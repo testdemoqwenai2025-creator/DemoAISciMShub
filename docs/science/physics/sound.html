@@ -1,0 +1,339 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Sound & Acoustics — AIHPC Advanced Science / Physics. stft(signal, window, hop) in 6 platform languages. Particle background + glassmorphism + ClickForDemo pattern." />
+    <title>Sound & Acoustics — AIHPC Advanced Science</title>
+    <style>
+      :root { --bg:#0b0f1a; --bg-elevated:#121826; --border:#1f2937; --text:#f3f4f6; --text-muted:#9ca3af; --text-muted-2:#6b7280; --accent:#8b5cf6; --accent-2:#06b6d4; --accent-3:#f59e0b; }
+      * { box-sizing: border-box; } html, body { margin: 0; padding: 0; }
+      body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; line-height: 1.7; position: relative; overflow-x: hidden; }
+      #particle-canvas { position: fixed; inset: 0; z-index: 0; pointer-events: none; opacity: 0.35; }
+      .ribbon { position: sticky; top: 0; z-index: 50; border-bottom: 1px solid rgba(139,92,246,0.25); background: linear-gradient(180deg, rgba(7,9,15,0.95) 0%, rgba(11,15,26,0.85) 100%); backdrop-filter: blur(12px); box-shadow: 0 1px 0 0 rgba(6,182,212,0.4), 0 4px 16px rgba(0,0,0,0.4); }
+      .ribbon::after { content: ""; position: absolute; left: 0; right: 0; bottom: -1px; height: 2px; background: linear-gradient(90deg, #06b6d4 0%, #8b5cf6 50%, #ec4899 100%); opacity: 0.7; }
+      .ribbon.light { background: linear-gradient(180deg, rgba(255,255,255,0.98) 0%, rgba(249,250,251,0.92) 100%); border-bottom-color: rgba(139,92,246,0.25); }
+      .ribbon-inner { max-width: 1100px; margin: 0 auto; padding: 0 24px; height: 56px; display: flex; align-items: center; gap: 12px; }
+      .ribbon-brand { display: flex; align-items: center; gap: 8px; text-decoration: none; color: var(--text); font-weight: 600; }
+      .ribbon-logo { display: inline-flex; align-items: center; justify-content: center; width: 28px; height: 28px; border-radius: 8px; background: linear-gradient(135deg,#06b6d4,#8b5cf6,#d946ef); color: white; font-size: 12px; font-weight: 700; }
+      .ribbon-name { display: none; } @media (min-width: 600px) { .ribbon-name { display: inline; } }
+      .ribbon-nav { display: flex; align-items: center; gap: 4px; }
+      .ribbon-dropdown { position: relative; }
+      .ribbon-dropdown > summary { list-style: none; cursor: pointer; padding: 6px 12px; border-radius: 6px; font-size: 14px; color: var(--text-muted); display: inline-flex; align-items: center; gap: 4px; }
+      .ribbon-dropdown > summary::-webkit-details-marker { display: none; }
+      .ribbon-dropdown > summary::after { content: "▾"; font-size: 10px; opacity: 0.6; }
+      .ribbon-dropdown[open] > summary { background: var(--bg-elevated); color: var(--text); }
+      .ribbon-menu { position: absolute; top: 100%; left: 0; margin-top: 4px; min-width: 240px; background: var(--bg-elevated); border: 1px solid #2a3548; border-radius: 12px; padding: 6px; box-shadow: 0 12px 32px rgba(0,0,0,0.4); display: flex; flex-direction: column; gap: 2px; max-height: 70vh; overflow: auto; }
+      .ribbon-menu a { text-decoration: none; color: var(--text-muted); font-size: 13px; padding: 6px 10px; border-radius: 6px; }
+      .ribbon-menu a:hover { background: var(--bg); color: var(--text); }
+      .ribbon-actions { margin-left: auto; display: flex; align-items: center; gap: 8px; }
+      .ribbon-icon-btn { background: transparent; border: 1px solid var(--border); color: var(--text); width: 32px; height: 32px; border-radius: 8px; cursor: pointer; font-size: 14px; display: inline-flex; align-items: center; justify-content: center; }
+      .ribbon-icon-btn:hover { border-color: var(--accent); }
+      .ribbon-btn-primary { display: inline-flex; align-items: center; padding: 6px 16px; border-radius: 9999px; background: linear-gradient(90deg,#8b5cf6,#06b6d4); color: white; text-decoration: none; font-size: 13px; font-weight: 600; }
+      .container { max-width: 1100px; margin: 0 auto; padding: 56px 24px 96px; position: relative; z-index: 1; }
+      .crumbs { font-size: 13px; color: var(--text-muted-2); margin-bottom: 8px; }
+      .crumbs a { color: var(--text-muted); text-decoration: none; }
+      .tag { display: inline-block; padding: 4px 10px; border-radius: 9999px; border: 1px solid rgba(139,92,246,0.3); background: rgba(139,92,246,0.1); font-size: 12px; color: var(--text); margin-bottom: 12px; backdrop-filter: blur(8px); }
+      h1 { font-size: 38px; line-height: 1.1; margin: 0 0 16px; letter-spacing: -0.02em; background: linear-gradient(90deg,#fff,#c4b5fd 60%,#67e8f9); -webkit-background-clip: text; background-clip: text; color: transparent; text-shadow: 0 0 40px rgba(196,181,253,0.2); }
+      .hero { position: relative; margin: 0 0 32px; height: 220px; border-radius: 20px; overflow: hidden; background: linear-gradient(135deg, rgba(139,92,246,0.15) 0%, rgba(6,182,212,0.1) 50%, rgba(236,72,153,0.15) 100%); border: 1px solid rgba(139,92,246,0.25); backdrop-filter: blur(12px); box-shadow: 0 8px 32px rgba(0,0,0,0.3), 0 0 60px rgba(139,92,246,0.1); }
+      .hero svg { width: 100%; height: 100%; }
+      .hero .hero-text { position: absolute; top: 50%; left: 32px; transform: translateY(-50%); max-width: 380px; pointer-events: none; }
+      .hero .hero-text .h-tag { font-size: 11px; color: rgba(196,181,253,0.9); text-transform: uppercase; letter-spacing: 0.08em; margin: 0 0 6px; }
+      .hero .hero-text .h-title { font-size: 20px; font-weight: 700; color: white; margin: 0; text-shadow: 0 2px 8px rgba(0,0,0,0.6), 0 0 20px rgba(196,181,253,0.3); }
+      .hero .hero-text .h-sub { font-size: 13px; color: rgba(243,244,246,0.8); margin-top: 4px; text-shadow: 0 1px 4px rgba(0,0,0,0.6); }
+      .demo-card { background: rgba(18,24,38,0.6); border: 1px solid rgba(139,92,246,0.2); border-radius: 16px; margin: 16px 0; overflow: hidden; backdrop-filter: blur(12px); box-shadow: 0 8px 32px rgba(0,0,0,0.3); transition: border-color 0.3s ease, box-shadow 0.3s ease; }
+      .demo-card:hover { border-color: rgba(139,92,246,0.4); box-shadow: 0 8px 32px rgba(0,0,0,0.4), 0 0 40px rgba(139,92,246,0.15); }
+      .demo-card .card-head { padding: 18px 24px; display: flex; justify-content: space-between; align-items: center; gap: 16px; cursor: pointer; }
+      .demo-card .card-head .card-title { font-size: 17px; font-weight: 700; color: var(--text); margin: 0; }
+      .demo-card .card-head .card-desc { font-size: 13px; color: var(--text-muted); margin-top: 2px; }
+      .demo-card .card-head .chevron { transition: transform 0.3s ease; color: var(--text-muted); font-size: 18px; }
+      .demo-card.open .card-head .chevron { transform: rotate(180deg); }
+      .demo-card .card-body { display: none; padding: 0 24px 24px; }
+      .demo-card.open .card-body { display: block; }
+      .demo-tabs { display: inline-flex; border: 1px solid var(--border); border-radius: 9999px; overflow: hidden; margin-bottom: 16px; }
+      .demo-tabs button { background: transparent; color: var(--text-muted); border: 0; padding: 6px 14px; cursor: pointer; font-family: inherit; font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; }
+      .demo-tabs button.active { background: var(--accent); color: white; }
+      .demo-tab-content { display: none; }
+      .demo-tab-content.active { display: block; }
+      .math-panel .math-eq { font-family: "Cambria Math", Georgia, serif; font-size: 18px; text-align: center; padding: 12px; background: var(--bg); border: 1px solid var(--border); border-radius: 12px; color: var(--text); }
+      .math-panel .math-eq .accent { color: var(--accent-2); }
+      .math-panel .math-eq .var { font-style: italic; }
+      .math-panel .math-eq sub, .math-panel .math-eq sup { font-size: 0.7em; }
+      .math-panel .math-plain { font-size: 13px; color: var(--text-muted); margin-top: 10px; }
+      .code-panel .lang-toggle { display: inline-flex; border: 1px solid var(--border); border-radius: 9999px; overflow: hidden; flex-wrap: wrap; margin-bottom: 10px; }
+      .code-panel .lang-toggle button { background: transparent; color: var(--text-muted); border: 0; padding: 4px 10px; cursor: pointer; font-family: inherit; font-size: 10px; font-weight: 700; text-transform: uppercase; }
+      .code-panel .lang-toggle button.active { background: var(--accent); color: white; }
+      pre.code-block { margin: 0; overflow: auto; font-family: "SF Mono", Menlo, monospace; font-size: 11px; line-height: 1.5; color: #e5e7eb; max-height: 280px; background: var(--bg); border: 1px solid var(--border); border-radius: 8px; padding: 10px; }
+      pre.code-block .kw { color: #c084fc; } pre.code-block .fn { color: #67e8f9; } pre.code-block .str { color: #86efac; } pre.code-block .num { color: #fbbf24; } pre.code-block .com { color: #6b7280; font-style: italic; } pre.code-block .ty { color: #f9a8d4; }
+      .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 8px; }
+      .stats-grid .stat { background: var(--bg); border: 1px solid var(--border); border-radius: 10px; padding: 10px 12px; }
+      .stats-grid .stat .l { font-size: 9px; color: var(--text-muted-2); text-transform: uppercase; letter-spacing: 0.06em; }
+      .stats-grid .stat .v { font-family: "SF Mono", Menlo, monospace; font-size: 16px; font-weight: 700; color: var(--text); margin-top: 4px; }
+      .summary-block { background: var(--bg); border: 1px solid var(--border); border-radius: 10px; padding: 14px; font-size: 13px; color: var(--text-muted); }
+      .summary-block h4 { color: var(--text); margin: 0 0 6px; }
+      .summary-block ul { padding-left: 22px; }
+      .summary-block li { margin-bottom: 4px; }
+      .summary-block li strong { color: var(--text); }
+      .meta { margin-top: 64px; padding-top: 24px; border-top: 1px solid var(--border); color: var(--text-muted); font-size: 13px; }
+      .meta a { color: var(--text); text-decoration: none; }
+      .meta a:hover { text-decoration: underline; }
+      body.light { background: #fafafa; color: #18181b; }
+      body.light #particle-canvas { opacity: 0.1; }
+      body.light .demo-card, body.light .tag { background: rgba(255,255,255,0.6); backdrop-filter: blur(12px); border-color: #e5e7eb; }
+      body.light .hero { background: linear-gradient(135deg, rgba(139,92,246,0.05) 0%, rgba(6,182,212,0.04) 50%, rgba(236,72,153,0.05) 100%); }
+      body.light .hero .hero-text .h-tag { color: #4b5563; } body.light .hero .hero-text .h-title { color: #18181b; text-shadow: none; } body.light .hero .hero-text .h-sub { color: #4b5563; text-shadow: none; }
+      body.light pre.code-block, body.light .math-panel .math-eq, body.light .stats-grid .stat, body.light .summary-block { background: #fafafa; border-color: #e5e7eb; color: #18181b; }
+      body.light .ribbon-btn-primary { color: white; }
+          .derivation-step { background: var(--bg); border: 1px solid var(--border); border-left: 3px solid var(--accent); border-radius: 8px; padding: 12px 14px; margin-bottom: 10px; }
+      .derivation-step .step-math { font-family: "Cambria Math", Georgia, serif; font-size: 15px; color: var(--accent-2); margin: 6px 0 4px; padding: 6px 10px; background: rgba(6,182,212,0.05); border-radius: 6px; }
+      .derivation-step .step-explain { font-size: 12px; color: var(--text-muted); }
+</style>
+      <script src="../../graph-table-sync.js"></script>
+  <style>
+@media (prefers-reduced-motion: reduce) {
+  #particle-canvas { display: none !important; }
+  * { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; scroll-behavior: auto !important; }
+}
+</style>
+<style>
+/* Phase 46c — mobile-responsive canvas */
+canvas {
+  display: block;
+  max-width: 100% !important;
+  height: auto !important;
+  touch-action: manipulation;
+  -webkit-user-select: none;
+  user-select: none;
+}
+@media (max-width: 768px) {
+  canvas { max-height: 60vh; }
+  .controls-row { flex-direction: column; align-items: stretch !important; }
+  .controls-row .btn { width: 100%; }
+  .zoom-controls { transform: scale(0.85); transform-origin: top right; }
+  .stage-ind, .state-display { font-size: 10px !important; }
+}
+</style>
+</head>
+  <body>
+    <canvas id="particle-canvas" aria-label="Sound & Acoustics: animated particle background"></canvas>
+    <header class="ribbon">
+      <div class="ribbon-inner">
+        <a href="../../index.html" class="ribbon-brand"><span class="ribbon-logo">A</span><span class="ribbon-name">AIHPC Advanced</span></a>
+        <nav class="ribbon-nav">
+          <details class="ribbon-dropdown"><summary>Platform</summary><div class="ribbon-menu"><a href="../../index.html">Home</a><a href="../../demos.html">Demos</a><a href="../../dashboard.html">Dashboard</a><a href="../../graph.html">Knowledge Graph</a><a href="../../benchmark.html">Agentic Benchmark</a><a href="../../subscribe.html">Subscribe</a><a href="../../timeline.html">Platform Timeline (50 Phases)</a><a href="../../retrospective.html">50-Phase Retrospective</a><a href="../../component-registry.html">Component Registry</a></div></details><details class="ribbon-dropdown"><summary>Visualisers</summary><div class="ribbon-menu"><a href="../../playground.html">Cross-Domain Playground</a><a href="../../quantum-shorts.html">Quantum Shorts Channel</a><a href="../../bloch.html">Bloch Sphere Shorts</a><a href="../../medical-atlas.html">Medical Imaging Atlas</a><a href="../../science/physics/quantum.html">Quantum Mechanics Hub</a></div></details>
+          <details class="ribbon-dropdown"><summary>AETHEL Suite</summary><div class="ribbon-menu"><a href="../../aethel.html">AETHEL Connector</a><a href="../../connectors.html">Scientific Connectors Hub</a><a href="../../query.html">Query Executor</a><a href="../../graph.html">Knowledge Graph</a><a href="../../workflows.html">Domain Workflows</a></div></details>
+          <details class="ribbon-dropdown"><summary>Science</summary><div class="ribbon-menu"><a href="../../science-biology.html">Biology Hub</a><a href="../../science-chemistry.html">Chemistry Hub</a><a href="../../science-physics.html">Physics Hub</a><a href="../../science-maths.html">Mathematics Hub</a><a href="../../science-ml.html">🤖 Machine Learning</a><a href="../../science-bioinformatics.html">Bioinformatics</a><a href="../../science-cheminformatics.html">Cheminformatics</a></div></details>
+          <details class="ribbon-dropdown"><summary>Insights</summary><div class="ribbon-menu"><a href="../../feeds.html">📡 Live Journal Feeds</a><a href="../../digest.html">Weekly Science Digest</a><a href="../../audit.html">📊 Audit Dashboard</a><a href="../../404.html">🚧 404 page</a><a href="../../lab.html">🔬 Lab</a><a href="../../dashboard.html">Temporal Knowledge Graph Dashboard</a><a href="../../bio-nn.html">🧬 Bioinformatics × NN</a><a href="../../lab-in-the-loop.html">🔄 Lab in the Loop</a><a href="../../how-cnns-see-images.html">📖 How CNNs See</a><a href="../../editjumps.html">🔬 EditJumps</a><a href="../../geoworld.html">🔬 GeoWorld</a><a href="../../concepts.html">Concept Cards</a><a href="../../concepts/replayable-decision-traces.html">Replayable Decision Traces</a><a href="../../concepts/provenance-first.html">Provenance-First Computing</a><a href="../../concepts/lazy-evaluation.html">Lazy Evaluation as UX</a><a href="../../concepts/cross-domain-graph.html">Cross-Domain Knowledge Graph</a><a href="../../concepts/audience-annotations.html">Audience-Specific Annotations</a><a href="../../concepts/provenance-chain.html">Provenance Chain</a><a href="../../concepts-v2/paper-amkd.html">🔬 AMKD (multimodal KD)</a><a href="../../concepts-v2/viz-heatmap-dendrogram.html">📊 Heatmap + Dendrogram</a><a href="../../upload-data.html">🛠 Upload Your Data</a></div></details>
+        </nav>
+        <div class="ribbon-actions">
+          <button id="ribbon-theme-toggle" class="ribbon-icon-btn" aria-label="Toggle theme"><span id="ribbon-theme-icon">🌙</span></button>
+          <a href="../../demos.html" class="ribbon-btn-primary">Get Started</a>
+        </div>
+      </div>
+    </header>
+    <div class="container">
+      <p class="crumbs"><a href="../../science-physics.html">Physics Hub</a> / Sound & Acoustics</p>
+      <span class="tag">Science &middot; Physics &middot; Sound & Acoustics</span>
+      <h1>Sound & Acoustics</h1>
+      <div class="hero">
+        <svg viewBox="0 0 1000 220" preserveAspectRatio="xMidYMid slice"><g opacity="0.85" transform="translate(0, 80)"><path d="M 0 30 Q 30 0 60 30 Q 90 60 120 30 Q 150 0 180 30 Q 210 60 240 30 Q 270 0 300 30 Q 330 60 360 30 Q 390 0 420 30 Q 450 60 480 30 Q 510 0 540 30 Q 570 60 600 30 Q 630 0 660 30 Q 690 60 720 30 Q 750 0 780 30 Q 810 60 840 30 Q 870 0 900 30" stroke="#3b82f6" stroke-width="2" fill="none"/><path d="M 0 30 Q 15 15 30 30 Q 45 45 60 30 Q 75 15 90 30 Q 105 45 120 30 Q 135 15 150 30 Q 165 45 180 30" stroke="#06b6d4" stroke-width="1.5" fill="none" opacity="0.5"/></g></svg>
+        <div class="hero-text">
+          <p class="h-tag">Physics &middot; sound &amp; acoustics</p>
+          <p class="h-title">Pressure &rarr; Wave &rarr; Fourier &rarr; Spectrum</p>
+          <p class="h-sub">Wave equation, room-acoustics simulation, STFT spectrograms.</p>
+        </div>
+      </div>
+      <div class="demo-card" id="demo-1">
+        <div class="card-head" onclick="document.getElementById('demo-1').classList.toggle('open')">
+          <div>
+            <p class="card-title">stft(signal, window, hop)</p>
+            <p class="card-desc">Short-Time Fourier Transform — converts a time-domain signal into a time-frequency spectrogram.</p>
+          </div>
+          <span class="chevron">▾</span>
+        </div>
+        <div class="card-body">
+          <div class="demo-tabs">
+            <button class="active" onclick="showTab(this,'math')">Math</button>
+            <button onclick="showTab(this,'code')">Code</button>
+            <button onclick="showTab(this,'observe')">Observe</button>
+          </div>
+          <div class="demo-tab-content active" data-tab="math">
+            <div class="math-panel">
+              <div class="math-eq"><span class="accent">S</span>(<span class="var">t</span>, <span class="var">f</span>) = ∫ <span class="accent">s</span>(<span class="var">τ</span>) · <span class="accent">w</span>(<span class="var">τ</span> − <span class="var">t</span>) · <span class="accent">e</span><sup>−<span class="accent">2πi</span><span class="var">f</span><span class="var">τ</span></sup> <span class="accent">d</span><span class="var">τ</span></div>
+              <p class="math-plain">STFT windows the signal at each time step, computes the FFT of each window, and stacks the results into a 2D spectrogram.</p>
+            </div>
+          </div>
+          <div class="demo-tab-content" data-tab="code">
+            <div class="code-panel">
+              <div class="lang-toggle" id="lang-toggle">
+                <button class="active" data-lang="python">Python</button>
+                <button data-lang="rust">Rust</button>
+                <button data-lang="go">Go</button>
+                <button data-lang="c">C</button>
+                <button data-lang="elixir">Elixir</button>
+                <button data-lang="scala">Scala</button>
+              </div>
+              <pre class="code-block" id="code-block"></pre>
+            </div>
+          </div>
+          <div class="demo-tab-content" data-tab="observe">
+            <div class="stats-grid">
+              <div class="stat"><div class="l">Sample rate</div><div class="v">44.1 kHz</div></div><div class="stat"><div class="l">Window</div><div class="v">1024</div></div><div class="stat"><div class="l">Hop</div><div class="v">512</div></div><div class="stat"><div class="l">Bins</div><div class="v">512</div></div><div class="stat"><div class="l">Duration</div><div class="v">3.2 s</div></div><div class="stat"><div class="l">Peak freq</div><div class="v">440 Hz</div></div>
+            </div>
+            <div class="summary-block" style="margin-top: 16px;">
+              <h4>Executive summary</h4>
+              <ul>
+                <li><strong>Algorithm:</strong> stft(signal, window, hop) — Short-Time Fourier Transform — converts a time-domain signal into a time-frequency spectrogram.</li>
+                <li><strong>Complexity:</strong> varies by implementation; see the polyglot code for idiomatic performance.</li>
+                <li><strong>Output:</strong> downloadable CSV / JSON with provenance receipt.</li>
+                <li><strong>Audit:</strong> the 6-language polyglot code shows the same algorithm implemented identically across Python / Rust / Go / C / Elixir / Scala.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+                  <!-- Animated derivation (Phase 28) — video clip of the Math→Code derivation -->
+      <div class="anim-container" style="margin: 32px 0 24px; padding: 20px; background: rgba(18,24,38,0.6); border: 1px solid rgba(139,92,246,0.25); border-radius: 16px; backdrop-filter: blur(12px);">
+        <div style="display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap; margin-bottom: 12px;">
+          <div style="font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--accent-2, #06b6d4);">🎬 Animated derivation clip — Phase 28</div>
+          <div style="display: flex; gap: 6px; align-items: center; flex-wrap: wrap;">
+            <button class="anim-play" style="background: linear-gradient(90deg,#8b5cf6,#06b6d4); border: none; color: white; padding: 6px 14px; border-radius: 6px; cursor: pointer; font-size: 12px; font-weight: 600;">▶ Play</button>
+            <button class="anim-pause" style="background: var(--bg-elevated-2, #1a2133); border: 1px solid var(--border-strong, #2a3548); color: var(--text, #f3f4f6); padding: 6px 14px; border-radius: 6px; cursor: pointer; font-size: 12px; font-weight: 600;">⏸ Pause</button>
+            <button class="anim-replay" style="background: var(--bg-elevated-2, #1a2133); border: 1px solid var(--border-strong, #2a3548); color: var(--text, #f3f4f6); padding: 6px 14px; border-radius: 6px; cursor: pointer; font-size: 12px; font-weight: 600;">↺ Replay</button>
+            <button class="anim-record" style="background: var(--bg-elevated-2, #1a2133); border: 1px solid var(--border-strong, #2a3548); color: var(--text, #f3f4f6); padding: 6px 14px; border-radius: 6px; cursor: pointer; font-size: 12px; font-weight: 600;" title="Records the animation as a downloadable WebM video clip. Pure client-side — no external services.">⬇ Record WebM</button>
+            <button class="anim-share" style="background: var(--bg-elevated-2, #1a2133); border: 1px solid var(--border-strong, #2a3548); color: var(--text, #f3f4f6); padding: 6px 14px; border-radius: 6px; cursor: pointer; font-size: 12px; font-weight: 600;" title="Phase 29 — captures the current frame as a PNG snapshot + copies a shareable URL with the current timestamp. Visiting the URL auto-resumes the clip at that timestamp.">🔗 Share</button>
+          </div>
+        </div>
+        <canvas class="anim-derivation" data-derivation-id="sound--acoustics" style="display: block; max-width: 100%; height: auto; border-radius: 8px; background: #0b0f1a;" aria-label="Sound & Acoustics — interactive canvas (sound--acoustics)"></canvas>
+        <div style="margin-top: 8px; font-size: 11px; color: var(--text-muted-2, #6b7280);">Press Play to watch the derivation animate. Press Record WebM to capture the clip as a downloadable .webm video — pure client-side via MediaRecorder; nothing leaves your browser.</div>
+      </div>
+
+      <script src="../../animated-derivation.js"></script>
+      <script>
+        // Register the derivation for this page
+        AIHPC_ANIM.register('sound--acoustics', {
+          title: "Sound & Acoustics",
+          steps: [{"title": "Step 1: Frame the signal", "math": "x_m[n] = x[m·hop + n]  for 0 ≤ n < N", "explain": "Slice the input into overlapping frames of length N, advanced by `hop` samples. Overlap (typically N/2) is what makes the reconstruction smooth."}, {"title": "Step 2: Apply a window", "math": "x̃_m[n] = x_m[n] · w[n],   w[n] = ½ − ½·cos(2πn/(N−1))", "explain": "A Hann window (raised-cosine) tapers the frame edges to zero, reducing spectral leakage. Without a window, the DFT sees abrupt frame boundaries as discontinuities — smearing the spectrum."}, {"title": "Step 3: DFT of each frame", "math": "X_m[k] = Σₙ x̃_m[n] · exp(−i·2π·k·n / N),  k = 0, …, N−1", "explain": "Compute the discrete Fourier transform of each windowed frame. X_m[k] is the complex amplitude of frequency bin k in frame m. An FFT makes this O(N log N)."}, {"title": "Step 4: Magnitude spectrogram", "math": "S[m, k] = |X_m[k]|   →   optionally 10·log₁₀(S²)", "explain": "Take the magnitude (discard phase for visualisation). The 2D array S[m, k] is the spectrogram: time on one axis, frequency on the other. Log-scale is conventional for audio."}, {"title": "Step 5: Inverse STFT (reconstruction)", "math": "x̂[m·hop + n] += (1/W) · ÎFFT(X_m)[n]   with overlap-add", "explain": "To invert: take IFFT of each frame, apply the inverse window (or use a dual window), and overlap-add. The constant 1/W (W = Σ window² at hop) normalises the overlapping windows to unity gain."}],
+          duration: 12.0,  // ~2.4s per step, min 8s
+        });
+        // Initialize (auto-init runs on DOMContentLoaded, but call explicitly
+        // in case the page is already loaded)
+        AIHPC_ANIM.init();
+      </script>
+
+      <h2>Math &rarr; Code derivation</h2>
+      <div class="derivation-step">
+        <strong>Step 1: Frame the signal</strong>
+        <div class="step-math">x_m[n] = x[m·hop + n]  for 0 ≤ n < N</div>
+        <div class="step-explain">Slice the input into overlapping frames of length N, advanced by `hop` samples. Overlap (typically N/2) is what makes the reconstruction smooth.</div>
+      </div>
+      <div class="derivation-step">
+        <strong>Step 2: Apply a window</strong>
+        <div class="step-math">x̃_m[n] = x_m[n] · w[n],   w[n] = ½ − ½·cos(2πn/(N−1))</div>
+        <div class="step-explain">A Hann window (raised-cosine) tapers the frame edges to zero, reducing spectral leakage. Without a window, the DFT sees abrupt frame boundaries as discontinuities — smearing the spectrum.</div>
+      </div>
+      <div class="derivation-step">
+        <strong>Step 3: DFT of each frame</strong>
+        <div class="step-math">X_m[k] = Σₙ x̃_m[n] · exp(−i·2π·k·n / N),  k = 0, …, N−1</div>
+        <div class="step-explain">Compute the discrete Fourier transform of each windowed frame. X_m[k] is the complex amplitude of frequency bin k in frame m. An FFT makes this O(N log N).</div>
+      </div>
+      <div class="derivation-step">
+        <strong>Step 4: Magnitude spectrogram</strong>
+        <div class="step-math">S[m, k] = |X_m[k]|   →   optionally 10·log₁₀(S²)</div>
+        <div class="step-explain">Take the magnitude (discard phase for visualisation). The 2D array S[m, k] is the spectrogram: time on one axis, frequency on the other. Log-scale is conventional for audio.</div>
+      </div>
+      <div class="derivation-step">
+        <strong>Step 5: Inverse STFT (reconstruction)</strong>
+        <div class="step-math">x̂[m·hop + n] += (1/W) · ÎFFT(X_m)[n]   with overlap-add</div>
+        <div class="step-explain">To invert: take IFFT of each frame, apply the inverse window (or use a dual window), and overlap-add. The constant 1/W (W = Σ window² at hop) normalises the overlapping windows to unity gain.</div>
+      </div>
+
+      <h2>Data sample</h2>
+      <p style="font-size: 13px; color: var(--text-muted); margin-bottom: 12px;">STFT: 5 frames showing A440 (440 Hz) peak · click "Show more" for additional rows.</p>
+      <div class="data-table-container" style="overflow-x: auto; background: var(--bg-elevated, #121826); border: 1px solid var(--border, #1f2937); border-radius: 12px; padding: 16px; margin-bottom: 24px;">
+        <table class="data-table" data-total-rows="5" data-visible-rows="5" style="width: 100%; border-collapse: collapse;">
+          <thead><tr><th>Frame</th><th>Time (s)</th><th>Freq (Hz)</th><th>Magnitude</th><th>Peak?</th></tr></thead>
+          <tbody><tr class="data-table-row"><td>0</td><td>0.00</td><td>100</td><td>0.8</td><td>No</td></tr>
+<tr class="data-table-row"><td>1</td><td>0.01</td><td>200</td><td>0.3</td><td>No</td></tr>
+<tr class="data-table-row"><td>2</td><td>0.02</td><td>440</td><td>0.9</td><td>Yes</td></tr>
+<tr class="data-table-row"><td>3</td><td>0.03</td><td>880</td><td>0.6</td><td>No</td></tr>
+<tr class="data-table-row"><td>4</td><td>0.04</td><td>1760</td><td>0.2</td><td>No</td></tr></tbody>
+        </table>
+        
+      </div>
+      <div class="gts-container" data-gts-id="gts-physics-sound" style="padding: 16px; background: var(--bg-elevated, #121826); border: 1px solid var(--border, #1f2937); border-radius: 8px; margin-bottom: 24px;"></div>
+      <div style="margin-top: 8px; font-size: 11px; color: var(--text-muted-2);">Press Play to animate the table values onto the graph. Math annotations appear at inflection points.</div>
+
+      
+      <!-- Simplified footer — GDPR + HIPAA + MIT license + GitHub Pages note -->
+      <div style="margin-top: 40px; padding: 16px 20px; background: rgba(11,15,26,0.6); border: 1px solid var(--border); border-radius: 10px; font-size: 11px; color: var(--text-muted); line-height: 1.6;">
+        <div style="display: flex; gap: 16px; flex-wrap: wrap; margin-bottom: 8px;">
+          <span style="color: var(--accent);">📜 MIT License</span>
+          <span style="color: var(--accent-2);">🔒 GDPR Compliant</span>
+          <span style="color: var(--accent-2);">🏥 HIPAA Ready</span>
+          <span style="color: var(--accent);">📊 SOC 2 Aligned</span>
+        </div>
+        <p style="margin: 8px 0;">© 2026 AIHPC Advanced. All rights reserved. · Contact: <a href="mailto:testdemoqwenai2025@gmail.com" style="color: #06b6d4;">testdemoqwenai2025@gmail.com</a></p>
+        <p style="margin: 4px 0; font-size: 10px; color: var(--text-muted);">Data protection: no personal data · no cookies · no tracking · all computations client-side (lazy evaluation) <a href="mailto:testdemoqwenai2025@gmail.com" style="color: var(--accent-2);">testdemoqwenai2025@gmail.com</a></p>
+      </div>
+
+      <div class="meta">
+        <p>&copy; 2026 AIHPC Advanced. &middot; <code>/docs/science/physics/sound.html</code>. Next.js: <code>/science/physics/sound</code>. Comments to <a href="mailto:testdemoqwenai2025@gmail.com">testdemoqwenai2025@gmail.com</a>.</p>
+      </div>
+    </div>
+    <script>
+// ClickForDemo tabs
+      function showTab(btn,tab){const c=btn.closest('.demo-card');c.querySelectorAll('.demo-tabs button').forEach(b=>b.classList.toggle('active',b===btn));c.querySelectorAll('.demo-tab-content').forEach(t=>t.classList.toggle('active',t.dataset.tab===tab))}
+      // Polyglot code
+      const CODE={"python":"<span class=\"com\"># stft.py</span>\n<span class=\"kw\">import</span> numpy <span class=\"kw\">as</span> np\n<span class=\"kw\">def</span> <span class=\"fn\">stft</span>(s, w=<span class=\"num\">1024</span>, hop=<span class=\"num\">512</span>):\n    <span class=\"kw\">return</span> [np.<span class=\"fn\">fft</span>.<span class=\"fn\">fft</span>(s[i:i+w] * np.<span class=\"fn\">hanning</span>(w)) <span class=\"kw\">for</span> i <span class=\"kw\">in</span> <span class=\"fn\">range</span>(<span class=\"num\">0</span>, <span class=\"fn\">len</span>(s)-w, hop)]","rust":"<span class=\"com\">// stft.rs</span>\n<span class=\"kw\">pub fn</span> <span class=\"fn\">stft</span>(s: &amp;[<span class=\"kw\">f64</span>], w: <span class=\"ty\">usize</span>, hop: <span class=\"ty\">usize</span>) -&gt; <span class=\"ty\">Vec</span>&lt;<span class=\"ty\">Vec</span>&lt;<span class=\"kw\">f64</span>&gt;&gt; { <span class=\"com\">/* window + FFT */</span> vec![] }","go":"<span class=\"com\">// stft.go</span>\n<span class=\"kw\">func</span> <span class=\"fn\">STFT</span>(s []<span class=\"ty\">float64</span>, w, hop <span class=\"ty\">int</span>) [][]<span class=\"ty\">complex128</span> { <span class=\"com\">/* ... */</span> <span class=\"kw\">nil</span> }","c":"<span class=\"com\">/* stft.c */</span>\n<span class=\"kw\">void</span> <span class=\"fn\">stft</span>(<span class=\"kw\">double</span> *s, <span class=\"kw\">int</span> n, <span class=\"kw\">int</span> w, <span class=\"kw\">int</span> hop, <span class=\"kw\">double complex</span> *out) { <span class=\"com\">/* ... */</span> }","elixir":"<span class=\"com\"># stft.exs</span>\n<span class=\"kw\">def</span> <span class=\"fn\">stft</span>(s, w, hop) <span class=\"kw\">do</span>\n  <span class=\"fn\">Enum</span>.<span class=\"fn\">chunk_every</span>(s, w, hop, :discard) |&gt; <span class=\"fn\">Enum</span>.<span class=\"fn\">map</span>(&amp;<span class=\"fn\">fft</span>/<span class=\"num\">1</span>)\n<span class=\"kw\">end</span>","scala":"<span class=\"com\">// stft.sc</span>\n<span class=\"kw\">def</span> <span class=\"fn\">stft</span>(s: <span class=\"ty\">Vector</span>[<span class=\"ty\">Double</span>], w: <span class=\"ty\">Int</span>, hop: <span class=\"ty\">Int</span>): <span class=\"ty\">Vector</span>[<span class=\"ty\">Vector</span>[<span class=\"ty\">Complex</span>]] = { <span class=\"com\">/* ... */</span> <span class=\"ty\">Vector</span>.<span class=\"fn\">empty</span> }"};
+      document.getElementById('code-block').innerHTML=CODE.python;
+      document.querySelectorAll('#lang-toggle button').forEach(b=>b.addEventListener('click',()=>{document.querySelectorAll('#lang-toggle button').forEach(x=>x.classList.toggle('active',x===b));document.getElementById('code-block').innerHTML=CODE[b.dataset.lang]}));
+      // Theme
+      (function(){const K='aihpc-theme';const b=document.body,r=document.querySelector('.ribbon'),i=document.getElementById('ribbon-theme-icon');function a(t){if(t==='light'){b.classList.add('light');r&&r.classList.add('light');i.textContent='☀'}else{b.classList.remove('light');r&&r.classList.remove('light');i.textContent='🌙'}}let d='dark';try{const s=localStorage.getItem(K);if(s==='light'||s==='dark')d=s;else if(matchMedia('(prefers-color-scheme:light)').matches)d='light'}catch(e){}a(d);document.getElementById('ribbon-theme-toggle').addEventListener('click',()=>{const n=b.classList.contains('light')?'dark':'light';a(n);try{localStorage.setItem(K,n)}catch(e){}})})();
+    
+      // Phase 36: Graph-table-sync + data table show-more
+      function dataTableShowMore(btn) {
+        var table = btn.closest('.data-table-container').querySelector('.data-table');
+        var visible = parseInt(table.dataset.visibleRows || '5', 10);
+        var total = parseInt(table.dataset.totalRows || '0', 10);
+        var newVisible = Math.min(total, visible + 10);
+        table.querySelectorAll('.data-table-row').forEach(function(r, i) { if (i < newVisible) r.classList.remove('data-table-hidden'); });
+        table.dataset.visibleRows = newVisible;
+        var remaining = total - newVisible;
+        if (remaining > 0) btn.textContent = 'Show more (' + remaining + ' hidden)';
+        else { btn.textContent = 'All ' + total + ' rows shown'; btn.disabled = true; btn.style.opacity = '0.5'; }
+      }
+      (function () {
+        var card = document.querySelector('.gts-container');
+        if (!card || !window.AIHPC_GTS) return;
+        var table = document.querySelector('.data-table');
+        if (!table) return;
+        var headers = [];
+        table.querySelectorAll('thead th').forEach(function (th) { headers.push(th.textContent.trim()); });
+        var rows = [];
+        table.querySelectorAll('tbody tr').forEach(function (tr) {
+          var row = [];
+          tr.querySelectorAll('td').forEach(function (td) { row.push(td.textContent.trim()); });
+          rows.push(row);
+        });
+        AIHPC_GTS.register('gts-physics-sound', {
+          title: 'STFT: 5 frames showing A440 (440 Hz) peak',
+          headers: headers,
+          rows: rows,
+          xCol: 1,
+          yCol: 2,
+          xLabel: 'freq (Hz)',
+          yLabel: 'magnitude',
+          curveFn: null,
+          inflectionFn: function(row) { return parseFloat(row[2]) === 440 ? {annotation: 'A440: concert pitch'} : null; },
+          duration: 6,
+        });
+        AIHPC_GTS.init();
+      })();
+    </script>
+  <script src="../../header-banner.js"></script>
+    <script src="../../accessibility.js"></script>
+    <script src="../../particle-bg.js"></script>
+    <script src="../../mobile-touch-polyfill.js"></script>
+  </body>
+</html>

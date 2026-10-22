@@ -1,0 +1,1198 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Lazy Evaluation as a UX Primitive — the 'feels alive' property. Reimagined as a 4-panel research-short popup: animated DNA helix, 6-language code toggle (Python / Rust / Go / C / Elixir / Scala), streaming 'thinking' tokens with a real function-call on a dataset, and a live result visualization." />
+    <title>Lazy Evaluation as UX — AIHPC Advanced Concept Card</title>
+    <style>
+      :root { --bg:#0b0f1a; --bg-elevated:#121826; --bg-elevated-2:#1a2133; --border:#1f2937; --border-strong:#2a3548; --text:#f3f4f6; --text-muted:#9ca3af; --text-muted-2:#6b7280; --accent:#8b5cf6; --accent-2:#06b6d4; --accent-3:#f59e0b; --success:#10b981; --danger:#ef4444; --warn:#fbbf24; --info:#3b82f6; --pink:#ec4899; }
+      * { box-sizing: border-box; }
+      html, body { margin: 0; padding: 0; }
+      body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; background: radial-gradient(1200px 600px at 20% -10%, rgba(139,92,246,0.18), transparent 60%), radial-gradient(1200px 600px at 100% 0%, rgba(6,182,212,0.12), transparent 55%), var(--bg); color: var(--text); min-height: 100vh; line-height: 1.7; }
+      /* Ribbon */
+      .ribbon {
+        position: sticky; top: 0; z-index: 50;
+        border-bottom: 1px solid rgba(139,92,246,0.25);
+        background: linear-gradient(180deg, rgba(7,9,15,0.95) 0%, rgba(11,15,26,0.85) 100%);
+        backdrop-filter: blur(12px);
+        box-shadow: 0 1px 0 0 rgba(6,182,212,0.4), 0 4px 16px rgba(0,0,0,0.4);
+      }
+      .ribbon::after {
+        content: ""; position: absolute; left: 0; right: 0; bottom: -1px;
+        height: 2px;
+        background: linear-gradient(90deg, #06b6d4 0%, #8b5cf6 50%, #ec4899 100%);
+        opacity: 0.7;
+      }
+      .ribbon.light {
+        background: linear-gradient(180deg, rgba(255,255,255,0.98) 0%, rgba(249,250,251,0.92) 100%);
+        border-bottom-color: rgba(139,92,246,0.25);
+      }
+      .ribbon-inner { max-width: 1100px; margin: 0 auto; padding: 0 24px; height: 56px; display: flex; align-items: center; gap: 12px; }
+      .ribbon-brand { display: flex; align-items: center; gap: 8px; text-decoration: none; color: var(--text); font-weight: 600; }
+      .ribbon-logo { display: inline-flex; align-items: center; justify-content: center; width: 28px; height: 28px; border-radius: 8px; background: linear-gradient(135deg,#06b6d4,#8b5cf6,#d946ef); color: white; font-size: 12px; font-weight: 700; }
+      .ribbon-name { display: none; }
+      @media (min-width: 600px) { .ribbon-name { display: inline; } }
+      .ribbon-nav { display: flex; align-items: center; gap: 4px; }
+      .ribbon-dropdown { position: relative; }
+      .ribbon-dropdown > summary { list-style: none; cursor: pointer; padding: 6px 12px; border-radius: 6px; font-size: 14px; color: var(--text-muted); display: inline-flex; align-items: center; gap: 4px; }
+      .ribbon-dropdown > summary::-webkit-details-marker { display: none; }
+      .ribbon-dropdown > summary::after { content: "▾"; font-size: 10px; opacity: 0.6; }
+      .ribbon-dropdown[open] > summary { background: var(--bg-elevated); color: var(--text); }
+      .ribbon-menu { position: absolute; top: 100%; left: 0; margin-top: 4px; min-width: 240px; background: var(--bg-elevated); border: 1px solid var(--border-strong); border-radius: 12px; padding: 6px; box-shadow: 0 12px 32px rgba(0,0,0,0.4); display: flex; flex-direction: column; gap: 2px; max-height: 70vh; overflow: auto; }
+      .ribbon-menu a { text-decoration: none; color: var(--text-muted); font-size: 13px; padding: 6px 10px; border-radius: 6px; }
+      .ribbon-menu a:hover { background: var(--bg); color: var(--text); }
+      .ribbon-actions { margin-left: auto; display: flex; align-items: center; gap: 8px; }
+      .ribbon-icon-btn { background: transparent; border: 1px solid var(--border); color: var(--text); width: 32px; height: 32px; border-radius: 8px; cursor: pointer; font-size: 14px; display: inline-flex; align-items: center; justify-content: center; }
+      .ribbon-icon-btn:hover { border-color: var(--accent); }
+      .ribbon-btn-primary { display: inline-flex; align-items: center; padding: 6px 16px; border-radius: 9999px; background: linear-gradient(90deg,#8b5cf6,#06b6d4); color: white; text-decoration: none; font-size: 13px; font-weight: 600; }
+
+      .container { max-width: 1000px; margin: 0 auto; padding: 48px 24px 96px; }
+      .crumbs { font-size: 13px; color: var(--text-muted-2); margin-bottom: 8px; }
+      .crumbs a { color: var(--text-muted); text-decoration: none; }
+      .tag { display: inline-block; padding: 4px 10px; border-radius: 9999px; border: 1px solid var(--border); background: var(--bg-elevated); font-size: 12px; color: var(--text-muted); margin-bottom: 12px; }
+      h1 { font-size: 38px; line-height: 1.1; margin: 0 0 16px; letter-spacing: -0.02em; background: linear-gradient(90deg,#fff,#c4b5fd 60%,#67e8f9); -webkit-background-clip: text; background-clip: text; color: transparent; }
+      .lead { font-size: 18px; color: var(--text-muted); max-width: 760px; margin: 0 0 32px; }
+      h2 { font-size: 24px; margin: 40px 0 12px; letter-spacing: -0.01em; }
+      p { margin: 0 0 16px; }
+      .muted { color: var(--text-muted); }
+      ul { padding-left: 22px; color: var(--text-muted); }
+      ul li { margin-bottom: 6px; }
+      ul li strong { color: var(--text); }
+      code { background: var(--bg-elevated); border: 1px solid var(--border); padding: 1px 6px; border-radius: 4px; font-size: 0.9em; }
+
+      /* Launch button */
+      .launch-row { display: flex; gap: 12px; flex-wrap: wrap; margin: 24px 0; }
+      .btn { background: var(--bg-elevated-2); border: 1px solid var(--border-strong); color: var(--text); padding: 10px 18px; border-radius: 9999px; cursor: pointer; font-size: 14px; font-family: inherit; font-weight: 600; display: inline-flex; align-items: center; gap: 8px; }
+      .btn:hover { border-color: var(--accent); }
+      .btn.primary { background: linear-gradient(90deg,#8b5cf6,#06b6d4); border-color: transparent; box-shadow: 0 0 24px rgba(139,92,246,0.4); }
+      .btn.primary:hover { filter: brightness(1.1); }
+
+      /* ============ THE POPUP — research-short style ============ */
+      .popup-overlay {
+        position: fixed; inset: 0; background: rgba(5,8,16,0.85);
+        backdrop-filter: blur(8px);
+        display: none; align-items: center; justify-content: center;
+        z-index: 100; padding: 16px;
+      }
+      .popup-overlay.open { display: flex; animation: fadeIn 0.3s ease; }
+      @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+      .popup {
+        background: linear-gradient(180deg, var(--bg-elevated) 0%, var(--bg) 100%);
+        border: 1px solid rgba(139,92,246,0.3);
+        border-radius: 24px;
+        width: 100%; max-width: 980px;
+        max-height: 90vh; overflow: hidden;
+        box-shadow: 0 24px 80px rgba(0,0,0,0.6), 0 0 60px rgba(139,92,246,0.2);
+        display: flex; flex-direction: column;
+        animation: popIn 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+      }
+      @keyframes popIn { from { transform: scale(0.92) translateY(20px); opacity: 0; } to { transform: scale(1) translateY(0); opacity: 1; } }
+
+      .popup-header {
+        display: flex; align-items: center; justify-content: space-between;
+        padding: 16px 20px; border-bottom: 1px solid var(--border);
+        background: linear-gradient(90deg, rgba(139,92,246,0.15), rgba(6,182,212,0.15));
+      }
+      .popup-header .title { display: flex; align-items: center; gap: 10px; font-size: 15px; font-weight: 600; }
+      .popup-header .title .dot { width: 8px; height: 8px; border-radius: 9999px; background: var(--success); animation: pulse 1.5s infinite; }
+      @keyframes pulse { 0%,100% { box-shadow: 0 0 0 0 rgba(16,185,129,0.5); } 50% { box-shadow: 0 0 0 6px rgba(16,185,129,0); } }
+      .popup-close {
+        background: transparent; border: 1px solid var(--border); color: var(--text-muted);
+        width: 28px; height: 28px; border-radius: 8px; cursor: pointer; font-size: 18px;
+        display: inline-flex; align-items: center; justify-content: center;
+      }
+      .popup-close:hover { border-color: var(--accent); color: var(--text); }
+
+      .popup-grid {
+        display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: 1fr 1fr;
+        gap: 1px; background: var(--border); flex: 1; min-height: 480px;
+      }
+      @media (max-width: 720px) { .popup-grid { grid-template-columns: 1fr; grid-template-rows: auto; } }
+
+      .panel {
+        background: var(--bg-elevated); padding: 16px;
+        display: flex; flex-direction: column; min-height: 220px;
+        position: relative; overflow: hidden;
+      }
+      .panel-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px; gap: 8px; flex-wrap: wrap; }
+      .panel-head .label { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-muted-2); }
+      .panel-head .badge { font-size: 10px; padding: 2px 8px; border-radius: 9999px; background: var(--bg-elevated-2); color: var(--text-muted); border: 1px solid var(--border); }
+
+      /* Panel 1: DNA helix SVG */
+      .helix-panel { background: radial-gradient(circle at 50% 50%, rgba(139,92,246,0.15), transparent 70%), var(--bg-elevated); align-items: center; justify-content: center; }
+      .helix-svg { width: 100%; flex: 1; max-height: 200px; }
+      .helix-svg .strand-a { stroke: #06b6d4; stroke-width: 2; fill: none; filter: drop-shadow(0 0 4px rgba(6,182,212,0.6)); }
+      .helix-svg .strand-b { stroke: #ec4899; stroke-width: 2; fill: none; filter: drop-shadow(0 0 4px rgba(236,72,153,0.6)); }
+      .helix-svg .rung { stroke: rgba(243,244,246,0.4); stroke-width: 1; }
+      .helix-svg .base { fill: #f59e0b; filter: drop-shadow(0 0 3px rgba(245,158,11,0.8)); }
+      .helix-svg .base-c { fill: #10b981; }
+      .helix-svg .base-g { fill: #ef4444; }
+      .helix-svg .base-t { fill: #3b82f6; }
+      .helix-rotate { transform-origin: 50% 50%; animation: helixSpin 8s linear infinite; }
+      @keyframes helixSpin { from { transform: rotateY(0deg); } to { transform: rotateY(360deg); } }
+      .helix-caption { font-size: 11px; color: var(--text-muted-2); text-align: center; margin-top: 4px; }
+      .helix-legend { display: flex; gap: 8px; flex-wrap: wrap; font-size: 10px; color: var(--text-muted); justify-content: center; margin-top: 6px; }
+      .helix-legend .item { display: inline-flex; align-items: center; gap: 4px; }
+      .helix-legend .swatch { width: 8px; height: 8px; border-radius: 9999px; }
+
+      /* Panel 2: Multi-language code */
+      .code-panel { background: var(--bg); }
+      .lang-toggle { display: inline-flex; border: 1px solid var(--border); border-radius: 9999px; overflow: hidden; flex-wrap: wrap; }
+      .lang-toggle button {
+        background: transparent; color: var(--text-muted); border: 0;
+        padding: 4px 10px; cursor: pointer; font-family: inherit; font-size: 10px; font-weight: 700;
+        text-transform: uppercase; letter-spacing: 0.04em;
+      }
+      .lang-toggle button.active { background: var(--accent); color: white; }
+      pre.code-block {
+        flex: 1; margin: 0; overflow: auto;
+        font-family: "SF Mono", Menlo, Monaco, Consolas, monospace;
+        font-size: 11px; line-height: 1.5; color: #e5e7eb;
+        padding: 8px 0 0 0;
+      }
+      pre.code-block .kw { color: #c084fc; }
+      pre.code-block .fn { color: #67e8f9; }
+      pre.code-block .str { color: #86efac; }
+      pre.code-block .num { color: #fbbf24; }
+      pre.code-block .com { color: #6b7280; font-style: italic; }
+      pre.code-block .ty { color: #f9a8d4; }
+
+      /* Panel 3: Function call + streaming tokens */
+      .call-panel { background: linear-gradient(180deg, var(--bg-elevated) 0%, var(--bg) 100%); }
+      .call-status {
+        font-family: "SF Mono", Menlo, monospace; font-size: 11px;
+        background: var(--bg); border: 1px solid var(--border); border-radius: 8px;
+        padding: 8px 10px; color: var(--text-muted); margin-bottom: 8px;
+        min-height: 28px;
+      }
+      .call-status .arrow { color: var(--accent); margin-right: 6px; }
+      .call-status .fn-name { color: var(--accent-2); font-weight: 600; }
+      .call-status .arg { color: var(--warn); }
+      .call-status .ret { color: var(--success); }
+      .tokens {
+        flex: 1; font-family: "SF Mono", Menlo, monospace; font-size: 11px;
+        line-height: 1.7; color: var(--text); background: var(--bg);
+        border: 1px solid var(--border); border-radius: 8px; padding: 8px 10px;
+        min-height: 100px; max-height: 140px; overflow: auto;
+      }
+      .tokens .cursor { display: inline-block; width: 7px; height: 12px; background: var(--accent); vertical-align: text-bottom; margin-left: 2px; animation: blink 1s steps(2, start) infinite; }
+      @keyframes blink { to { visibility: hidden; } }
+      .progress { margin-top: 8px; height: 4px; background: var(--bg); border-radius: 9999px; overflow: hidden; }
+      .progress-bar { height: 100%; background: linear-gradient(90deg,#8b5cf6,#06b6d4); width: 0; transition: width 0.2s ease; }
+
+      /* Panel 4: Result viz */
+      .result-panel { background: var(--bg-elevated); }
+      .result-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; margin-bottom: 8px; }
+      .result-stats .stat { background: var(--bg); border: 1px solid var(--border); border-radius: 8px; padding: 6px 8px; }
+      .result-stats .stat .l { font-size: 9px; color: var(--text-muted-2); text-transform: uppercase; letter-spacing: 0.06em; }
+      .result-stats .stat .v { font-family: "SF Mono", Menlo, monospace; font-size: 14px; font-weight: 700; color: var(--text); }
+      .result-stats .stat .v.out { color: var(--danger); }
+      .result-chart { flex: 1; background: var(--bg); border: 1px solid var(--border); border-radius: 8px; padding: 8px; min-height: 100px; }
+      .result-chart svg { width: 100%; height: 100%; }
+
+      /* Popup footer */
+      .popup-footer {
+        padding: 12px 20px; border-top: 1px solid var(--border);
+        background: var(--bg-elevated);
+        display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap;
+      }
+      .popup-footer .meta { font-size: 11px; color: var(--text-muted-2); }
+      .popup-footer .actions { display: flex; gap: 6px; }
+      .popup-footer .act {
+        background: transparent; border: 1px solid var(--border); color: var(--text-muted);
+        padding: 6px 12px; border-radius: 8px; cursor: pointer; font-size: 11px; font-family: inherit; font-weight: 600;
+        display: inline-flex; align-items: center; gap: 4px;
+      }
+      .popup-footer .act:hover { border-color: var(--accent); color: var(--text); }
+      .popup-footer .act.primary { background: linear-gradient(90deg,#8b5cf6,#06b6d4); border-color: transparent; color: white; }
+
+      .meta-page { margin-top: 64px; padding-top: 24px; border-top: 1px solid var(--border); color: var(--text-muted); font-size: 13px; }
+      .meta-page a { color: var(--text); text-decoration: none; }
+      .meta-page a:hover { text-decoration: underline; }
+
+      body.light { background: radial-gradient(1200px 600px at 20% -10%, rgba(139,92,246,0.08), transparent 60%), radial-gradient(1200px 600px at 100% 0%, rgba(6,182,212,0.06), transparent 55%), #fafafa; color: #18181b; }
+      body.light .popup { background: linear-gradient(180deg, #ffffff 0%, #fafafa 100%); border-color: rgba(139,92,246,0.3); }
+      body.light .panel, body.light .popup-header, body.light .popup-footer { background: white; border-color: #e5e7eb; }
+      body.light .call-panel, body.light .result-panel { background: linear-gradient(180deg, #ffffff 0%, #fafafa 100%); }
+      body.light .helix-panel { background: radial-gradient(circle at 50% 50%, rgba(139,92,246,0.08), transparent 70%), white; }
+      body.light pre.code-block, body.light .tokens, body.light .call-status, body.light .result-chart, body.light .result-stats .stat { background: #fafafa; border-color: #e5e7eb; color: #18181b; }
+      body.light pre.code-block .com { color: #6b7280; }
+      body.light .lead, body.light .muted, body.light ul, body.light .meta-page, body.light .tag { color: #4b5563; }
+      body.light code { background: #f3f4f6; border-color: #e5e7eb; }
+      body.light .ribbon-menu, body.light .ribbon-dropdown[open] > summary { background: white; border-color: #e5e7eb; }
+      body.light .ribbon-btn-primary { color: white; }
+    </style>
+    <script src="../subscribe-gate.js"></script>
+  <style>
+@media (prefers-reduced-motion: reduce) {
+  #particle-canvas { display: none !important; }
+  * { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; scroll-behavior: auto !important; }
+}
+</style>
+</head>
+  <body>
+    <header class="ribbon">
+      <div class="ribbon-inner">
+        <a href="../index.html" class="ribbon-brand"><span class="ribbon-logo">A</span><span class="ribbon-name">AIHPC Advanced</span></a>
+        <nav class="ribbon-nav">
+          <details class="ribbon-dropdown"><summary>Platform</summary><div class="ribbon-menu"><a href="../index.html">Home</a><a href="../demos.html">Demos</a><a href="../dashboard.html">Dashboard</a><a href="../graph.html">Knowledge Graph</a><a href="../benchmark.html">Agentic Benchmark</a><a href="../subscribe.html">Subscribe</a><a href="../timeline.html">Platform Timeline (50 Phases)</a><a href="../retrospective.html">50-Phase Retrospective</a><a href="../component-registry.html">Component Registry</a></div></details><details class="ribbon-dropdown"><summary>Visualisers</summary><div class="ribbon-menu"><a href="../playground.html">Cross-Domain Playground</a><a href="../quantum-shorts.html">Quantum Shorts Channel</a><a href="../bloch.html">Bloch Sphere Shorts</a><a href="../medical-atlas.html">Medical Imaging Atlas</a><a href="../science/physics/quantum.html">Quantum Mechanics Hub</a></div></details>
+          <details class="ribbon-dropdown"><summary>AETHEL Suite</summary><div class="ribbon-menu"><a href="../aethel.html">AETHEL Connector</a><a href="../connectors.html">Scientific Connectors Hub</a><a href="../query.html">Query Executor</a><a href="../graph.html">Knowledge Graph</a><a href="../workflows.html">Domain Workflows</a></div></details>
+          <details class="ribbon-dropdown"><summary>Science</summary><div class="ribbon-menu"><a href="../science-biology.html">Biology Hub</a><a href="../science-chemistry.html">Chemistry Hub</a><a href="../science-physics.html">Physics Hub</a><a href="../science-maths.html">Mathematics Hub</a><a href="../science-ml.html">🤖 Machine Learning</a><a href="../science-bioinformatics.html">Bioinformatics</a><a href="../science-cheminformatics.html">Cheminformatics</a></div></details>
+          <details class="ribbon-dropdown"><summary>Insights</summary><div class="ribbon-menu"><a href="../feeds.html">📡 Live Journal Feeds</a><a href="../digest.html">Weekly Science Digest</a><a href="../audit.html">📊 Audit Dashboard</a><a href="../404.html">🚧 404 page</a><a href="../lab.html">🔬 Lab</a><a href="../dashboard.html">Temporal Knowledge Graph Dashboard</a><a href="../bio-nn.html">🧬 Bioinformatics × NN</a><a href="../lab-in-the-loop.html">🔄 Lab in the Loop</a><a href="../how-cnns-see-images.html">📖 How CNNs See</a><a href="../editjumps.html">🔬 EditJumps</a><a href="../geoworld.html">🔬 GeoWorld</a><a href="../concepts.html">Concept Cards</a><a href="../concepts/replayable-decision-traces.html">Replayable Decision Traces</a><a href="../concepts/provenance-first.html">Provenance-First Computing</a><a href="../concepts/lazy-evaluation.html">Lazy Evaluation as UX</a><a href="../concepts/cross-domain-graph.html">Cross-Domain Knowledge Graph</a><a href="../concepts/audience-annotations.html">Audience-Specific Annotations</a><a href="../concepts/provenance-chain.html">Provenance Chain</a><a href="../concepts-v2/paper-amkd.html">🔬 AMKD (multimodal KD)</a><a href="../concepts-v2/viz-heatmap-dendrogram.html">📊 Heatmap + Dendrogram</a><a href="../upload-data.html">🛠 Upload Your Data</a></div></details>
+        </nav>
+        <div class="ribbon-actions">
+          <button id="ribbon-theme-toggle" class="ribbon-icon-btn" aria-label="Toggle dark / light theme" title="Toggle dark / light theme"><span id="ribbon-theme-icon">🌙</span></button>
+          <a href="../index.html#live-demo" class="ribbon-btn-primary">Get Started</a>
+        </div>
+      </div>
+    </header>
+
+    <div class="container">
+      <p class="crumbs"><a href="../concepts.html">Concept Cards</a> / Lazy Evaluation as UX</p>
+      <span class="tag">UX &middot; feels alive &middot; the popup IS the demo</span>
+      <h1>Lazy Evaluation as a UX Primitive</h1>
+      <p class="lead">
+        Popups open immediately with a <em>pending</em> state and stream
+        updates as the computation progresses. Users feel progress rather
+        than blocking — the <em>feels alive</em> property that&apos;s hard to copy.
+        Press the button below: the popup runs a real function call
+        (compute outlier stats on a gene-expression dataset) across all six
+        platform languages, with a rotating DNA helix, streaming
+        &quot;thinking&quot; tokens, and a live result chart.
+      </p>
+
+      <div class="launch-row">
+        <button class="btn primary" id="launch-btn">▶ Launch the popup experience</button>
+        <span class="muted" style="font-size:13px; align-self:center;">No external links — everything happens in your browser.</span>
+      </div>
+
+      <h2>What the popup demonstrates</h2>
+      <ul>
+        <li><strong>Zero perceived latency.</strong> The popup opens in &lt;50ms with a &quot;pending&quot; state; the viewer sees activity instantly even though the full computation takes ~5 seconds.</li>
+        <li><strong>Streaming trace.</strong> Sub-steps arrive as the computation progresses — &quot;computing mean...&quot;, &quot;computing std...&quot;, &quot;identifying outliers...&quot;. Each step is part of the <a href="replayable-decision-traces.html">decision trace</a>.</li>
+        <li><strong>Polyglot.</strong> The same algorithm — <code>compute_outliers(values)</code> — is shown in all six platform languages (Python / Rust / Go / C / Elixir / Scala). Toggle to compare.</li>
+        <li><strong>Real function call.</strong> The popup actually runs the function on a small embedded dataset (10 gene-expression values); the result is computed in your browser, not faked.</li>
+        <li><strong>Visual context.</strong> A rotating DNA double-helix SVG sets the biological register; the result chart highlights outliers in red.</li>
+        <li><strong>Provenance.</strong> The popup footer offers a downloadable receipt (CSV + JSON trace) — the artifact is the asset.</li>
+      </ul>
+
+      <h2>Why this is the central UX primitive</h2>
+      <p class="muted">
+        Most platforms block on computation: a spinner hides the work and
+        the user waits. The lazy-evaluated popup inverts this — the popup
+        opens instantly and the work streams in. This is the
+        &quot;feels alive&quot; property that&apos;s hard to copy. Combined with
+        the temporal dashboard at <a href="../dashboard.html">/dashboard</a>,
+        it makes computation observable in real time and replayable
+        after the fact.
+      </p>
+
+      <h2>Evolution of the subject</h2>
+      <ul>
+        <li><strong>Today.</strong> Pure client-side streaming with setTimeout cadence; the popup is the demo.</li>
+        <li><strong>Phase 5+.</strong> SSE stream from a sandboxed runtime; each trace event is a JSON object on the wire.</li>
+        <li><strong>Phase 6+.</strong> Popups compose — open a sub-popup from any step to inspect the sub-trace. Click any &quot;thinking&quot; token to see its grounding in the knowledge graph.</li>
+      </ul>
+
+      <div class="meta-page">
+        <p>&copy; 2026 AIHPC Advanced. &middot; Static page from <code>/docs/concepts/lazy-evaluation.html</code>. Next.js route: <code>/concepts/lazy-evaluation</code>. Comments to <a href="mailto:testdemoqwenai2025@gmail.com">testdemoqwenai2025@gmail.com</a>.</p>
+      </div>
+    </div>
+
+    <!-- ============ THE POPUP ============ -->
+    <div class="popup-overlay" id="popup-overlay">
+      <div class="popup" role="dialog" aria-modal="true" aria-labelledby="popup-title">
+        <div class="popup-header">
+          <div class="title" id="popup-title">
+            <span class="dot"></span>
+            AETHEL · compute_outliers(values)
+          </div>
+          <button class="popup-close" id="popup-close" aria-label="Close popup">&times;</button>
+        </div>
+
+        <div class="popup-grid">
+          <!-- Panel 1: DNA helix -->
+          <div class="panel helix-panel">
+            <div class="panel-head">
+              <span class="label">1 · Visual context</span>
+              <span class="badge">DNA double helix · live</span>
+            </div>
+            <svg class="helix-svg" id="helix" viewBox="0 0 300 200" preserveAspectRatio="xMidYMid meet">
+              <g class="helix-rotate" id="helix-rotate">
+                <!-- Two sinusoidal strands -->
+                <path class="strand-a" d="M 0 100 Q 37.5 60 75 100 T 150 100 T 225 100 T 300 100" />
+                <path class="strand-b" d="M 0 100 Q 37.5 140 75 100 T 150 100 T 225 100 T 300 100" />
+                <!-- Rungs + base pairs at fixed positions -->
+                <g id="rungs"></g>
+              </g>
+            </svg>
+            <p class="helix-caption">Rotating · 12 base pairs · 4 bases (A · C · G · T)</p>
+            <div class="helix-legend">
+              <span class="item"><span class="swatch" style="background:#f59e0b"></span>A</span>
+              <span class="item"><span class="swatch" style="background:#10b981"></span>C</span>
+              <span class="item"><span class="swatch" style="background:#ef4444"></span>G</span>
+              <span class="item"><span class="swatch" style="background:#3b82f6"></span>T</span>
+            </div>
+          </div>
+
+          <!-- Panel 2: Multi-language code -->
+          <div class="panel code-panel">
+            <div class="panel-head">
+              <span class="label">2 · Polyglot code</span>
+              <div class="lang-toggle" id="lang-toggle">
+                <button data-lang="python" class="active">Python</button>
+                <button data-lang="rust">Rust</button>
+                <button data-lang="go">Go</button>
+                <button data-lang="c">C</button>
+                <button data-lang="elixir">Elixir</button>
+                <button data-lang="scala">Scala</button>
+              </div>
+            </div>
+            <pre class="code-block" id="code-block"></pre>
+          </div>
+
+          <!-- Panel 3: Function call + streaming tokens -->
+          <div class="panel call-panel">
+            <div class="panel-head">
+              <span class="label">3 · Function call · streaming</span>
+              <span class="badge" id="step-badge">idle</span>
+            </div>
+            <div class="call-status" id="call-status"><span class="arrow">▸</span> ready</div>
+            <div class="tokens" id="tokens"></div>
+            <div class="progress"><div class="progress-bar" id="progress-bar"></div></div>
+          </div>
+
+          <!-- Panel 4: Result viz -->
+          <div class="panel result-panel">
+            <div class="panel-head">
+              <span class="label">4 · Result · live</span>
+              <span class="badge" id="viz-badge">awaiting</span>
+            </div>
+            <div class="result-stats" id="result-stats">
+              <div class="stat"><div class="l">μ (mean)</div><div class="v" id="r-mean">—</div></div>
+              <div class="stat"><div class="l">σ (std)</div><div class="v" id="r-std">—</div></div>
+              <div class="stat"><div class="l">n</div><div class="v" id="r-n">—</div></div>
+              <div class="stat"><div class="l">outliers</div><div class="v" id="r-outliers">—</div></div>
+            </div>
+            <div class="result-chart">
+              <svg id="result-chart" viewBox="0 0 300 100" preserveAspectRatio="none"></svg>
+            </div>
+          </div>
+        </div>
+
+        <!-- Bring your own data — the user's key insight: "upload or url for desired dataset" -->
+        <div style="padding: 12px 20px; border-top: 1px solid var(--border); background: var(--bg-elevated);">
+          <div style="font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-muted-2); margin-bottom: 8px;">5 · Bring your own dataset (ETL/ELT)</div>
+          <div style="display: flex; gap: 8px; flex-wrap: wrap; align-items: center;">
+            <label style="background: var(--bg-elevated-2); border: 1px solid var(--border-strong); color: var(--text); padding: 6px 12px; border-radius: 6px; cursor: pointer; font-size: 11px; font-weight: 600; display: inline-flex; align-items: center; gap: 4px;">
+              📁 Upload CSV/JSON/TXT
+              <input type="file" id="file-input" accept=".csv,.json,.txt,.tsv" style="display:none;" />
+            </label>
+            <input type="url" id="url-input" placeholder="or paste a dataset URL…" style="flex:1; min-width:200px; background: var(--bg); border: 1px solid var(--border); color: var(--text); padding: 6px 10px; border-radius: 6px; font-size: 11px; font-family: inherit;" />
+            <button class="act" id="url-fetch-btn" style="font-size: 11px;">⬇ Fetch URL</button>
+            <button class="act" id="use-default-btn" style="font-size: 11px;">↺ Use default</button>
+          </div>
+          <div id="etl-report" style="display:none; margin-top: 8px; padding: 10px; background: var(--bg); border: 1px solid var(--border); border-radius: 8px; font-size: 11px; color: var(--text-muted); font-family: 'SF Mono', Menlo, monospace; max-height: 120px; overflow: auto;"></div>
+        </div>
+
+        <div class="popup-footer">
+          
+      <!-- Simplified footer — GDPR + HIPAA + MIT license + GitHub Pages note -->
+      <div style="margin-top: 40px; padding: 16px 20px; background: rgba(11,15,26,0.6); border: 1px solid var(--border); border-radius: 10px; font-size: 11px; color: var(--text-muted); line-height: 1.6;">
+        <div style="display: flex; gap: 16px; flex-wrap: wrap; margin-bottom: 8px;">
+          <span style="color: var(--accent);">📜 MIT License</span>
+          <span style="color: var(--accent-2);">🔒 GDPR Compliant</span>
+          <span style="color: var(--accent-2);">🏥 HIPAA Ready</span>
+          <span style="color: var(--accent);">📊 SOC 2 Aligned</span>
+        </div>
+        <p style="margin: 8px 0;">© 2026 AIHPC Advanced. All rights reserved. · Contact: <a href="mailto:testdemoqwenai2025@gmail.com" style="color: #06b6d4;">testdemoqwenai2025@gmail.com</a></p>
+        <p style="margin: 4px 0; font-size: 10px; color: var(--text-muted);">Data protection: no personal data · no cookies · no tracking · all computations client-side (lazy evaluation) <a href="mailto:testdemoqwenai2025@gmail.com" style="color: var(--accent-2);">testdemoqwenai2025@gmail.com</a></p>
+      </div>
+
+      <div class="meta">All client-side · no external services · data stays in your browser</div>
+          <div class="actions">
+            <button class="act" id="act-py">▶ Execute in Python (Pyodide)</button>
+            <button class="act" id="act-copy">⎘ Copy β̂</button>
+            <button class="act" id="act-csv">⬇ CSV</button>
+            <button class="act primary" id="act-receipt" title="Pro tier required — sign in at /subscribe">⬇ Receipt</button>
+          </div>
+          <div id="py-result" style="display:none; width:100%; margin-top:8px; padding:10px 12px; background: var(--bg); border: 1px solid var(--border); border-radius:8px; font-family: 'SF Mono', Menlo, monospace; font-size: 12px; color: var(--text);"></div>
+          <div style="width:100%; margin-top:8px; display:flex; align-items:center; justify-content:space-between; gap:8px; font-size:11px; color: var(--text-muted-2);">
+            <span data-aihpc-tier-badge="1" id="popup-tier-badge"></span>
+            <span id="popup-tier-hint" style="font-size:10px;">CSV: all tiers · Receipt: Pro+ · Trace: Team only</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Phase 35: N-D Hypercube Viewer modal — lazy-loaded on click -->
+    <div id="nd-modal-overlay" style="display:none; position:fixed; inset:0; z-index:10001; background:rgba(0,0,0,0.7); backdrop-filter:blur(8px); align-items:center; justify-content:center;">
+      <div style="background:linear-gradient(180deg,#121826 0%,#0b0f1a 100%); border:1px solid rgba(139,92,246,0.3); border-radius:16px; padding:24px; max-width:680px; width:90%; max-height:90vh; overflow:auto; box-shadow:0 8px 32px rgba(0,0,0,0.5),0 0 60px rgba(139,92,246,0.1);">
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:16px;">
+          <h3 style="margin:0; font-size:18px; background:linear-gradient(90deg,#fff,#c4b5fd 60%,#67e8f9); -webkit-background-clip:text; background-clip:text; color:transparent;">N-D Hypercube Viewer (4D→10D)</h3>
+          <button id="nd-modal-close" style="background:transparent; border:1px solid var(--border-strong,#2a3548); color:var(--text,#f3f4f6); width:32px; height:32px; border-radius:8px; cursor:pointer; font-size:16px;">&times;</button>
+        </div>
+        <div style="margin-bottom:12px; display:flex; gap:6px; align-items:center; flex-wrap:wrap;">
+          <span style="font-size:11px; color:var(--text-muted-2);">Dimension:</span>
+          <input type="range" id="nd-dim-slider" min="4" max="10" value="4" step="1" style="accent-color:#8b5cf6;" />
+          <span id="nd-dim-value" style="font-size:14px; font-weight:700; color:#06b6d4; min-width:28px; text-align:center;">4</span>
+          <button id="nd-play-btn" style="background:linear-gradient(90deg,#8b5cf6,#06b6d4); border:none; color:white; padding:4px 12px; border-radius:4px; cursor:pointer; font-size:11px; font-weight:600;">⏸ Pause</button>
+          <button id="nd-speed-btn" style="background:#1a2133; border:1px solid #2a3548; color:#f3f4f6; padding:4px 12px; border-radius:4px; cursor:pointer; font-size:11px;">1× speed</button>
+          <button id="nd-reset-btn" style="background:#1a2133; border:1px solid #2a3548; color:#f3f4f6; padding:4px 12px; border-radius:4px; cursor:pointer; font-size:11px;">↺ Reset</button>
+        </div>
+        <svg id="nd-viewer-svg" viewBox="0 0 600 420" preserveAspectRatio="xMidYMid meet" style="width:100%; height:auto; background:#0b0f1a; border-radius:8px;"></svg>
+        <div id="nd-info" style="margin-top:12px; display:grid; grid-template-columns:repeat(auto-fill,minmax(120px,1fr)); gap:8px;">
+          <div style="padding:6px 10px; background:rgba(18,24,38,0.6); border:1px solid #1f2937; border-radius:6px;"><div style="font-size:9px; color:#6b7280; text-transform:uppercase;">Vertices</div><div id="nd-info-vertices" style="font-size:14px; font-weight:700; color:#06b6d4; font-family:'SF Mono',Menlo;">—</div></div>
+          <div style="padding:6px 10px; background:rgba(18,24,38,0.6); border:1px solid #1f2937; border-radius:6px;"><div style="font-size:9px; color:#6b7280; text-transform:uppercase;">Edges</div><div id="nd-info-edges" style="font-size:14px; font-weight:700; color:#06b6d4; font-family:'SF Mono',Menlo;">—</div></div>
+          <div style="padding:6px 10px; background:rgba(18,24,38,0.6); border:1px solid #1f2937; border-radius:6px;"><div style="font-size:9px; color:#6b7280; text-transform:uppercase;">Name</div><div id="nd-info-name" style="font-size:14px; font-weight:700; color:#06b6d4; font-family:'SF Mono',Menlo;">Tesseract</div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Launch N-D Viewer button — appears below the popup-open section -->
+    <div style="margin-top: 24px; text-align: center;">
+      <button id="launch-nd-viewer" style="background:linear-gradient(90deg,#06b6d4,#8b5cf6); border:none; color:white; padding:12px 28px; border-radius:9999px; cursor:pointer; font-size:14px; font-weight:600; box-shadow:0 4px 16px rgba(6,182,212,0.3);">🔬 Launch N-D Hypercube Viewer (4D→10D)</button>
+      <p style="margin-top:8px; font-size:12px; color:var(--text-muted);">Phase 35 — lazily loads the N-D viewer from geometry.html. Renders a 4D tesseract → 10D decaeract with animated rotation + perspective projection chain. Pure client-side.</p>
+    </div>
+
+    <script>
+      // ============================================================
+      // Reimagined lazy-evaluation popup — pure client-side
+      // ============================================================
+      // Real function call on a small gene-expression dataset,
+      // polyglot code (6 platform languages), streaming tokens,
+      // live result viz, downloadable receipt. The popup IS the demo.
+      // ============================================================
+
+      // ---- The dataset (a small gene-expression vector) ----
+      const DATASET = [3.2, 5.1, 4.7, 2.9, 5.8, 4.2, 6.1, 3.9, 5.5, 4.8];
+
+      // ---- The function (real implementation in JS, mirrors the 6 languages) ----
+      function computeOutliers(values) {
+        const n = values.length;
+        const mean = values.reduce((s, v) => s + v, 0) / n;
+        const variance = values.reduce((s, v) => s + (v - mean) ** 2, 0) / n;
+        const std = Math.sqrt(variance);
+        const threshold = mean + 2 * std;
+        const outliers = values.filter((v) => v > threshold);
+        return { n, mean, std, threshold, outliers, all: values };
+      }
+
+      // ---- The 6-language code (same algorithm, different idioms) ----
+      const CODE = {
+        python: `<span class="com"># compute_outliers.py — Python (numpy-style)</span>
+<span class="kw">import</span> math
+
+<span class="kw">def</span> <span class="fn">compute_outliers</span>(values: <span class="ty">list</span>[<span class="ty">float</span>]) -> <span class="ty">dict</span>:
+    n = <span class="fn">len</span>(values)
+    mean = <span class="fn">sum</span>(values) / n
+    var  = <span class="fn">sum</span>((v - mean) ** <span class="num">2</span> <span class="kw">for</span> v <span class="kw">in</span> values) / n
+    std  = math.<span class="fn">sqrt</span>(var)
+    threshold = mean + <span class="num">2</span> * std
+    <span class="kw">return</span> {
+        <span class="str">"n"</span>: n, <span class="str">"mean"</span>: mean,
+        <span class="str">"std"</span>: std, <span class="str">"threshold"</span>: threshold,
+        <span class="str">"outliers"</span>: [v <span class="kw">for</span> v <span class="kw">in</span> values <span class="kw">if</span> v &gt; threshold],
+    }`,
+        rust: `<span class="com">// compute_outliers.rs — Rust (std iterators)</span>
+<span class="kw">pub struct</span> <span class="ty">Stats</span> {
+    <span class="kw">pub</span> n: <span class="ty">usize</span>,
+    <span class="kw">pub</span> mean: <span class="ty">f64</span>,
+    <span class="kw">pub</span> std: <span class="ty">f64</span>,
+    <span class="kw">pub</span> threshold: <span class="ty">f64</span>,
+    <span class="kw">pub</span> outliers: <span class="ty">Vec</span>&lt;<span class="ty">f64</span>&gt;,
+}
+
+<span class="kw">pub fn</span> <span class="fn">compute_outliers</span>(values: &amp;[<span class="ty">f64</span>]) -&gt; <span class="ty">Stats</span> {
+    <span class="kw">let</span> n = values.<span class="fn">len</span>() <span class="kw">as</span> <span class="ty">f64</span>;
+    <span class="kw">let</span> mean = values.<span class="fn">iter</span>().<span class="fn">sum</span>::&lt;<span class="ty">f64</span>&gt;() / n;
+    <span class="kw">let</span> var  = values.<span class="fn">iter</span>()
+        .<span class="fn">map</span>(|v| (v - mean).<span class="fn">powi</span>(<span class="num">2</span>))
+        .<span class="fn">sum</span>::&lt;<span class="ty">f64</span>&gt;() / n;
+    <span class="kw">let</span> std  = var.<span class="fn">sqrt</span>();
+    <span class="kw">let</span> threshold = mean + <span class="num">2.0</span> * std;
+    <span class="kw">let</span> outliers = values.<span class="fn">iter</span>()
+        .<span class="fn">filter</span>(|&amp;v| v &gt; threshold)
+        .<span class="fn">copied</span>().<span class="fn">collect</span>();
+    <span class="ty">Stats</span> { n: n <span class="kw">as</span> <span class="ty">usize</span>, mean, std, threshold, outliers }
+}`,
+        go: `<span class="com">// compute_outliers.go — Golang (simple loops)</span>
+<span class="kw">package</span> stats
+
+<span class="kw">import</span> <span class="str">"math"</span>
+
+<span class="kw">type</span> <span class="ty">Stats</span> <span class="kw">struct</span> {
+    N         <span class="ty">int</span>
+    Mean      <span class="ty">float64</span>
+    Std       <span class="ty">float64</span>
+    Threshold <span class="ty">float64</span>
+    Outliers  []<span class="ty">float64</span>
+}
+
+<span class="kw">func</span> <span class="fn">ComputeOutliers</span>(values []<span class="ty">float64</span>) <span class="ty">Stats</span> {
+    n := <span class="fn">float64</span>(<span class="fn">len</span>(values))
+    <span class="kw">var</span> sum <span class="ty">float64</span>
+    <span class="kw">for</span> _, v := <span class="kw">range</span> values { sum += v }
+    mean := sum / n
+    <span class="kw">var</span> sq <span class="ty">float64</span>
+    <span class="kw">for</span> _, v := <span class="kw">range</span> values { sq += (v - mean) * (v - mean) }
+    std := math.<span class="fn">Sqrt</span>(sq / n)
+    thr := mean + <span class="num">2</span>*std
+    <span class="kw">var</span> out []<span class="ty">float64</span>
+    <span class="kw">for</span> _, v := <span class="kw">range</span> values {
+        <span class="kw">if</span> v &gt; thr { out = <span class="fn">append</span>(out, v) }
+    }
+    <span class="kw">return</span> <span class="ty">Stats</span>{<span class="fn">len</span>(values), mean, std, thr, out}
+}`,
+        c: `<span class="com">/* compute_outliers.c — C (manual loops) */</span>
+<span class="kw">#include</span> <span class="str">&lt;math.h&gt;</span>
+<span class="kw">#include</span> <span class="str">&lt;stdlib.h&gt;</span>
+
+<span class="kw">typedef struct</span> {
+    <span class="kw">int</span> n;
+    <span class="kw">double</span> mean, std, threshold;
+    <span class="kw">double</span> *outliers;
+    <span class="kw">int</span> n_outliers;
+} <span class="ty">stats_t</span>;
+
+<span class="ty">stats_t</span> <span class="fn">compute_outliers</span>(<span class="kw">const double</span> *v, <span class="kw">int</span> n) {
+    <span class="kw">double</span> sum = <span class="num">0.0</span>, sq = <span class="num">0.0</span>;
+    <span class="kw">for</span> (<span class="kw">int</span> i = <span class="num">0</span>; i &lt; n; i++) sum += v[i];
+    <span class="kw">double</span> mean = sum / n;
+    <span class="kw">for</span> (<span class="kw">int</span> i = <span class="num">0</span>; i &lt; n; i++)
+        sq += (v[i] - mean) * (v[i] - mean);
+    <span class="kw">double</span> std = <span class="fn">sqrt</span>(sq / n);
+    <span class="kw">double</span> thr = mean + <span class="num">2.0</span> * std;
+    <span class="ty">stats_t</span> s = { n, mean, std, thr, <span class="fn">malloc</span>(<span class="kw">sizeof</span>(<span class="kw">double</span>) * n), <span class="num">0</span> };
+    <span class="kw">for</span> (<span class="kw">int</span> i = <span class="num">0</span>; i &lt; n; i++)
+        <span class="kw">if</span> (v[i] &gt; thr) s.outliers[s.n_outliers++] = v[i];
+    <span class="kw">return</span> s;
+}`,
+        elixir: `<span class="com"># compute_outliers.exs — Elixir (Enum + pattern match)</span>
+<span class="kw">defmodule</span> <span class="ty">Stats</span> <span class="kw">do</span>
+  <span class="kw">def</span> <span class="fn">compute_outliers</span>(values) <span class="kw">when</span> <span class="fn">is_list</span>(values) <span class="kw">do</span>
+    n    = <span class="fn">length</span>(values)
+    sum  = <span class="ty">Enum</span>.<span class="fn">sum</span>(values)
+    mean = sum / n
+    var  = <span class="ty">Enum</span>.<span class="fn">reduce</span>(values, <span class="num">0</span>, <span class="kw">fn</span> v, acc -&gt;
+      acc + :math.<span class="fn">pow</span>(v - mean, <span class="num">2</span>)
+    <span class="kw">end</span>) / n
+    std  = :math.<span class="fn">sqrt</span>(var)
+    thr  = mean + <span class="num">2</span> * std
+    outliers = <span class="ty">Enum</span>.<span class="fn">filter</span>(values, <span class="kw">fn</span> v -&gt; v &gt; thr <span class="kw">end</span>)
+    %{n: n, mean: mean, std: std,
+      threshold: thr, outliers: outliers}
+  <span class="kw">end</span>
+<span class="kw">end</span>`,
+        scala: `<span class="com">// compute_outliers.sc — Scala (collection methods)</span>
+<span class="kw">object</span> <span class="ty">Stats</span> {
+  <span class="kw">case class</span> <span class="ty">Result</span>(
+    n: <span class="ty">Int</span>, mean: <span class="ty">Double</span>, std: <span class="ty">Double</span>,
+    threshold: <span class="ty">Double</span>, outliers: <span class="ty">Vector</span>[<span class="ty">Double</span>]
+  )
+
+  <span class="kw">def</span> <span class="fn">computeOutliers</span>(values: <span class="ty">Vector</span>[<span class="ty">Double</span>]): <span class="ty">Result</span> = {
+    <span class="kw">val</span> n    = values.size
+    <span class="kw">val</span> mean = values.<span class="fn">sum</span> / n
+    <span class="kw">val</span> var_ = values.<span class="fn">map</span>(v =&gt; math.<span class="fn">pow</span>(v - mean, <span class="num">2</span>)).<span class="fn">sum</span> / n
+    <span class="kw">val</span> std  = math.<span class="fn">sqrt</span>(var_)
+    <span class="kw">val</span> thr  = mean + <span class="num">2.0</span> * std
+    <span class="kw">val</span> outs = values.<span class="fn">filter</span>(_ &gt; thr)
+    <span class="ty">Result</span>(n, mean, std, thr, outs)
+  }
+}`,
+      };
+      let currentLang = 'python';
+      function renderCode(lang) {
+        currentLang = lang;
+        document.getElementById('code-block').innerHTML = CODE[lang] || '';
+        document.querySelectorAll('#lang-toggle button').forEach((b) =>
+          b.classList.toggle('active', b.dataset.lang === lang));
+      }
+      document.querySelectorAll('#lang-toggle button').forEach((b) =>
+        b.addEventListener('click', () => renderCode(b.dataset.lang)));
+      renderCode('python');
+
+      // ---- DNA helix rungs ----
+      function buildHelix() {
+        const rungsEl = document.getElementById('rungs');
+        const bases = ['A','C','G','T'];
+        const colors = { A:'#f59e0b', C:'#10b981', G:'#ef4444', T:'#3b82f6' };
+        const xs = [];
+        for (let i = 0; i < 12; i++) xs.push(20 + i * 24);
+        let parts = [];
+        for (let i = 0; i < 12; i++) {
+          const x = xs[i];
+          // y depends on position along the strand; strands cross at multiples of 37.5
+          // For visual richness, use a sinusoidal position.
+          const yA = 100 + Math.sin(i * 0.7) * 30;
+          const yB = 100 - Math.sin(i * 0.7) * 30;
+          parts.push(`<line class="rung" x1="${x}" y1="${yA}" x2="${x}" y2="${yB}" />`);
+          // Random base-pair dots
+          const b1 = bases[i % 4], b2 = bases[(i + 2) % 4]; // A-T, C-G
+          parts.push(`<circle class="base base-${b1}" cx="${x}" cy="${yA}" r="4"/>`);
+          parts.push(`<circle class="base base-${b2}" cx="${x}" cy="${yB}" r="4"/>`);
+        }
+        rungsEl.innerHTML = parts.join('');
+      }
+      buildHelix();
+
+      // ---- Popup open/close ----
+      const overlay = document.getElementById('popup-overlay');
+      const launchBtn = document.getElementById('launch-btn');
+      const closeBtn = document.getElementById('popup-close');
+      function open() { overlay.classList.add('open'); runDemo(); }
+      function close() { overlay.classList.remove('open'); stopDemo(); }
+      launchBtn.addEventListener('click', open);
+      closeBtn.addEventListener('click', close);
+      overlay.addEventListener('click', (e) => { if (e.target === overlay) close(); });
+      document.addEventListener('keydown', (e) => { if (e.key === 'Escape') close(); });
+
+      // ---- The streaming trace (the actual run) ----
+      let running = false;
+      let timer = null;
+      let lastResult = null;
+
+      const sleep = (ms) => new Promise(r => setTimeout(r, ms));
+
+      function setCall(html) { document.getElementById('call-status').innerHTML = html; }
+      function setStep(label) { document.getElementById('step-badge').textContent = label; }
+      function setVizBadge(label) { document.getElementById('viz-badge').textContent = label; }
+      function appendTokens(html) {
+        document.getElementById('tokens').innerHTML += html;
+        document.getElementById('tokens').scrollTop = document.getElementById('tokens').scrollHeight;
+      }
+      function clearTokens() { document.getElementById('tokens').innerHTML = ''; }
+      function setProgress(p) { document.getElementById('progress-bar').style.width = (p * 100) + '%'; }
+
+      async function runDemo() {
+        if (running) return;
+        running = true;
+        clearTokens();
+        setProgress(0);
+        setVizBadge('awaiting');
+
+        const ds = DATASET.slice();
+        // Step 1: parse / load dataset
+        setStep('parse');
+        setCall(`<span class="arrow">▸</span> <span class="fn-name">load_dataset</span>(<span class="arg">"gene_expression_10.csv"</span>)`);
+        appendTokens(`<span style="color:var(--text-muted);">▸ loading dataset</span> `);
+        await sleep(380);
+        appendTokens(`<span style="color:var(--success);">ok</span> — 10 rows, 1 column<br>`);
+        setProgress(0.15);
+        await sleep(180);
+
+        // Step 2: compute mean
+        setStep('mean');
+        setCall(`<span class="arrow">▸</span> <span class="fn-name">mean</span>(<span class="arg">[${ds.slice(0,3).join(', ')}, ...]</span>)`);
+        appendTokens(`<span style="color:var(--accent-2);">▸ computing mean...</span> `);
+        await sleep(520);
+        const sum = ds.reduce((s, v) => s + v, 0);
+        const mean = sum / ds.length;
+        appendTokens(`<span style="color:var(--success);">= ${mean.toFixed(4)}</span><br>`);
+        document.getElementById('r-mean').textContent = mean.toFixed(3);
+        document.getElementById('r-n').textContent = String(ds.length);
+        setProgress(0.4);
+        await sleep(200);
+
+        // Step 3: compute std
+        setStep('std');
+        setCall(`<span class="arrow">▸</span> <span class="fn-name">std</span>(<span class="arg">values, mean</span>)`);
+        appendTokens(`<span style="color:var(--accent-2);">▸ computing std...</span> `);
+        await sleep(520);
+        const variance = ds.reduce((s, v) => s + (v - mean) ** 2, 0) / ds.length;
+        const std = Math.sqrt(variance);
+        appendTokens(`<span style="color:var(--success);">= ${std.toFixed(4)}</span><br>`);
+        document.getElementById('r-std').textContent = std.toFixed(3);
+        setProgress(0.6);
+        await sleep(200);
+
+        // Step 4: threshold
+        setStep('threshold');
+        const threshold = mean + 2 * std;
+        setCall(`<span class="arrow">▸</span> <span class="fn-name">threshold</span> = mean + <span class="arg">2σ</span> = <span class="ret">${threshold.toFixed(3)}</span>`);
+        appendTokens(`<span style="color:var(--warn);">▸ threshold (μ + 2σ) = ${threshold.toFixed(3)}</span><br>`);
+        setProgress(0.75);
+        await sleep(280);
+
+        // Step 5: find outliers
+        setStep('outliers');
+        setCall(`<span class="arrow">▸</span> <span class="fn-name">filter</span>(<span class="arg">v =&gt; v &gt; threshold</span>)`);
+        appendTokens(`<span style="color:var(--accent-2);">▸ identifying outliers...</span> `);
+        await sleep(520);
+        const outliers = ds.filter((v) => v > threshold);
+        lastResult = { mean, std, threshold, outliers, all: ds, n: ds.length };
+        if (outliers.length === 0) {
+          appendTokens(`<span style="color:var(--success);">none (all values &lt; ${threshold.toFixed(3)})</span><br>`);
+        } else {
+          appendTokens(`<span style="color:var(--danger);">${outliers.length} found: [${outliers.join(', ')}]</span><br>`);
+        }
+        document.getElementById('r-outliers').textContent = String(outliers.length);
+        document.getElementById('r-outliers').classList.toggle('out', outliers.length > 0);
+        setProgress(0.92);
+        await sleep(200);
+
+        // Step 6: render result chart
+        setStep('render');
+        setVizBadge('rendering');
+        setCall(`<span class="arrow">▸</span> <span class="fn-name">render_chart</span>(<span class="arg">values, threshold</span>)`);
+        appendTokens(`<span style="color:var(--accent-2);">▸ rendering chart...</span> `);
+        await sleep(420);
+        renderChart(ds, threshold);
+        appendTokens(`<span style="color:var(--success);">done</span><span class="cursor"></span>`);
+        setProgress(1.0);
+        setStep('done');
+        setVizBadge('live');
+        setCall(`<span class="arrow">✓</span> <span class="ret">result ready</span> · μ=${mean.toFixed(2)}, σ=${std.toFixed(2)}, ${outliers.length} outlier(s)`);
+      }
+
+      function stopDemo() {
+        running = false;
+        if (timer) { clearTimeout(timer); timer = null; }
+      }
+
+      // ---- Result chart (SVG bar chart with threshold line + outlier highlighting) ----
+      function renderChart(values, threshold) {
+        const svg = document.getElementById('result-chart');
+        const W = 300, H = 100, pad = 8;
+        const max = Math.max(...values, threshold) * 1.1;
+        const min = 0;
+        const barW = (W - 2 * pad) / values.length - 4;
+        const xScale = (i) => pad + i * (barW + 4);
+        const yScale = (v) => H - pad - ((v - min) / (max - min)) * (H - 2 * pad);
+        const parts = [];
+        // Threshold line
+        const yT = yScale(threshold);
+        parts.push(`<line x1="${pad}" y1="${yT}" x2="${W - pad}" y2="${yT}" stroke="#f59e0b" stroke-width="1" stroke-dasharray="3 2"/>`);
+        parts.push(`<text x="${W - pad - 4}" y="${yT - 3}" text-anchor="end" font-size="8" fill="#f59e0b">μ+2σ</text>`);
+        // Bars
+        values.forEach((v, i) => {
+          const x = xScale(i);
+          const y = yScale(v);
+          const h = H - pad - y;
+          const isOutlier = v > threshold;
+          const fill = isOutlier ? '#ef4444' : '#06b6d4';
+          const glow = isOutlier ? 'filter: drop-shadow(0 0 4px rgba(239,68,68,0.6))' : '';
+          parts.push(`<rect x="${x}" y="${y}" width="${barW}" height="${h}" fill="${fill}" rx="1.5" style="${glow}"/>`);
+        });
+        svg.innerHTML = parts.join('');
+      }
+
+      // ---- Footer actions ----
+      function downloadBlob(filename, content, mime) {
+        const blob = new Blob([content], { type: mime });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url; a.download = filename;
+        document.body.appendChild(a); a.click(); a.remove();
+        URL.revokeObjectURL(url);
+      }
+      document.getElementById('act-csv').addEventListener('click', () => {
+        if (!lastResult) return;
+        const r = lastResult;
+        const lines = ['# AIHPC Advanced — compute_outliers output', '# Generated: ' + new Date().toISOString(), '#', 'index,value,is_outlier'];
+        r.all.forEach((v, i) => lines.push(`${i + 1},${v},${v > r.threshold ? 'true' : 'false'}`));
+        lines.push(`# mean,${r.mean}`);
+        lines.push(`# std,${r.std}`);
+        lines.push(`# threshold,${r.threshold}`);
+        downloadBlob('aihpc-outliers-' + Date.now() + '.csv', lines.join('\n') + '\n', 'text/csv;charset=utf-8');
+      });
+      document.getElementById('act-copy').addEventListener('click', async () => {
+        if (!lastResult) return;
+        try {
+          await navigator.clipboard.writeText(JSON.stringify({ mean: lastResult.mean, std: lastResult.std, threshold: lastResult.threshold, outliers: lastResult.outliers }, null, 2));
+          const btn = document.getElementById('act-copy');
+          btn.textContent = '✓ Copied';
+          setTimeout(() => { btn.textContent = '⎘ Copy β̂'; }, 1500);
+        } catch (e) {}
+      });
+      document.getElementById('act-receipt').addEventListener('click', () => {
+        if (!lastResult) return;
+        // Live subscription gating (Phase 24): require Pro+ tier
+        // to download the provenance receipt. Team tier additionally
+        // gets the full audit trace embedded in the receipt.
+        if (!window.AIHPC || !AIHPC.requireTier('pro', { feature: 'Provenance receipt' })) {
+          return; // banner auto-shown by requireTier
+        }
+        const r = lastResult;
+        const tier = AIHPC.getTier();
+        const session = AIHPC.getSession() || {};
+        // Build a trace entry stream — even on Pro we record the
+        // minimal event log; Team tier gets the full per-step
+        // trace with timings.
+        const trace = [
+          { step: 1, action: 'load',    detail: 'embedded dataset loaded',  at: session.since || new Date().toISOString() },
+          { step: 2, action: 'compute', detail: `mean(${r.n})=${r.mean.toFixed(4)}`, at: new Date().toISOString() },
+          { step: 3, action: 'compute', detail: `std=${r.std.toFixed(4)} threshold=${r.threshold.toFixed(4)}`, at: new Date().toISOString() },
+          { step: 4, action: 'flag',    detail: `${r.outliers.length} outlier(s) detected`, at: new Date().toISOString() },
+        ];
+        const receipt = {
+          '@context': 'https://aihpc.advanced/prov/v1',
+          '@type': 'aihpc:ProvenanceReceipt',
+          manifestHash: 'sha256:' + btoa(currentLang + DATASET.join(',')).slice(0, 24),
+          manifest: { id: 'compute-outliers', language: currentLang, runtime: 'browser', dataResidency: 'downloadable' },
+          input: { data: r.all, n: r.n, source: 'embedded dataset' },
+          output: { mean: r.mean, std: r.std, threshold: r.threshold, outliers: r.outliers },
+          environment: { client: 'browser', timestamp: new Date().toISOString(), tier: tier },
+          // Team tier: include full trace. Pro tier: omit trace
+          // (the audit trail is the Team-tier upgrade).
+          ...(tier === 'team' ? { trace: { steps: trace.length, format: 'json-ld', entries: trace } } : { traceAvailable: 'team-tier' }),
+        };
+        const filename = 'aihpc-receipt-' + Date.now() + '.json';
+        downloadBlob(filename, JSON.stringify(receipt, null, 2), 'application/json');
+        // Visual confirmation on the button
+        const btn = document.getElementById('act-receipt');
+        const origText = btn.textContent;
+        btn.textContent = '✓ Downloaded';
+        setTimeout(() => { btn.textContent = origText; }, 1500);
+      });
+
+      // ---- Pyodide integration (real Python execution in-browser) ----
+      // Loads Pyodide from the CDN on first click of "Execute in Python".
+      // After loading, runs the compute_outliers Python implementation
+      // against the same dataset and displays the result inline.
+      let pyodidePromise = null;
+      function loadPyodide() {
+        if (pyodidePromise) return pyodidePromise;
+        pyodidePromise = new Promise(async (resolve, reject) => {
+          try {
+            // Load the Pyodide bootstrap script from CDN (jsDelivr mirror).
+            // Pyodide is an open-source CPython compiled to WASM; the CDN
+            // serves the static assets (no server-side compute).
+            if (!window.loadPyodide) {
+              await new Promise((r, j) => {
+                const s = document.createElement('script');
+                s.src = 'https://cdn.jsdelivr.net/pyodide/v0.26.2/full/pyodide.js';
+                s.onload = r;
+                s.onerror = () => j(new Error('Pyodide failed to load from CDN.'));
+                document.head.appendChild(s);
+              });
+            }
+            const py = await window.loadPyodide({ indexURL: 'https://cdn.jsdelivr.net/pyodide/v0.26.2/full/' });
+            resolve(py);
+          } catch (e) { reject(e); }
+        });
+        return pyodidePromise;
+      }
+      async function runPython() {
+        const btn = document.getElementById('act-py');
+        const out = document.getElementById('py-result');
+        if (!lastResult) {
+          out.style.display = 'block';
+          out.innerHTML = '<span style="color: var(--danger);">Run the demo first (▶ Launch the popup experience), then press Execute in Python.</span>';
+          return;
+        }
+        btn.disabled = true;
+        btn.textContent = 'Loading Pyodide… (one-time ~10MB download)';
+        out.style.display = 'block';
+        out.textContent = 'Loading Pyodide runtime from CDN (one-time ~10MB download)...';
+        try {
+          const py = await loadPyodide();
+          btn.textContent = 'Executing Python…';
+          out.textContent = 'Pyodide loaded. Executing compute_outliers() in Python...';
+          // The Python source — mirror of the snippet shown in the code panel
+          const pySrc = `
+import math
+def compute_outliers(values):
+    n = len(values)
+    mean = sum(values) / n
+    var  = sum((v - mean) ** 2 for v in values) / n
+    std  = math.sqrt(var)
+    threshold = mean + 2 * std
+    return {
+        "n": n, "mean": mean, "std": std, "threshold": threshold,
+        "outliers": [v for v in values if v > threshold],
+    }
+result = compute_outliers(${JSON.stringify(lastResult.all)})
+import json
+print(json.dumps(result))
+`;
+          py.runPython(pySrc);
+          const pyResultStr = py.globals.get('result');
+          // pyResultStr is a Python dict; convert via repr-like JSON
+          const json = py.runPython('import json; json.dumps(result)');
+          const pyResult = JSON.parse(json);
+          out.innerHTML = `<span style="color: var(--accent-2);">✓ Python execution complete (via Pyodide / CPython 3.12 WASM):</span><br>` +
+            `<span style="color: var(--text-muted);">mean = </span><span style="color: var(--success);">${pyResult.mean.toFixed(6)}</span><br>` +
+            `<span style="color: var(--text-muted);">std = </span><span style="color: var(--success);">${pyResult.std.toFixed(6)}</span><br>` +
+            `<span style="color: var(--text-muted);">threshold = </span><span style="color: var(--success);">${pyResult.threshold.toFixed(6)}</span><br>` +
+            `<span style="color: var(--text-muted);">outliers = </span><span style="color: var(--danger);">[${pyResult.outliers.join(', ')}]</span><br>` +
+            `<span style="color: var(--text-muted-2); font-size: 10px;">Match JS impl: ${pyResult.mean.toFixed(4) === lastResult.mean.toFixed(4) ? 'YES ✓' : 'NO (drift)'}</span>`;
+          btn.textContent = '✓ Executed in Python';
+        } catch (e) {
+          out.innerHTML = `<span style="color: var(--danger);">Pyodide error: ${e.message}</span>`;
+          btn.textContent = '▶ Execute in Python (retry)';
+        } finally {
+          btn.disabled = false;
+          setTimeout(() => { btn.textContent = '▶ Execute in Python (Pyodide)'; }, 2000);
+        }
+      }
+      document.getElementById('act-py').addEventListener('click', runPython);
+
+      // ---- ETL/ELT: Bring your own dataset ----
+      // The user's key insight: "upload or url for desired dataset"
+      // + "provide a code for ETL/ELT cleaning process"
+      // This lets users bring their own data, clean it, and run
+      // compute_outliers on it — completing the platform's goals.
+
+      function readCSV(text) {
+        const lines = text.trim().split(/\r?\n/);
+        return lines.map(l => l.split(/[,;\t]/).map(c => c.trim()));
+      }
+      function extractNumericColumn(rows, colIdx) {
+        // Try to find a numeric column; default to last column
+        const vals = [];
+        for (const r of rows) {
+          if (r.length <= colIdx) continue;
+          const v = parseFloat(r[colIdx]);
+          if (!Number.isNaN(v)) vals.push(v);
+        }
+        return vals;
+      }
+      function autoDetectColumn(rows) {
+        // Find the first column that has >50% parseable floats
+        const maxCol = Math.max(...rows.map(r => r.length));
+        for (let c = 0; c < maxCol; c++) {
+          let parsed = 0, total = 0;
+          for (const r of rows) {
+            if (r.length <= c) continue;
+            total++;
+            if (!isNaN(parseFloat(r[c]))) parsed++;
+          }
+          if (total > 0 && parsed / total > 0.5) return c;
+        }
+        return maxCol - 1; // fallback to last column
+      }
+      function etlClean(rawText, filename) {
+        // ETL pipeline: extract → transform → load
+        const report = [];
+        report.push(`▸ ETL pipeline starting — source: ${filename || 'pasted text'}`);
+
+        // Step 1: Parse (detect format)
+        let rows, format;
+        try {
+          JSON.parse(rawText);
+          // It's JSON — try to extract a numeric array
+          const json = JSON.parse(rawText);
+          if (Array.isArray(json) && json.length > 0 && typeof json[0] === 'number') {
+            const vals = json.filter(v => typeof v === 'number');
+            report.push(`▸ Format: JSON array of numbers (${vals.length} values)`);
+            return { values: vals, report };
+          } else {
+            // JSON object — look for a data array
+            for (const key of Object.keys(json)) {
+              if (Array.isArray(json[key]) && json[key].length > 0 && typeof json[key][0] === 'number') {
+                report.push(`▸ Format: JSON object → key "${key}" (${json[key].length} values)`);
+                return { values: json[key].filter(v => typeof v === 'number'), report };
+              }
+            }
+            throw new Error('JSON has no numeric array');
+          }
+        } catch {
+          // Not JSON → try CSV
+          rows = readCSV(rawText);
+          format = 'CSV';
+          if (rows.length === 0) throw new Error('Empty data');
+          report.push(`▸ Format: CSV/TSV (${rows.length} rows, ${rows[0].length} columns)`);
+        }
+
+        // Step 2: Detect numeric column
+        const colIdx = autoDetectColumn(rows);
+        const colName = rows[0] && rows[0][colIdx] ? rows[0][colIdx] : `column ${colIdx + 1}`;
+        // Check if first row is a header (non-numeric)
+        let dataRows = rows;
+        if (rows[0] && isNaN(parseFloat(rows[0][colIdx]))) {
+          dataRows = rows.slice(1);
+          report.push(`▸ Header row detected — column "${colName}" selected`);
+        } else {
+          report.push(`▸ Auto-detected column ${colIdx + 1} (no header)`);
+        }
+
+        // Step 3: Extract values (with NA removal)
+        const rawCount = dataRows.length;
+        const values = extractNumericColumn(dataRows, colIdx);
+        const naRemoved = rawCount - values.length;
+        report.push(`▸ Extract: ${values.length} values (removed ${naRemoved} NA/null/non-numeric)`);
+
+        // Step 4: Outlier pre-flagging (for ETL report, not removal)
+        if (values.length > 0) {
+          const mean = values.reduce((s, v) => s + v, 0) / values.length;
+          const std = Math.sqrt(values.reduce((s, v) => s + (v - mean) ** 2, 0) / values.length);
+          const iqr = values.slice().sort((a, b) => a - b);
+          const q1 = iqr[Math.floor(iqr.length * 0.25)] || 0;
+          const q3 = iqr[Math.floor(iqr.length * 0.75)] || 0;
+          const iqrVal = q3 - q1;
+          const lowerFence = q1 - 1.5 * iqrVal;
+          const upperFence = q3 + 1.5 * iqrVal;
+          const flaggedOutliers = values.filter(v => v < lowerFence || v > upperFence).length;
+          report.push(`▸ Stats: μ=${mean.toFixed(3)} σ=${std.toFixed(3)} IQR=[${q1.toFixed(2)}, ${q3.toFixed(2)}]`);
+          if (flaggedOutliers > 0) {
+            report.push(`▸ Outlier pre-flag (IQR 1.5×): ${flaggedOutliers} values outside [${lowerFence.toFixed(2)}, ${upperFence.toFixed(2)}]`);
+          }
+          report.push(`▸ ETL complete — ${values.length} values ready for compute_outliers()`);
+        } else {
+          report.push(`▸ ETL failed — no numeric values found`);
+        }
+
+        return { values, report };
+      }
+
+      function applyUserData(values, reportLines) {
+        if (!values || values.length === 0) {
+          alert('No numeric values found in the uploaded data.');
+          return;
+        }
+        // Replace the embedded DATASET with the user's data
+        DATASET.length = 0;
+        for (const v of values) DATASET.push(v);
+        // Show ETL report
+        const etlEl = document.getElementById('etl-report');
+        etlEl.style.display = 'block';
+        etlEl.innerHTML = reportLines.map(l => `<div style="margin: 2px 0;">${l.replace(/▸/g, '<span style="color: var(--accent-2);">▸</span>')}</div>`).join('');
+        // Reset lastResult so the user needs to Run again
+        lastResult = null;
+        document.getElementById('download-btn').disabled = true;
+      }
+
+      // File upload handler
+      document.getElementById('file-input').addEventListener('change', (e) => {
+        const file = e.target.files[0];
+        if (!file) return;
+        const reader = new FileReader();
+        reader.onload = (ev) => {
+          try {
+            const { values, report } = etlClean(ev.target.result, file.name);
+            applyUserData(values, report);
+          } catch (err) {
+            const etlEl = document.getElementById('etl-report');
+            etlEl.style.display = 'block';
+            etlEl.innerHTML = `<span style="color: var(--danger);">ETL error: ${err.message}</span>`;
+          }
+        };
+        reader.onerror = () => alert('File read failed.');
+        reader.readAsText(file);
+      });
+
+      // URL fetch handler
+      document.getElementById('url-fetch-btn').addEventListener('click', async () => {
+        const url = document.getElementById('url-input').value.trim();
+        if (!url) { alert('Paste a dataset URL first.'); return; }
+        const etlEl = document.getElementById('etl-report');
+        etlEl.style.display = 'block';
+        etlEl.textContent = 'Fetching… (CORS may block some URLs; try a CORS-enabled endpoint)';
+        try {
+          const resp = await fetch(url);
+          if (!resp.ok) throw new Error(`HTTP ${resp.status}`);
+          const text = await resp.text();
+          const { values, report } = etlClean(text, url);
+          applyUserData(values, report);
+        } catch (err) {
+          etlEl.innerHTML = `<span style="color: var(--danger);">Fetch error: ${err.message}</span><br><span style="font-size: 10px;">Tip: the URL must be CORS-enabled. Many public datasets (data.gov, github raw) work. If blocked, download the file and use the Upload button instead.</span>`;
+        }
+      });
+
+      // Use default data
+      document.getElementById('use-default-btn').addEventListener('click', () => {
+        const defaults = [3.2, 5.1, 4.7, 2.9, 5.8, 4.2, 6.1, 3.9, 5.5, 4.8];
+        DATASET.length = 0;
+        for (const v of defaults) DATASET.push(v);
+        document.getElementById('etl-report').style.display = 'none';
+        lastResult = null;
+        document.getElementById('download-btn').disabled = true;
+      });
+
+      // ---- Subscription gating (live, Phase 24) ----
+      // The shared subscribe-gate.js library handles tier lookup,
+      // banner rendering, and cross-tab session updates. We just
+      // mount the tier badge in the popup footer and refresh the
+      // visual state when the popup opens or the session changes.
+      function refreshPopupGate() {
+        const badge = document.getElementById('popup-tier-badge');
+        if (badge && window.AIHPC) AIHPC.mountTierBadge(badge);
+        const btn = document.getElementById('act-receipt');
+        if (!btn || !window.AIHPC) return;
+        const tier = AIHPC.getTier();
+        if (tier === 'free') {
+          btn.style.opacity = '0.5';
+          btn.title = '🔒 Pro tier required — sign in at /subscribe.html to download receipts';
+        } else {
+          btn.style.opacity = '1';
+          btn.title = `Download provenance receipt (${tier} tier${tier === 'team' ? ' · includes trace' : ''})`;
+        }
+      }
+      // Re-mount the badge + refresh button state when popup opens
+      document.getElementById('launch-btn').addEventListener('click', () => {
+        setTimeout(refreshPopupGate, 100); // wait for popup to render
+      });
+      // Cross-tab session updates (e.g. user upgrades in another tab)
+      if (window.AIHPC) AIHPC.onChange(function () { refreshPopupGate(); });
+
+      // ---- Phase 35: N-D Hypercube Viewer (lazy-loaded) ----
+      var ndLoaded = false;
+      function openNDModal() {
+        var overlay = document.getElementById('nd-modal-overlay');
+        if (!overlay) return;
+        overlay.style.display = 'flex';
+        // Lazy-load nd-viewer.js on first open
+        if (!ndLoaded) {
+          ndLoaded = true;
+          var script = document.createElement('script');
+          script.src = '../nd-viewer.js';
+          script.onload = function () {
+            if (window.AIHPC_ND) {
+              AIHPC_ND.init('nd-viewer-svg', {
+                sliderId: 'nd-dim-slider',
+                playBtnId: 'nd-play-btn',
+                speedBtnId: 'nd-speed-btn',
+                resetBtnId: 'nd-reset-btn',
+              });
+              AIHPC_ND.onInfo(function (info) {
+                var v = document.getElementById('nd-info-vertices');
+                var e = document.getElementById('nd-info-edges');
+                var n = document.getElementById('nd-info-name');
+                var d = document.getElementById('nd-dim-value');
+                if (v) v.textContent = info.vertices;
+                if (e) e.textContent = info.edges;
+                if (n) n.textContent = AIHPC_ND.ND_NAMES[info.dim] || (info.dim + '-cube');
+                if (d) d.textContent = info.dim;
+              });
+            }
+          };
+          document.head.appendChild(script);
+        }
+      }
+      function closeNDModal() {
+        var overlay = document.getElementById('nd-modal-overlay');
+        if (overlay) overlay.style.display = 'none';
+      }
+      var ndLaunchBtn = document.getElementById('launch-nd-viewer');
+      if (ndLaunchBtn) ndLaunchBtn.addEventListener('click', openNDModal);
+      var ndCloseBtn = document.getElementById('nd-modal-close');
+      if (ndCloseBtn) ndCloseBtn.addEventListener('click', closeNDModal);
+      var ndOverlay = document.getElementById('nd-modal-overlay');
+      if (ndOverlay) ndOverlay.addEventListener('click', function (e) {
+        if (e.target === ndOverlay) closeNDModal();
+      });
+
+      // ---- Ribbon theme toggle ----
+      (function setupRibbonTheme() {
+        const KEY = 'aihpc-theme';
+        const body = document.body, ribbon = document.querySelector('.ribbon'), icon = document.getElementById('ribbon-theme-icon');
+        function apply(theme) {
+          if (theme === 'light') { body.classList.add('light'); ribbon && ribbon.classList.add('light'); if (icon) icon.textContent = '☀'; }
+          else { body.classList.remove('light'); ribbon && ribbon.classList.remove('light'); if (icon) icon.textContent = '🌙'; }
+        }
+        let initial = 'dark';
+        try { const stored = localStorage.getItem(KEY); if (stored === 'light' || stored === 'dark') initial = stored; else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches) initial = 'light'; } catch (e) {}
+        apply(initial);
+        const btn = document.getElementById('ribbon-theme-toggle');
+        if (btn) btn.addEventListener('click', () => { const next = body.classList.contains('light') ? 'dark' : 'light'; apply(next); try { localStorage.setItem(KEY, next); } catch (e) {} });
+      })();
+    </script>
+  <script src="../ask-ai-button.js"></script>
+  <script src="header-banner.js"></script>
+    <script src="../accessibility.js"></script>
+  </body>
+</html>

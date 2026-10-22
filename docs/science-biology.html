@@ -1,0 +1,418 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Biology Hub — AIHPC Advanced Science. Subdomains: Molecular Biology, Genetics, Proteins, Cell Imaging, Systems Biology, Evolutionary Bio. Modern AI for biology, inspired by DeepMind's AlphaFold / AlphaMissense." />
+    <title>Biology Hub — AIHPC Advanced Science</title>
+    <style>
+      :root { --bg:#0b0f1a; --bg-elevated:#121826; --bg-elevated-2:#1a2133; --border:#1f2937; --border-strong:#2a3548; --text:#f3f4f6; --text-muted:#9ca3af; --text-muted-2:#6b7280; --accent:#8b5cf6; --accent-2:#06b6d4; --accent-3:#f59e0b; --success:#10b981; --danger:#ef4444; }
+      * { box-sizing: border-box; } html, body { margin: 0; padding: 0; }
+      body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; background: radial-gradient(1200px 600px at 20% -10%, rgba(16,185,129,0.18), transparent 60%), radial-gradient(1200px 600px at 100% 0%, rgba(139,92,246,0.12), transparent 55%), var(--bg); color: var(--text); min-height: 100vh; line-height: 1.6; }
+      .ribbon { position: sticky; top: 0; z-index: 50; border-bottom: 1px solid rgba(139,92,246,0.25); background: linear-gradient(180deg, rgba(7,9,15,0.95) 0%, rgba(11,15,26,0.85) 100%); backdrop-filter: blur(12px); box-shadow: 0 1px 0 0 rgba(6,182,212,0.4), 0 4px 16px rgba(0,0,0,0.4); }
+      .ribbon::after { content: ""; position: absolute; left: 0; right: 0; bottom: -1px; height: 2px; background: linear-gradient(90deg, #06b6d4 0%, #8b5cf6 50%, #ec4899 100%); opacity: 0.7; }
+      .ribbon.light { background: linear-gradient(180deg, rgba(255,255,255,0.98) 0%, rgba(249,250,251,0.92) 100%); border-bottom-color: rgba(139,92,246,0.25); }
+      .ribbon-inner { max-width: 1100px; margin: 0 auto; padding: 0 24px; height: 56px; display: flex; align-items: center; gap: 12px; }
+      .ribbon-brand { display: flex; align-items: center; gap: 8px; text-decoration: none; color: var(--text); font-weight: 600; }
+      .ribbon-logo { display: inline-flex; align-items: center; justify-content: center; width: 28px; height: 28px; border-radius: 8px; background: linear-gradient(135deg,#06b6d4,#8b5cf6,#d946ef); color: white; font-size: 12px; font-weight: 700; }
+      .ribbon-name { display: none; } @media (min-width: 600px) { .ribbon-name { display: inline; } }
+      .ribbon-nav { display: flex; align-items: center; gap: 4px; }
+      .ribbon-dropdown { position: relative; }
+      .ribbon-dropdown > summary { list-style: none; cursor: pointer; padding: 6px 12px; border-radius: 6px; font-size: 14px; color: var(--text-muted); display: inline-flex; align-items: center; gap: 4px; }
+      .ribbon-dropdown > summary::-webkit-details-marker { display: none; }
+      .ribbon-dropdown > summary::after { content: "▾"; font-size: 10px; opacity: 0.6; }
+      .ribbon-dropdown[open] > summary { background: var(--bg-elevated); color: var(--text); }
+      .ribbon-menu { position: absolute; top: 100%; left: 0; margin-top: 4px; min-width: 240px; background: var(--bg-elevated); border: 1px solid var(--border-strong); border-radius: 12px; padding: 6px; box-shadow: 0 12px 32px rgba(0,0,0,0.4); display: flex; flex-direction: column; gap: 2px; max-height: 70vh; overflow: auto; }
+      .ribbon-menu a { text-decoration: none; color: var(--text-muted); font-size: 13px; padding: 6px 10px; border-radius: 6px; }
+      .ribbon-menu a:hover { background: var(--bg); color: var(--text); }
+      .ribbon-actions { margin-left: auto; display: flex; align-items: center; gap: 8px; }
+      .ribbon-icon-btn { background: transparent; border: 1px solid var(--border); color: var(--text); width: 32px; height: 32px; border-radius: 8px; cursor: pointer; font-size: 14px; display: inline-flex; align-items: center; justify-content: center; }
+      .ribbon-icon-btn:hover { border-color: var(--accent); }
+      .ribbon-btn-primary { display: inline-flex; align-items: center; padding: 6px 16px; border-radius: 9999px; background: linear-gradient(90deg,#8b5cf6,#06b6d4); color: white; text-decoration: none; font-size: 13px; font-weight: 600; }
+      .container { max-width: 1100px; margin: 0 auto; padding: 56px 24px 96px; position: relative; z-index: 1; }
+      .badge { display: inline-block; padding: 4px 10px; border-radius: 9999px; border: 1px solid var(--border); background: var(--bg-elevated); font-size: 12px; color: var(--text-muted); margin-bottom: 24px; }
+      h1 { font-size: 40px; line-height: 1.1; margin: 0 0 16px; letter-spacing: -0.02em; background: linear-gradient(90deg,#fff,#a7f3d0 60%,#67e8f9); -webkit-background-clip: text; background-clip: text; color: transparent; }
+      .lead { font-size: 18px; color: var(--text-muted); max-width: 760px; margin: 0 0 40px; }
+      .cards { display: grid; gap: 16px; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); margin-top: 24px; }
+      .card { background: var(--bg-elevated); border: 1px solid var(--border); border-radius: 16px; padding: 24px; transition: border-color 0.2s ease, transform 0.2s ease; text-decoration: none; color: var(--text); display: flex; flex-direction: column; gap: 8px; }
+      .card:hover { border-color: rgba(16,185,129,0.55); transform: translateY(-2px); }
+      .card .icon { width: 48px; height: 48px; border-radius: 12px; background: linear-gradient(135deg, rgba(16,185,129,0.2), rgba(139,92,246,0.2)); display: inline-flex; align-items: center; justify-content: center; }
+      .card .icon svg { width: 24px; height: 24px; }
+      .card .tag { font-size: 11px; color: var(--text-muted-2); text-transform: uppercase; letter-spacing: 0.06em; }
+      .card h2 { margin: 0; font-size: 20px; }
+      .card p { margin: 0; color: var(--text-muted); font-size: 14px; flex: 1; }
+      .card .tools { font-size: 12px; color: var(--accent-2); font-weight: 600; }
+      /* Hero illustration */
+      .hero { position: relative; margin: 0 0 32px; height: 220px; border-radius: 20px; overflow: hidden; background: linear-gradient(135deg, rgba(16,185,129,0.18) 0%, rgba(139,92,246,0.12) 50%, rgba(6,182,212,0.18) 100%); border: 1px solid rgba(16,185,129,0.25); }
+      .hero svg { width: 100%; height: 100%; display: block; }
+      .hero .hero-text { position: absolute; top: 50%; left: 32px; transform: translateY(-50%); max-width: 380px; pointer-events: none; }
+      .hero .hero-text .h-tag { font-size: 11px; color: rgba(167,243,208,0.9); text-transform: uppercase; letter-spacing: 0.08em; margin: 0 0 6px; }
+      .hero .hero-text .h-title { font-size: 20px; font-weight: 700; color: white; margin: 0; text-shadow: 0 2px 8px rgba(0,0,0,0.6); }
+      .hero .hero-text .h-sub { font-size: 13px; color: rgba(243,244,246,0.8); margin-top: 4px; text-shadow: 0 1px 4px rgba(0,0,0,0.6); }
+      .hero .dna-anim { animation: floatY 6s ease-in-out infinite; transform-origin: 80% 50%; }
+      @keyframes floatY { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-6px); } }
+      .meta { margin-top: 64px; padding-top: 24px; border-top: 1px solid var(--border); color: var(--text-muted); font-size: 13px; }
+      .meta a { color: var(--text); text-decoration: none; }
+      .meta a:hover { text-decoration: underline; }
+      body.light { background: radial-gradient(1200px 600px at 20% -10%, rgba(16,185,129,0.08), transparent 60%), radial-gradient(1200px 600px at 100% 0%, rgba(139,92,246,0.06), transparent 55%), #fafafa; color: #18181b; }
+      body.light .card, body.light .badge, body.light .ribbon-menu, body.light .ribbon-dropdown[open] > summary { background: white; border-color: #e5e7eb; }
+      body.light .lead, body.light .badge, body.light .meta, body.light .card p, body.light .card .tag, body.light .card .tools { color: #4b5563; }
+      body.light .ribbon-btn-primary { color: white; }
+      body.light .hero { background: linear-gradient(135deg, rgba(16,185,129,0.08) 0%, rgba(139,92,246,0.06) 50%, rgba(6,182,212,0.08) 100%); border-color: rgba(16,185,129,0.25); }
+      body.light .hero .hero-text .h-tag { color: rgba(6,95,70,1); }
+      body.light .hero .hero-text .h-title { color: #18181b; text-shadow: none; }
+      body.light .hero .hero-text .h-sub { color: #4b5563; text-shadow: none; }
+    #particle-canvas { position: fixed; inset: 0; z-index: 0; pointer-events: none; opacity: 0.25; }
+      body.light #particle-canvas { opacity: 0.1; }
+    </style>
+  <style>
+@media (prefers-reduced-motion: reduce) {
+  #particle-canvas { display: none !important; }
+  * { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; scroll-behavior: auto !important; }
+}
+</style>
+<style>
+/* Phase 46c — mobile-responsive canvas */
+canvas {
+  display: block;
+  max-width: 100% !important;
+  height: auto !important;
+  touch-action: manipulation;
+  -webkit-user-select: none;
+  user-select: none;
+}
+@media (max-width: 768px) {
+  canvas { max-height: 60vh; }
+  .controls-row { flex-direction: column; align-items: stretch !important; }
+  .controls-row .btn { width: 100%; }
+  .zoom-controls { transform: scale(0.85); transform-origin: top right; }
+  .stage-ind, .state-display { font-size: 10px !important; }
+}
+</style>
+</head>
+  <body>
+    <canvas id="particle-canvas" aria-label="Biology: animated particle background"></canvas>
+    
+    <header class="ribbon">
+      <div class="ribbon-inner">
+        <a href="index.html" class="ribbon-brand"><span class="ribbon-logo">A</span><span class="ribbon-name">AIHPC Advanced</span></a>
+        <nav class="ribbon-nav">
+          <details class="ribbon-dropdown"><summary>Platform</summary><div class="ribbon-menu"><a href="index.html">Home</a><a href="demos.html">Demos</a><a href="dashboard.html">Dashboard</a><a href="graph.html">Knowledge Graph</a><a href="benchmark.html">Agentic Benchmark</a><a href="subscribe.html">Subscribe</a><a href="timeline.html">Platform Timeline (50 Phases)</a><a href="retrospective.html">50-Phase Retrospective</a><a href="component-registry.html">Component Registry</a></div></details><details class="ribbon-dropdown"><summary>Visualisers</summary><div class="ribbon-menu"><a href="playground.html">Cross-Domain Playground</a><a href="quantum-shorts.html">Quantum Shorts Channel</a><a href="bloch.html">Bloch Sphere Shorts</a><a href="medical-atlas.html">Medical Imaging Atlas</a><a href="science/physics/quantum.html">Quantum Mechanics Hub</a></div></details>
+          <details class="ribbon-dropdown"><summary>AETHEL Suite</summary><div class="ribbon-menu"><a href="aethel.html">AETHEL Connector</a><a href="connectors.html">Scientific Connectors Hub</a><a href="query.html">Query Executor</a><a href="graph.html">Knowledge Graph</a><a href="workflows.html">Domain Workflows</a></div></details>
+          <details class="ribbon-dropdown"><summary>Science</summary><div class="ribbon-menu"><a href="science-biology.html">Biology Hub</a><a href="science-chemistry.html">Chemistry Hub</a><a href="science-physics.html">Physics Hub</a><a href="science-maths.html">Mathematics Hub</a><a href="science-ml.html">🤖 Machine Learning</a><a href="science-bioinformatics.html">Bioinformatics</a><a href="science-cheminformatics.html">Cheminformatics</a></div></details>
+          <details class="ribbon-dropdown"><summary>Insights</summary><div class="ribbon-menu"><a href="feeds.html">📡 Live Journal Feeds</a><a href="digest.html">Weekly Science Digest</a><a href="audit.html">📊 Audit Dashboard</a><a href="404.html">🚧 404 page</a><a href="lab.html">🔬 Lab</a><a href="dashboard.html">Temporal Knowledge Graph Dashboard</a><a href="bio-nn.html">🧬 Bioinformatics × NN</a><a href="lab-in-the-loop.html">🔄 Lab in the Loop</a><a href="how-cnns-see-images.html">📖 How CNNs See</a><a href="editjumps.html">🔬 EditJumps</a><a href="geoworld.html">🔬 GeoWorld</a><a href="concepts.html">Concept Cards</a><a href="concepts/replayable-decision-traces.html">Replayable Decision Traces</a><a href="concepts/provenance-first.html">Provenance-First Computing</a><a href="concepts/lazy-evaluation.html">Lazy Evaluation as UX</a><a href="concepts/cross-domain-graph.html">Cross-Domain Knowledge Graph</a><a href="concepts/audience-annotations.html">Audience-Specific Annotations</a><a href="concepts/provenance-chain.html">Provenance Chain</a><a href="concepts-v2/paper-amkd.html">🔬 AMKD (multimodal KD)</a><a href="concepts-v2/viz-heatmap-dendrogram.html">📊 Heatmap + Dendrogram</a><a href="upload-data.html">🛠 Upload Your Data</a></div></details>
+        </nav>
+        <div class="ribbon-actions">
+          <button id="ribbon-theme-toggle" class="ribbon-icon-btn" aria-label="Toggle dark / light theme" title="Toggle dark / light theme"><span id="ribbon-theme-icon">🌙</span></button>
+          <a href="index.html#live-demo" class="ribbon-btn-primary">Get Started</a>
+        </div>
+      </div>
+    </header>
+
+    <div class="container">
+      <span class="badge">Science Hub &middot; Biology</span>
+      <h1>Biology</h1>
+
+      <!-- Hero SVG: DNA double helix + cell outlines + molecule ring -->
+      <div class="hero">
+        <svg viewBox="0 0 1000 220" preserveAspectRatio="xMidYMid slice">
+          <defs>
+            <linearGradient id="dnaGrad1" x1="0%" y1="0%" x2="100%" y2="0%">
+              <stop offset="0%" stop-color="#10b981" stop-opacity="0.9"/>
+              <stop offset="100%" stop-color="#06b6d4" stop-opacity="0.4"/>
+            </linearGradient>
+            <linearGradient id="dnaGrad2" x1="0%" y1="0%" x2="100%" y2="0%">
+              <stop offset="0%" stop-color="#ec4899" stop-opacity="0.9"/>
+              <stop offset="100%" stop-color="#8b5cf6" stop-opacity="0.4"/>
+            </linearGradient>
+            <filter id="glow1" x="-20%" y="-20%" width="140%" height="140%">
+              <feGaussianBlur stdDeviation="2" result="b"/>
+              <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+            </filter>
+          </defs>
+          <g opacity="0.08" stroke="#10b981" stroke-width="0.5">
+            <line x1="0" y1="20" x2="1000" y2="20"/><line x1="0" y1="60" x2="1000" y2="60"/>
+            <line x1="0" y1="100" x2="1000" y2="100"/><line x1="0" y1="140" x2="1000" y2="140"/>
+            <line x1="0" y1="180" x2="1000" y2="180"/>
+          </g>
+          <circle cx="120" cy="80" r="38" fill="none" stroke="#10b981" stroke-width="1" opacity="0.35"/>
+          <circle cx="120" cy="80" r="20" fill="none" stroke="#06b6d4" stroke-width="1" opacity="0.4"/>
+          <circle cx="120" cy="80" r="6" fill="#8b5cf6" opacity="0.5"/>
+          <circle cx="850" cy="160" r="48" fill="none" stroke="#ec4899" stroke-width="1" opacity="0.3"/>
+          <circle cx="850" cy="160" r="28" fill="none" stroke="#f59e0b" stroke-width="1" opacity="0.4"/>
+          <circle cx="850" cy="160" r="8" fill="#06b6d4" opacity="0.5"/>
+          <g class="dna-anim" filter="url(#glow1)">
+            <path d="M 480 30 Q 510 60 540 30 Q 570 0 600 30 Q 630 60 660 30 Q 690 0 720 30 Q 750 60 780 30 Q 810 0 840 30 Q 870 60 900 30 Q 930 0 960 30" stroke="url(#dnaGrad1)" stroke-width="2.5" fill="none"/>
+            <path d="M 480 30 Q 510 0 540 30 Q 570 60 600 30 Q 630 0 660 30 Q 690 60 720 30 Q 750 0 780 30 Q 810 60 840 30 Q 870 0 900 30 Q 930 60 960 30" stroke="url(#dnaGrad2)" stroke-width="2.5" fill="none"/>
+          </g>
+          <g class="dna-anim" filter="url(#glow1)" transform="translate(0, 160)">
+            <path d="M 480 0 Q 510 -30 540 0 Q 570 30 600 0 Q 630 -30 660 0 Q 690 30 720 0 Q 750 -30 780 0 Q 810 30 840 0 Q 870 -30 900 0 Q 930 30 960 0" stroke="url(#dnaGrad1)" stroke-width="2.5" fill="none"/>
+            <path d="M 480 0 Q 510 30 540 0 Q 570 -30 600 0 Q 630 30 660 0 Q 690 -30 720 0 Q 750 30 780 0 Q 810 -30 840 0 Q 870 30 900 0 Q 930 -30 960 0" stroke="url(#dnaGrad2)" stroke-width="2.5" fill="none"/>
+          </g>
+          <g transform="translate(280, 110)" opacity="0.7">
+            <polygon points="0,-30 26,-15 26,15 0,30 -26,15 -26,-15" fill="none" stroke="#10b981" stroke-width="1.5"/>
+            <circle cx="0" cy="-30" r="4" fill="#06b6d4"/><circle cx="26" cy="-15" r="4" fill="#10b981"/>
+            <circle cx="26" cy="15" r="4" fill="#8b5cf6"/><circle cx="0" cy="30" r="4" fill="#ec4899"/>
+            <circle cx="-26" cy="15" r="4" fill="#f59e0b"/><circle cx="-26" cy="-15" r="4" fill="#3b82f6"/>
+          </g>
+          <g fill="#10b981" opacity="0.5">
+            <circle cx="60" cy="40" r="1.5"/><circle cx="180" cy="20" r="1"/>
+            <circle cx="380" cy="40" r="1.5"/><circle cx="420" cy="180" r="1"/>
+            <circle cx="700" cy="180" r="1.5"/><circle cx="920" cy="80" r="1"/>
+            <circle cx="960" cy="160" r="1.5"/><circle cx="160" cy="200" r="1"/>
+          </g>
+        </svg>
+        <div class="hero-text">
+          <p class="h-tag">Biology &middot; central dogma</p>
+          <p class="h-title">DNA &rarr; RNA &rarr; Protein &rarr; Function</p>
+          <p class="h-sub">From sequence to structure to biology. Modern AI for every step.</p>
+        </div>
+      </div>
+
+      <p class="lead">
+        Modern AI for biology — molecular, genetic, protein, imaging,
+        systems, and evolutionary subdomains. Inspired by DeepMind&apos;s
+        AlphaFold 3 (protein structure), AlphaMissense (variant
+        pathogenicity), and the broader scientific-AI ecosystem. Each
+        subdomain card below is a dedicated page documenting inputs,
+        outputs, methods, and observability for that area.
+       <a href="feeds.html?domain=biology" style="display: inline-flex; align-items: center; gap: 4px; margin-left: 6px; padding: 3px 12px; border-radius: 9999px; background: linear-gradient(90deg, rgba(6,182,212,0.15), rgba(139,92,246,0.15)); border: 1px solid rgba(6,182,212,0.4); color: #06b6d4; text-decoration: none; font-size: 12px; font-weight: 600;">📡 Biology feeds &rarr;</a></p>
+
+      <!-- Phase 39: Medical Imaging Lab — multi-organ segmentation viewer -->
+      <section style="margin: 32px 0;">
+        <span class="badge" style="background: linear-gradient(90deg, rgba(6,182,212,0.15), rgba(139,92,246,0.15)); border: 1px solid rgba(6,182,212,0.4); color: #06b6d4;">Phase 39 · Medical Imaging Lab</span>
+        <h2 style="font-size: 24px; margin: 8px 0 12px; background: linear-gradient(90deg,#06b6d4,#10b981); -webkit-background-clip: text; background-clip: text; color: transparent;">Multi-organ AI segmentation — TotalSegmentator-style live viewer</h2>
+        <p style="font-size: 14px; color: var(--text-muted, #9ca3af); max-width: 920px; margin: 0 0 16px;">Inspired by the LinkedIn <strong>TotalSegmentator</strong> post (Wass et al. 2023, Radiology) — which segments 117 organs from a CT in 6 seconds — this lab inverts the LinkedIn visual hierarchy: the central slice is <em>minimised</em>, peripheral slices (CT axial, MRI T1/T2, X-ray, PET/CT, sagittal) are <em>emphasised</em>. The scanner sweep animates the segmentation propagating organ-by-organ. Click any organ in the legend to highlight it across all six peripheral modalities simultaneously.</p>
+        <div id="bio-medimg-container"></div>
+        <p style="font-size: 11px; color: var(--text-muted-2, #6b7280); margin-top: 8px;">Pure client-side — all slices are procedurally generated (no real patient data). For production CT/MRI segmentation, use the open-source TotalSegmentator (Apache 2.0) via the AIHPC Connector.</p>
+        <p style="font-size: 12px; color: var(--text-muted, #9ca3af); margin-top: 12px;"><strong>Phase 41 · DICOM loader</strong> — drop your own <code>.dcm</code> / <code>.dicom</code> file below. The viewer's first peripheral slice will overlay the parsed DICOM metadata (modality, rows × cols, study date) as a badge. Full pixel-data decode requires cornerstone.js (WASM); the header parse runs in-browser in < 100 ms.</p>
+        <div id="bio-uploader-container"></div>
+      </section>
+
+      <!-- Phase 43: Modern AI Medical Image Analysis — segmentation pipeline + BioEmu2 dynamics + Levels of Investigation -->
+      <section style="margin: 32px 0;">
+        <p class="h-tag" style="color: #06b6d4;">Phase 43 · Modern AI Medical Image Analysis</p>
+        <h2 style="font-size: 24px; margin: 8px 0 12px; background: linear-gradient(90deg,#06b6d4,#8b5cf6); -webkit-background-clip: text; background-clip: text; color: transparent;">Medical Image Segmentation pipeline · BioEmu2 dynamics · Levels of Investigation</h2>
+        <p style="font-size: 14px; color: var(--text-muted, #9ca3af); max-width: 920px;">Inspired by the LinkedIn infographics <em>"Medical Image Segmentation: More Than Drawing a Boundary"</em> (MRI → prediction mask → 3D reconstruction, Dice / IoU / tumour volume) and <em>BioEmu2: Scalable emulation of biomolecular dynamics</em> (Microsoft Research, José Jiménez Luna — structure prediction / large complexes / equilibrium sampling / dynamics). Two live viewers below + a 3-tier 'Levels of Investigation' framework + recent research references.</p>
+
+        <!-- 1. Medical Image Segmentation Pipeline viewer -->
+        <div style="margin-top: 24px;">
+          <h3 style="font-size: 16px; color: #06b6d4; margin: 0 0 8px;">1. Medical Image Segmentation pipeline — MRI → AI mask → 3D reconstruction</h3>
+          <p style="font-size: 12px; color: var(--text-muted, #9ca3af); margin: 0 0 12px;">Three columns animate in lock-step: raw MRI T1c slice (left), AI prediction mask with scanner sweep + confidence (middle), 3D tumour reconstruction from the slice stack (right). Live metrics at the bottom: Dice coefficient, IoU, tumour volume (cm³), Hausdorff distance (mm), sensitivity, specificity. The pipeline mirrors what nnU-Net, MedSAM, and TotalSegmentator do clinically — except here it runs in-browser on procedural slices.</p>
+          <div id="bio-seg-container"></div>
+          <p style="font-size: 11px; color: var(--text-muted-2, #6b7280); margin-top: 8px;">Press <strong>Play sweep</strong> to animate the scanner. The confidence starts at 0.5 (early scan) and grows to 0.94 (full prediction). Hausdorff distance decreases as confidence rises — exactly as in real AI-segmented clinical workflows.</p>
+        </div>
+
+        <!-- 2. BioEmu2-style Biomolecular Dynamics viewer -->
+        <div style="margin-top: 32px;">
+          <h3 style="font-size: 16px; color: #8b5cf6; margin: 0 0 8px;">2. BioEmu2-style biomolecular dynamics — 4-panel foundation model</h3>
+          <p style="font-size: 12px; color: var(--text-muted, #9ca3af); margin: 0 0 12px;">A 2×2 panel grid mimicking the BioEmu2 infographic. Each panel runs a separate visualisation: (1) <strong>Structure prediction</strong> — single-chain 3D fold (alpha-helix backbone) with live pLDDT; (2) <strong>Large complexes</strong> — 4-chain multi-colour assembly; (3) <strong>Equilibrium sampling</strong> — Boltzmann-distributed conformational ensemble with live ΔG; (4) <strong>Dynamics</strong> — MD trajectory with motion trail + live RMSD (Å). All 4 panels rotate together; press Play to see them animate.</p>
+          <div id="bio-biodyn-container"></div>
+          <p style="font-size: 11px; color: var(--text-muted-2, #6b7280); margin-top: 8px;">Inspired by <strong>BioEmu2</strong> (Microsoft Research 2024+, MIT licence) — a foundation model for biomolecular structure, dynamics, and function. The viewer is procedural (no real MD trajectories); for production molecular-dynamics use OpenMM, GROMACS, or BioEmu's official weights.</p>
+        </div>
+
+        <!-- 3. Levels of Investigation framework -->
+        <div style="margin-top: 32px; padding: 20px; background: rgba(18,24,38,0.6); border: 1px solid var(--border, #1f2937); border-radius: 12px;">
+          <h3 style="font-size: 16px; color: #06b6d4; margin: 0 0 8px;">3. Levels of Investigation — modern AI tooling by depth</h3>
+          <p style="font-size: 12px; color: var(--text-muted, #9ca3af); margin: 0 0 16px;">Different clinical + research questions need different depths of analysis. The AIHPC Levels of Investigation framework maps each tier to the appropriate modern AI tooling + expected runtime + output.</p>
+          <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px;">
+            <!-- Tier 1: Quick triage -->
+            <div style="padding: 16px; background: rgba(6,182,212,0.08); border: 1px solid rgba(6,182,212,0.3); border-radius: 10px;">
+              <div style="font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: #06b6d4;">Tier 1 — Quick triage</div>
+              <div style="font-size: 24px; font-weight: 800; color: #06b6d4; margin: 4px 0;">1-5 sec</div>
+              <p style="font-size: 11px; color: var(--text-muted, #9ca3af); margin: 0 0 8px;">Single-structure segmentation or quick triage. Goal: rule-in / rule-out for time-critical cases (stroke, pneumothorax, intracranial haemorrhage).</p>
+              <ul style="margin: 0; padding-left: 16px; font-size: 10px; color: var(--text-muted, #9ca3af); line-height: 1.6;">
+                <li><strong>Google Lens medical</strong> (3B on-device) — top-5 differential in 1.5s</li>
+                <li><strong>Viz.ai LVO</strong> — large-vessel-occlusion detection on NCCT</li>
+                <li><strong>Aidoc IH</strong> — intracranial haemorrhage triage</li>
+                <li><strong>CheXNet</strong> — CXR rule-out pneumonia / PTX</li>
+              </ul>
+              <p style="font-size: 10px; color: var(--text-muted-2, #6b7280); margin-top: 8px;">Output: 0/1 triage flag + 1-line reasoning.</p>
+            </div>
+            <!-- Tier 2: Detailed analysis -->
+            <div style="padding: 16px; background: rgba(139,92,246,0.08); border: 1px solid rgba(139,92,246,0.3); border-radius: 10px;">
+              <div style="font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: #8b5cf6;">Tier 2 — Detailed analysis</div>
+              <div style="font-size: 24px; font-weight: 800; color: #8b5cf6; margin: 4px 0;">1-5 min</div>
+              <p style="font-size: 11px; color: var(--text-muted, #9ca3af); margin: 0 0 8px;">Multi-organ segmentation, structure prediction, basic dynamics. Goal: surgical planning, RT planning, longitudinal tracking.</p>
+              <ul style="margin: 0; padding-left: 16px; font-size: 10px; color: var(--text-muted, #9ca3af); line-height: 1.6;">
+                <li><strong>TotalSegmentator</strong> (Wass 2023) — 117 organs / 6 s CT</li>
+                <li><strong>nnU-Net v2</strong> (Isensee 2021) — self-configuring pipeline</li>
+                <li><strong>MedSAM</strong> (Ma 2024) — generalist medical SAM</li>
+                <li><strong>AlphaFold 3</strong> (Abramson 2024) — complex structure + interaction</li>
+                <li><strong>ESM-3</strong> (Meta 2024) — protein sequence → function</li>
+              </ul>
+              <p style="font-size: 10px; color: var(--text-muted-2, #6b7280); margin-top: 8px;">Output: full segmentation mask + Dice / IoU + 3D volume + report.</p>
+            </div>
+            <!-- Tier 3: Research-grade -->
+            <div style="padding: 16px; background: rgba(236,72,153,0.08); border: 1px solid rgba(236,72,153,0.3); border-radius: 10px;">
+              <div style="font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: #ec4899;">Tier 3 — Research-grade</div>
+              <div style="font-size: 24px; font-weight: 800; color: #ec4899; margin: 4px 0;">1-5 hr</div>
+              <p style="font-size: 11px; color: var(--text-muted, #9ca3af); margin: 0 0 8px;">Full conformational ensemble, long MD trajectory, multi-modal fusion. Goal: drug discovery, mechanism-of-action, paper-grade results.</p>
+              <ul style="margin: 0; padding-left: 16px; font-size: 10px; color: var(--text-muted, #9ca3af); line-height: 1.6;">
+                <li><strong>BioEmu2</strong> (MSR 2024) — Boltzmann-weighted ensemble</li>
+                <li><strong>OpenMM</strong> (Eastman 2017) — GPU-accelerated MD</li>
+                <li><strong>GROMACS</strong> (Páll 2020) — exascale MD</li>
+                <li><strong>MAISI</strong> (NVIDIA 2024) — synthetic CT/MRI</li>
+                <li><strong>MACE-MT-2</strong> (2026) — DFT-accurate materials</li>
+              </ul>
+              <p style="font-size: 10px; color: var(--text-muted-2, #6b7280); margin-top: 8px;">Output: paper-grade figures + raw ensembles (HDF5) + reproducibility receipt.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- 4. Recent research references -->
+        <div style="margin-top: 24px; padding: 16px; background: rgba(11,15,26,0.6); border-radius: 10px; border: 1px solid var(--border, #1f2937);">
+          <h3 style="margin: 0 0 8px; font-size: 13px; color: #06b6d4; text-transform: uppercase; letter-spacing: 0.08em;">Recent research supporting this section</h3>
+          <ul style="margin: 0; padding-left: 18px; color: var(--text-muted, #9ca3af); font-size: 11px; line-height: 1.7;">
+            <li><strong style="color: var(--accent-2, #06b6d4);">TotalSegmentator</strong> — Wassermann et al. 2023, Radiology. 117 organs in 6 s/CT; nnU-Net backbone; Apache 2.0.</li>
+            <li><strong style="color: var(--accent-2, #06b6d4);">nnU-Net v2</strong> — Isensee et al. 2021, Nature Methods. Self-configuring pipeline; still SOTA backbone.</li>
+            <li><strong style="color: var(--accent-2, #06b6d4);">MedSAM</strong> — Ma et al. 2024, Nature Communications. 1.5M-image SAM fine-tune; generalist medical SAM.</li>
+            <li><strong style="color: var(--accent-2, #06b6d4);">BioEmu2</strong> — Microsoft Research (Jiménez Luna et al.) 2024+. Scalable emulation of biomolecular dynamics; MIT licence; foundation model for structure + dynamics + function.</li>
+            <li><strong style="color: var(--accent-2, #06b6d4);">AlphaFold 3</strong> — Abramson et al. 2024, Nature. Diffusion-based complex structure + interaction prediction.</li>
+            <li><strong style="color: var(--accent-2, #06b6d4);">ESM-3</strong> — Hayet et al. 2024. Meta FAIR; 7B-param protein language model; structure + function + design.</li>
+            <li><strong style="color: var(--accent-2, #06b6d4);">MACE-MT-2</strong> — NVIDIA + Caltech 2026. DFT-accurate materials ML potential; foundation for GNoME-2.</li>
+            <li><strong style="color: var(--accent-2, #06b6d4);">BioNeMo-2</strong> — NVIDIA 2026. 4B-param drug discovery FM; CASP GDT_TS 0.85.</li>
+            <li><strong style="color: var(--accent-2, #06b6d4);">RadFM</strong> — Wu et al. 2023. Radiology Foundation Model: 2D + 3D medical LLM.</li>
+            <li><strong style="color: var(--accent-2, #06b6d4);">Med-Gemini</strong> — Saab et al. 2024, Nature. Gemini multimodal for medical reasoning.</li>
+          </ul>
+          <p style="margin: 8px 0 0; color: var(--text-muted-2, #6b7280); font-size: 11px;">Pure client-side — all slices + backbones are procedurally generated. For production use TotalSegmentator, nnU-Net v2, MedSAM, BioEmu2 (open weights via HuggingFace), AlphaFold 3 (via server), ESM-3, OpenMM, GROMACS, MACE-MT-2.</p>
+        </div>
+      </section>
+
+      <div class="cards">
+        <a class="card" href="science/biology/molecular.html">
+          <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2"><circle cx="12" cy="12" r="2"/><path d="M12 2a10 10 0 0 1 0 20M2 12a10 10 0 0 1 20 0"/></svg></div>
+          <span class="tag">Subdomain</span>
+          <h2>Molecular Biology</h2>
+          <p>DNA / RNA / protein interactions at the molecular level. Central dogma, transcription, translation. AlphaFold-style and molecular-dynamics demos.</p>
+          <span class="tools">Tools: BLAST, Pyodide, Three.js viewer</span>
+        </a>
+        <a class="card" href="https://testdemoqwenai2025-creator.github.io/DemoAIHPC/science/genetics.html">
+          <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2"><path d="M4 4c4 8 12 8 16 0M4 20c4-8 12-8 16 0M4 4v16M20 4v16"/></svg></div>
+          <span class="tag">Subdomain</span>
+          <h2>Genetics</h2>
+          <p>Variant pathogenicity, GWAS, heritability. AlphaMissense-style variant classification with ClinVar-style annotation.</p>
+          <span class="tools">Tools: VCF parser, ClinVar join, PLM forward pass</span>
+        </a>
+        <a class="card" href="https://testdemoqwenai2025-creator.github.io/DemoAIHPC/science/proteins.html">
+          <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2"><path d="M3 12c3-6 6-6 9 0s6 6 9 0M3 16c3-6 6-6 9 0s6 6 9 0M3 8c3-6 6-6 9 0s6 6 9 0"/></svg></div>
+          <span class="tag">Subdomain</span>
+          <h2>Proteins</h2>
+          <p>3D structure prediction, protein-ligand complexes, binding affinity. AlphaFold 3-style models with pLDDT, PAE, PDB export.</p>
+          <span class="tools">Tools: SE(3)-equivariant NN, MSA, PDB exporter</span>
+        </a>
+        <a class="card" href="science/biology/imaging.html">
+          <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="9" cy="9" r="2"/><path d="m21 15-3-3-7 7"/></svg></div>
+          <span class="tag">Subdomain</span>
+          <h2>Cell Imaging</h2>
+          <p>Microscopy image analysis: segmentation, denoising, super-resolution. Cellpose-style and StarDist-style models in-browser.</p>
+          <span class="tools">Tools: WebGL conv, UNet, TIFF loader</span>
+        </a>
+        <a class="card" href="science/biology/systems.html">
+          <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2"><circle cx="6" cy="6" r="3"/><circle cx="18" cy="6" r="3"/><circle cx="12" cy="18" r="3"/><path d="M9 6h6M9 18h6M6 9v3a6 6 0 0 0 6 6M18 9v3a6 6 0 0 1-6 6"/></svg></div>
+          <span class="tag">Subdomain</span>
+          <h2>Systems Biology</h2>
+          <p>Pathway modelling, ODE / SDE simulation, flux-balance analysis. Multi-omics integration across genomics, transcriptomics, proteomics.</p>
+          <span class="tools">Tools: ODE solver, FBA, network diffusion</span>
+        </a>
+        <a class="card" href="science/biology/evolutionary.html">
+          <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2"><path d="M3 12h4l3-7 4 14 3-7h3"/></svg></div>
+          <span class="tag">Subdomain</span>
+          <h2>Evolutionary Biology</h2>
+          <p>Phylogenetics, sequence alignment, positive-selection detection. Tree visualisation and dN/dS analysis.</p>
+          <span class="tools">Tools: MSA, NJ tree, PAML-style dN/dS</span>
+        </a>
+      </div>
+
+      
+      <!-- Simplified footer — GDPR + HIPAA + MIT license + GitHub Pages note -->
+      <div style="margin-top: 40px; padding: 16px 20px; background: rgba(11,15,26,0.6); border: 1px solid var(--border); border-radius: 10px; font-size: 11px; color: var(--text-muted); line-height: 1.6;">
+        <div style="display: flex; gap: 16px; flex-wrap: wrap; margin-bottom: 8px;">
+          <span style="color: var(--accent);">📜 MIT License</span>
+          <span style="color: var(--accent-2);">🔒 GDPR Compliant</span>
+          <span style="color: var(--accent-2);">🏥 HIPAA Ready</span>
+          <span style="color: var(--accent);">📊 SOC 2 Aligned</span>
+        </div>
+        <p style="margin: 8px 0;">© 2026 AIHPC Advanced. All rights reserved. · Contact: <a href="mailto:testdemoqwenai2025@gmail.com" style="color: #06b6d4;">testdemoqwenai2025@gmail.com</a></p>
+        <p style="margin: 4px 0; font-size: 10px; color: var(--text-muted);">Data protection: no personal data · no cookies · no tracking · all computations client-side (lazy evaluation) <a href="mailto:testdemoqwenai2025@gmail.com" style="color: var(--accent-2);">testdemoqwenai2025@gmail.com</a></p>
+      </div>
+
+      <div class="meta">
+        <p>&copy; 2026 AIHPC Advanced. &middot; Static page from <code>/docs/science-biology.html</code>. Next.js route: <code>/science/biology</code>. Comments to <a href="mailto:testdemoqwenai2025@gmail.com">testdemoqwenai2025@gmail.com</a>.</p>
+      </div>
+    </div>
+
+    <script>
+      (function setupRibbonTheme() {
+        const KEY = 'aihpc-theme';
+        const body = document.body, ribbon = document.querySelector('.ribbon'), icon = document.getElementById('ribbon-theme-icon');
+        function apply(theme) {
+          if (theme === 'light') { body.classList.add('light'); ribbon && ribbon.classList.add('light'); if (icon) icon.textContent = '☀'; }
+          else { body.classList.remove('light'); ribbon && ribbon.classList.remove('light'); if (icon) icon.textContent = '🌙'; }
+        }
+        let initial = 'dark';
+        try { const stored = localStorage.getItem(KEY); if (stored === 'light' || stored === 'dark') initial = stored; else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches) initial = 'light'; } catch (e) {}
+        apply(initial);
+        const btn = document.getElementById('ribbon-theme-toggle');
+        if (btn) btn.addEventListener('click', () => { const next = body.classList.contains('light') ? 'dark' : 'light'; apply(next); try { localStorage.setItem(KEY, next); } catch (e) {} });
+      })();
+// Phase 39: mount multi-organ medical-imaging viewer
+      document.addEventListener('DOMContentLoaded', function () {
+        if (!window.AIHPC_MEDIMG) return;
+        AIHPC_MEDIMG.mount('bio-medimg-container', {
+          organs: ['lung', 'heart', 'liver', 'kidney-left', 'kidney-right', 'spleen', 'bladder', 'bone'],
+        });
+        AIHPC_MEDIMG.play('bio-medimg-container');
+        // Phase 41: register this viewer as a consumer of the scientific-uploader
+        AIHPC_MEDIMG.registerAsUploaderConsumer('bio-medimg-container');
+        if (window.AIHPC_UPLOADER) {
+          AIHPC_UPLOADER.mount('bio-uploader-container');
+        }
+      });
+
+      // Phase 43: lazy-mount segmentation pipeline + biomolecular-dynamics viewers
+      // (only when scrolled into view, per the lazy-evaluation concept)
+      (function () {
+        var segLoaded = false, biodynLoaded = false;
+        var segEl = document.getElementById('bio-seg-container');
+        var biodynEl = document.getElementById('bio-biodyn-container');
+        function loadSeg() {
+          if (segLoaded || !window.AIHPC_SEG || !segEl) return;
+          segLoaded = true;
+          AIHPC_SEG.mount('bio-seg-container');
+          setTimeout(function () { AIHPC_SEG.play('bio-seg-container'); }, 200);
+        }
+        function loadBiodyn() {
+          if (biodynLoaded || !window.AIHPC_BIODYN || !biodynEl) return;
+          biodynLoaded = true;
+          AIHPC_BIODYN.mount('bio-biodyn-container');
+          setTimeout(function () { AIHPC_BIODYN.play('bio-biodyn-container'); }, 200);
+        }
+        if ('IntersectionObserver' in window) {
+          var io = new IntersectionObserver(function (entries) {
+            entries.forEach(function (e) {
+              if (e.isIntersecting) {
+                if (e.target === segEl) { loadSeg(); }
+                if (e.target === biodynEl) { loadBiodyn(); }
+                io.unobserve(e.target);
+              }
+            });
+          }, { rootMargin: '200px' });
+          if (segEl) io.observe(segEl);
+          if (biodynEl) io.observe(biodynEl);
+        } else {
+          // Fallback
+          window.addEventListener('scroll', function () { loadSeg(); loadBiodyn(); }, { once: true, passive: true });
+        }
+      })();
+    </script>
+    <script src="medical-imaging.js"></script>
+    <script src="scientific-uploader.js"></script>
+    <script src="segmentation-pipeline.js" defer></script>
+    <script src="biomolecular-dynamics.js" defer></script>
+  <script src="header-banner.js"></script>
+    <script src="accessibility.js"></script>
+    <script src="particle-bg.js"></script>
+    <script src="mobile-touch-polyfill.js"></script>
+  </body>
+</html>

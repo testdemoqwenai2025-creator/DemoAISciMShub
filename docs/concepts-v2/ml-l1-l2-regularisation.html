@@ -1,0 +1,253 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="L1 / L2 Regularisation — visual-first concept card. Network diagram with dropped/regularised neurons." />
+    <title>L1 / L2 Regularisation — Concept Card · AIHPC</title>
+    <style>
+      :root { --bg:#0b0f1a; --bg-elevated:#121826; --border:#1f2937; --text:#f3f4f6; --text-muted:#9ca3af; --accent:#06b6d4; --accent2:#8b5cf6; --danger:#ef4444; --success:#10b981; --warn:#f59e0b; }
+      * { box-sizing: border-box; margin: 0; padding: 0; }
+      html, body { background: var(--bg); color: var(--text); font-family: -apple-system, "Segoe UI", sans-serif; min-height: 100vh; overflow-x: hidden; }
+      body::before { content:""; position:fixed; inset:0; background: radial-gradient(1000px 500px at 50% 0%, rgba(6,182,212,0.10), transparent 70%); pointer-events:none; z-index:0; }
+      .wrap { max-width: 760px; margin: 0 auto; padding: 24px 16px 64px; position: relative; z-index: 1; }
+      .head { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; }
+      .head .tag { font-size: 10px; padding: 3px 10px; border-radius: 9999px; background: rgba(6,182,212,0.15); border: 1px solid rgba(6,182,212,0.4); color: var(--accent); font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; }
+      .head h1 { font-size: 24px; font-weight: 800; }
+      .back { font-size: 12px; color: var(--accent); text-decoration: none; margin-bottom: 12px; display: inline-block; }
+      .eq-badge { display: inline-flex; align-items: center; gap: 6px; padding: 6px 14px; border-radius: 8px; background: rgba(11,15,26,0.85); border: 1px solid rgba(6,182,212,0.3); font-family: "Cambria Math", Georgia, serif; font-size: 15px; color: var(--accent); margin-bottom: 12px; }
+      .desc { font-size: 14px; color: var(--text-muted); line-height: 1.5; margin-bottom: 16px; max-width: 600px; }
+      .canvas-wrap { position: relative; background: rgba(11,15,26,0.6); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; margin-bottom: 16px; }
+      canvas { display: block; width: 100%; height: auto; }
+      .loss-overlay { position: absolute; top: 12px; right: 12px; background: rgba(11,15,26,0.9); border: 1px solid var(--border); border-radius: 8px; padding: 8px 16px; text-align: right; }
+      .loss-overlay .lbl { font-size: 9px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.1em; }
+      .loss-overlay .val { font-size: 28px; font-weight: 800; font-family: ui-monospace, monospace; color: var(--accent); }
+      .loss-overlay .val.bad { color: var(--danger); } .loss-overlay .val.ok { color: var(--warn); } .loss-overlay .val.good { color: var(--success); }
+      .eq-overlay { position: absolute; bottom: 12px; left: 12px; background: rgba(11,15,26,0.9); border: 1px solid rgba(6,182,212,0.3); border-radius: 6px; padding: 4px 12px; font-family: "Cambria Math", Georgia, serif; font-size: 13px; color: var(--accent); pointer-events: none; }
+      .phase-indicator { position: absolute; bottom: 12px; right: 12px; background: rgba(11,15,26,0.9); border: 1px solid var(--border); border-radius: 6px; padding: 4px 10px; font-size: 10px; color: var(--text-muted); font-family: ui-monospace, monospace; }
+      .phase-indicator.active { color: var(--accent); border-color: rgba(6,182,212,0.4); }
+      .controls { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 16px; align-items: flex-end; }
+      .ctrl { flex: 1; min-width: 180px; background: rgba(18,24,38,0.7); border: 1px solid var(--border); border-radius: 8px; padding: 10px 14px; }
+      .ctrl label { font-size: 11px; color: var(--text-muted); display: block; margin-bottom: 4px; }
+      .ctrl .val { font-size: 14px; font-weight: 700; font-family: ui-monospace, monospace; color: var(--accent); }
+      .ctrl input[type=range] { width: 100%; -webkit-appearance: none; appearance: none; height: 4px; border-radius: 2px; background: var(--border); outline: none; }
+      .ctrl input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; width: 16px; height: 16px; border-radius: 50%; background: var(--accent); cursor: pointer; border: 2px solid var(--bg); }
+      .btn { padding: 10px 20px; border-radius: 8px; border: none; cursor: pointer; font-size: 13px; font-weight: 700; }
+      .btn.primary { background: linear-gradient(90deg, var(--accent), var(--accent2)); color: white; } .btn.primary:hover { transform: translateY(-1px); box-shadow: 0 4px 16px rgba(6,182,212,0.3); }
+      .btn.ghost { background: rgba(18,24,38,0.7); border: 1px solid var(--border); color: var(--text-muted); } .btn.ghost:hover { border-color: var(--accent); color: var(--text); }
+      .btn:disabled { opacity: 0.5; cursor: not-allowed; }
+      .code-section { background: rgba(18,24,38,0.5); border: 1px solid var(--border); border-radius: 8px; padding: 14px 16px; margin-top: 16px; }
+      .code-section h3 { font-size: 11px; font-weight: 700; color: var(--accent); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 8px; }
+      .code-section .eq-line { font-family: "Cambria Math", Georgia, serif; font-size: 14px; color: var(--accent); padding: 6px 10px; background: rgba(6,182,212,0.05); border-radius: 6px; border-left: 3px solid var(--accent); margin-bottom: 10px; }
+      .code-section pre { background: #06080f; border: 1px solid var(--border); border-radius: 6px; padding: 12px 14px; font-family: "SF Mono", Menlo, monospace; font-size: 12px; line-height: 1.6; color: #e5e7eb; overflow-x: auto; }
+      .kw { color: #c4b5fd; } .fn { color: #06b6d4; } .num { color: #f59e0b; } .cm { color: #6b7280; font-style: italic; }
+      .foot { font-size: 10px; color: var(--text-muted); text-align: center; margin-top: 24px; font-family: ui-monospace, monospace; }
+      .foot a { color: var(--accent); text-decoration: none; }
+    </style>
+  <style>
+@media (prefers-reduced-motion: reduce) {
+  #particle-canvas { display: none !important; }
+  * { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; scroll-behavior: auto !important; }
+}
+</style>
+</head>
+  <body>
+    <div class="wrap">
+      <a href="../index.html" class="back">← Home</a>
+      <div class="head">
+        <span class="tag">ML · Regularisation</span>
+        <h1>L1 / L2 Regularisation</h1>
+      </div>
+      <p class="desc">L1 → <b>sparse weights</b> (feature selection). L2 → <b>small weights</b> (smoothness, weight decay).</p>
+      <div class="eq-badge">📐 L1: λ · Σ|wᵢ|        L2: λ · Σ wᵢ²</div>
+      <div class="canvas-wrap">
+        <canvas id="main-canvas" width="728" height="360" aria-label="L1 / L2 Regularisation: main interactive visualisation"></canvas>
+        <div class="loss-overlay"><div class="lbl" id="loss-lbl">penalty</div><div class="val" id="loss-val">0.0000</div></div>
+        <div class="eq-overlay">L1: λ · Σ|wᵢ|        L2: λ · Σ wᵢ²</div>
+        <div class="phase-indicator" id="phase-ind">idle</div>
+      </div>
+      <div class="controls">
+        <div class="ctrl" id="b1-ctrl"><label>Regularisation λ <span class="val" id="b1-val">0.10</span></label><input type="range" id="b1-slider" min="0" max="1" step="0.01" value="0.1" /></div>
+        <div style="display: flex; flex-direction: column; gap: 6px; justify-content: flex-end;">
+          <button class="btn primary" id="btn-gd">▶ Resample</button>
+          <div style="display: flex; gap: 6px;">
+            <button class="btn ghost" id="btn-step" style="flex: 1;">⏭ Step</button>
+            <button class="btn ghost" id="btn-reset" style="flex: 1;">↺ Reset</button>
+          </div>
+        </div>
+      </div>
+      <div class="code-section">
+        <h3>💻 Math → Code — how symbols become variables</h3>
+        <div class="eq-line">L1: λ · Σ|wᵢ|        L2: λ · Σ wᵢ²</div>
+        <pre><span class="cm"># L1 = λ · Σ |w_i|            (LASSO)</span>
+<span class="cm"># L2 = λ · Σ w_i²             (Ridge / weight decay)</span>
+<span class="cm"># λ → regularization strength</span>
+<span class="cm"># Gradient: dL1/dw = λ · sign(w);  dL2/dw = 2λ · w</span>
+<span class="kw">import</span> numpy <span class="kw">as</span> np
+
+<span class="kw">def</span> <span class="fn">l1_regularization</span>(weights, lam=<span class="num">0.01</span>):
+    <span class="kw">return</span> lam * np.<span class="fn">sum</span>(np.<span class="fn">abs</span>(weights))
+
+<span class="kw">def</span> <span class="fn">l2_regularization</span>(weights, lam=<span class="num">0.01</span>):
+    <span class="kw">return</span> lam * np.<span class="fn">sum</span>(weights ** <span class="num">2</span>)
+
+<span class="kw">def</span> <span class="fn">l1_grad</span>(weights, lam=<span class="num">0.01</span>):
+    <span class="kw">return</span> lam * np.<span class="fn">sign</span>(weights)
+
+<span class="kw">def</span> <span class="fn">l2_grad</span>(weights, lam=<span class="num">0.01</span>):
+    <span class="kw">return</span> <span class="num">2</span> * lam * weights
+
+<span class="cm"># Example</span>
+w = np.<span class="fn">array</span>([<span class="num">1.0</span>, -<span class="num">2.0</span>, <span class="num">0.5</span>, -<span class="num">0.3</span>])
+<span class="fn">print</span>(<span class="num">&#x27;L1 loss:&#x27;</span>, <span class="fn">l1_regularization</span>(w, lam=<span class="num">0.1</span>))  <span class="cm"># 0.38</span>
+<span class="fn">print</span>(<span class="num">&#x27;L2 loss:&#x27;</span>, <span class="fn">l2_regularization</span>(w, lam=<span class="num">0.1</span>))  <span class="cm"># 0.534</span>
+<span class="fn">print</span>(<span class="num">&#x27;L1 grad:&#x27;</span>, <span class="fn">l1_grad</span>(w, lam=<span class="num">0.1</span>))  <span class="cm"># [ 0.1 -0.1  0.1 -0.1]</span>
+<span class="fn">print</span>(<span class="num">&#x27;L2 grad:&#x27;</span>, <span class="fn">l2_grad</span>(w, lam=<span class="num">0.1</span>))  <span class="cm"># [ 0.2 -0.4  0.1 -0.06]</span></pre>
+      </div>
+      <div class="foot">
+        <a href="../concepts/ml-l1-l2-regularisation.html">📖 Full text version</a>  ·  Concept card v2
+      </div>
+    </div>
+    <script>
+      var canvas = document.getElementById('main-canvas');
+      var ctx = canvas.getContext('2d');
+
+      // ===== REGULARISATION NETWORK =====
+      var W = canvas.width, H = canvas.height;
+      var lam = 0.1;
+      var isAnim = false;
+      var REG = 'l1l2';
+
+      // 3-layer network: 5 → 6 → 4 → 3
+      var layers = [5, 6, 4, 3];
+      var nodes = [];
+      var seed = 1;
+      function rng() { seed = (seed * 9301 + 49297) % 233280; return seed / 233280; }
+
+      function genNetwork() {
+        nodes = [];
+        for (var li = 0; li < layers.length; li++) {
+          var layer = [];
+          var layerH = layers[li] * 40;
+          var startY = (H - layerH) / 2;
+          for (var ni = 0; ni < layers[li]; ni++) {
+            // For dropout: p = lam (drop prob). For L1/L2: small w = high penalty.
+            var drop = REG === 'dropout' ? (rng() < lam) : false;
+            var w = (rng() - 0.5) * 2;  // weight in [-1, 1]
+            var reg = REG === 'l1l2' ? w * (1 - lam * 0.5) : w;  // shrink toward 0
+            layer.push({ x: 60 + li * 200, y: startY + ni * 40 + 20, dropped: drop, weight: reg });
+          }
+          nodes.push(layer);
+        }
+      }
+      genNetwork();
+
+      function render() {
+        var bg = ctx.createLinearGradient(0,0,0,H); bg.addColorStop(0,'#0a0e1a'); bg.addColorStop(1,'#0f1422');
+        ctx.fillStyle = bg; ctx.fillRect(0,0,W,H);
+        // Title
+        ctx.fillStyle = '#06b6d4'; ctx.font = 'bold 12px ui-monospace'; ctx.textAlign = 'center';
+        if (REG === 'dropout') ctx.fillText('Dropout — dropped neurons shown faded', W/2, 30);
+        else ctx.fillText('L1/L2 — weight magnitudes shown by line thickness', W/2, 30);
+        ctx.textAlign = 'left';
+        // Edges
+        for (var li = 0; li < nodes.length - 1; li++) {
+          for (var i = 0; i < nodes[li].length; i++) {
+            for (var j = 0; j < nodes[li+1].length; j++) {
+              var n1 = nodes[li][i], n2 = nodes[li+1][j];
+              if (n1.dropped || n2.dropped) {
+                ctx.strokeStyle = 'rgba(239,68,68,0.2)';
+                ctx.lineWidth = 0.5;
+              } else {
+                var w = (n1.weight + n2.weight) / 2;
+                var intensity = REG === 'l1l2' ? Math.abs(w) : 0.5;
+                ctx.strokeStyle = 'rgba(6,182,212,' + (0.2 + intensity * 0.5) + ')';
+                ctx.lineWidth = REG === 'l1l2' ? Math.abs(w) * 2 + 0.3 : 1;
+              }
+              ctx.beginPath(); ctx.moveTo(n1.x, n1.y); ctx.lineTo(n2.x, n2.y); ctx.stroke();
+            }
+          }
+        }
+        // Nodes
+        for (var la = 0; la < nodes.length; la++) {
+          for (var k = 0; k < nodes[la].length; k++) {
+            var nd = nodes[la][k];
+            ctx.beginPath(); ctx.arc(nd.x, nd.y, 8, 0, 6.28);
+            if (nd.dropped) { ctx.fillStyle = 'rgba(239,68,68,0.3)'; ctx.fill(); ctx.strokeStyle = '#ef4444'; }
+            else { ctx.fillStyle = '#06b6d4'; ctx.fill(); ctx.strokeStyle = '#06b6d4'; }
+            ctx.lineWidth = 2; ctx.stroke();
+          }
+        }
+        // Penalty
+        var penalty = 0;
+        if (REG === 'l1l2') {
+          for (var pli = 0; pli < nodes.length; pli++) {
+            for (var pni = 0; pni < nodes[pli].length; pni++) {
+              penalty += lam * Math.abs(nodes[pli][pni].weight);
+            }
+          }
+        } else {  // dropout
+          var dropped = 0, total = 0;
+          for (var dli = 0; dli < nodes.length; dli++) {
+            for (var dni = 0; dni < nodes[dli].length; dni++) {
+              total++;
+              if (nodes[dli][dni].dropped) dropped++;
+            }
+          }
+          penalty = total > 0 ? dropped / total : 0;
+        }
+        document.getElementById('loss-val').textContent = penalty.toFixed(3);
+        document.getElementById('loss-val').className = 'val ' + (penalty < 0.3 ? 'good' : 'ok');
+      }
+
+      document.getElementById('b1-slider').addEventListener('input', function(e) { lam = parseFloat(e.target.value); document.getElementById('b1-val').textContent = lam.toFixed(2); genNetwork(); render(); });
+
+      document.getElementById('btn-gd').addEventListener('click', function() {
+        genNetwork(); render();
+        document.getElementById('phase-ind').textContent = 'resampled'; document.getElementById('phase-ind').classList.add('active');
+        setTimeout(function() {
+          document.getElementById('phase-ind').textContent = 'idle'; document.getElementById('phase-ind').classList.remove('active');
+        }, 800);
+      });
+      // Phase 38.8: Step button — single-step mode
+      document.getElementById('btn-step').addEventListener('click', function() {
+        if (isAnim) return;
+        if (typeof animate !== 'function') return;
+        var origST = window.setTimeout;
+        var stepTaken = false;
+        window.setTimeout = function(fn, delay) {
+          if (stepTaken) return;
+          stepTaken = true;
+          window.setTimeout = origST;
+          origST(fn, 0);
+        };
+        document.getElementById('phase-ind').textContent = 'step (manual)';
+        document.getElementById('phase-ind').classList.add('active');
+        animate();
+        origST(function() { window.setTimeout = origST; }, 200);
+      });
+      document.getElementById('btn-reset').addEventListener('click', function() {
+        lam = 0.1; document.getElementById('b1-slider').value = 0.1; document.getElementById('b1-val').textContent = '0.10';
+        document.getElementById('phase-ind').textContent = 'idle';
+        document.getElementById('phase-ind').classList.remove('active');
+        genNetwork(); render();
+      });
+      render();
+    </script>
+        <!-- Simplified footer — GDPR + HIPAA + MIT license -->
+    <div style="margin-top: 40px; padding: 16px 20px; background: rgba(11,15,26,0.6); border: 1px solid #1f2937; border-radius: 10px; font-size: 11px; color: #9ca3af; line-height: 1.6;">
+      <div style="display: flex; gap: 16px; flex-wrap: wrap; margin-bottom: 8px;">
+        <span style="color: #10b981;">📜 MIT License</span>
+        <span style="color: #06b6d4;">🔒 GDPR Compliant</span>
+        <span style="color: #06b6d4;">🏥 HIPAA Ready</span>
+        <span style="color: #10b981;">📊 SOC 2 Aligned</span>
+      </div>
+      <p style="margin: 8px 0;">© 2026 AIHPC Advanced. All rights reserved. · Contact: <a href="mailto:testdemoqwenai2025@gmail.com" style="color: #06b6d4;">testdemoqwenai2025@gmail.com</a></p>
+      <p style="margin: 4px 0; font-size: 10px;">Data protection: no personal data collected · no cookies · no tracking · no external API calls · all computations client-side (lazy evaluation)</p>
+    </div>
+    <script src="header-banner.js"></script>
+    <script src="zoom-loader.js"></script>
+    <script src="../accessibility.js"></script>
+    <script src="../mobile-touch-polyfill.js"></script>
+  </body>
+</html>

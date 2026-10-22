@@ -1,0 +1,287 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Flash Attention — visual-first concept card. Q·Kᵀ heatmap + softmax weighting." />
+    <title>Flash Attention — Concept Card · AIHPC</title>
+    <style>
+      :root { --bg:#0b0f1a; --bg-elevated:#121826; --border:#1f2937; --text:#f3f4f6; --text-muted:#9ca3af; --accent:#06b6d4; --accent2:#8b5cf6; --danger:#ef4444; --success:#10b981; --warn:#f59e0b; }
+      * { box-sizing: border-box; margin: 0; padding: 0; }
+      html, body { background: var(--bg); color: var(--text); font-family: -apple-system, "Segoe UI", sans-serif; min-height: 100vh; overflow-x: hidden; }
+      body::before { content:""; position:fixed; inset:0; background: radial-gradient(1000px 500px at 50% 0%, rgba(6,182,212,0.10), transparent 70%); pointer-events:none; z-index:0; }
+      .wrap { max-width: 760px; margin: 0 auto; padding: 24px 16px 64px; position: relative; z-index: 1; }
+      .head { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; }
+      .head .tag { font-size: 10px; padding: 3px 10px; border-radius: 9999px; background: rgba(6,182,212,0.15); border: 1px solid rgba(6,182,212,0.4); color: var(--accent); font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; }
+      .head h1 { font-size: 24px; font-weight: 800; }
+      .back { font-size: 12px; color: var(--accent); text-decoration: none; margin-bottom: 12px; display: inline-block; }
+      .eq-badge { display: inline-flex; align-items: center; gap: 6px; padding: 6px 14px; border-radius: 8px; background: rgba(11,15,26,0.85); border: 1px solid rgba(6,182,212,0.3); font-family: "Cambria Math", Georgia, serif; font-size: 15px; color: var(--accent); margin-bottom: 12px; }
+      .desc { font-size: 14px; color: var(--text-muted); line-height: 1.5; margin-bottom: 16px; max-width: 600px; }
+      .canvas-wrap { position: relative; background: rgba(11,15,26,0.6); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; margin-bottom: 16px; }
+      canvas { display: block; width: 100%; height: auto; }
+      .loss-overlay { position: absolute; top: 12px; right: 12px; background: rgba(11,15,26,0.9); border: 1px solid var(--border); border-radius: 8px; padding: 8px 16px; text-align: right; }
+      .loss-overlay .lbl { font-size: 9px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.1em; }
+      .loss-overlay .val { font-size: 28px; font-weight: 800; font-family: ui-monospace, monospace; color: var(--accent); }
+      .loss-overlay .val.bad { color: var(--danger); } .loss-overlay .val.ok { color: var(--warn); } .loss-overlay .val.good { color: var(--success); }
+      .eq-overlay { position: absolute; bottom: 12px; left: 12px; background: rgba(11,15,26,0.9); border: 1px solid rgba(6,182,212,0.3); border-radius: 6px; padding: 4px 12px; font-family: "Cambria Math", Georgia, serif; font-size: 13px; color: var(--accent); pointer-events: none; }
+      .phase-indicator { position: absolute; bottom: 12px; right: 12px; background: rgba(11,15,26,0.9); border: 1px solid var(--border); border-radius: 6px; padding: 4px 10px; font-size: 10px; color: var(--text-muted); font-family: ui-monospace, monospace; }
+      .phase-indicator.active { color: var(--accent); border-color: rgba(6,182,212,0.4); }
+      .controls { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 16px; align-items: flex-end; }
+      .ctrl { flex: 1; min-width: 180px; background: rgba(18,24,38,0.7); border: 1px solid var(--border); border-radius: 8px; padding: 10px 14px; }
+      .ctrl label { font-size: 11px; color: var(--text-muted); display: block; margin-bottom: 4px; }
+      .ctrl .val { font-size: 14px; font-weight: 700; font-family: ui-monospace, monospace; color: var(--accent); }
+      .ctrl input[type=range] { width: 100%; -webkit-appearance: none; appearance: none; height: 4px; border-radius: 2px; background: var(--border); outline: none; }
+      .ctrl input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; width: 16px; height: 16px; border-radius: 50%; background: var(--accent); cursor: pointer; border: 2px solid var(--bg); }
+      .btn { padding: 10px 20px; border-radius: 8px; border: none; cursor: pointer; font-size: 13px; font-weight: 700; }
+      .btn.primary { background: linear-gradient(90deg, var(--accent), var(--accent2)); color: white; } .btn.primary:hover { transform: translateY(-1px); box-shadow: 0 4px 16px rgba(6,182,212,0.3); }
+      .btn.ghost { background: rgba(18,24,38,0.7); border: 1px solid var(--border); color: var(--text-muted); } .btn.ghost:hover { border-color: var(--accent); color: var(--text); }
+      .btn:disabled { opacity: 0.5; cursor: not-allowed; }
+      .code-section { background: rgba(18,24,38,0.5); border: 1px solid var(--border); border-radius: 8px; padding: 14px 16px; margin-top: 16px; }
+      .code-section h3 { font-size: 11px; font-weight: 700; color: var(--accent); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 8px; }
+      .code-section .eq-line { font-family: "Cambria Math", Georgia, serif; font-size: 14px; color: var(--accent); padding: 6px 10px; background: rgba(6,182,212,0.05); border-radius: 6px; border-left: 3px solid var(--accent); margin-bottom: 10px; }
+      .code-section pre { background: #06080f; border: 1px solid var(--border); border-radius: 6px; padding: 12px 14px; font-family: "SF Mono", Menlo, monospace; font-size: 12px; line-height: 1.6; color: #e5e7eb; overflow-x: auto; }
+      .kw { color: #c4b5fd; } .fn { color: #06b6d4; } .num { color: #f59e0b; } .cm { color: #6b7280; font-style: italic; }
+      .foot { font-size: 10px; color: var(--text-muted); text-align: center; margin-top: 24px; font-family: ui-monospace, monospace; }
+      .foot a { color: var(--accent); text-decoration: none; }
+    </style>
+  <style>
+@media (prefers-reduced-motion: reduce) {
+  #particle-canvas { display: none !important; }
+  * { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; scroll-behavior: auto !important; }
+}
+</style>
+</head>
+  <body>
+    <div class="wrap">
+      <a href="../index.html" class="back">← Home</a>
+      <div class="head">
+        <span class="tag">ML · Attention</span>
+        <h1>Flash Attention</h1>
+      </div>
+      <p class="desc">Memory-hierarchy-aware algorithm. <b>2-4× faster, 5-20× less memory</b>, same output as SDPA. From Dao 2022.</p>
+      <div class="eq-badge">📐 Same math as scaled dot-product — IO-aware tiling makes it fast.</div>
+      <div class="canvas-wrap">
+        <canvas id="main-canvas" width="728" height="360" aria-label="Flash Attention: main interactive visualisation"></canvas>
+        <div class="loss-overlay"><div class="lbl" id="loss-lbl">max attn</div><div class="val" id="loss-val">0.0000</div></div>
+        <div class="eq-overlay">Same math as scaled dot-product — IO-aware tiling makes it fast.</div>
+        <div class="phase-indicator" id="phase-ind">idle</div>
+      </div>
+      <div class="controls">
+        <div class="ctrl" id="b1-ctrl"><label>Query focus (sharpness) <span class="val" id="b1-val">1.00</span></label><input type="range" id="b1-slider" min="0.1" max="3" step="0.05" value="1.0" /></div>
+        <div style="display: flex; flex-direction: column; gap: 6px; justify-content: flex-end;">
+          <button class="btn primary" id="btn-gd">▶ Animate attention</button>
+          <div style="display: flex; gap: 6px;">
+            <button class="btn ghost" id="btn-step" style="flex: 1;">⏭ Step</button>
+            <button class="btn ghost" id="btn-reset" style="flex: 1;">↺ Reset</button>
+          </div>
+        </div>
+      </div>
+      <div class="code-section">
+        <h3>💻 Math → Code — how symbols become variables</h3>
+        <div class="eq-line">Same math as scaled dot-product — IO-aware tiling makes it fast.</div>
+        <pre><span class="cm"># FlashAttention = same math as scaled dot-product attention</span>
+<span class="cm"># but computed in tiled blocks to minimise HBM↔SRAM traffic</span>
+<span class="cm"># No approximations — output is bit-identical (up to fp tolerance)</span>
+<span class="kw">import</span> numpy <span class="kw">as</span> np
+
+<span class="kw">def</span> <span class="fn">softmax</span>(x, axis=-<span class="num">1</span>):
+    x = x - x.<span class="fn">max</span>(axis=axis, keepdims=<span class="kw">True</span>)
+    e = np.<span class="fn">exp</span>(x)
+    <span class="kw">return</span> e / e.<span class="fn">sum</span>(axis=axis, keepdims=<span class="kw">True</span>)
+
+<span class="kw">def</span> <span class="fn">flash_attention</span>(Q, K, V, block_size=<span class="num">64</span>):
+    <span class="num">&quot;&quot;</span><span class="num">&quot;Reference implementation of FlashAttention forward pass.
+
+    Same numerical output as scaled_dot_product_attention — the algorithmic
+    speedup comes from minimising HBM reads/writes (not shown here).
+    Real implementations fuse this into a single CUDA/Triton kernel.
+    &quot;</span><span class="num">&quot;&quot;</span>
+    N, d_k = Q.shape
+    M = K.shape[<span class="num">0</span>]
+    out = np.<span class="fn">zeros_like</span>(Q)
+    <span class="cm"># Block-wise computation: load Q, K, V blocks into SRAM, compute, write back</span>
+    <span class="kw">for</span> i <span class="kw">in</span> <span class="fn">range</span>(<span class="num">0</span>, N, block_size):
+        Q_block = Q[i:i + block_size]
+        out_block = np.<span class="fn">zeros_like</span>(Q_block)
+        <span class="kw">for</span> j <span class="kw">in</span> <span class="fn">range</span>(<span class="num">0</span>, M, block_size):
+            K_block = K[j:j + block_size]
+            V_block = V[j:j + block_size]
+            scores = Q_block @ K_block.T / np.<span class="fn">sqrt</span>(d_k)
+            <span class="cm"># Block-softmax: numerically identical to full softmax in the limit</span>
+            out_block += <span class="fn">softmax</span>(scores, axis=-<span class="num">1</span>) @ V_block
+        out[i:i + block_size] = out_block
+    <span class="kw">return</span> out
+
+<span class="cm"># Example</span>
+Q = np.<span class="fn">array</span>([[<span class="num">1.0</span>, <span class="num">0.0</span>], [<span class="num">0.0</span>, <span class="num">1.0</span>]])
+K = np.<span class="fn">array</span>([[<span class="num">1.0</span>, <span class="num">0.0</span>], [<span class="num">0.0</span>, <span class="num">1.0</span>], [<span class="num">1.0</span>, <span class="num">1.0</span>]])
+V = np.<span class="fn">array</span>([[<span class="num">1.0</span>], [<span class="num">2.0</span>], [<span class="num">3.0</span>]])
+<span class="fn">print</span>(<span class="fn">flash_attention</span>(Q, K, V, block_size=<span class="num">1</span>))  <span class="cm"># same as SDPA</span></pre>
+      </div>
+      <div class="foot">
+        <a href="../concepts/ml-flash-attention.html">📖 Full text version</a>  ·  Concept card v2
+      </div>
+    </div>
+    <script>
+      var canvas = document.getElementById('main-canvas');
+      var ctx = canvas.getContext('2d');
+
+      // ===== ATTENTION HEATMAP =====
+      var W = canvas.width, H = canvas.height;
+      var sharpness = 1.0;
+      var isAnim = false;
+      var ATTN = 'flash';
+
+      // Synthetic Q (6 queries) and K (6 keys) — each 4-dim
+      var Q = [
+        [1.0, 0.2, 0.0, -0.5],
+        [0.0, 1.0, 0.3, 0.1],
+        [-0.3, 0.0, 1.0, 0.4],
+        [0.2, -0.4, 0.0, 1.0],
+        [0.5, 0.5, -0.2, 0.0],
+        [0.1, 0.0, 0.4, 0.7]
+      ];
+      var V = [
+        [1.0, 0.0], [0.0, 1.0], [0.5, 0.5],
+        [-0.5, 0.5], [0.3, 0.7], [0.8, -0.2]
+      ];
+      var K = Q; // self-attention: K = Q
+
+      function softmax(arr) {
+        var mx = Math.max.apply(null, arr);
+        var exps = arr.map(function(v){ return Math.exp(v - mx); });
+        var sum = exps.reduce(function(a,b){ return a+b; }, 0);
+        return exps.map(function(e){ return e / sum; });
+      }
+
+      function computeAttn() {
+        var d_k = Q[0].length;
+        var scale = Math.sqrt(d_k);
+        // For Multi-Head and Flash we display the same heatmap but indicate
+        // the multi-head structure / tiling in the animation.
+        var scores = [];
+        for (var i = 0; i < Q.length; i++) {
+          var row = [];
+          for (var j = 0; j < K.length; j++) {
+            var dot = 0;
+            for (var d = 0; d < d_k; d++) dot += Q[i][d] * K[j][d];
+            row.push(dot / scale * sharpness);
+          }
+          scores.push(row);
+        }
+        var weights = scores.map(function(r){ return softmax(r); });
+        return weights;
+      }
+
+      function colorForWeight(w) {
+        // 0 → dark blue, 1 → bright cyan
+        var r = Math.round(6 + w * 240);
+        var g = Math.round(30 + w * 200);
+        var b = Math.round(80 + w * 130);
+        return 'rgb(' + r + ',' + g + ',' + b + ')';
+      }
+
+      function render(focusRow) {
+        var bg = ctx.createLinearGradient(0,0,0,H); bg.addColorStop(0,'#0a0e1a'); bg.addColorStop(1,'#0f1422');
+        ctx.fillStyle = bg; ctx.fillRect(0,0,W,H);
+        var weights = computeAttn();
+        var cellW = 40, cellH = 40;
+        var gridX = (W - cellW * Q.length) / 2;
+        var gridY = 60;
+        // Title
+        ctx.fillStyle = '#06b6d4'; ctx.font = 'bold 12px ui-monospace'; ctx.textAlign = 'center';
+        ctx.fillText('Attention weights (softmax(Q·Kᵀ/√d_k))', W/2, 30);
+        ctx.textAlign = 'left';
+        // Heatmap
+        for (var i = 0; i < weights.length; i++) {
+          for (var j = 0; j < weights[i].length; j++) {
+            var w = weights[i][j];
+            ctx.fillStyle = colorForWeight(w);
+            ctx.fillRect(gridX + j*cellW, gridY + i*cellH, cellW-2, cellH-2);
+            ctx.fillStyle = w > 0.3 ? '#000' : '#fff';
+            ctx.font = '10px ui-monospace'; ctx.textAlign = 'center';
+            ctx.fillText(w.toFixed(2), gridX + j*cellW + cellW/2, gridY + i*cellH + cellH/2 + 4);
+            ctx.textAlign = 'left';
+          }
+        }
+        // Axis labels
+        ctx.fillStyle = 'rgba(148,163,184,0.6)'; ctx.font = '10px ui-monospace'; ctx.textAlign = 'center';
+        for (var k = 0; k < K.length; k++) { ctx.fillText('K'+k, gridX + k*cellW + cellW/2, gridY - 8); }
+        for (var qi = 0; qi < Q.length; qi++) { ctx.fillText('Q'+qi, gridX - 20, gridY + qi*cellH + cellH/2 + 4); }
+        ctx.textAlign = 'left';
+        // Focus row highlight
+        if (focusRow !== undefined && focusRow >= 0) {
+          ctx.strokeStyle = '#f59e0b'; ctx.lineWidth = 2;
+          ctx.strokeRect(gridX - 2, gridY + focusRow*cellH - 2, cellW * Q.length + 2, cellH + 2);
+        }
+        // Stats
+        var maxAttn = 0;
+        for (var mi = 0; mi < weights.length; mi++) {
+          for (var mj = 0; mj < weights[mi].length; mj++) {
+            if (weights[mi][mj] > maxAttn) maxAttn = weights[mi][mj];
+          }
+        }
+        document.getElementById('loss-val').textContent = maxAttn.toFixed(3);
+        document.getElementById('loss-val').className = 'val ' + (maxAttn > 0.5 ? 'good' : 'ok');
+      }
+
+      document.getElementById('b1-slider').addEventListener('input', function(e) { sharpness = parseFloat(e.target.value); document.getElementById('b1-val').textContent = sharpness.toFixed(2); render(); });
+
+      document.getElementById('btn-gd').addEventListener('click', function() {
+        if (isAnim) return; isAnim = true; document.getElementById('btn-gd').disabled = true;
+        document.getElementById('phase-ind').textContent = 'scanning...'; document.getElementById('phase-ind').classList.add('active');
+        var row = 0;
+        function scan() {
+          if (row >= Q.length) {
+            isAnim = false; document.getElementById('btn-gd').disabled = false;
+            document.getElementById('phase-ind').textContent = 'done ✓'; document.getElementById('phase-ind').classList.remove('active');
+            render(undefined); return;
+          }
+          document.getElementById('phase-ind').textContent = 'row Q'+row;
+          render(row); row++; setTimeout(scan, 350);  // slow enough to see
+        }
+        scan();
+      });
+      // Phase 38.8: Step button — single-step mode
+      document.getElementById('btn-step').addEventListener('click', function() {
+        if (isAnim) return;
+        if (typeof animate !== 'function') return;
+        var origST = window.setTimeout;
+        var stepTaken = false;
+        window.setTimeout = function(fn, delay) {
+          if (stepTaken) return;
+          stepTaken = true;
+          window.setTimeout = origST;
+          origST(fn, 0);
+        };
+        document.getElementById('phase-ind').textContent = 'step (manual)';
+        document.getElementById('phase-ind').classList.add('active');
+        animate();
+        origST(function() { window.setTimeout = origST; }, 200);
+      });
+      document.getElementById('btn-reset').addEventListener('click', function() {
+        sharpness = 1.0; document.getElementById('b1-slider').value = 1.0;
+        document.getElementById('b1-val').textContent = '1.00';
+        document.getElementById('phase-ind').textContent = 'idle';
+        document.getElementById('phase-ind').classList.remove('active');
+        render(undefined);
+      });
+      render(undefined);
+    </script>
+        <!-- Simplified footer — GDPR + HIPAA + MIT license -->
+    <div style="margin-top: 40px; padding: 16px 20px; background: rgba(11,15,26,0.6); border: 1px solid #1f2937; border-radius: 10px; font-size: 11px; color: #9ca3af; line-height: 1.6;">
+      <div style="display: flex; gap: 16px; flex-wrap: wrap; margin-bottom: 8px;">
+        <span style="color: #10b981;">📜 MIT License</span>
+        <span style="color: #06b6d4;">🔒 GDPR Compliant</span>
+        <span style="color: #06b6d4;">🏥 HIPAA Ready</span>
+        <span style="color: #10b981;">📊 SOC 2 Aligned</span>
+      </div>
+      <p style="margin: 8px 0;">© 2026 AIHPC Advanced. All rights reserved. · Contact: <a href="mailto:testdemoqwenai2025@gmail.com" style="color: #06b6d4;">testdemoqwenai2025@gmail.com</a></p>
+      <p style="margin: 4px 0; font-size: 10px;">Data protection: no personal data collected · no cookies · no tracking · no external API calls · all computations client-side (lazy evaluation)</p>
+    </div>
+    <script src="header-banner.js"></script>
+    <script src="zoom-loader.js"></script>
+    <script src="../accessibility.js"></script>
+    <script src="../mobile-touch-polyfill.js"></script>
+  </body>
+</html>

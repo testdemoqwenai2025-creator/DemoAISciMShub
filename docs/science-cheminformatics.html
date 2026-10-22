@@ -1,0 +1,363 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Cheminformatics Hub — AIHPC Advanced. BLAST, sequence alignment, phylogenetics, structural cheminformatics. Modern AI for cheminformatics." />
+    <title>Cheminformatics Hub — AIHPC Advanced Science</title>
+    <style>
+      :root { --bg:#0b0f1a; --bg-elevated:#121826; --border:#1f2937; --text:#f3f4f6; --text-muted:#9ca3af; --text-muted-2:#6b7280; --accent:#8b5cf6; --accent-2:#06b6d4; }
+      * { box-sizing: border-box; } html, body { margin: 0; padding: 0; }
+      body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; line-height: 1.6; position: relative; overflow-x: hidden; }
+      #particle-canvas { position: fixed; inset: 0; z-index: 0; pointer-events: none; opacity: 0.3; }
+      .ribbon { position: sticky; top: 0; z-index: 50; border-bottom: 1px solid rgba(139,92,246,0.25); background: linear-gradient(180deg, rgba(7,9,15,0.95) 0%, rgba(11,15,26,0.85) 100%); backdrop-filter: blur(12px); box-shadow: 0 1px 0 0 rgba(6,182,212,0.4), 0 4px 16px rgba(0,0,0,0.4); }
+      .ribbon::after { content: ""; position: absolute; left: 0; right: 0; bottom: -1px; height: 2px; background: linear-gradient(90deg, #06b6d4 0%, #8b5cf6 50%, #ec4899 100%); opacity: 0.7; }
+      .ribbon.light { background: linear-gradient(180deg, rgba(255,255,255,0.98) 0%, rgba(249,250,251,0.92) 100%); border-bottom-color: rgba(139,92,246,0.25); }
+      .ribbon-inner { max-width: 1100px; margin: 0 auto; padding: 0 24px; height: 56px; display: flex; align-items: center; gap: 12px; }
+      .ribbon-brand { display: flex; align-items: center; gap: 8px; text-decoration: none; color: var(--text); font-weight: 600; }
+      .ribbon-logo { display: inline-flex; align-items: center; justify-content: center; width: 28px; height: 28px; border-radius: 8px; background: linear-gradient(135deg,#06b6d4,#8b5cf6,#d946ef); color: white; font-size: 12px; font-weight: 700; }
+      .ribbon-name { display: none; } @media (min-width: 600px) { .ribbon-name { display: inline; } }
+      .ribbon-nav { display: flex; align-items: center; gap: 4px; }
+      .ribbon-dropdown { position: relative; }
+      .ribbon-dropdown > summary { list-style: none; cursor: pointer; padding: 6px 12px; border-radius: 6px; font-size: 14px; color: var(--text-muted); display: inline-flex; align-items: center; gap: 4px; }
+      .ribbon-dropdown > summary::-webkit-details-marker { display: none; }
+      .ribbon-dropdown > summary::after { content: "▾"; font-size: 10px; opacity: 0.6; }
+      .ribbon-dropdown[open] > summary { background: var(--bg-elevated); color: var(--text); }
+      .ribbon-menu { position: absolute; top: 100%; left: 0; margin-top: 4px; min-width: 240px; background: var(--bg-elevated); border: 1px solid #2a3548; border-radius: 12px; padding: 6px; box-shadow: 0 12px 32px rgba(0,0,0,0.4); display: flex; flex-direction: column; gap: 2px; max-height: 70vh; overflow: auto; }
+      .ribbon-menu a { text-decoration: none; color: var(--text-muted); font-size: 13px; padding: 6px 10px; border-radius: 6px; }
+      .ribbon-menu a:hover { background: var(--bg); color: var(--text); }
+      .ribbon-actions { margin-left: auto; display: flex; align-items: center; gap: 8px; }
+      .ribbon-icon-btn { background: transparent; border: 1px solid var(--border); color: var(--text); width: 32px; height: 32px; border-radius: 8px; cursor: pointer; font-size: 14px; display: inline-flex; align-items: center; justify-content: center; }
+      .ribbon-icon-btn:hover { border-color: var(--accent); }
+      .ribbon-btn-primary { display: inline-flex; align-items: center; padding: 6px 16px; border-radius: 9999px; background: linear-gradient(90deg,#8b5cf6,#06b6d4); color: white; text-decoration: none; font-size: 13px; font-weight: 600; }
+      .container { max-width: 1100px; margin: 0 auto; padding: 56px 24px 96px; position: relative; z-index: 1; }
+      .badge { display: inline-block; padding: 4px 10px; border-radius: 9999px; border: 1px solid rgba(139,92,246,0.3); background: rgba(139,92,246,0.1); font-size: 12px; color: var(--text); margin-bottom: 24px; backdrop-filter: blur(8px); }
+      h1 { font-size: 40px; line-height: 1.1; margin: 0 0 16px; letter-spacing: -0.02em; background: linear-gradient(90deg,#fff,#fcd34d 60%,#67e8f9); -webkit-background-clip: text; background-clip: text; color: transparent; }
+      .lead { font-size: 18px; color: var(--text-muted); max-width: 760px; margin: 0 0 40px; }
+      .hero { position: relative; margin: 0 0 32px; height: 220px; border-radius: 20px; overflow: hidden; background: linear-gradient(135deg, rgba(245,158,11,0.15) 0%, rgba(6,182,212,0.1) 50%, rgba(139,92,246,0.15) 100%); border: 1px solid rgba(245,158,11,0.25); backdrop-filter: blur(12px); box-shadow: 0 8px 32px rgba(0,0,0,0.3), 0 0 60px rgba(245,158,11,0.1); }
+      .hero svg { width: 100%; height: 100%; }
+      .hero .hero-text { position: absolute; top: 50%; left: 32px; transform: translateY(-50%); max-width: 380px; pointer-events: none; }
+      .hero .hero-text .h-tag { font-size: 11px; color: rgba(252,211,77,0.9); text-transform: uppercase; letter-spacing: 0.08em; margin: 0 0 6px; }
+      .hero .hero-text .h-title { font-size: 20px; font-weight: 700; color: white; margin: 0; text-shadow: 0 2px 8px rgba(0,0,0,0.6); }
+      .hero .hero-text .h-sub { font-size: 13px; color: rgba(243,244,246,0.8); margin-top: 4px; text-shadow: 0 1px 4px rgba(0,0,0,0.6); }
+      .cards { display: grid; gap: 16px; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); margin-top: 24px; }
+      .card { background: rgba(18,24,38,0.6); border: 1px solid rgba(139,92,246,0.2); border-radius: 16px; padding: 24px; text-decoration: none; color: var(--text); display: flex; flex-direction: column; gap: 8px; transition: border-color 0.2s ease, transform 0.2s ease; backdrop-filter: blur(12px); }
+      .card:hover { border-color: rgba(245,158,11,0.55); transform: translateY(-2px); box-shadow: 0 8px 32px rgba(0,0,0,0.4), 0 0 40px rgba(245,158,11,0.1); }
+      .card .tag { font-size: 11px; color: var(--text-muted-2); text-transform: uppercase; letter-spacing: 0.06em; }
+      .card h2 { margin: 0; font-size: 20px; }
+      .card p { margin: 0; color: var(--text-muted); font-size: 14px; flex: 1; }
+      .card .tools { font-size: 12px; color: var(--accent-2); font-weight: 600; }
+      .meta { margin-top: 64px; padding-top: 24px; border-top: 1px solid var(--border); color: var(--text-muted); font-size: 13px; }
+      .meta a { color: var(--text); text-decoration: none; }
+      .meta a:hover { text-decoration: underline; }
+      body.light { background: #fafafa; color: #18181b; }
+      body.light #particle-canvas { opacity: 0.1; }
+      body.light .card, body.light .badge { background: rgba(255,255,255,0.6); backdrop-filter: blur(12px); border-color: #e5e7eb; }
+      body.light .lead, body.light .meta { color: #4b5563; }
+      body.light .hero { background: linear-gradient(135deg, rgba(245,158,11,0.05) 0%, rgba(6,182,212,0.04) 50%, rgba(139,92,246,0.05) 100%); }
+      body.light .hero .hero-text .h-tag { color: #4b5563; } body.light .hero .hero-text .h-title { color: #18181b; text-shadow: none; } body.light .hero .hero-text .h-sub { color: #4b5563; text-shadow: none; }
+      body.light .ribbon-btn-primary { color: white; }
+    </style>
+  <style>
+@media (prefers-reduced-motion: reduce) {
+  #particle-canvas { display: none !important; }
+  * { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; scroll-behavior: auto !important; }
+}
+</style>
+<style>
+/* Phase 46c — mobile-responsive canvas */
+canvas {
+  display: block;
+  max-width: 100% !important;
+  height: auto !important;
+  touch-action: manipulation;
+  -webkit-user-select: none;
+  user-select: none;
+}
+@media (max-width: 768px) {
+  canvas { max-height: 60vh; }
+  .controls-row { flex-direction: column; align-items: stretch !important; }
+  .controls-row .btn { width: 100%; }
+  .zoom-controls { transform: scale(0.85); transform-origin: top right; }
+  .stage-ind, .state-display { font-size: 10px !important; }
+}
+</style>
+</head>
+  <body>
+    <canvas id="particle-canvas" aria-label="Cheminformatics: animated particle background"></canvas>
+    <header class="ribbon">
+      <div class="ribbon-inner">
+        <a href="index.html" class="ribbon-brand"><span class="ribbon-logo">A</span><span class="ribbon-name">AIHPC Advanced</span></a>
+        <nav class="ribbon-nav">
+          <details class="ribbon-dropdown"><summary>Platform</summary><div class="ribbon-menu"><a href="index.html">Home</a><a href="demos.html">Demos</a><a href="dashboard.html">Dashboard</a><a href="graph.html">Knowledge Graph</a><a href="benchmark.html">Agentic Benchmark</a><a href="subscribe.html">Subscribe</a><a href="timeline.html">Platform Timeline (50 Phases)</a><a href="retrospective.html">50-Phase Retrospective</a><a href="component-registry.html">Component Registry</a></div></details><details class="ribbon-dropdown"><summary>Visualisers</summary><div class="ribbon-menu"><a href="playground.html">Cross-Domain Playground</a><a href="quantum-shorts.html">Quantum Shorts Channel</a><a href="bloch.html">Bloch Sphere Shorts</a><a href="medical-atlas.html">Medical Imaging Atlas</a><a href="science/physics/quantum.html">Quantum Mechanics Hub</a></div></details>
+          <details class="ribbon-dropdown"><summary>AETHEL Suite</summary><div class="ribbon-menu"><a href="aethel.html">AETHEL Connector</a><a href="connectors.html">Scientific Connectors Hub</a><a href="query.html">Query Executor</a><a href="graph.html">Knowledge Graph</a><a href="workflows.html">Domain Workflows</a></div></details>
+          <details class="ribbon-dropdown"><summary>Science</summary><div class="ribbon-menu"><a href="science-biology.html">Biology Hub</a><a href="science-chemistry.html">Chemistry Hub</a><a href="science-physics.html">Physics Hub</a><a href="science-maths.html">Mathematics Hub</a><a href="science-ml.html">🤖 Machine Learning</a><a href="science-bioinformatics.html">Bioinformatics</a><a href="science-cheminformatics.html">Cheminformatics</a></div></details>
+          <details class="ribbon-dropdown"><summary>Insights</summary><div class="ribbon-menu"><a href="feeds.html">📡 Live Journal Feeds</a><a href="digest.html">Weekly Science Digest</a><a href="audit.html">📊 Audit Dashboard</a><a href="404.html">🚧 404 page</a><a href="lab.html">🔬 Lab</a><a href="dashboard.html">Temporal Knowledge Graph Dashboard</a><a href="bio-nn.html">🧬 Bioinformatics × NN</a><a href="lab-in-the-loop.html">🔄 Lab in the Loop</a><a href="how-cnns-see-images.html">📖 How CNNs See</a><a href="editjumps.html">🔬 EditJumps</a><a href="geoworld.html">🔬 GeoWorld</a><a href="concepts.html">Concept Cards</a><a href="concepts/replayable-decision-traces.html">Replayable Decision Traces</a><a href="concepts/provenance-first.html">Provenance-First Computing</a><a href="concepts/lazy-evaluation.html">Lazy Evaluation as UX</a><a href="concepts/cross-domain-graph.html">Cross-Domain Knowledge Graph</a><a href="concepts/audience-annotations.html">Audience-Specific Annotations</a><a href="concepts/provenance-chain.html">Provenance Chain</a><a href="concepts-v2/paper-amkd.html">🔬 AMKD (multimodal KD)</a><a href="concepts-v2/viz-heatmap-dendrogram.html">📊 Heatmap + Dendrogram</a><a href="upload-data.html">🛠 Upload Your Data</a></div></details>
+        </nav>
+        <div class="ribbon-actions">
+          <button id="ribbon-theme-toggle" class="ribbon-icon-btn" aria-label="Toggle theme"><span id="ribbon-theme-icon">🌙</span></button>
+          <a href="demos.html" class="ribbon-btn-primary">Get Started</a>
+        </div>
+      </div>
+    </header>
+    <div class="container">
+      <span class="badge">Science Hub &middot; Bioinformatics</span>
+      <h1>Cheminformatics</h1>
+      <div class="hero">
+        <svg viewBox="0 0 1000 220" preserveAspectRatio="xMidYMid slice">
+          <g opacity="0.08" stroke="#f59e0b" stroke-width="0.5"><line x1="0" y1="40" x2="1000" y2="40"/><line x1="0" y1="80" x2="1000" y2="80"/><line x1="0" y1="120" x2="1000" y2="120"/><line x1="0" y1="160" x2="1000" y2="160"/></g>
+          <g font-family="SF Mono, monospace" font-size="12" font-weight="700" text-anchor="middle"><text x="30" y="40" fill="#f59e0b">A</text><text x="55" y="40" fill="#f59e0b">C</text><text x="80" y="40" fill="#ef4444">G</text><text x="105" y="40" fill="#3b82f6">T</text><text x="130" y="40" fill="#f59e0b">A</text><text x="155" y="40" fill="#f59e0b">C</text><text x="30" y="80" fill="#f59e0b">A</text><text x="55" y="80" fill="#f59e0b">C</text><text x="80" y="80" fill="#ef4444">G</text><text x="105" y="80" fill="#3b82f6">T</text><text x="30" y="120" fill="#3b82f6">T</text><text x="55" y="120" fill="#f59e0b">A</text><text x="80" y="120" fill="#f59e0b">C</text><text x="105" y="120" fill="#ef4444">G</text><text x="130" y="120" fill="#3b82f6">T</text><text x="30" y="160" fill="#ef4444">G</text><text x="55" y="160" fill="#3b82f6">T</text><text x="80" y="160" fill="#f59e0b">A</text><text x="105" y="160" fill="#f59e0b">C</text></g>
+          <line x1="20" y1="50" x2="160" y2="50" stroke="#f59e0b" stroke-width="0.5" opacity="0.3"/><line x1="20" y1="90" x2="115" y2="90" stroke="#06b6d4" stroke-width="0.5" opacity="0.3"/><line x1="20" y1="130" x2="140" y2="130" stroke="#8b5cf6" stroke-width="0.5" opacity="0.3"/><line x1="20" y1="170" x2="115" y2="170" stroke="#ec4899" stroke-width="0.5" opacity="0.3"/>
+          <text x="200" y="110" font-size="11" fill="#f59e0b" font-family="SF Mono">MSA</text>
+          <g transform="translate(280, 60)" opacity="0.7"><circle cx="0" cy="0" r="8" fill="#f59e0b"/><circle cx="40" cy="-30" r="6" fill="#06b6d4"/><circle cx="-40" cy="-30" r="6" fill="#8b5cf6"/><circle cx="60" cy="20" r="5" fill="#ec4899"/><circle cx="-60" cy="20" r="5" fill="#f59e0b"/><line x1="0" y1="0" x2="40" y2="-30" stroke="rgba(255,255,255,0.3)"/><line x1="0" y1="0" x2="-40" y2="-30" stroke="rgba(255,255,255,0.3)"/><line x1="0" y1="0" x2="60" y2="20" stroke="rgba(255,255,255,0.3)"/><line x1="0" y1="0" x2="-60" y2="20" stroke="rgba(255,255,255,0.3)"/><line x1="40" y1="-30" x2="60" y2="20" stroke="rgba(255,255,255,0.2)"/><line x1="-40" y1="-30" x2="-60" y2="20" stroke="rgba(255,255,255,0.2)"/></g>
+          <text x="400" y="110" font-size="11" fill="#06b6d4" font-family="SF Mono">→ Phylogenetic tree</text>
+          <g transform="translate(650, 60)" opacity="0.7"><line x1="0" y1="40" x2="-40" y2="-10" stroke="#f59e0b" stroke-width="1.5"/><line x1="0" y1="40" x2="40" y2="-10" stroke="#06b6d4" stroke-width="1.5"/><line x1="-40" y1="-10" x2="-60" y2="-40" stroke="#8b5cf6" stroke-width="1"/><line x1="40" y1="-10" x2="20" y2="-40" stroke="#ec4899" stroke-width="1"/><line x1="40" y1="-10" x2="60" y2="-40" stroke="#f59e0b" stroke-width="1"/><circle cx="0" cy="40" r="3" fill="#f59e0b"/><circle cx="-40" cy="-10" r="3" fill="#06b6d4"/><circle cx="40" cy="-10" r="3" fill="#06b6d4"/></g>
+          <g opacity="0.4" fill="#f59e0b"><circle cx="80" cy="200" r="1"/><circle cx="380" cy="200" r="1"/><circle cx="680" cy="200" r="1"/><circle cx="900" cy="200" r="1"/></g>
+        </svg>
+        <div class="hero-text">
+          <p class="h-tag">Bioinformatics &middot; sequence to structure</p>
+          <p class="h-title">SMILES &rarr; Molecule &rarr; Property &rarr; Reaction</p>
+          <p class="h-sub">BLAST, alignment, phylogenetics, structural cheminformatics.</p>
+        </div>
+      </div>
+      <p class="lead">Modern AI for cheminformatics — SMILES/InChI parsing, molecular property prediction, retrosynthesis, reaction classification. Inspired by the public research ecosystem (RDKit, GNoME, DeepChem, ChemFormer). <a href="feeds.html?domain=chemistry" style="display: inline-flex; align-items: center; gap: 4px; margin-left: 6px; padding: 3px 12px; border-radius: 9999px; background: linear-gradient(90deg, rgba(6,182,212,0.15), rgba(139,92,246,0.15)); border: 1px solid rgba(6,182,212,0.4); color: #06b6d4; text-decoration: none; font-size: 12px; font-weight: 600;">📡 Cheminformatics feeds &rarr;</a></p>
+      <div class="cards">
+        <a class="card" href="science/chemistry/organic.html"><span class="tag">Demo card</span><h2>SMILES Parser</h2><p>Parse SMILES notation into molecular graph. 6-language polyglot code. ClickForDemo pattern with Math/Code/Observe tabs.</p><span class="tools">Tools: SMILES, InChI, graph GNN</span></a>
+        <a class="card" href="science/chemistry/inorganic.html"><span class="tag">Demo card</span><h2>CIF Parser</h2><p>Crystallographic Information File parser. Extract space group, unit cell, fractional coordinates.</p><span class="tools">Tools: CIF, VASP, GNoME</span></a>
+        <a class="card" href="science/chemistry/computational.html"><span class="tag">Demo card</span><h2>Molecular Dynamics</h2><p>Velocity-Verlet integrator. Simulate molecular trajectories, force-field evaluation.</p><span class="tools">Tools: Verlet, OpenMM, xTB</span></a>
+        <a class="card" href="demos.html"><span class="tag">Coming soon</span><h2>Molecular Property Prediction</h2><p>Graph neural network for predicting solubility, toxicity, drug-likeness from SMILES. Pyodide + RDKit.</p><span class="tools">Tools: RDKit, GNN, Pyodide</span></a>
+        <a class="card" href="demos.html"><span class="tag">Coming soon</span><h2>Retrosynthesis</h2><p>Target molecule → reactant tree. GNN-based reaction prediction. Visualise the synthesis tree.</p><span class="tools">Tools: ChemFormer, GNN, SMILES</span></a>
+        <a class="card" href="demos.html"><span class="tag">Coming soon</span><h2>Reaction Classification</h2><p>Classify chemical reactions from SMILES reactants → products. GNN classifier with attention.</p><span class="tools">Tools: GNN, attention, SMILES</span></a>
+      </div>
+
+      <!-- Phase 38: 3D / N-D Molecule Viewer -->
+      <section style="margin-top: 32px;">
+        <p class="h-tag" style="color:#06b6d4;">Phase 38 · 3D / N-D Cheminformatics</p>
+        <h2 style="font-size: 22px; margin: 8px 0 12px; background: linear-gradient(90deg,#06b6d4,#8b5cf6); -webkit-background-clip: text; background-clip: text; color: transparent;">3D Molecule Viewer + N-D property projection</h2>
+        <p class="lead" style="font-size: 14px; max-width: 920px;">A pure client-side canvas renderer for 3D ball-and-stick molecules with CPK colours, animated rotation, pharmacophore overlay (HBD/HBA/HYD), 3D QSAR surface, and an N-D property strip. SMILES → naive 3D layout via a Fibonacci sphere — for demos; not a true conformer (use RDKit for production). Inspired by the Causal-Chemprop paper (ACS JCIM 2026) shown on LinkedIn — which pairs a Chemprop MPNN with a structural causal model for pIC50 prediction. Toggle the layers below to explore.</p>
+
+        <div style="display: grid; grid-template-columns: 1fr 320px; gap: 16px; margin-top: 16px;">
+          <div id="chem-mol3d-container"></div>
+          <div style="background: rgba(18,24,38,0.7); border: 1px solid rgba(139,92,246,0.25); border-radius: 12px; padding: 16px; backdrop-filter: blur(12px);">
+            <h3 style="margin: 0 0 12px; color: #06b6d4; font-size: 14px; text-transform: uppercase; letter-spacing: 0.08em;">Demo molecules</h3>
+            <p style="font-size: 11px; color: #9ca3af; margin: 0 0 12px;">Click to load into the 3D viewer. Each has SMILES, computed properties (logP, MW, TPSA, HBD, HBA, rotatable bonds), and pharmacophore features.</p>
+            <ul id="chem-mol-list" style="list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 6px;">
+              <li data-id="aspirin" style="padding: 8px 10px; border-radius: 6px; background: rgba(11,15,26,0.6); border: 1px solid var(--border); cursor: pointer; font-size: 12px;"><strong style="color: #06b6d4;">Aspirin</strong> <span style="color: #9ca3af; font-family: ui-monospace;">CC(=O)Oc1ccccc1C(=O)O</span></li>
+              <li data-id="caffeine" style="padding: 8px 10px; border-radius: 6px; background: rgba(11,15,26,0.6); border: 1px solid var(--border); cursor: pointer; font-size: 12px;"><strong style="color: #06b6d4;">Caffeine</strong> <span style="color: #9ca3af; font-family: ui-monospace;">CN1C=NC2=C1C(=O)N(C(=O)N2C)C</span></li>
+              <li data-id="ibuprofen" style="padding: 8px 10px; border-radius: 6px; background: rgba(11,15,26,0.6); border: 1px solid var(--border); cursor: pointer; font-size: 12px;"><strong style="color: #06b6d4;">Ibuprofen</strong> <span style="color: #9ca3af; font-family: ui-monospace;">CC(C)Cc1ccc(C(C)C(=O)O)cc1</span></li>
+              <li data-id="ethanol" style="padding: 8px 10px; border-radius: 6px; background: rgba(11,15,26,0.6); border: 1px solid var(--border); cursor: pointer; font-size: 12px;"><strong style="color: #06b6d4;">Ethanol</strong> <span style="color: #9ca3af; font-family: ui-monospace;">CCO</span></li>
+              <li data-id="glucose" style="padding: 8px 10px; border-radius: 6px; background: rgba(11,15,26,0.6); border: 1px solid var(--border); cursor: pointer; font-size: 12px;"><strong style="color: #06b6d4;">D-Glucose</strong> <span style="color: #9ca3af; font-family: ui-monospace;">OC[C@H]1OC(O)[C@H](O)[C@@H](O)[C@@H]1O</span></li>
+              <li data-id="benzene" style="padding: 8px 10px; border-radius: 6px; background: rgba(11,15,26,0.6); border: 1px solid var(--border); cursor: pointer; font-size: 12px;"><strong style="color: #06b6d4;">Benzene</strong> <span style="color: #9ca3af; font-family: ui-monospace;">c1ccccc1</span></li>
+            </ul>
+            <div style="margin-top: 16px; padding-top: 12px; border-top: 1px solid var(--border);">
+              <h3 style="margin: 0 0 8px; color: #06b6d4; font-size: 12px; text-transform: uppercase; letter-spacing: 0.08em;">Layer toggles</h3>
+              <p style="font-size: 11px; color: #9ca3af; margin: 0;">Use the buttons on the molecule card: <strong>🎯 Pharm</strong> overlays H-bond donor/acceptor + hydrophobic features. <strong>⛰ QSAR</strong> renders a 3D wireframe surface coloured by the active property. <strong>N-D</strong> shows the parallel-coordinates property strip (logP · MW · TPSA · HBD · HBA · rotatable bonds).</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Phase 38: Causal-Chemprop demo (inspired by ACS JCIM 2026 paper) -->
+      <section style="margin-top: 32px; background: rgba(18,24,38,0.6); border: 1px solid rgba(139,92,246,0.25); border-radius: 16px; padding: 24px; backdrop-filter: blur(12px);">
+        <p class="h-tag" style="color:#8b5cf6;">Phase 38 · Causal inference × MPNN</p>
+        <h2 style="font-size: 22px; margin: 8px 0 12px; background: linear-gradient(90deg,#8b5cf6,#ec4899); -webkit-background-clip: text; background-clip: text; color: transparent;">Causal-Chemprop: structural causal model × MPNN for pIC50</h2>
+        <p class="lead" style="font-size: 14px; max-width: 920px;">Inspired by the LinkedIn post on the ACS JCIM 2026 paper "Causal-Chemprop" — which augments the Chemprop message-passing neural network (MPNN) with a structural causal model (SCM) for molecular property prediction. The anchor + test molecules are conditionally intervened on (do-calculus), which improves pIC50 prediction accuracy on kinases like ABL (0.45 → 0.56), BCR-ABL, and others. The demo below shows the 5-step causal pipeline; each step has Math → Code annotations (6-language polyglot in the concept card).</p>
+
+        <div style="display: grid; grid-template-columns: repeat(5, 1fr); gap: 8px; margin-top: 16px;">
+          <div style="padding: 12px; background: rgba(11,15,26,0.6); border: 1px solid var(--border); border-radius: 8px; text-align: center;">
+            <div style="font-size: 22px; color: #06b6d4;">⚓</div>
+            <div style="font-size: 11px; color: #9ca3af; margin-top: 4px;">Step 1</div>
+            <div style="font-size: 12px; color: #f3f4f6; font-weight: 600; margin-top: 4px;">Anchor molecules</div>
+            <div style="font-size: 10px; color: #6b7280; margin-top: 4px;">High-confidence actives (IC<sub>50</sub> &lt; 100 nM)</div>
+          </div>
+          <div style="padding: 12px; background: rgba(11,15,26,0.6); border: 1px solid var(--border); border-radius: 8px; text-align: center;">
+            <div style="font-size: 22px; color: #8b5cf6;">🧬</div>
+            <div style="font-size: 11px; color: #9ca3af; margin-top: 4px;">Step 2</div>
+            <div style="font-size: 12px; color: #f3f4f6; font-weight: 600; margin-top: 4px;">Chemprop MPNN</div>
+            <div style="font-size: 10px; color: #6b7280; margin-top: 4px;">Message passing over molecular graph</div>
+          </div>
+          <div style="padding: 12px; background: rgba(11,15,26,0.6); border: 1px solid var(--border); border-radius: 8px; text-align: center;">
+            <div style="font-size: 22px; color: #ec4899;">🔀</div>
+            <div style="font-size: 11px; color: #9ca3af; margin-top: 4px;">Step 3</div>
+            <div style="font-size: 12px; color: #f3f4f6; font-weight: 600; margin-top: 4px;">SCM conditioning</div>
+            <div style="font-size: 10px; color: #6b7280; margin-top: 4px;">Condition on anchor scaffold</div>
+          </div>
+          <div style="padding: 12px; background: rgba(11,15,26,0.6); border: 1px solid var(--border); border-radius: 8px; text-align: center;">
+            <div style="font-size: 22px; color: #f59e0b;">⚙️</div>
+            <div style="font-size: 11px; color: #9ca3af; margin-top: 4px;">Step 4</div>
+            <div style="font-size: 12px; color: #f3f4f6; font-weight: 600; margin-top: 4px;">do-calculus</div>
+            <div style="font-size: 10px; color: #6b7280; margin-top: 4px;">Intervene on R-group substituents</div>
+          </div>
+          <div style="padding: 12px; background: rgba(11,15,26,0.6); border: 1px solid var(--border); border-radius: 8px; text-align: center;">
+            <div style="font-size: 22px; color: #10b981;">📈</div>
+            <div style="font-size: 11px; color: #9ca3af; margin-top: 4px;">Step 5</div>
+            <div style="font-size: 12px; color: #f3f4f6; font-weight: 600; margin-top: 4px;">pIC50 lift</div>
+            <div style="font-size: 10px; color: #6b7280; margin-top: 4px;">ABL: 0.45 → 0.56 · BCR-ABL: 0.51 → 0.63</div>
+          </div>
+        </div>
+
+        <details style="margin-top: 16px;">
+          <summary style="font-size: 13px; color: #06b6d4; cursor: pointer; font-weight: 600;">Show the 5-step Math → Code derivation</summary>
+          <div style="margin-top: 12px; padding: 12px; background: rgba(11,15,26,0.7); border-radius: 8px; font-family: ui-monospace, SF Mono, Menlo, monospace; font-size: 11px; line-height: 1.6; color: #f3f4f6;">
+            <div style="color: #06b6d4;">Step 1 — Anchor selection:</div>
+            <div>A = {(m, IC<sub>50</sub>) : IC<sub>50</sub>(m) &lt; 100 nM, confidence(m) &gt; 0.9}</div>
+            <div style="color: #6b7280; margin-top: 4px;">// High-confidence actives form the anchor set A.</div>
+            <br/>
+            <div style="color: #8b5cf6;">Step 2 — MPNN message passing (Chemprop):</div>
+            <div>h<sub>v</sub><sup>(k+1)</sup> = σ(W<sub>k</sub> Σ<sub>u ∈ N(v)</sub> h<sub>u</sub><sup>(k)</sup> + b<sub>k</sub>)</div>
+            <div style="color: #6b7280; margin-top: 4px;">// Update atom features h by aggregating neighbours' features.</div>
+            <br/>
+            <div style="color: #ec4899;">Step 3 — SCM conditioning:</div>
+            <div>P(Y | do(X), A) ≠ P(Y | X, A) — back-door adjustment</div>
+            <div style="color: #6b7280; margin-top: 4px;">// Condition on the anchor scaffold to block confounding paths.</div>
+            <br/>
+            <div style="color: #f59e0b;">Step 4 — do-calculus intervention:</div>
+            <div>do(X = x<sub>R</sub>) — replace R-group substituents with test values</div>
+            <div style="color: #6b7280; margin-top: 4px;">// Counterfactual: "what if we set R-group to test value?"</div>
+            <br/>
+            <div style="color: #10b981;">Step 5 — pIC50 prediction lift:</div>
+            <div>pIC<sub>50</sub> = -log<sub>10</sub>(IC<sub>50</sub> × 10<sup>-9</sup>)  ·  Δ = ŷ<sub>causal</sub> − ŷ<sub>MPNN</sub></div>
+            <div style="color: #6b7280; margin-top: 4px;">// ABL: 0.45 → 0.56 (r²) · BCR-ABL: 0.51 → 0.63 · c-KIT: 0.48 → 0.59</div>
+          </div>
+        </details>
+
+        <p style="font-size: 11px; color: #6b7280; margin-top: 16px;">References: Causal-Chemprop, ACS J. Chem. Inf. Model. 2026. Chemprop (Yang et al. 2019). Structural causal models (Pearl 2009). The concept card at <a href="concepts/digest-causal-chemprop.html" style="color: #06b6d4;">concepts/digest-causal-chemprop.html</a> has the 6-language polyglot code (Python / Rust / Go / C / Elixir / Scala).</p>
+      </section>
+
+      <!-- Phase 40: Scientific File Uploader — drop PDB/SDF/CSV/Parquet/Arrow/HDF5/HDFS/etc -->
+      <section style="margin-top: 32px;">
+        <p class="h-tag" style="color:#06b6d4;">Phase 40 · Scientific + Big-Data File Uploader</p>
+        <h2 style="font-size: 22px; margin: 8px 0 12px; background: linear-gradient(90deg,#06b6d4,#a855f7); -webkit-background-clip: text; background-clip: text; color: transparent;">Drop your molecule / data → live 3D view + parsed stats</h2>
+        <p class="lead" style="font-size: 14px; max-width: 920px;">Drop a <code>.pdb</code>, <code>.sdf</code>, <code>.mol</code>, <code>.cif</code> file to see real 3D coordinates rendered in the molecule-3d viewer above (no SMILES needed). Also accepts big-data + scientific formats — <code>.csv</code>, <code>.tsv</code>, <code>.parquet</code>, <code>.arrow</code>, <code>.feather</code>, <code>.h5</code>/<code>.hdf5</code>, <code>.nc</code>/<code>.netcdf</code>, <code>.npy</code>/<code>.npz</code>, <code>.mat</code>, <code>.fits</code>, <code>.vtk</code>, <code>.json</code>, <code>.hdfs</code>. Pure client-side. Nothing leaves the browser.</p>
+        <div id="chem-uploader-container"></div>
+        <p style="font-size: 11px; color: #6b7280; margin-top: 8px;">Magic-bytes detection (PAR1 / ARROW1 / \x89HDF\r\n\x1A\n / \x93NUMPY / SEQ) means the right parser is chosen automatically by file content — even if the extension is wrong. The uploader registers molecule-3d as a downstream consumer: any parsed <code>kind: 'molecule'</code> result is automatically pushed into the viewer above.</p>
+      </section>
+      
+      <!-- Simplified footer — GDPR + HIPAA + MIT license + GitHub Pages note -->
+      <div style="margin-top: 40px; padding: 16px 20px; background: rgba(11,15,26,0.6); border: 1px solid var(--border); border-radius: 10px; font-size: 11px; color: var(--text-muted); line-height: 1.6;">
+        <div style="display: flex; gap: 16px; flex-wrap: wrap; margin-bottom: 8px;">
+          <span style="color: var(--accent);">📜 MIT License</span>
+          <span style="color: var(--accent-2);">🔒 GDPR Compliant</span>
+          <span style="color: var(--accent-2);">🏥 HIPAA Ready</span>
+          <span style="color: var(--accent);">📊 SOC 2 Aligned</span>
+        </div>
+        <p style="margin: 8px 0;">© 2026 AIHPC Advanced. All rights reserved. · Contact: <a href="mailto:testdemoqwenai2025@gmail.com" style="color: #06b6d4;">testdemoqwenai2025@gmail.com</a></p>
+        <p style="margin: 4px 0; font-size: 10px; color: var(--text-muted);">Data protection: no personal data · no cookies · no tracking · all computations client-side (lazy evaluation) <a href="mailto:testdemoqwenai2025@gmail.com" style="color: var(--accent-2);">testdemoqwenai2025@gmail.com</a></p>
+      </div>
+
+      <div class="meta"><p>&copy; 2026 AIHPC Advanced. &middot; <code>/docs/science-cheminformatics.html</code>. Next.js: <code>/science/cheminformatics</code>. Comments to <a href="mailto:testdemoqwenai2025@gmail.com">testdemoqwenai2025@gmail.com</a>.</p></div>
+    </div>
+    <script>
+      
+      (function(){const K='aihpc-theme';const b=document.body,r=document.querySelector('.ribbon'),i=document.getElementById('ribbon-theme-icon');function a(t){if(t==='light'){b.classList.add('light');r&&r.classList.add('light');i.textContent='☀'}else{b.classList.remove('light');r&&r.classList.remove('light');i.textContent='🌙'}}let d='dark';try{const s=localStorage.getItem(K);if(s==='light'||s==='dark')d=s;else if(matchMedia('(prefers-color-scheme:light)').matches)d='light'}catch(e){}a(d);document.getElementById('ribbon-theme-toggle').addEventListener('click',()=>{const n=b.classList.contains('light')?'dark':'light';a(n);try{localStorage.setItem(K,n)}catch(e){}})})();
+
+      // Phase 38: 3D molecule viewer — register demo molecules + auto-play
+      document.addEventListener('DOMContentLoaded', function () {
+        if (!window.AIHPC_MOL3D) return;
+        AIHPC_MOL3D.mount('chem-mol3d-container');
+        // Phase 40: register molecule-3d as a consumer of the scientific-uploader
+        if (window.AIHPC_UPLOADER) {
+          AIHPC_UPLOADER.registerConsumer('molecule-3d', function (parsed, fileName) {
+            if (parsed.kind !== 'molecule') return;
+            AIHPC_MOL3D.register('chem-mol3d-container', 'uploaded-' + fileName, {
+              id: 'uploaded-' + fileName,
+              smiles: '(uploaded ' + parsed.format.toUpperCase() + ')',
+              name: fileName + ' (' + parsed.atoms.length + ' atoms)',
+              atoms: parsed.atoms.map(function (a) {
+                return {
+                  element: a.element,
+                  x: a.x - 0, y: a.y - 0, z: a.z - 0,
+                  r: 0.18,
+                  color: undefined,
+                  label: a.element,
+                };
+              }),
+              bonds: parsed.bonds,
+              properties: { atoms: parsed.atoms.length, bonds: parsed.bonds.length, format: parsed.format },
+              landscapeProperty: 'atoms',
+              caption: 'Uploaded ' + parsed.format.toUpperCase() + ' file — ' + parsed.atoms.length + ' atoms + ' + parsed.bonds.length + ' bonds. Real coordinates; no SMILES.',
+            });
+            AIHPC_MOL3D.setActive('chem-mol3d-container', 'uploaded-' + fileName);
+            AIHPC_MOL3D.play('chem-mol3d-container');
+          });
+        }
+        AIHPC_MOL3D.register('chem-mol3d-container', 'aspirin', {
+          id: 'aspirin',
+          smiles: 'CC(=O)Oc1ccccc1C(=O)O',
+          name: 'Acetylsalicylic acid (Aspirin)',
+          properties: { logP: 1.31, MW: 180.16, TPSA: 63.6, HBD: 1, HBA: 4, rotatable: 3, rings: 1 },
+          landscapeProperty: 'logP',
+          caption: 'NSAID — cyclooxygenase inhibitor. MW 180, logP 1.31, 1 HBD, 4 HBA.',
+        });
+        AIHPC_MOL3D.register('chem-mol3d-container', 'caffeine', {
+          id: 'caffeine',
+          smiles: 'CN1C=NC2=C1C(=O)N(C(=O)N2C)C',
+          name: 'Caffeine',
+          properties: { logP: -0.07, MW: 194.19, TPSA: 58.4, HBD: 0, HBA: 6, rotatable: 0, rings: 2 },
+          landscapeProperty: 'logP',
+          caption: 'Adenosine receptor antagonist. Two fused rings, no HBD.',
+        });
+        AIHPC_MOL3D.register('chem-mol3d-container', 'ibuprofen', {
+          id: 'ibuprofen',
+          smiles: 'CC(C)Cc1ccc(C(C)C(=O)O)cc1',
+          name: 'Ibuprofen',
+          properties: { logP: 3.97, MW: 206.28, TPSA: 37.3, HBD: 1, HBA: 2, rotatable: 4, rings: 1 },
+          landscapeProperty: 'logP',
+          caption: 'NSAID — COX-2 inhibitor. High logP (3.97) — high plasma protein binding.',
+        });
+        AIHPC_MOL3D.register('chem-mol3d-container', 'ethanol', {
+          id: 'ethanol',
+          smiles: 'CCO',
+          name: 'Ethanol',
+          properties: { logP: -0.14, MW: 46.07, TPSA: 20.2, HBD: 1, HBA: 1, rotatable: 0, rings: 0 },
+          landscapeProperty: 'logP',
+          caption: 'Simple alcohol. GABA-A modulator. logP negative — freely water-soluble.',
+        });
+        AIHPC_MOL3D.register('chem-mol3d-container', 'glucose', {
+          id: 'glucose',
+          smiles: 'OC[C@H]1OC(O)[C@H](O)[C@@H](O)[C@@H]1O',
+          name: 'D-Glucose',
+          properties: { logP: -3.0, MW: 180.16, TPSA: 110.4, HBD: 5, HBA: 6, rotatable: 1, rings: 1 },
+          landscapeProperty: 'logP',
+          caption: 'Pyranose ring. 5 HBD, 6 HBA — extremely hydrophilic (logP -3.0).',
+        });
+        AIHPC_MOL3D.register('chem-mol3d-container', 'benzene', {
+          id: 'benzene',
+          smiles: 'c1ccccc1',
+          name: 'Benzene',
+          properties: { logP: 2.0, MW: 78.11, TPSA: 0.0, HBD: 0, HBA: 0, rotatable: 0, rings: 1 },
+          landscapeProperty: 'logP',
+          caption: 'Aromatic ring — prototypical π-system.',
+        });
+        AIHPC_MOL3D.setActive('chem-mol3d-container', 'aspirin');
+        AIHPC_MOL3D.play('chem-mol3d-container');
+
+        // Wire molecule list clicks
+        var list = document.getElementById('chem-mol-list');
+        if (list) {
+          list.addEventListener('click', function (e) {
+            var li = e.target.closest('li');
+            if (!li) return;
+            var id = li.dataset.id;
+            AIHPC_MOL3D.setActive('chem-mol3d-container', id);
+            list.querySelectorAll('li').forEach(function (l) { l.style.borderColor = 'var(--border)'; l.style.background = 'rgba(11,15,26,0.6)'; });
+            li.style.borderColor = '#06b6d4';
+            li.style.background = 'rgba(6,182,212,0.08)';
+          });
+          list.querySelector('li').style.borderColor = '#06b6d4';
+          list.querySelector('li').style.background = 'rgba(6,182,212,0.08)';
+        }
+      });
+
+      // Phase 40: mount scientific file uploader
+      if (window.AIHPC_UPLOADER) {
+        AIHPC_UPLOADER.mount('chem-uploader-container');
+      }
+    </script>
+    <script src="molecule-3d.js"></script>
+    <script src="scientific-uploader.js"></script>
+  <script src="header-banner.js"></script>
+    <script src="accessibility.js"></script>
+    <script src="particle-bg.js"></script>
+    <script src="mobile-touch-polyfill.js"></script>
+  </body>
+</html>

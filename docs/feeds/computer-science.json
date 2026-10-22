@@ -1,0 +1,2757 @@
+{
+  "domain": "computer-science",
+  "generated_at": "2026-10-22T06:29:11.265764Z",
+  "total_entries": 275,
+  "entries": [
+    {
+      "title": "MIT’s new lidar chip could give self-driving cars a wider view",
+      "link": "https://www.sciencedaily.com/releases/2026/07/260722032127.htm",
+      "summary": "MIT engineers have found a way to give chip-based lidar a wider, clearer view without relying on moving parts. Their design uses differently shaped antennas that can sit close together without scrambling one another’s signals. In tests, the system sharply reduced interference while steering a single",
+      "published": "Wed, 22 Jul 2026 06:00:54 EDT",
+      "guid": "https://www.sciencedaily.com/releases/2026/07/260722032127.htm",
+      "feed_id": "science-daily-cs",
+      "journal": "Science Daily",
+      "domain": "computer-science"
+    },
+    {
+      "title": "Quantum breakthrough could revolutionize teleportation and computing",
+      "link": "https://www.sciencedaily.com/releases/2026/05/260513034640.htm",
+      "summary": "Scientists in Japan have developed a new way to instantly detect elusive quantum “W states,” a major milestone for quantum technology. The breakthrough could help unlock faster quantum communication, teleportation, and powerful new computing systems.",
+      "published": "Wed, 13 May 2026 03:55:23 EDT",
+      "guid": "https://www.sciencedaily.com/releases/2026/05/260513034640.htm",
+      "feed_id": "science-daily-cs",
+      "journal": "Science Daily",
+      "domain": "computer-science"
+    },
+    {
+      "title": "New quantum algorithm solves “impossible” materials problem in seconds",
+      "link": "https://www.sciencedaily.com/releases/2026/05/260512202355.htm",
+      "summary": "A new quantum-inspired algorithm has cracked a problem so massive that conventional supercomputers struggle to even approach it. Researchers used the method to simulate extraordinarily complex quantum materials known as quasicrystals, opening the door to powerful new quantum devices and ultra-effici",
+      "published": "Wed, 13 May 2026 03:33:27 EDT",
+      "guid": "https://www.sciencedaily.com/releases/2026/05/260512202355.htm",
+      "feed_id": "science-daily-cs",
+      "journal": "Science Daily",
+      "domain": "computer-science"
+    },
+    {
+      "title": "Harvard scientists turn a silicon chip into a DNA writing machine",
+      "link": "https://www.sciencedaily.com/releases/2026/07/260708022202.htm",
+      "summary": "Scientists have created a silicon chip that can write dozens of DNA sequences simultaneously using electricity and water-based enzymes, offering a cleaner alternative to conventional DNA manufacturing. The breakthrough could eventually support portable DNA-writing devices and even massive DNA data s",
+      "published": "Wed, 08 Jul 2026 22:48:06 EDT",
+      "guid": "https://www.sciencedaily.com/releases/2026/07/260708022202.htm",
+      "feed_id": "science-daily-cs",
+      "journal": "Science Daily",
+      "domain": "computer-science"
+    },
+    {
+      "title": "New AI model reveals how neutron star mergers forge heavy elements",
+      "link": "https://www.sciencedaily.com/releases/2026/06/260626030426.htm",
+      "summary": "Researchers have created an AI-based simulation that makes it much faster to model how neutron star mergers produce many of the universe's heaviest elements. The new tool could improve predictions of these powerful explosions while helping scientists better connect observations in space with experim",
+      "published": "Wed, 08 Jul 2026 00:07:40 EDT",
+      "guid": "https://www.sciencedaily.com/releases/2026/06/260626030426.htm",
+      "feed_id": "science-daily-cs",
+      "journal": "Science Daily",
+      "domain": "computer-science"
+    },
+    {
+      "title": "Quantum computers keep losing data. This breakthrough finally tracks it",
+      "link": "https://www.sciencedaily.com/releases/2026/04/260407193857.htm",
+      "summary": "Quantum computers struggle with a major flaw: their information vanishes unpredictably. Scientists have now created a new method that can measure this loss over 100 times faster than before. By tracking changes in near real time, researchers can finally see what’s going wrong inside these systems. T",
+      "published": "Wed, 08 Apr 2026 01:02:44 EDT",
+      "guid": "https://www.sciencedaily.com/releases/2026/04/260407193857.htm",
+      "feed_id": "science-daily-cs",
+      "journal": "Science Daily",
+      "domain": "computer-science"
+    },
+    {
+      "title": "AI-powered spectrometer chip shrinks lab technology to the size of a grain of sand",
+      "link": "https://www.sciencedaily.com/releases/2026/05/260525000501.htm",
+      "summary": "A new AI-powered chip from UC Davis can analyze light and chemicals using a device tiny enough to fit almost anywhere. By combining smart silicon sensors with machine learning, it achieves lab-style spectral analysis without the bulky equipment.",
+      "published": "Tue, 26 May 2026 09:09:27 EDT",
+      "guid": "https://www.sciencedaily.com/releases/2026/05/260525000501.htm",
+      "feed_id": "science-daily-cs",
+      "journal": "Science Daily",
+      "domain": "computer-science"
+    },
+    {
+      "title": "Physicists just turned glass into a powerful quantum security device",
+      "link": "https://www.sciencedaily.com/releases/2026/03/260324024255.htm",
+      "summary": "Scientists have turned simple glass into a powerful quantum communication device that could safeguard data against future quantum attacks. The chip combines stability, speed, and versatility—handling both ultra-secure encryption and record-breaking random number generation in one compact system.",
+      "published": "Tue, 24 Mar 2026 03:43:30 EDT",
+      "guid": "https://www.sciencedaily.com/releases/2026/03/260324024255.htm",
+      "feed_id": "science-daily-cs",
+      "journal": "Science Daily",
+      "domain": "computer-science"
+    },
+    {
+      "title": "New programmable photonic chip can control how fast light moves",
+      "link": "https://www.sciencedaily.com/releases/2026/07/260718010149.htm",
+      "summary": "Scientists have created a programmable optical chip that can slow light on demand, giving engineers far greater control over how optical signals propagate through a circuit. The technology could provide the delays, synchronization, and buffering functions needed to make light-based computing more pr",
+      "published": "Tue, 21 Jul 2026 22:43:34 EDT",
+      "guid": "https://www.sciencedaily.com/releases/2026/07/260718010149.htm",
+      "feed_id": "science-daily-cs",
+      "journal": "Science Daily",
+      "domain": "computer-science"
+    },
+    {
+      "title": "Quantum systems can remember and forget at the same time, scientists discover",
+      "link": "https://www.sciencedaily.com/releases/2026/04/260413043150.htm",
+      "summary": "Quantum systems can secretly “remember” their past—even when they appear not to. Scientists found that whether a system shows memory depends on how you look at it: through its evolving state or its measurable properties. Each perspective uncovers different kinds of memory, meaning a system can seem",
+      "published": "Tue, 14 Apr 2026 01:55:52 EDT",
+      "guid": "https://www.sciencedaily.com/releases/2026/04/260413043150.htm",
+      "feed_id": "science-daily-cs",
+      "journal": "Science Daily",
+      "domain": "computer-science"
+    },
+    {
+      "title": "This new chip survives 1300°F (700°C) and could change AI forever",
+      "link": "https://www.sciencedaily.com/releases/2026/04/260406192904.htm",
+      "summary": "A team of engineers has created a breakthrough memory device that keeps working at temperatures hotter than molten lava, shattering one of electronics’ biggest limits. Built from an unusual stack of ultra-durable materials, the tiny component can store data and perform calculations even at 700°C (13",
+      "published": "Tue, 07 Apr 2026 01:32:38 EDT",
+      "guid": "https://www.sciencedaily.com/releases/2026/04/260406192904.htm",
+      "feed_id": "science-daily-cs",
+      "journal": "Science Daily",
+      "domain": "computer-science"
+    },
+    {
+      "title": "Scientists connect “time crystal” to real device in quantum breakthrough",
+      "link": "https://www.sciencedaily.com/releases/2026/05/260504154024.htm",
+      "summary": "A strange kind of matter that “ticks” forever without energy input has just taken a major leap toward real-world use. Known as a time crystal, this quantum system repeats its motion endlessly—like a clock that never winds down—and scientists have now managed to connect it to an external device for t",
+      "published": "Tue, 05 May 2026 16:53:45 EDT",
+      "guid": "https://www.sciencedaily.com/releases/2026/05/260504154024.htm",
+      "feed_id": "science-daily-cs",
+      "journal": "Science Daily",
+      "domain": "computer-science"
+    },
+    {
+      "title": "New light-powered chip could accelerate AI and quantum computing",
+      "link": "https://www.sciencedaily.com/releases/2026/06/260601025343.htm",
+      "summary": "Scientists have created a tiny chip that can generate, steer, and read light-based information all in one device, marking a major leap toward ultra-fast, energy-efficient computing. The breakthrough uses atomically thin materials and nanoscale structures to control a unique quantum property of light",
+      "published": "Tue, 02 Jun 2026 00:30:26 EDT",
+      "guid": "https://www.sciencedaily.com/releases/2026/06/260601025343.htm",
+      "feed_id": "science-daily-cs",
+      "journal": "Science Daily",
+      "domain": "computer-science"
+    },
+    {
+      "title": "Scientists just overturned a century-old physics assumption",
+      "link": "https://www.sciencedaily.com/releases/2026/09/260901010659.htm",
+      "summary": "Scientists at Carnegie Mellon University have discovered an unexpected form of the Hall effect, overturning the long-held assumption that this electrical response only appears when a magnetic field points perpendicular to a material. Beyond expanding a century-old principle of physics, the finding c",
+      "published": "Tue, 01 Sep 2026 01:06:59 EDT",
+      "guid": "https://www.sciencedaily.com/releases/2026/09/260901010659.htm",
+      "feed_id": "science-daily-cs",
+      "journal": "Science Daily",
+      "domain": "computer-science"
+    },
+    {
+      "title": "Scientists switch on a strange new form of magnetism in an ultrathin material",
+      "link": "https://www.sciencedaily.com/releases/2026/08/260826055454.htm",
+      "summary": "Scientists have found a surprising way to potentially switch on an unusual form of magnetism in ruthenium dioxide, a material that normally appears nonmagnetic. When the material was made into an ultrathin film only a few atomic layers thick and placed under strain, its electrons developed patterns",
+      "published": "Thu, 27 Aug 2026 05:23:20 EDT",
+      "guid": "https://www.sciencedaily.com/releases/2026/08/260826055454.htm",
+      "feed_id": "science-daily-cs",
+      "journal": "Science Daily",
+      "domain": "computer-science"
+    },
+    {
+      "title": "This new brain-like chip could slash AI energy use by 70%",
+      "link": "https://www.sciencedaily.com/releases/2026/04/260422044633.htm",
+      "summary": "A breakthrough in brain-inspired computing could make today’s energy-hungry AI systems far more efficient. Researchers have engineered a new nanoelectronic device using a modified form of hafnium oxide that mimics how neurons process and store information at the same time. Unlike conventional chips",
+      "published": "Thu, 23 Apr 2026 02:01:42 EDT",
+      "guid": "https://www.sciencedaily.com/releases/2026/04/260422044633.htm",
+      "feed_id": "science-daily-cs",
+      "journal": "Science Daily",
+      "domain": "computer-science"
+    },
+    {
+      "title": "SpaceX wants to build AI data centers in space. Will it work?",
+      "link": "https://www.sciencedaily.com/releases/2026/06/260618041501.htm",
+      "summary": "The race to build data centers in space is gaining momentum as AI drives unprecedented demand for computing power. Orbital facilities could tap into abundant solar energy and avoid many of the environmental challenges faced on Earth. Yet space remains a harsh and expensive place to operate, with maj",
+      "published": "Thu, 18 Jun 2026 23:43:09 EDT",
+      "guid": "https://www.sciencedaily.com/releases/2026/06/260618041501.htm",
+      "feed_id": "science-daily-cs",
+      "journal": "Science Daily",
+      "domain": "computer-science"
+    },
+    {
+      "title": "JWST’s mysterious little red dots may be black holes growing at incredible speeds",
+      "link": "https://www.sciencedaily.com/releases/2026/09/260917003703.htm",
+      "summary": "New supercomputer simulations suggest JWST’s puzzling Little Red Dots are rapidly growing black holes from the early Universe. Extreme radiation may have helped create unusually massive black hole seeds, while dense surrounding gas allowed them to grow dozens of times faster than black holes can tod",
+      "published": "Thu, 17 Sep 2026 08:45:48 EDT",
+      "guid": "https://www.sciencedaily.com/releases/2026/09/260917003703.htm",
+      "feed_id": "science-daily-cs",
+      "journal": "Science Daily",
+      "domain": "computer-science"
+    },
+    {
+      "title": "Tiny magnetic waves could unlock quantum computers the size of a penny",
+      "link": "https://www.sciencedaily.com/releases/2026/06/260626030431.htm",
+      "summary": "A major breakthrough in quantum technology has turned magnons, tiny magnetic waves once considered too short-lived for practical use, into promising carriers of quantum information. Researchers extended their lifetime by nearly 100 times, reaching up to 18 microseconds, and discovered that the main",
+      "published": "Thu, 02 Jul 2026 02:48:14 EDT",
+      "guid": "https://www.sciencedaily.com/releases/2026/06/260626030431.htm",
+      "feed_id": "science-daily-cs",
+      "journal": "Science Daily",
+      "domain": "computer-science"
+    },
+    {
+      "title": "Laser-powered wireless hits 360 Gbps and uses half the energy of Wi-Fi",
+      "link": "https://www.sciencedaily.com/releases/2026/04/260402042734.htm",
+      "summary": "A new breakthrough in wireless technology could dramatically boost internet speeds while cutting energy use—by switching from radio waves to light. Researchers have developed a tiny chip packed with dozens of miniature lasers that can transmit massive amounts of data simultaneously, reaching speeds",
+      "published": "Thu, 02 Apr 2026 15:58:03 EDT",
+      "guid": "https://www.sciencedaily.com/releases/2026/04/260402042734.htm",
+      "feed_id": "science-daily-cs",
+      "journal": "Science Daily",
+      "domain": "computer-science"
+    },
+    {
+      "title": "This new qubit could be 100 times less error-prone in superfluid quantum computer breakthrough",
+      "link": "https://www.sciencedaily.com/releases/2026/09/260930020309.htm",
+      "summary": "A proposed qubit made with superfluid helium could cut quantum computing error rates by around 100 times by shielding quantum information from common forms of electromagnetic noise. If experiments confirm the predictions, the technology could eventually work alongside today’s superconducting qubits",
+      "published": "Thu, 01 Oct 2026 09:17:13 EDT",
+      "guid": "https://www.sciencedaily.com/releases/2026/09/260930020309.htm",
+      "feed_id": "science-daily-cs",
+      "journal": "Science Daily",
+      "domain": "computer-science"
+    },
+    {
+      "title": "IBM quantum computer solves classically intractable problem in 15 minutes",
+      "link": "https://www.sciencedaily.com/releases/2026/08/260829035219.htm",
+      "summary": "IBM and University of Chicago researchers have completed a quantum computation that leading classical methods could not practically reproduce. The system used 70 error-corrected logical qubits and finished the task in roughly 15 minutes while also providing statistical evidence that the result was r",
+      "published": "Sun, 30 Aug 2026 10:08:13 EDT",
+      "guid": "https://www.sciencedaily.com/releases/2026/08/260829035219.htm",
+      "feed_id": "science-daily-cs",
+      "journal": "Science Daily",
+      "domain": "computer-science"
+    },
+    {
+      "title": "World's smallest QR code, smaller than bacteria, could store data for centuries",
+      "link": "https://www.sciencedaily.com/releases/2026/03/260328043603.htm",
+      "summary": "Scientists have created a microscopic QR code so tiny it can only be seen with an electron microscope—smaller than most bacteria and now officially a world record. But this isn’t just about size; it’s about durability. By engraving data into ultra-stable ceramic materials, the team has opened the do",
+      "published": "Sun, 29 Mar 2026 01:07:10 EDT",
+      "guid": "https://www.sciencedaily.com/releases/2026/03/260328043603.htm",
+      "feed_id": "science-daily-cs",
+      "journal": "Science Daily",
+      "domain": "computer-science"
+    },
+    {
+      "title": "A hidden “on switch” in human DNA has finally been decoded",
+      "link": "https://www.sciencedaily.com/releases/2026/08/260823014943.htm",
+      "summary": "Researchers have used AI to uncover the DNA signature of a key genetic “switch” involved in turning genes on. After analyzing about 500,000 DNA sequences, the model identified the initiator in roughly 60% of human genes. The breakthrough could help predict the effects of harmful mutations and eventu",
+      "published": "Sun, 23 Aug 2026 08:14:40 EDT",
+      "guid": "https://www.sciencedaily.com/releases/2026/08/260823014943.htm",
+      "feed_id": "science-daily-cs",
+      "journal": "Science Daily",
+      "domain": "computer-science"
+    },
+    {
+      "title": "JUPITER supercomputer breaks world record with 50-qubit quantum simulation",
+      "link": "https://www.sciencedaily.com/releases/2026/05/260510234715.htm",
+      "summary": "Scientists in Germany have pulled off a staggering computing feat by fully simulating a 50-qubit quantum computer for the first time ever using Europe’s new exascale supercomputer, JUPITER. The breakthrough shatters the previous 48-qubit record and highlights just how powerful next-generation superc",
+      "published": "Sun, 10 May 2026 23:47:15 EDT",
+      "guid": "https://www.sciencedaily.com/releases/2026/05/260510234715.htm",
+      "feed_id": "science-daily-cs",
+      "journal": "Science Daily",
+      "domain": "computer-science"
+    },
+    {
+      "title": "A 0.42-nanometer breakthrough could push transistors beyond silicon",
+      "link": "https://www.sciencedaily.com/releases/2026/08/260808234943.htm",
+      "summary": "Atomically thin semiconductors could enable dramatically smaller and more efficient chips, but a stubborn problem at the boundary between materials has limited their performance. Researchers have now engineered that atomic interface to protect electron flow while still allowing extremely thin insula",
+      "published": "Sun, 09 Aug 2026 02:05:43 EDT",
+      "guid": "https://www.sciencedaily.com/releases/2026/08/260808234943.htm",
+      "feed_id": "science-daily-cs",
+      "journal": "Science Daily",
+      "domain": "computer-science"
+    },
+    {
+      "title": "Scientists find a way to slash computer memory energy use by orders of magnitude",
+      "link": "https://www.sciencedaily.com/releases/2026/09/260906170132.htm",
+      "summary": "Scientists have devised a new way to switch magnetic computer memory while using far less energy than today's leading technologies. By mathematically optimizing the pulses used to flip digital bits, the method could reduce energy consumption by several orders of magnitude. Simulations suggest it may",
+      "published": "Sun, 06 Sep 2026 21:14:19 EDT",
+      "guid": "https://www.sciencedaily.com/releases/2026/09/260906170132.htm",
+      "feed_id": "science-daily-cs",
+      "journal": "Science Daily",
+      "domain": "computer-science"
+    },
+    {
+      "title": "Quantum mechanics once baffled scientists. Now it's changing the world",
+      "link": "https://www.sciencedaily.com/releases/2026/06/260624025516.htm",
+      "summary": "Quantum mechanics has journeyed from a strange and controversial idea to the foundation of some of humanity’s most advanced technologies. Now researchers are pushing its boundaries even further, with potential breakthroughs in energy, medicine, computing, and our understanding of the universe.",
+      "published": "Sun, 05 Jul 2026 14:13:44 EDT",
+      "guid": "https://www.sciencedaily.com/releases/2026/06/260624025516.htm",
+      "feed_id": "science-daily-cs",
+      "journal": "Science Daily",
+      "domain": "computer-science"
+    },
+    {
+      "title": "Scientists built a memory chip that breaks the rules of miniaturization",
+      "link": "https://www.sciencedaily.com/releases/2026/05/260502233908.htm",
+      "summary": "A new kind of memory device may finally solve the problem of overheating and battery drain in electronics. By shrinking components to an extreme scale and redesigning their structure, researchers found a way to reduce energy loss instead of increasing it. The result is a tiny memory unit that improv",
+      "published": "Sun, 03 May 2026 03:08:59 EDT",
+      "guid": "https://www.sciencedaily.com/releases/2026/05/260502233908.htm",
+      "feed_id": "science-daily-cs",
+      "journal": "Science Daily",
+      "domain": "computer-science"
+    },
+    {
+      "title": "New 3D silicon chip breakthrough could extend Moore’s Law for years",
+      "link": "https://www.sciencedaily.com/releases/2026/05/260530053412.htm",
+      "summary": "As traditional chip miniaturization slows, researchers have found a way to pack more computing power into the same space by stacking silicon circuits in multiple layers. The new process uses ultra-thin silicon membranes and low-temperature manufacturing techniques to overcome a major obstacle that h",
+      "published": "Sat, 30 May 2026 06:26:24 EDT",
+      "guid": "https://www.sciencedaily.com/releases/2026/05/260530053412.htm",
+      "feed_id": "science-daily-cs",
+      "journal": "Science Daily",
+      "domain": "computer-science"
+    },
+    {
+      "title": "Stanford quantum computing breakthrough uses twisted light to work without extreme cooling",
+      "link": "https://www.sciencedaily.com/releases/2026/05/260528074028.htm",
+      "summary": "A new room-temperature quantum device uses twisted light to entangle photons and electrons, overcoming one of the biggest hurdles in quantum technology. The breakthrough could pave the way for smaller, cheaper quantum systems with applications ranging from secure communications to future AI and comp",
+      "published": "Sat, 30 May 2026 01:08:07 EDT",
+      "guid": "https://www.sciencedaily.com/releases/2026/05/260528074028.htm",
+      "feed_id": "science-daily-cs",
+      "journal": "Science Daily",
+      "domain": "computer-science"
+    },
+    {
+      "title": "Artificial neurons successfully communicate with living brain cells",
+      "link": "https://www.sciencedaily.com/releases/2026/04/260417225020.htm",
+      "summary": "Engineers at Northwestern University have taken a striking leap toward merging machines with the human brain by printing artificial neurons that can actually communicate with real ones. These flexible, low-cost devices generate lifelike electrical signals capable of activating living brain cells, a",
+      "published": "Sat, 18 Apr 2026 03:32:36 EDT",
+      "guid": "https://www.sciencedaily.com/releases/2026/04/260417225020.htm",
+      "feed_id": "science-daily-cs",
+      "journal": "Science Daily",
+      "domain": "computer-science"
+    },
+    {
+      "title": "Scientists tracked kids for 8 years — the screen time result was unexpected",
+      "link": "https://www.sciencedaily.com/releases/2026/08/260815064803.htm",
+      "summary": "An eight-year Finnish study found that children who spent more time on screens tended to show better cognitive processing as teenagers, challenging common assumptions about screen use. Researchers say the key may be balancing physical activity with screen activities that encourage learning, creativi",
+      "published": "Sat, 15 Aug 2026 06:48:03 EDT",
+      "guid": "https://www.sciencedaily.com/releases/2026/08/260815064803.htm",
+      "feed_id": "science-daily-cs",
+      "journal": "Science Daily",
+      "domain": "computer-science"
+    },
+    {
+      "title": "The hidden atomic gap that could break next-generation computer chips",
+      "link": "https://www.sciencedaily.com/releases/2026/05/260508003125.htm",
+      "summary": "A major obstacle may be standing in the way of the next generation of ultra-tiny computer chips. Researchers discovered that many promising 2D materials lose their advantages because an invisible atomic-scale gap forms when they are combined with insulating layers. That tiny gap weakens electronic p",
+      "published": "Sat, 09 May 2026 18:48:13 EDT",
+      "guid": "https://www.sciencedaily.com/releases/2026/05/260508003125.htm",
+      "feed_id": "science-daily-cs",
+      "journal": "Science Daily",
+      "domain": "computer-science"
+    },
+    {
+      "title": "A “quantum bath” puts quantum entanglement on autopilot",
+      "link": "https://www.sciencedaily.com/releases/2026/08/260830000002.htm",
+      "summary": "Physicists have demonstrated a new way to entangle distant quantum bits without the constant measurements and active control normally required. The team created a “quantum bath,” a shared environment filled with correlated microwave photons that automatically pushes separated qubits into an entangle",
+      "published": "Mon, 31 Aug 2026 09:08:37 EDT",
+      "guid": "https://www.sciencedaily.com/releases/2026/08/260830000002.htm",
+      "feed_id": "science-daily-cs",
+      "journal": "Science Daily",
+      "domain": "computer-science"
+    },
+    {
+      "title": "A tiny “rainbow on a chip” could help supercharge 6G networks",
+      "link": "https://www.sciencedaily.com/releases/2026/08/260823014946.htm",
+      "summary": "Researchers have created a tiny chip that produces a stable “rainbow” of light capable of generating multiple high-frequency signals at once, potentially boosting the speed and capacity of future 6G networks. Its extreme precision could also make it valuable for quantum timing, navigation, radar, an",
+      "published": "Mon, 24 Aug 2026 08:07:31 EDT",
+      "guid": "https://www.sciencedaily.com/releases/2026/08/260823014946.htm",
+      "feed_id": "science-daily-cs",
+      "journal": "Science Daily",
+      "domain": "computer-science"
+    },
+    {
+      "title": "Screen time at ages 1 and 6 may matter more than parents realize",
+      "link": "https://www.sciencedaily.com/releases/2026/08/260823094152.htm",
+      "summary": "More screen time during infancy and around the start of school was linked to poorer academic performance and weaker working memory years later. The findings suggest that early childhood may contain particularly sensitive windows when screen habits can have longer-lasting effects.",
+      "published": "Mon, 24 Aug 2026 06:31:15 EDT",
+      "guid": "https://www.sciencedaily.com/releases/2026/08/260823094152.htm",
+      "feed_id": "science-daily-cs",
+      "journal": "Science Daily",
+      "domain": "computer-science"
+    },
+    {
+      "title": "An ordinary laptop solved a problem thought to require a quantum computer",
+      "link": "https://www.sciencedaily.com/releases/2026/07/260719040000.htm",
+      "summary": "A quantum problem once described as impossible for classical computers has now been solved using relatively modest hardware. Researchers used tensor networks to compress the overwhelming wave function created by hundreds of entangled qubits, allowing some calculations to run on a laptop. Their resul",
+      "published": "Mon, 20 Jul 2026 03:40:09 EDT",
+      "guid": "https://www.sciencedaily.com/releases/2026/07/260719040000.htm",
+      "feed_id": "science-daily-cs",
+      "journal": "Science Daily",
+      "domain": "computer-science"
+    },
+    {
+      "title": "Forget electrons, this breakthrough uses light-matter particles to power AI",
+      "link": "https://www.sciencedaily.com/releases/2026/05/260518041341.htm",
+      "summary": "Researchers at Penn have created a hybrid light-matter particle that could dramatically speed up AI computing while using far less energy. The breakthrough may help replace some electronic computing processes with ultra-efficient light-based technology.",
+      "published": "Mon, 18 May 2026 20:23:26 EDT",
+      "guid": "https://www.sciencedaily.com/releases/2026/05/260518041341.htm",
+      "feed_id": "science-daily-cs",
+      "journal": "Science Daily",
+      "domain": "computer-science"
+    },
+    {
+      "title": "Caltech breakthrough brings fiber-optic performance to silicon chips",
+      "link": "https://www.sciencedaily.com/releases/2026/08/260814235905.htm",
+      "summary": "Caltech scientists have created ultra-low-loss optical pathways on silicon chips that approach the efficiency of fiber optics and dramatically outperform existing technology at visible wavelengths. The breakthrough could unlock more powerful lasers, miniature atomic sensors and clocks, quantum syste",
+      "published": "Mon, 17 Aug 2026 08:30:41 EDT",
+      "guid": "https://www.sciencedaily.com/releases/2026/08/260814235905.htm",
+      "feed_id": "science-daily-cs",
+      "journal": "Science Daily",
+      "domain": "computer-science"
+    },
+    {
+      "title": "Scientists turn DNA into a memory device that uses 100x less power",
+      "link": "https://www.sciencedaily.com/releases/2026/08/260816044853.htm",
+      "summary": "Researchers combined synthetic DNA with a semiconductor to create an ultra-low-power memory device capable of storing and processing information in the same place. The bio-hybrid technology could eventually help make AI systems and next-generation computers far more energy efficient.",
+      "published": "Mon, 17 Aug 2026 04:06:45 EDT",
+      "guid": "https://www.sciencedaily.com/releases/2026/08/260816044853.htm",
+      "feed_id": "science-daily-cs",
+      "journal": "Science Daily",
+      "domain": "computer-science"
+    },
+    {
+      "title": "“Giant superatoms” could finally solve quantum computing’s biggest problem",
+      "link": "https://www.sciencedaily.com/releases/2026/04/260413043155.htm",
+      "summary": "In the pursuit of powerful and stable quantum computers, researchers at Chalmers University of Technology, Sweden, have developed the theory for an entirely new quantum system – based on the novel concept of ‘giant superatoms’. This breakthrough enables quantum information to be protected, controlle",
+      "published": "Mon, 13 Apr 2026 08:38:46 EDT",
+      "guid": "https://www.sciencedaily.com/releases/2026/04/260413043155.htm",
+      "feed_id": "science-daily-cs",
+      "journal": "Science Daily",
+      "domain": "computer-science"
+    },
+    {
+      "title": "Heat breaks the rules at the nanoscale and scientists used it to their advantage",
+      "link": "https://www.sciencedaily.com/releases/2026/06/260606075511.htm",
+      "summary": "Scientists used nanoscale gold metamaterials to supercharge heat transfer across tiny gaps, achieving up to four times more energy flow than similar conventional systems. The breakthrough could lead to better chip cooling, more efficient energy technologies, and a new era of precision heat engineeri",
+      "published": "Mon, 08 Jun 2026 07:17:50 EDT",
+      "guid": "https://www.sciencedaily.com/releases/2026/06/260606075511.htm",
+      "feed_id": "science-daily-cs",
+      "journal": "Science Daily",
+      "domain": "computer-science"
+    },
+    {
+      "title": "Scientists find quantum computers forget most of their work",
+      "link": "https://www.sciencedaily.com/releases/2026/04/260406045126.htm",
+      "summary": "Quantum circuits are supposed to gain power as they grow longer, but noise changes the picture. A new study finds that earlier steps in these circuits gradually lose their impact, with only the final layers really mattering. As a result, deep quantum circuits behave more like shallow ones. This limi",
+      "published": "Mon, 06 Apr 2026 05:08:06 EDT",
+      "guid": "https://www.sciencedaily.com/releases/2026/04/260406045126.htm",
+      "feed_id": "science-daily-cs",
+      "journal": "Science Daily",
+      "domain": "computer-science"
+    },
+    {
+      "title": "Scientists just created exotic new forms of matter that shouldn’t exist",
+      "link": "https://www.sciencedaily.com/releases/2026/05/260504154014.htm",
+      "summary": "A new quantum physics study reveals that simply changing a magnetic field over time can unlock entirely new forms of matter that don’t exist under normal conditions. By carefully “driving” materials with timed magnetic shifts, researchers created exotic quantum states that could be far more stable a",
+      "published": "Mon, 04 May 2026 22:48:12 EDT",
+      "guid": "https://www.sciencedaily.com/releases/2026/05/260504154014.htm",
+      "feed_id": "science-daily-cs",
+      "journal": "Science Daily",
+      "domain": "computer-science"
+    },
+    {
+      "title": "Scientists discover bizarre new states inside tiny magnetic whirlpools",
+      "link": "https://www.sciencedaily.com/releases/2026/03/260326075614.htm",
+      "summary": "Researchers have uncovered a new way to generate exotic oscillation states in tiny magnetic structures—using only minimal energy. By exciting magnetic waves, they triggered a delicate motion that produced a rich spectrum of signals never seen before in this system. The finding challenges existing as",
+      "published": "Fri, 27 Mar 2026 07:34:19 EDT",
+      "guid": "https://www.sciencedaily.com/releases/2026/03/260326075614.htm",
+      "feed_id": "science-daily-cs",
+      "journal": "Science Daily",
+      "domain": "computer-science"
+    },
+    {
+      "title": "Quantum AI just got shockingly good at predicting chaos",
+      "link": "https://www.sciencedaily.com/releases/2026/04/260417224455.htm",
+      "summary": "Researchers have shown that blending quantum computing with AI can dramatically improve predictions of complex, chaotic systems. By letting a quantum computer identify hidden patterns in data, the AI becomes more accurate and stable over time. The method outperformed standard models while using far",
+      "published": "Fri, 17 Apr 2026 23:51:09 EDT",
+      "guid": "https://www.sciencedaily.com/releases/2026/04/260417224455.htm",
+      "feed_id": "science-daily-cs",
+      "journal": "Science Daily",
+      "domain": "computer-science"
+    },
+    {
+      "title": "NASA’s new AI space chip could let spacecraft think for themselves",
+      "link": "https://www.sciencedaily.com/releases/2026/05/260515002134.htm",
+      "summary": "NASA is testing a next-generation space computer chip that could give spacecraft the ability to operate far more independently in deep space. The radiation-hardened processor is showing performance levels hundreds of times beyond current spaceflight computers while surviving punishing tests designed",
+      "published": "Fri, 15 May 2026 04:13:15 EDT",
+      "guid": "https://www.sciencedaily.com/releases/2026/05/260515002134.htm",
+      "feed_id": "science-daily-cs",
+      "journal": "Science Daily",
+      "domain": "computer-science"
+    },
+    {
+      "title": "Brain-inspired chip runs near absolute zero and could transform quantum computing",
+      "link": "https://www.sciencedaily.com/releases/2026/06/260612032024.htm",
+      "summary": "Scientists at the University of Hong Kong have created a remarkable new type of brain-inspired chip that can function just above absolute zero, one of the coldest environments imaginable. By using a standard silicon carbide transistor in a completely new way, the team made a single device behave lik",
+      "published": "Fri, 12 Jun 2026 06:38:54 EDT",
+      "guid": "https://www.sciencedaily.com/releases/2026/06/260612032024.htm",
+      "feed_id": "science-daily-cs",
+      "journal": "Science Daily",
+      "domain": "computer-science"
+    },
+    {
+      "title": "Tiny nanolaser could cut computer energy use in half",
+      "link": "https://www.sciencedaily.com/releases/2026/09/260911003858.htm",
+      "summary": "Scientists have created an ultra-small nanolaser that could eventually allow microchips to transmit information with light instead of electricity, potentially making computers faster while cutting energy use roughly in half. Thousands of the lasers could fit on a single chip, opening possibilities f",
+      "published": "Fri, 11 Sep 2026 08:03:26 EDT",
+      "guid": "https://www.sciencedaily.com/releases/2026/09/260911003858.htm",
+      "feed_id": "science-daily-cs",
+      "journal": "Science Daily",
+      "domain": "computer-science"
+    },
+    {
+      "title": "Scientists just made quantum computer operations 1,000 times faster",
+      "link": "https://www.sciencedaily.com/releases/2026/09/260911003845.htm",
+      "summary": "Researchers have found a way to perform certain quantum operations more than 1,000 times faster, cutting thousands of repeated control cycles down to just one. The advance could reduce errors and bring reliable, fault-tolerant quantum computers closer to reality.",
+      "published": "Fri, 11 Sep 2026 07:52:30 EDT",
+      "guid": "https://www.sciencedaily.com/releases/2026/09/260911003845.htm",
+      "feed_id": "science-daily-cs",
+      "journal": "Science Daily",
+      "domain": "computer-science"
+    },
+    {
+      "title": "This new chip could slash data center energy waste",
+      "link": "https://www.sciencedaily.com/releases/2026/04/260409101103.htm",
+      "summary": "A new chip design from UC San Diego could make data centers far more energy-efficient by rethinking how power is converted for GPUs. By combining vibrating piezoelectric components with a clever circuit layout, the system overcomes limitations of traditional designs. The prototype achieved impressiv",
+      "published": "Fri, 10 Apr 2026 08:45:22 EDT",
+      "guid": "https://www.sciencedaily.com/releases/2026/04/260409101103.htm",
+      "feed_id": "science-daily-cs",
+      "journal": "Science Daily",
+      "domain": "computer-science"
+    },
+    {
+      "title": "Scientists are seriously asking if bees and ChatGPT are conscious",
+      "link": "https://www.sciencedaily.com/releases/2026/06/260604044258.htm",
+      "summary": "New studies suggest consciousness can't be judged solely by behavior, whether it's a chatbot discussing philosophy or a bee searching for nectar. Researchers are increasingly focusing on the internal mechanisms of brains and computers, concluding that today's AI is likely not conscious while leaving",
+      "published": "Fri, 05 Jun 2026 01:27:32 EDT",
+      "guid": "https://www.sciencedaily.com/releases/2026/06/260604044258.htm",
+      "feed_id": "science-daily-cs",
+      "journal": "Science Daily",
+      "domain": "computer-science"
+    },
+    {
+      "title": "To Keep or Not to Keep: Learning KV Cache Retention in Disaggregated LLM Serving Systems",
+      "link": "https://arxiv.org/abs/2610.28637",
+      "summary": "arXiv:2610.28637v1 Announce Type: new Abstract: Disaggregated \\textsc{LLM} serving separates prefill and decode across node pools, placing a network fabric between \\textsc{KV}-cache computation and consumption. This breaks a key assumption of classical cache policies: a miss no longer incurs only l",
+      "published": "2026-10-22T00:00:00-04:00",
+      "guid": "oai:arXiv.org:2610.28637v1",
+      "feed_id": "arxiv-cs-lg",
+      "journal": "arXiv",
+      "domain": "computer-science"
+    },
+    {
+      "title": "Interaction-Gated Time-Frequency Learning for Parameter-Efficient PPG-Based Heart Rate Estimation",
+      "link": "https://arxiv.org/abs/2610.28693",
+      "summary": "arXiv:2610.28693v1 Announce Type: new Abstract: Photoplethysmography (PPG) enables low-cost and non-invasive heart rate (HR) monitoring but remains sensitive to waveform distortion, physiological variability, and measurement interference. Temporal waveform characteristics and frequency-domain perio",
+      "published": "2026-10-22T00:00:00-04:00",
+      "guid": "oai:arXiv.org:2610.28693v1",
+      "feed_id": "arxiv-cs-lg",
+      "journal": "arXiv",
+      "domain": "computer-science"
+    },
+    {
+      "title": "Reinforcement learning for hardware acceleration and system-level optimization on FPGA and integrated-circuit platforms: A survey",
+      "link": "https://arxiv.org/abs/2610.28699",
+      "summary": "arXiv:2610.28699v1 Announce Type: new Abstract: Reinforcement learning (RL) enables adaptive and autonomous decision-making in embedded, edge, and heterogeneous computing systems. Field-programmable gate arrays (FPGAs) and integrated circuits (ICs) offer low latency, energy efficiency, and architec",
+      "published": "2026-10-22T00:00:00-04:00",
+      "guid": "oai:arXiv.org:2610.28699v1",
+      "feed_id": "arxiv-cs-lg",
+      "journal": "arXiv",
+      "domain": "computer-science"
+    },
+    {
+      "title": "Scalable Stress-Constrained Topology Optimization: A Super-resolution and Simultaneous Approach Based on Machine Learning",
+      "link": "https://arxiv.org/abs/2610.28703",
+      "summary": "arXiv:2610.28703v1 Announce Type: new Abstract: Large-scale topology optimization (TO) remains computationally demanding, especially for stress-constrained problems. To address this challenge, we propose the simultaneous neural topology optimization (SNTO) framework where we represent state, adjoin",
+      "published": "2026-10-22T00:00:00-04:00",
+      "guid": "oai:arXiv.org:2610.28703v1",
+      "feed_id": "arxiv-cs-lg",
+      "journal": "arXiv",
+      "domain": "computer-science"
+    },
+    {
+      "title": "SimHack: Predicting the onset of detectable reward hacking before RL training",
+      "link": "https://arxiv.org/abs/2610.28707",
+      "summary": "arXiv:2610.28707v1 Announce Type: new Abstract: When training LLMs to code with reinforcement learning, reward hacking is often detectable but difficult to prevent, since (a) environment hardening is increasingly difficult as training environments grow more complex; and (b) training-time interventi",
+      "published": "2026-10-22T00:00:00-04:00",
+      "guid": "oai:arXiv.org:2610.28707v1",
+      "feed_id": "arxiv-cs-lg",
+      "journal": "arXiv",
+      "domain": "computer-science"
+    },
+    {
+      "title": "STAR-XPC: Set Transformer for Estimating X-ray Transmission in Polymer Composites",
+      "link": "https://arxiv.org/abs/2610.28709",
+      "summary": "arXiv:2610.28709v1 Announce Type: new Abstract: Evaluating the energy transmission ratio of an X-ray beam through a polymer composite is a challenging task in radiation shielding studies. The reference solution with Monte Carlo transport simulation is highly accurate but computationally expensive:",
+      "published": "2026-10-22T00:00:00-04:00",
+      "guid": "oai:arXiv.org:2610.28709v1",
+      "feed_id": "arxiv-cs-lg",
+      "journal": "arXiv",
+      "domain": "computer-science"
+    },
+    {
+      "title": "Big Claims, Small Margins: Do Reported GraphLLM Gains Survive Simple Baselines?",
+      "link": "https://arxiv.org/abs/2610.28714",
+      "summary": "arXiv:2610.28714v1 Announce Type: new Abstract: LLM-based methods for node classification on text-attributed graphs (TAGs) routinely report state-of-the-art accuracy. We ask how these results compare with inexpensive baselines run on the same splits. On the splits of three recent studies, we tune f",
+      "published": "2026-10-22T00:00:00-04:00",
+      "guid": "oai:arXiv.org:2610.28714v1",
+      "feed_id": "arxiv-cs-lg",
+      "journal": "arXiv",
+      "domain": "computer-science"
+    },
+    {
+      "title": "Offline Apprenticeship Learning for Human-Centric Environments",
+      "link": "https://arxiv.org/abs/2610.28716",
+      "summary": "arXiv:2610.28716v1 Announce Type: new Abstract: Effective decision-making in human-centric environments such as Intelligent Tutoring Systems (ITSs) and clinical healthcare requires policies that are adaptive, data-efficient, and ethically deployable. Apprenticeship Learning (AL) infers policies dir",
+      "published": "2026-10-22T00:00:00-04:00",
+      "guid": "oai:arXiv.org:2610.28716v1",
+      "feed_id": "arxiv-cs-lg",
+      "journal": "arXiv",
+      "domain": "computer-science"
+    },
+    {
+      "title": "ReAPO: Retry-Aware Policy Optimization for Efficient Exploration in LLM Reasoning",
+      "link": "https://arxiv.org/abs/2610.28770",
+      "summary": "arXiv:2610.28770v1 Announce Type: new Abstract: RLVR improves language-model reasoning, but commonly relies on independent stochastic rollouts for exploration, which can repeatedly sample similar failed strategies. Prior work has seen success with approaches that guide exploration by introducing de",
+      "published": "2026-10-22T00:00:00-04:00",
+      "guid": "oai:arXiv.org:2610.28770v1",
+      "feed_id": "arxiv-cs-lg",
+      "journal": "arXiv",
+      "domain": "computer-science"
+    },
+    {
+      "title": "Motion Equivariant Convolutional LSTM: When Motion Becomes a Gauge Symmetry",
+      "link": "https://arxiv.org/abs/2610.28771",
+      "summary": "arXiv:2610.28771v1 Announce Type: new Abstract: Objects move, cameras pan, and weather drifts with the wind: much of what changes in sequential data is motion. Motion changes where things are, not what they are, and is therefore a symmetry of the data. Yet standard recurrent networks are not equiva",
+      "published": "2026-10-22T00:00:00-04:00",
+      "guid": "oai:arXiv.org:2610.28771v1",
+      "feed_id": "arxiv-cs-lg",
+      "journal": "arXiv",
+      "domain": "computer-science"
+    },
+    {
+      "title": "Building a Nested LADDER for LLM Unstructured Post-Training Pruning",
+      "link": "https://arxiv.org/abs/2610.28773",
+      "summary": "arXiv:2610.28773v1 Announce Type: new Abstract: Non-uniform allocation can improve post-training pruning of large language models, yet quality can still degrade sharply at high sparsity. To control degradation as sparsity increases, we introduce LADDER (Layer-Wise Allocation via Damage-Driven Evalu",
+      "published": "2026-10-22T00:00:00-04:00",
+      "guid": "oai:arXiv.org:2610.28773v1",
+      "feed_id": "arxiv-cs-lg",
+      "journal": "arXiv",
+      "domain": "computer-science"
+    },
+    {
+      "title": "Second Thoughts: Exploring and Planning through Comparative Imagination in World Models",
+      "link": "https://arxiv.org/abs/2610.28779",
+      "summary": "arXiv:2610.28779v1 Announce Type: new Abstract: World models let agents compare imagined outcomes before acting, but an agent must still decide which alternatives to explore and when a proposed plan should replace its learned policy. We introduce SDI (Sibling Disagreement in Imagination), which con",
+      "published": "2026-10-22T00:00:00-04:00",
+      "guid": "oai:arXiv.org:2610.28779v1",
+      "feed_id": "arxiv-cs-lg",
+      "journal": "arXiv",
+      "domain": "computer-science"
+    },
+    {
+      "title": "Extreme Low-State Quantized Transformer for Electricity-Load Forecasting",
+      "link": "https://arxiv.org/abs/2610.28784",
+      "summary": "arXiv:2610.28784v1 Announce Type: new Abstract: Aggressive low-state weight quantization can substantially reduce neural-network representational flexibility, making predictive performance difficult to preserve when only a few discrete weight states are available. We investigate this regime for Tra",
+      "published": "2026-10-22T00:00:00-04:00",
+      "guid": "oai:arXiv.org:2610.28784v1",
+      "feed_id": "arxiv-cs-lg",
+      "journal": "arXiv",
+      "domain": "computer-science"
+    },
+    {
+      "title": "Measure First, Then Allocate: Calibrated Rollout Budgets for MCP Agents in Reinforcement Learning",
+      "link": "https://arxiv.org/abs/2610.28785",
+      "summary": "arXiv:2610.28785v1 Announce Type: new Abstract: Training tool-using language models requires costly interaction, yet identical rewards within a rollout group provide no group-relative learning signal. We use reward disagreement to guide harness evaluation and the allocation of rollouts for policy t",
+      "published": "2026-10-22T00:00:00-04:00",
+      "guid": "oai:arXiv.org:2610.28785v1",
+      "feed_id": "arxiv-cs-lg",
+      "journal": "arXiv",
+      "domain": "computer-science"
+    },
+    {
+      "title": "ArcFlow: Training Flow Policies for Multiple Solver Budgets",
+      "link": "https://arxiv.org/abs/2610.28788",
+      "summary": "arXiv:2610.28788v1 Announce Type: new Abstract: Flow-matching policies adjust inference cost through the number of solver steps, but reinforcement learning at a single fixed solver budget can hide degradation at cheaper deployment budgets and even erase useful one-step behavior present in a pretrai",
+      "published": "2026-10-22T00:00:00-04:00",
+      "guid": "oai:arXiv.org:2610.28788v1",
+      "feed_id": "arxiv-cs-lg",
+      "journal": "arXiv",
+      "domain": "computer-science"
+    },
+    {
+      "title": "CALLIOPE: Private Insights into AI Use, Without Embeddings",
+      "link": "https://arxiv.org/abs/2610.28797",
+      "summary": "arXiv:2610.28797v1 Announce Type: new Abstract: We introduce CALLIOPE, a top-down framework for discovering topic hierarchies in large corpora of unstructured data (e.g., LLM conversations), while supporting differential privacy (DP). Unlike traditional and even recent LLM-augmented approaches that",
+      "published": "2026-10-22T00:00:00-04:00",
+      "guid": "oai:arXiv.org:2610.28797v1",
+      "feed_id": "arxiv-cs-lg",
+      "journal": "arXiv",
+      "domain": "computer-science"
+    },
+    {
+      "title": "An Explicit Feedback Contract for Iterative ML-Agent Harnesses",
+      "link": "https://arxiv.org/abs/2610.28798",
+      "summary": "arXiv:2610.28798v1 Announce Type: new Abstract: Iterative ML agents develop models by editing code, running experiments, reading a validation score, and choosing what to try next. In current harnesses this loop is served by an exact validation score returned after every attempt, which leaves the va",
+      "published": "2026-10-22T00:00:00-04:00",
+      "guid": "oai:arXiv.org:2610.28798v1",
+      "feed_id": "arxiv-cs-lg",
+      "journal": "arXiv",
+      "domain": "computer-science"
+    },
+    {
+      "title": "Towards Realistic Models of Change: A Causal Perspective on Decision-Making and Dynamical Systems",
+      "link": "https://arxiv.org/abs/2610.28803",
+      "summary": "arXiv:2610.28803v1 Announce Type: new Abstract: While statistical learning has made remarkable progress in recent decades, driven by large datasets and data-driven protocols that have transformed scientific practice, it still faces a key limitation: it struggles to generalize beyond the data it has",
+      "published": "2026-10-22T00:00:00-04:00",
+      "guid": "oai:arXiv.org:2610.28803v1",
+      "feed_id": "arxiv-cs-lg",
+      "journal": "arXiv",
+      "domain": "computer-science"
+    },
+    {
+      "title": "A Mechanistic Study of Automated Failure Attribution in LLM-based Agentic Systems",
+      "link": "https://arxiv.org/abs/2610.28811",
+      "summary": "arXiv:2610.28811v1 Announce Type: new Abstract: Agentic systems have demonstrated strong capabilities on complex tasks by enabling multiple interacting large language model (LLM)-based agents to collaborate and execute subtasks in parallel. However, this collaborative structure introduces new chall",
+      "published": "2026-10-22T00:00:00-04:00",
+      "guid": "oai:arXiv.org:2610.28811v1",
+      "feed_id": "arxiv-cs-lg",
+      "journal": "arXiv",
+      "domain": "computer-science"
+    },
+    {
+      "title": "When Do Gaussian Priors Fail? A Latent Geometry Investigation of RL Fine-Tuning",
+      "link": "https://arxiv.org/abs/2610.28849",
+      "summary": "arXiv:2610.28849v1 Announce Type: new Abstract: Latent diffusion models almost universally place a Gaussian prior on the VAE latent space. For base generation this default is unproblematic; under reinforcement-learning fine-tuning, however, it carries a structural limitation. The standard VAE's KL",
+      "published": "2026-10-22T00:00:00-04:00",
+      "guid": "oai:arXiv.org:2610.28849v1",
+      "feed_id": "arxiv-cs-lg",
+      "journal": "arXiv",
+      "domain": "computer-science"
+    },
+    {
+      "title": "A General Topological Symmetry Index for Critical Orbits In Neural Network Loss Landscapes",
+      "link": "https://arxiv.org/abs/2610.28864",
+      "summary": "arXiv:2610.28864v1 Announce Type: new Abstract: A systematic understanding of the global structure of neural-network loss landscapes remains challenging due to their high dimensionality. Symmetries arising from network architectures and learning objectives provide a way to investigate aspects of th",
+      "published": "2026-10-22T00:00:00-04:00",
+      "guid": "oai:arXiv.org:2610.28864v1",
+      "feed_id": "arxiv-cs-lg",
+      "journal": "arXiv",
+      "domain": "computer-science"
+    },
+    {
+      "title": "How Much Gradient Does Truncated Backprop Lose in Looped Transformers?",
+      "link": "https://arxiv.org/abs/2610.28871",
+      "summary": "arXiv:2610.28871v1 Announce Type: new Abstract: Looped transformers reuse one block of layers many times and are often trained by backpropagating through only the last k loops. We measure how much of the weight gradient this throws away, exactly and for every k from one backward pass, on nine loope",
+      "published": "2026-10-22T00:00:00-04:00",
+      "guid": "oai:arXiv.org:2610.28871v1",
+      "feed_id": "arxiv-cs-lg",
+      "journal": "arXiv",
+      "domain": "computer-science"
+    },
+    {
+      "title": "LEAN: Loss-Engineered Modulation of the Model Weight-Sensitivity Distribution for Efficient, Error-Tolerant Neural Networks",
+      "link": "https://arxiv.org/abs/2610.28872",
+      "summary": "arXiv:2610.28872v1 Announce Type: new Abstract: The weights of a trained network do not have uniform sensitivity to model accuracy: the 1% most sensitive weights carry about a fifth of the damage a bit flip can do. This distribution decides the bit-flip tolerance of a model, the fraction of weights",
+      "published": "2026-10-22T00:00:00-04:00",
+      "guid": "oai:arXiv.org:2610.28872v1",
+      "feed_id": "arxiv-cs-lg",
+      "journal": "arXiv",
+      "domain": "computer-science"
+    },
+    {
+      "title": "Actually, All Learnable Distribution Classes Are Privately Learnable",
+      "link": "https://arxiv.org/abs/2610.28878",
+      "summary": "arXiv:2610.28878v1 Announce Type: new Abstract: We show that every class of distributions that is learnable up to arbitrarily small target error in total variation distance with finitely many samples is also learnable under ($\\varepsilon, \\delta$)-differential privacy up to arbitrarily small target",
+      "published": "2026-10-22T00:00:00-04:00",
+      "guid": "oai:arXiv.org:2610.28878v1",
+      "feed_id": "arxiv-cs-lg",
+      "journal": "arXiv",
+      "domain": "computer-science"
+    },
+    {
+      "title": "RL-IF: Tracking Non-local Training Data Influence for Online Reinforcement Learning",
+      "link": "https://arxiv.org/abs/2610.28883",
+      "summary": "arXiv:2610.28883v1 Announce Type: new Abstract: Online reinforcement learning (RL) has achieved significant success in decision-making tasks, but modern online RL remains highly sensitive to the quality of training experience. Understanding the contribution of individual training instances is there",
+      "published": "2026-10-22T00:00:00-04:00",
+      "guid": "oai:arXiv.org:2610.28883v1",
+      "feed_id": "arxiv-cs-lg",
+      "journal": "arXiv",
+      "domain": "computer-science"
+    },
+    {
+      "title": "Combating Catastrophic Forgetting in Continual Domain Adaptation via Knowledge Recasting",
+      "link": "https://arxiv.org/abs/2610.28892",
+      "summary": "arXiv:2610.28892v1 Announce Type: new Abstract: Adapting language models to new domains during post-training risks degrading previously acquired capabilities, a phenomenon commonly known as catastrophic forgetting. Existing mitigation methods largely treat forgetting as a consequence of excessive m",
+      "published": "2026-10-22T00:00:00-04:00",
+      "guid": "oai:arXiv.org:2610.28892v1",
+      "feed_id": "arxiv-cs-lg",
+      "journal": "arXiv",
+      "domain": "computer-science"
+    },
+    {
+      "title": "Minimax-Optimal Predictive Flow Matching under Distribution Drift",
+      "link": "https://arxiv.org/abs/2610.28898",
+      "summary": "arXiv:2610.28898v1 Announce Type: new Abstract: Flow matching learns a generative velocity field by regression, but under distribution drift a field must be deployed before the current data arrive. We study this predictive problem for a fixed, possibly nonconvex, neural class, with dynamic regret a",
+      "published": "2026-10-22T00:00:00-04:00",
+      "guid": "oai:arXiv.org:2610.28898v1",
+      "feed_id": "arxiv-cs-lg",
+      "journal": "arXiv",
+      "domain": "computer-science"
+    },
+    {
+      "title": "A Model-Free Continuous-Time RL Algorithm from Discrete-Time Off-Policy Data with End-to-End Guarantees",
+      "link": "https://arxiv.org/abs/2610.28915",
+      "summary": "arXiv:2610.28915v1 Announce Type: new Abstract: In this paper, we study continuous-time reinforcement learning, where the state follows an unknown stochastic differential equation but only a fixed off-policy batch of discrete-time transitions is available. Standard discrete-time Q-learning becomes",
+      "published": "2026-10-22T00:00:00-04:00",
+      "guid": "oai:arXiv.org:2610.28915v1",
+      "feed_id": "arxiv-cs-lg",
+      "journal": "arXiv",
+      "domain": "computer-science"
+    },
+    {
+      "title": "Query Feedback and Teaching for Stable and Certifiable Language Generation",
+      "link": "https://arxiv.org/abs/2610.28918",
+      "summary": "arXiv:2610.28918v1 Announce Type: new Abstract: Language generation in the limit studies whether a learner observing an enumeration of an unknown target language can eventually generate only valid, previously unseen elements. We study stability, introduced by Kalavasis, Mehrotra, and Velegkas (2025",
+      "published": "2026-10-22T00:00:00-04:00",
+      "guid": "oai:arXiv.org:2610.28918v1",
+      "feed_id": "arxiv-cs-lg",
+      "journal": "arXiv",
+      "domain": "computer-science"
+    },
+    {
+      "title": "The Data Differentiator Framework (DDF): Quantifying Marginal Data Value with Information-Theoretic and Game-Theoretic Measures in an Agentic Evaluation Pipeline (SDSAE)",
+      "link": "https://arxiv.org/abs/2610.28933",
+      "summary": "arXiv:2610.28933v1 Announce Type: new Abstract: In data-rich enterprises the hard question is not whether a candidate dataset is good in isolation, but whether it adds information beyond what the organization already holds, and whether that increment is worth its price. We present the Data Differen",
+      "published": "2026-10-22T00:00:00-04:00",
+      "guid": "oai:arXiv.org:2610.28933v1",
+      "feed_id": "arxiv-cs-lg",
+      "journal": "arXiv",
+      "domain": "computer-science"
+    },
+    {
+      "title": "Auditing Conformal Prediction for Language Models Under Inference-Time Model Shift",
+      "link": "https://arxiv.org/abs/2610.28937",
+      "summary": "arXiv:2610.28937v1 Announce Type: new Abstract: Conformal prediction (CP) for language models is typically evaluated under a matched protocol, in which calibration and deployment use the same post-training inference configuration, such as quantization mode and inference temperature. In deployment,",
+      "published": "2026-10-22T00:00:00-04:00",
+      "guid": "oai:arXiv.org:2610.28937v1",
+      "feed_id": "arxiv-cs-lg",
+      "journal": "arXiv",
+      "domain": "computer-science"
+    },
+    {
+      "title": "Multi-Objective Protein Optimization via Modular Diffusion Steering",
+      "link": "https://arxiv.org/abs/2610.28943",
+      "summary": "arXiv:2610.28943v1 Announce Type: new Abstract: Protein engineering often requires improving several properties simultaneously, motivating the search for high-performing sequences that represent useful fitness tradeoffs. Discovering these sequences is challenging because the design space is combina",
+      "published": "2026-10-22T00:00:00-04:00",
+      "guid": "oai:arXiv.org:2610.28943v1",
+      "feed_id": "arxiv-cs-lg",
+      "journal": "arXiv",
+      "domain": "computer-science"
+    },
+    {
+      "title": "Is 2:4 Sparsity Still Worth It? Semi-Structured Sparsity versus Quantization in LLM Inference",
+      "link": "https://arxiv.org/abs/2610.28947",
+      "summary": "arXiv:2610.28947v1 Announce Type: new Abstract: NVIDIA tensor cores have supported 2:4 semi-structured sparsity since Ampere, and the pattern composes with quantization. When the two are combined, the practical question is which step to take next: from a given precision, add 2:4 sparsity or drop to",
+      "published": "2026-10-22T00:00:00-04:00",
+      "guid": "oai:arXiv.org:2610.28947v1",
+      "feed_id": "arxiv-cs-lg",
+      "journal": "arXiv",
+      "domain": "computer-science"
+    },
+    {
+      "title": "Online Open-World Wafer Defect Discovery using Hyperdimensional Computing",
+      "link": "https://arxiv.org/abs/2610.28949",
+      "summary": "arXiv:2610.28949v1 Announce Type: new Abstract: Conventional wafer defect analysis relies on offline, closed-world classifiers that fail to detect novel, unseen defect signatures emerging during continuous semiconductor manufacturing. To address this, we propose WaferHDC, an online open-world wafer",
+      "published": "2026-10-22T00:00:00-04:00",
+      "guid": "oai:arXiv.org:2610.28949v1",
+      "feed_id": "arxiv-cs-lg",
+      "journal": "arXiv",
+      "domain": "computer-science"
+    },
+    {
+      "title": "Transformers as Generic Deep Neural Networks: Exact Compilation, the Cost of Removing Activation-Activation Products, and Multi-Agent Attention Clustering",
+      "link": "https://arxiv.org/abs/2610.28958",
+      "summary": "arXiv:2610.28958v1 Announce Type: new Abstract: Transformers are deployed as a special model class. Neural processing units (NPU) add dedicated operators for attention and normalization, and quantization relies on Transformer-specific algorithms. We show the computation does not force this. Every T",
+      "published": "2026-10-22T00:00:00-04:00",
+      "guid": "oai:arXiv.org:2610.28958v1",
+      "feed_id": "arxiv-cs-lg",
+      "journal": "arXiv",
+      "domain": "computer-science"
+    },
+    {
+      "title": "Unit-Aware Differentially Private Quantum Machine Learning for Clinical and Wearable Health Data",
+      "link": "https://arxiv.org/abs/2610.28968",
+      "summary": "arXiv:2610.28968v1 Announce Type: new Abstract: Clinical registries and wearable sensors support early health-risk assessment, yet models trained on these records may leak sensitive information when released. Differential privacy (DP) bounds this leakage by injecting noise whose total magnitude gro",
+      "published": "2026-10-22T00:00:00-04:00",
+      "guid": "oai:arXiv.org:2610.28968v1",
+      "feed_id": "arxiv-cs-lg",
+      "journal": "arXiv",
+      "domain": "computer-science"
+    },
+    {
+      "title": "From Weather to Enhanced Weathering: Weather Foundation Models for Carbon Dioxide Removal at Operational Scale",
+      "link": "https://arxiv.org/abs/2610.28973",
+      "summary": "arXiv:2610.28973v1 Announce Type: new Abstract: Enhanced Rock Weathering (ERW) is a carbon removal solution with the potential to remove gigatons of CO$_2$ per year, but quantifying that removal today requires dense soil sampling and laboratory analysis. We evaluate five weather Foundation Models (",
+      "published": "2026-10-22T00:00:00-04:00",
+      "guid": "oai:arXiv.org:2610.28973v1",
+      "feed_id": "arxiv-cs-lg",
+      "journal": "arXiv",
+      "domain": "computer-science"
+    },
+    {
+      "title": "How Does Orthogonalization Adapt to the Neural Network Hessian Structure? A Gradient Self Outer-Product Analysis at Initialization",
+      "link": "https://arxiv.org/abs/2610.28975",
+      "summary": "arXiv:2610.28975v1 Announce Type: new Abstract: Muon orthogonalizes a weight matrix's momentum before each step, and on neural networks this simple preconditioner beats AdamW in a wide range of tasks. Existing analyses explain Muon within general optimization frameworks or on a few specific models,",
+      "published": "2026-10-22T00:00:00-04:00",
+      "guid": "oai:arXiv.org:2610.28975v1",
+      "feed_id": "arxiv-cs-lg",
+      "journal": "arXiv",
+      "domain": "computer-science"
+    },
+    {
+      "title": "SSMCGM-Stream: A Streaming State-Space Model for Personalized Diabetes Management",
+      "link": "https://arxiv.org/abs/2610.28976",
+      "summary": "arXiv:2610.28976v1 Announce Type: new Abstract: Continuous glucose monitoring supports diabetes management but requires forecasting models that are accurate, interpretable, and efficient enough for real-time deployment. We present SSMCGM-Stream, a streaming state-space model that maintains a person",
+      "published": "2026-10-22T00:00:00-04:00",
+      "guid": "oai:arXiv.org:2610.28976v1",
+      "feed_id": "arxiv-cs-lg",
+      "journal": "arXiv",
+      "domain": "computer-science"
+    },
+    {
+      "title": "Attention-based Classification for Indirect Prompt Injection",
+      "link": "https://arxiv.org/abs/2610.28988",
+      "summary": "arXiv:2610.28988v1 Announce Type: new Abstract: Indirect prompt injection (IPI) attacks, in which adversarial instructions are embedded in external data processed by a language model, pose a significant threat to the integrity of deployed LLM agents. Attention Tracker (Hung et al., 2025) is a recen",
+      "published": "2026-10-22T00:00:00-04:00",
+      "guid": "oai:arXiv.org:2610.28988v1",
+      "feed_id": "arxiv-cs-lg",
+      "journal": "arXiv",
+      "domain": "computer-science"
+    },
+    {
+      "title": "Doob-Based Generative Policy Optimization",
+      "link": "https://arxiv.org/abs/2610.28990",
+      "summary": "arXiv:2610.28990v1 Announce Type: new Abstract: Diffusion and flow models provide expressive policy classes for robotic and sequential decision-making systems. However, their action likelihoods are generally intractable, limiting the direct use of widely adopted policy optimization methods such as",
+      "published": "2026-10-22T00:00:00-04:00",
+      "guid": "oai:arXiv.org:2610.28990v1",
+      "feed_id": "arxiv-cs-lg",
+      "journal": "arXiv",
+      "domain": "computer-science"
+    },
+    {
+      "title": "Rethinking Time Series Tokenization from a Frequency Perspective",
+      "link": "https://arxiv.org/abs/2610.28997",
+      "summary": "arXiv:2610.28997v1 Announce Type: new Abstract: Tokenization that partitions time series into subsequences has become a foundational paradigm in modern time series modeling. However, we find that current tokenization strategies inherently introduce spectral distortions, forcing the learned represen",
+      "published": "2026-10-22T00:00:00-04:00",
+      "guid": "oai:arXiv.org:2610.28997v1",
+      "feed_id": "arxiv-cs-lg",
+      "journal": "arXiv",
+      "domain": "computer-science"
+    },
+    {
+      "title": "FlashNext-RL: A System Optimization Study for Long-Horizon Agentic RL of Qwen3.8-Flash-Next",
+      "link": "https://arxiv.org/abs/2610.28998",
+      "summary": "arXiv:2610.28998v1 Announce Type: new Abstract: Long-horizon agentic reinforcement learning (RL) requires both efficient rollout generation and training on long sequences. However, the memory requirements and model-specific operators of Qwen3.8-Flash-Next make this difficult with existing open-sour",
+      "published": "2026-10-22T00:00:00-04:00",
+      "guid": "oai:arXiv.org:2610.28998v1",
+      "feed_id": "arxiv-cs-lg",
+      "journal": "arXiv",
+      "domain": "computer-science"
+    },
+    {
+      "title": "Local and Sparse Kernel Operator Learning for Incompressible Flows: An Operator Lagrange Formulation",
+      "link": "https://arxiv.org/abs/2610.29009",
+      "summary": "arXiv:2610.29009v1 Announce Type: new Abstract: We present a local and sparse kernel method for learning the solution operators of incompressible flows. It builds on our earlier property-preserving kernel method, whose global output reconstruction and dense operator regression scale poorly. Our met",
+      "published": "2026-10-22T00:00:00-04:00",
+      "guid": "oai:arXiv.org:2610.29009v1",
+      "feed_id": "arxiv-cs-lg",
+      "journal": "arXiv",
+      "domain": "computer-science"
+    },
+    {
+      "title": "Dissimilarity-Based Markov Decision Processes for Stabilizing State Distributions",
+      "link": "https://arxiv.org/abs/2610.29024",
+      "summary": "arXiv:2610.29024v1 Announce Type: new Abstract: Reinforcement learning for stochastic systems typically optimizes expected cumulative rewards, while reliable and repeatable behavior also depends on how the state distribution evolves over time. Optimizing expected return alone does not guarantee tha",
+      "published": "2026-10-22T00:00:00-04:00",
+      "guid": "oai:arXiv.org:2610.29024v1",
+      "feed_id": "arxiv-cs-lg",
+      "journal": "arXiv",
+      "domain": "computer-science"
+    },
+    {
+      "title": "Better Policies, Worse Verifier Audits",
+      "link": "https://arxiv.org/abs/2610.29029",
+      "summary": "arXiv:2610.29029v1 Announce Type: new Abstract: Verifier stacks increasingly sit inside post-training and test-time compute loops. We study a specific control loop: a component verifier is evaluated on fresh policy outputs against the full success label and refreshed when that aggregate score falls",
+      "published": "2026-10-22T00:00:00-04:00",
+      "guid": "oai:arXiv.org:2610.29029v1",
+      "feed_id": "arxiv-cs-lg",
+      "journal": "arXiv",
+      "domain": "computer-science"
+    },
+    {
+      "title": "Gate Initialisation versus Recurrent Dropout and Zoneout in Learning Long Dependencies: A Controlled Study of LSTM and GRU Networks on Synthetic Tasks",
+      "link": "https://arxiv.org/abs/2610.29034",
+      "summary": "arXiv:2610.29034v1 Announce Type: new Abstract: Dropout and zoneout are routinely added to long short-term memory (LSTM) and gated recurrent unit (GRU) networks, but, to our knowledge, their placements have not been crossed with gate initialisation in a factorial design, and it is not known whether",
+      "published": "2026-10-22T00:00:00-04:00",
+      "guid": "oai:arXiv.org:2610.29034v1",
+      "feed_id": "arxiv-cs-lg",
+      "journal": "arXiv",
+      "domain": "computer-science"
+    },
+    {
+      "title": "ART-MPG: Autoregressive R/T Manifold Path Guiding",
+      "link": "https://arxiv.org/abs/2610.29049",
+      "summary": "arXiv:2610.29049v1 Announce Type: new Abstract: Specular chains concentrate important transport in small regions of path space and the structure depends on chain topology. We introduce ART-MPG, a compact neural model that samples chain length, an autoregressive reflection/transmission (R/T) string,",
+      "published": "2026-10-22T00:00:00-04:00",
+      "guid": "oai:arXiv.org:2610.29049v1",
+      "feed_id": "arxiv-cs-lg",
+      "journal": "arXiv",
+      "domain": "computer-science"
+    },
+    {
+      "title": "Dynamics of Hidden Learning Structure",
+      "link": "https://arxiv.org/abs/2610.29054",
+      "summary": "arXiv:2610.29054v1 Announce Type: new Abstract: A learner's present predictions do not fully determine how it will learn next. We study the dynamics of hidden learning structure through two related operations. Fiber Regulation Theory (FRT) describes protected repair of existing function and the lea",
+      "published": "2026-10-22T00:00:00-04:00",
+      "guid": "oai:arXiv.org:2610.29054v1",
+      "feed_id": "arxiv-cs-lg",
+      "journal": "arXiv",
+      "domain": "computer-science"
+    },
+    {
+      "title": "Distilling Multi-Teacher Scoring Principles for Unsupervised Time Series Anomaly Detection",
+      "link": "https://arxiv.org/abs/2610.29063",
+      "summary": "arXiv:2610.29063v1 Announce Type: new Abstract: Time series anomalies take diverse forms, and individual detectors encode different anomaly scoring principles that rarely cover all anomaly types. Recent unsupervised time-series anomaly detectors provide complementary scoring signals, yet deploying",
+      "published": "2026-10-22T00:00:00-04:00",
+      "guid": "oai:arXiv.org:2610.29063v1",
+      "feed_id": "arxiv-cs-lg",
+      "journal": "arXiv",
+      "domain": "computer-science"
+    },
+    {
+      "title": "The Price of Choice in Selective Prediction",
+      "link": "https://arxiv.org/abs/2610.29067",
+      "summary": "arXiv:2610.29067v1 Announce Type: new Abstract: A selective classifier may be claimed to satisfy a risk-coverage contract if some rule from a predeclared menu (a threshold or a union of $K$ score intervals) attains coverage at least $\\kappa$ and error at most $\\alpha$. Refuting this existential cla",
+      "published": "2026-10-22T00:00:00-04:00",
+      "guid": "oai:arXiv.org:2610.29067v1",
+      "feed_id": "arxiv-cs-lg",
+      "journal": "arXiv",
+      "domain": "computer-science"
+    },
+    {
+      "title": "Value-Rectified Distillation for Flow-based Offline Reinforcement Learning",
+      "link": "https://arxiv.org/abs/2610.29075",
+      "summary": "arXiv:2610.29075v1 Announce Type: new Abstract: We aim to address the problem of Out-of-Distribution (OOD) Mode Averaging, a critical problem that emerges when distilling Flow Matching (FM) based behavior policies in offline Reinforcement Learning (RL): When learning over multi-modal datasets, stan",
+      "published": "2026-10-22T00:00:00-04:00",
+      "guid": "oai:arXiv.org:2610.29075v1",
+      "feed_id": "arxiv-cs-lg",
+      "journal": "arXiv",
+      "domain": "computer-science"
+    },
+    {
+      "title": "Causal world models under physical parameter shifts",
+      "link": "https://arxiv.org/abs/2610.29088",
+      "summary": "arXiv:2610.29088v1 Announce Type: new Abstract: World models predict how embodied systems evolve under actions, but their accuracy can degrade when physical conditions move outside the training distribution. We study two components of causal modeling: which inputs a predictor may use, and how its m",
+      "published": "2026-10-22T00:00:00-04:00",
+      "guid": "oai:arXiv.org:2610.29088v1",
+      "feed_id": "arxiv-cs-lg",
+      "journal": "arXiv",
+      "domain": "computer-science"
+    },
+    {
+      "title": "MHeatmap: Two-Walk Laplacian Reordering and Mosaic Layout for Rectangular Matrix Visualization",
+      "link": "https://arxiv.org/abs/2610.29114",
+      "summary": "arXiv:2610.29114v1 Announce Type: new Abstract: Weighted rectangular matrices record relations between two types of objects, such as occupations and industries, documents and terms, origins and destinations, or annotated classes and computed clusters. Their heatmaps become difficult to read when ar",
+      "published": "2026-10-22T00:00:00-04:00",
+      "guid": "oai:arXiv.org:2610.29114v1",
+      "feed_id": "arxiv-cs-lg",
+      "journal": "arXiv",
+      "domain": "computer-science"
+    },
+    {
+      "title": "Mitigating Reward Hacking in Realistic Scenarios Through Representation Engineering",
+      "link": "https://arxiv.org/abs/2610.29129",
+      "summary": "arXiv:2610.29129v1 Announce Type: new Abstract: Reward hacking is a major problem in current production machine learning systems, resulting in costly and dangerous failures. Here we study how to monitor for and mitigate reward hacking in realistic settings, including tool calls and long contexts. W",
+      "published": "2026-10-22T00:00:00-04:00",
+      "guid": "oai:arXiv.org:2610.29129v1",
+      "feed_id": "arxiv-cs-lg",
+      "journal": "arXiv",
+      "domain": "computer-science"
+    },
+    {
+      "title": "Conditional Flow Models Convert Epistemic Uncertainty into Apparent Aleatoric Variance",
+      "link": "https://arxiv.org/abs/2610.29172",
+      "summary": "arXiv:2610.29172v1 Announce Type: new Abstract: Conditional Flow Models (CFMs) are increasingly being used in place of deterministic predictors across machine learning, including for tasks that were classically formulated as regression. Given their success in such tasks, we ask the question: what u",
+      "published": "2026-10-22T00:00:00-04:00",
+      "guid": "oai:arXiv.org:2610.29172v1",
+      "feed_id": "arxiv-cs-lg",
+      "journal": "arXiv",
+      "domain": "computer-science"
+    },
+    {
+      "title": "Truncated Out-of-Bag Probability Gain: A Noise-Robust Criterion for Random-Forest Wrapper Feature Selection",
+      "link": "https://arxiv.org/abs/2610.29195",
+      "summary": "arXiv:2610.29195v1 Announce Type: new Abstract: Random-Forest wrapper feature selection can use out-of-bag (OOB) predictions as a built-in validation signal, but the criteria that decide each forward step accumulate OOB estimation noise. We propose TOP-Gain (Truncated Out-of-bag Probability Gain),",
+      "published": "2026-10-22T00:00:00-04:00",
+      "guid": "oai:arXiv.org:2610.29195v1",
+      "feed_id": "arxiv-cs-lg",
+      "journal": "arXiv",
+      "domain": "computer-science"
+    },
+    {
+      "title": "PerSPL: Personalized Semi-supervised Preference Learning",
+      "link": "https://arxiv.org/abs/2610.29219",
+      "summary": "arXiv:2610.29219v1 Announce Type: new Abstract: Personalized reward models require user-specific preference comparisons, but collecting such feedback is costly and provides only limited supervision for each user. At the same time, large pools of responses can be generated without user identities or",
+      "published": "2026-10-22T00:00:00-04:00",
+      "guid": "oai:arXiv.org:2610.29219v1",
+      "feed_id": "arxiv-cs-lg",
+      "journal": "arXiv",
+      "domain": "computer-science"
+    },
+    {
+      "title": "Delay-Guided Attention for Quality Prediction in Multistage Manufacturing",
+      "link": "https://arxiv.org/abs/2610.29220",
+      "summary": "arXiv:2610.29220v1 Announce Type: new Abstract: Quality prediction in multistage manufacturing is challenging when inter-stage lags vary over time, as measurements taken at the same timestamp may reflect different process states. Existing approaches often preserve production order but fuse timestam",
+      "published": "2026-10-22T00:00:00-04:00",
+      "guid": "oai:arXiv.org:2610.29220v1",
+      "feed_id": "arxiv-cs-lg",
+      "journal": "arXiv",
+      "domain": "computer-science"
+    },
+    {
+      "title": "MA-UITD: Offline Multi-Agent Reward Inference for Characterizing Continuous Social Behavior",
+      "link": "https://arxiv.org/abs/2610.29237",
+      "summary": "arXiv:2610.29237v1 Announce Type: new Abstract: Multi-agent inverse reinforcement learning offers a powerful framework not only for imitation learning but also for understanding the neural computations supporting social interactions and decision-making. Inferring rewards from interacting agents is",
+      "published": "2026-10-22T00:00:00-04:00",
+      "guid": "oai:arXiv.org:2610.29237v1",
+      "feed_id": "arxiv-cs-lg",
+      "journal": "arXiv",
+      "domain": "computer-science"
+    },
+    {
+      "title": "Extending FAIR Principles with Observability for Trustworthy Federated Learning",
+      "link": "https://arxiv.org/abs/2610.29252",
+      "summary": "arXiv:2610.29252v1 Announce Type: new Abstract: Federated learning (FL) keeps data at its source, but locality alone does not make a federation trustworthy. Without sufficient observability, an aggregator cannot determine whether the client service was healthy, the local data pipeline was trustwort",
+      "published": "2026-10-22T00:00:00-04:00",
+      "guid": "oai:arXiv.org:2610.29252v1",
+      "feed_id": "arxiv-cs-lg",
+      "journal": "arXiv",
+      "domain": "computer-science"
+    },
+    {
+      "title": "Estimating Performance for Safe Deployment of Machine Learning Models",
+      "link": "https://arxiv.org/abs/2610.29262",
+      "summary": "arXiv:2610.29262v1 Announce Type: new Abstract: The main challenge in applying deep neural networks to real-world scenarios lies in distributional discrepancies between training and test datasets, often caused by variations in data acquisition conditions. Assessing the performance of pre-trained mo",
+      "published": "2026-10-22T00:00:00-04:00",
+      "guid": "oai:arXiv.org:2610.29262v1",
+      "feed_id": "arxiv-cs-lg",
+      "journal": "arXiv",
+      "domain": "computer-science"
+    },
+    {
+      "title": "Design and Tuning of Multi-Agent Systems Using Bayesian Evolutionary Optimization",
+      "link": "https://arxiv.org/abs/2610.29276",
+      "summary": "arXiv:2610.29276v1 Announce Type: new Abstract: Designing effective multi-agent systems (MAS) remains a challenging and resource-intensive task. We propose a Bayesian Evolutionary Optimization framework for automatically discovering task-specific MAS topologies. The approach combines evolutionary o",
+      "published": "2026-10-22T00:00:00-04:00",
+      "guid": "oai:arXiv.org:2610.29276v1",
+      "feed_id": "arxiv-cs-lg",
+      "journal": "arXiv",
+      "domain": "computer-science"
+    },
+    {
+      "title": "Flat-RLVR: Sharpness-Aware Reinforcement Learning with Verifiable Rewards for Reasoning Capacity in LLMs",
+      "link": "https://arxiv.org/abs/2610.29281",
+      "summary": "arXiv:2610.29281v1 Announce Type: new Abstract: Reinforcement learning with verifiable rewards (RLVR), particularly through group-relative policy optimization (GRPO), has emerged as a central paradigm for the post-training of large language models (LLMs). While RLVR is highly effective at enhancing",
+      "published": "2026-10-22T00:00:00-04:00",
+      "guid": "oai:arXiv.org:2610.29281v1",
+      "feed_id": "arxiv-cs-lg",
+      "journal": "arXiv",
+      "domain": "computer-science"
+    },
+    {
+      "title": "Approximate Solomonoff Induction: On the Robustness of Learned Universal Predictors",
+      "link": "https://arxiv.org/abs/2610.29289",
+      "summary": "arXiv:2610.29289v1 Announce Type: new Abstract: Why large language models trained via log-loss minimization over massive and diverse datasets exhibit broad capabilities and generalizable skills is not yet fully understood. Grau-Moya et al. (ICML 2024) offer a conceptual explanation through the lens",
+      "published": "2026-10-22T00:00:00-04:00",
+      "guid": "oai:arXiv.org:2610.29289v1",
+      "feed_id": "arxiv-cs-lg",
+      "journal": "arXiv",
+      "domain": "computer-science"
+    },
+    {
+      "title": "ExpEvolve: Structuring and Reusing Experience for Open-Ended Discovery",
+      "link": "https://arxiv.org/abs/2610.29303",
+      "summary": "arXiv:2610.29303v1 Announce Type: new Abstract: Evolutionary coding agents such as AlphaEvolve are one of the notable successes in using Large Language Models (LLMs) to build AI Scientists. These agents tackle open-ended scientific problems by iteratively improving and evolving programs, leveraging",
+      "published": "2026-10-22T00:00:00-04:00",
+      "guid": "oai:arXiv.org:2610.29303v1",
+      "feed_id": "arxiv-cs-lg",
+      "journal": "arXiv",
+      "domain": "computer-science"
+    },
+    {
+      "title": "Interpretable Cutting Plane Selection for Mixed-Integer Linear Programming Using Genetic Programming",
+      "link": "https://arxiv.org/abs/2610.29311",
+      "summary": "arXiv:2610.29311v1 Announce Type: new Abstract: Cutting planes (cuts) remove fractional solutions from mixed-integer linear programs (MILPs) without excluding any feasible integer solutions, making them a key ingredient in modern MILP solvers. Current state-of-the-art solvers rely on fine-tuned han",
+      "published": "2026-10-22T00:00:00-04:00",
+      "guid": "oai:arXiv.org:2610.29311v1",
+      "feed_id": "arxiv-cs-lg",
+      "journal": "arXiv",
+      "domain": "computer-science"
+    },
+    {
+      "title": "YingLan: A Multimodal Ocean Foundation Model for Unified Representation Learning from Heterogeneous Observations",
+      "link": "https://arxiv.org/abs/2610.29313",
+      "summary": "arXiv:2610.29313v1 Announce Type: new Abstract: Multimodal ocean modeling remains challenging due to substantial heterogeneity in data structures, physical semantics, and spatiotemporal characteristics across satellite imagery, gridded oceanographic fields, and buoy observations. Existing approache",
+      "published": "2026-10-22T00:00:00-04:00",
+      "guid": "oai:arXiv.org:2610.29313v1",
+      "feed_id": "arxiv-cs-lg",
+      "journal": "arXiv",
+      "domain": "computer-science"
+    },
+    {
+      "title": "DISRL: Dual-Scale Incremental Semi-Supervised Reinforcement Learning for Dynamic Community Tracking",
+      "link": "https://arxiv.org/abs/2610.29315",
+      "summary": "arXiv:2610.29315v1 Announce Type: new Abstract: Dynamic local community detection tracks the evolving community of designated seed nodes across graph snapshots. However, it faces two critical challenges: temporal supervision uncertainty, where sparse and outdated labels fail to provide seed-specifi",
+      "published": "2026-10-22T00:00:00-04:00",
+      "guid": "oai:arXiv.org:2610.29315v1",
+      "feed_id": "arxiv-cs-lg",
+      "journal": "arXiv",
+      "domain": "computer-science"
+    },
+    {
+      "title": "BrainCodes: A Lightweight EEG Foundation Model over Discrete Neural Codes",
+      "link": "https://arxiv.org/abs/2610.29320",
+      "summary": "arXiv:2610.29320v1 Announce Type: new Abstract: Recent electroencephalography (EEG) foundation models increasingly emphasize model scale, potentially limiting their deployment on resource-constrained devices and in everyday environments. We argue that transferable EEG features can instead be learne",
+      "published": "2026-10-22T00:00:00-04:00",
+      "guid": "oai:arXiv.org:2610.29320v1",
+      "feed_id": "arxiv-cs-lg",
+      "journal": "arXiv",
+      "domain": "computer-science"
+    },
+    {
+      "title": "Reader--Writer Coupling in Transformer MLPs",
+      "link": "https://arxiv.org/abs/2610.29340",
+      "summary": "arXiv:2610.29340v1 Announce Type: new Abstract: A transformer MLP gives each hidden channel two roles: a reader that decides when the channel responds, and a writer that decides what it adds back to the residual stream. Read as a key--value memory, the layer can be measured one factor set at a time",
+      "published": "2026-10-22T00:00:00-04:00",
+      "guid": "oai:arXiv.org:2610.29340v1",
+      "feed_id": "arxiv-cs-lg",
+      "journal": "arXiv",
+      "domain": "computer-science"
+    },
+    {
+      "title": "Benchmarking and Error Analysis of Deep Search and Deep Research LLM Agents",
+      "link": "https://arxiv.org/abs/2610.29346",
+      "summary": "arXiv:2610.29346v1 Announce Type: new Abstract: As Large Language Models (LLMs) evolve into autonomous Deep Search and Deep Research Agents capable of executing long-horizon, multi-step tasks, evaluating their reliability becomes increasingly critical. However, existing evaluation paradigms predomi",
+      "published": "2026-10-22T00:00:00-04:00",
+      "guid": "oai:arXiv.org:2610.29346v1",
+      "feed_id": "arxiv-cs-lg",
+      "journal": "arXiv",
+      "domain": "computer-science"
+    },
+    {
+      "title": "Data Schedules and Learning Rate Schedules Should Be Designed Together",
+      "link": "https://arxiv.org/abs/2610.29348",
+      "summary": "arXiv:2610.29348v1 Announce Type: new Abstract: Mid-training (MT) is a training phase in LLM training pipelines that continues pretraining (PT) on smaller datasets of higher value. Taking the PT and MT phases as a whole, training usually starts with only PT data and then transitions completely to M",
+      "published": "2026-10-22T00:00:00-04:00",
+      "guid": "oai:arXiv.org:2610.29348v1",
+      "feed_id": "arxiv-cs-lg",
+      "journal": "arXiv",
+      "domain": "computer-science"
+    },
+    {
+      "title": "GaP-MoE : Explicit Expert Specialization in Mixture-of-Experts via Orthogonal Gradient Accumulation and Projection",
+      "link": "https://arxiv.org/abs/2610.29355",
+      "summary": "arXiv:2610.29355v1 Announce Type: new Abstract: Sparse Mixture-of-Experts (SMoE) models improve scalability by routing input tokens to only a subset of expert networks, but they often suffer from representation collapse, in which multiple experts converge toward similar functions and lose their int",
+      "published": "2026-10-22T00:00:00-04:00",
+      "guid": "oai:arXiv.org:2610.29355v1",
+      "feed_id": "arxiv-cs-lg",
+      "journal": "arXiv",
+      "domain": "computer-science"
+    },
+    {
+      "title": "Compositional neural networks for multimodal X-ray and neutron scattering inversion",
+      "link": "https://arxiv.org/abs/2610.29362",
+      "summary": "arXiv:2610.29362v1 Announce Type: new Abstract: X-ray and neutron scattering are indispensable for structural characterization across condensed-matter physics and materials science. Yet, because scattering experiments generally record intensities without phase information, distinct structures can y",
+      "published": "2026-10-22T00:00:00-04:00",
+      "guid": "oai:arXiv.org:2610.29362v1",
+      "feed_id": "arxiv-cs-lg",
+      "journal": "arXiv",
+      "domain": "computer-science"
+    },
+    {
+      "title": "Cascading Bandits with Noisy Observations: Algorithms and Regret Bounds",
+      "link": "https://arxiv.org/abs/2610.29381",
+      "summary": "arXiv:2610.29381v1 Announce Type: new Abstract: We propose a novel stochastic cascading bandit setup where probing an ordered shortlist of $K$ out of $L$ arms incurs position-dependent costs, and the learner observes only noisy feedback regarding each arm's true output. We identify a sub-class of n",
+      "published": "2026-10-22T00:00:00-04:00",
+      "guid": "oai:arXiv.org:2610.29381v1",
+      "feed_id": "arxiv-cs-lg",
+      "journal": "arXiv",
+      "domain": "computer-science"
+    },
+    {
+      "title": "Parallelizable Probabilistic Latent Reasoning for Diverse Reasoning Trajectories",
+      "link": "https://arxiv.org/abs/2610.29385",
+      "summary": "arXiv:2610.29385v1 Announce Type: new Abstract: Language models relying on verbalized Chain-of-Thought (CoT) are constrained to token-by-token generation in the language space, where many tokens serve textual coherence rather than core reasoning. This entangles genuine differences in logical trajec",
+      "published": "2026-10-22T00:00:00-04:00",
+      "guid": "oai:arXiv.org:2610.29385v1",
+      "feed_id": "arxiv-cs-lg",
+      "journal": "arXiv",
+      "domain": "computer-science"
+    },
+    {
+      "title": "Nominate-then-Adjudicate: LLM-Assisted One-Pass and Per-Instance MIP Solver Tuning",
+      "link": "https://arxiv.org/abs/2610.29391",
+      "summary": "arXiv:2610.29391v1 Announce Type: new Abstract: Mixed-integer programming solvers expose hundreds or even thousands of parameters whose best setting varies per instance, yet per-instance search is prohibitively expensive. We frame this as configuration for heterogeneous Big Data optimization worklo",
+      "published": "2026-10-22T00:00:00-04:00",
+      "guid": "oai:arXiv.org:2610.29391v1",
+      "feed_id": "arxiv-cs-lg",
+      "journal": "arXiv",
+      "domain": "computer-science"
+    },
+    {
+      "title": "Progressive Permutation Alignment with Temperature-Controlled Spectral Sharpening",
+      "link": "https://arxiv.org/abs/2610.29396",
+      "summary": "arXiv:2610.29396v1 Announce Type: new Abstract: In implicit neural representations (INRs), 3D signals are encoded directly in network weights, making stable weight-space operations essential. However, permutation symmetry causes independently trained yet functionally equivalent models to appear dis",
+      "published": "2026-10-22T00:00:00-04:00",
+      "guid": "oai:arXiv.org:2610.29396v1",
+      "feed_id": "arxiv-cs-lg",
+      "journal": "arXiv",
+      "domain": "computer-science"
+    },
+    {
+      "title": "The Predictive--Optimization Gap in GuanDan Self-Play",
+      "link": "https://arxiv.org/abs/2610.29411",
+      "summary": "arXiv:2610.29411v1 Announce Type: new Abstract: Outcome-predictive signals are often treated as promising optimization targets in reinforcement learning, but predictive validity and optimization utility are different claims. We expose this distinction in GuanDan, a multi-round imperfect-information",
+      "published": "2026-10-22T00:00:00-04:00",
+      "guid": "oai:arXiv.org:2610.29411v1",
+      "feed_id": "arxiv-cs-lg",
+      "journal": "arXiv",
+      "domain": "computer-science"
+    },
+    {
+      "title": "Alternative Strategies for Active Learning with Bayesian Bradley Terry Model",
+      "link": "https://arxiv.org/abs/2610.29416",
+      "summary": "arXiv:2610.29416v1 Announce Type: new Abstract: Comparative judgement uses pairwise comparisons to rank items, but recovering accurate rankings from a limited number of judgements depends on both the inference method and the pairs selected. We developed a Bayesian Bradley-Terry model (BBTM) that us",
+      "published": "2026-10-22T00:00:00-04:00",
+      "guid": "oai:arXiv.org:2610.29416v1",
+      "feed_id": "arxiv-cs-lg",
+      "journal": "arXiv",
+      "domain": "computer-science"
+    },
+    {
+      "title": "Generalization Bounds via Vector-Valued $L_p$ Correlation $V_\\alpha$",
+      "link": "https://arxiv.org/abs/2610.29425",
+      "summary": "arXiv:2610.29425v1 Announce Type: new Abstract: Understanding generalization of randomized learning algorithms remains a central challenge. Mutual-information and total-variation bounds provide complementary ways to quantify data--hypothesis dependence, but they can behave quite differently in high",
+      "published": "2026-10-22T00:00:00-04:00",
+      "guid": "oai:arXiv.org:2610.29425v1",
+      "feed_id": "arxiv-cs-lg",
+      "journal": "arXiv",
+      "domain": "computer-science"
+    },
+    {
+      "title": "BIRD-RL: Scaling Agentic Reinforcement Learning over Stateful Data-Centric Environments",
+      "link": "https://arxiv.org/abs/2610.29426",
+      "summary": "arXiv:2610.29426v1 Announce Type: new Abstract: While agentic reinforcement learning (RL) has emerged as a promising paradigm for training small language models (SLMs), existing frameworks are predominantly tool-centric and struggle with data-centric environments. Specifically, applying tool-centri",
+      "published": "2026-10-22T00:00:00-04:00",
+      "guid": "oai:arXiv.org:2610.29426v1",
+      "feed_id": "arxiv-cs-lg",
+      "journal": "arXiv",
+      "domain": "computer-science"
+    },
+    {
+      "title": "One Act, Many Masks: Effect-Marginal Policy Optimization for Long-Horizon Agents",
+      "link": "https://arxiv.org/abs/2610.29427",
+      "summary": "arXiv:2610.29427v1 Announce Type: new Abstract: Recent advances in multi-turn reinforcement learning (RL) have substantially improved the performance of LLM agents on complex, long-horizon interactive tasks. However, despite progress in fine-grained credit assignment, policy optimization still appl",
+      "published": "2026-10-22T00:00:00-04:00",
+      "guid": "oai:arXiv.org:2610.29427v1",
+      "feed_id": "arxiv-cs-lg",
+      "journal": "arXiv",
+      "domain": "computer-science"
+    },
+    {
+      "title": "How Far Can Foundation Models Be Distilled for Efficient Jet Tagging?",
+      "link": "https://arxiv.org/abs/2610.29439",
+      "summary": "arXiv:2610.29439v1 Announce Type: new Abstract: Jet tagging is one of the most important applications of machine learning at the Large Hadron Collider. Recent models build in more physics knowledge or rely on large-scale pretraining, but the experiments place strict limits on their inference cost.",
+      "published": "2026-10-22T00:00:00-04:00",
+      "guid": "oai:arXiv.org:2610.29439v1",
+      "feed_id": "arxiv-cs-lg",
+      "journal": "arXiv",
+      "domain": "computer-science"
+    },
+    {
+      "title": "Harness Scaling for Generalizable Agentic Reinforcement Learning",
+      "link": "https://arxiv.org/abs/2610.29458",
+      "summary": "arXiv:2610.29458v1 Announce Type: new Abstract: Agent harnesses have become a central component of modern agentic systems, shaping how models use tools, manage context, and coordinate long-horizon interaction. Realizing the benefits of these harnesses depends on how effectively the underlying model",
+      "published": "2026-10-22T00:00:00-04:00",
+      "guid": "oai:arXiv.org:2610.29458v1",
+      "feed_id": "arxiv-cs-lg",
+      "journal": "arXiv",
+      "domain": "computer-science"
+    },
+    {
+      "title": "Asymmetry Tunneling Beyond Adaptive Equivariance Relaxation",
+      "link": "https://arxiv.org/abs/2610.29473",
+      "summary": "arXiv:2610.29473v1 Announce Type: new Abstract: Equivariant neural networks encode prescribed symmetries as powerful inductive biases, yet real-world data may exhibit symmetry-breaking structure that these priors cannot fully capture. Prior work has largely addressed this challenge through model-si",
+      "published": "2026-10-22T00:00:00-04:00",
+      "guid": "oai:arXiv.org:2610.29473v1",
+      "feed_id": "arxiv-cs-lg",
+      "journal": "arXiv",
+      "domain": "computer-science"
+    },
+    {
+      "title": "Density-Level Backward Error for Low-NFE Generative Flows",
+      "link": "https://arxiv.org/abs/2610.29475",
+      "summary": "arXiv:2610.29475v1 Announce Type: new Abstract: Low-NFE generative ODE sampling is constrained not only by solver order, but also by how a fixed budget of network evaluations is distributed along the flow. We develop a density-level backward-error framework that identifies the component of a solver",
+      "published": "2026-10-22T00:00:00-04:00",
+      "guid": "oai:arXiv.org:2610.29475v1",
+      "feed_id": "arxiv-cs-lg",
+      "journal": "arXiv",
+      "domain": "computer-science"
+    },
+    {
+      "title": "Generative Modeling via Nonlinear Schr\\\"odinger Bridges and Branching Diffusions",
+      "link": "https://arxiv.org/abs/2610.29476",
+      "summary": "arXiv:2610.29476v1 Announce Type: new Abstract: We propose a new generative modeling framework grounded in forward-backward partial differential equations (PDEs). These equations arise naturally in mean-field game (MFG) theory, and are closely related to nonlinear Schr\\\"odinger systems. Our main co",
+      "published": "2026-10-22T00:00:00-04:00",
+      "guid": "oai:arXiv.org:2610.29476v1",
+      "feed_id": "arxiv-cs-lg",
+      "journal": "arXiv",
+      "domain": "computer-science"
+    },
+    {
+      "title": "Rethinking Agentic Model Orchestration for Time Series Forecasting",
+      "link": "https://arxiv.org/abs/2610.29504",
+      "summary": "arXiv:2610.29504v1 Announce Type: new Abstract: Time series foundation models (TSFMs) perform unevenly across forecasting tasks. Recent work uses agentic model orchestration (AMO) to select or combine TSFMs, often outperforming individual forecasters. Yet these gains may reflect stronger or more co",
+      "published": "2026-10-22T00:00:00-04:00",
+      "guid": "oai:arXiv.org:2610.29504v1",
+      "feed_id": "arxiv-cs-lg",
+      "journal": "arXiv",
+      "domain": "computer-science"
+    },
+    {
+      "title": "Shortcut-Resistant CAM Distillation for Long-Tailed Recognition",
+      "link": "https://arxiv.org/abs/2610.29508",
+      "summary": "arXiv:2610.29508v1 Announce Type: new Abstract: Real-world datasets often follow a long-tailed distribution, making generalization to tail classes difficult. We revisit this problem through the lens of shortcut learning, where models prefer the easiest predictive cues (e.g., background or textures)",
+      "published": "2026-10-22T00:00:00-04:00",
+      "guid": "oai:arXiv.org:2610.29508v1",
+      "feed_id": "arxiv-cs-lg",
+      "journal": "arXiv",
+      "domain": "computer-science"
+    },
+    {
+      "title": "BRIDGE: An Acceptance Gate to Block False Improvements in Model Updates, with a Retrospective Clinical Evaluation",
+      "link": "https://arxiv.org/abs/2610.29515",
+      "summary": "arXiv:2610.29515v1 Announce Type: new Abstract: Models are updated repeatedly, and an update that looks better on validation data but not on new data is a false improvement that can misguide clinical decisions. The naive rule accepts every positive validation gain and is optimistic when the same da",
+      "published": "2026-10-22T00:00:00-04:00",
+      "guid": "oai:arXiv.org:2610.29515v1",
+      "feed_id": "arxiv-cs-lg",
+      "journal": "arXiv",
+      "domain": "computer-science"
+    },
+    {
+      "title": "Geometric knowledge spaces, Attention pairing and Architectures",
+      "link": "https://arxiv.org/abs/2610.29526",
+      "summary": "arXiv:2610.29526v1 Announce Type: new Abstract: In this paper, we propose a geometric approach to deriving attention mechanisms and exploring potential new transformer architectures. We begin by formalizing the notions of knowledge worlds and attention pairings, then demonstrate how this framework",
+      "published": "2026-10-22T00:00:00-04:00",
+      "guid": "oai:arXiv.org:2610.29526v1",
+      "feed_id": "arxiv-cs-lg",
+      "journal": "arXiv",
+      "domain": "computer-science"
+    },
+    {
+      "title": "Are Joint-Embedding Predictive Objectives Effective for Longitudinal EHRs?",
+      "link": "https://arxiv.org/abs/2610.29528",
+      "summary": "arXiv:2610.29528v1 Announce Type: new Abstract: Masked language modelling (MLM) is the dominant pretraining objective for transformer encoders applied to longitudinal electronic health records (EHRs). However, reconstructing individual events may overemphasise noisy or weakly informative observatio",
+      "published": "2026-10-22T00:00:00-04:00",
+      "guid": "oai:arXiv.org:2610.29528v1",
+      "feed_id": "arxiv-cs-lg",
+      "journal": "arXiv",
+      "domain": "computer-science"
+    },
+    {
+      "title": "Phase Transitions in Learning Driven by Extremal Data",
+      "link": "https://arxiv.org/abs/2610.29531",
+      "summary": "arXiv:2610.29531v1 Announce Type: new Abstract: We study an extremal regression problem, an example of multiple instance learning (MIL), where the predictors are given as multisets, called bags. The bag elements (called instances) possess hidden labels which are pooled to produce an observed bag-le",
+      "published": "2026-10-22T00:00:00-04:00",
+      "guid": "oai:arXiv.org:2610.29531v1",
+      "feed_id": "arxiv-cs-lg",
+      "journal": "arXiv",
+      "domain": "computer-science"
+    },
+    {
+      "title": "Block Diffusion for Longitudinal EHR: Accuracy, Efficiency, and Representation Trade-offs",
+      "link": "https://arxiv.org/abs/2610.29533",
+      "summary": "arXiv:2610.29533v1 Announce Type: new Abstract: Autoregressive (AR) models have proved effective for zero-shot prediction from longitudinal electronic health records, but impose strictly sequential generation on trajectories containing temporally clustered and interdependent clinical events. We inv",
+      "published": "2026-10-22T00:00:00-04:00",
+      "guid": "oai:arXiv.org:2610.29533v1",
+      "feed_id": "arxiv-cs-lg",
+      "journal": "arXiv",
+      "domain": "computer-science"
+    },
+    {
+      "title": "Stochastic Pruning of the DPO Computation Graph: 1.4x Faster Training and Lower Peak Memory",
+      "link": "https://arxiv.org/abs/2610.29538",
+      "summary": "arXiv:2610.29538v1 Announce Type: new Abstract: Direct preference optimization (DPO) incurs training costs in output scoring, sequence execution, and backpropagation, so reducing supervision alone does not necessarily save computation. We introduce a unified framework for stochastic pruning of the",
+      "published": "2026-10-22T00:00:00-04:00",
+      "guid": "oai:arXiv.org:2610.29538v1",
+      "feed_id": "arxiv-cs-lg",
+      "journal": "arXiv",
+      "domain": "computer-science"
+    },
+    {
+      "title": "WRDO: Weighted Refusal Direction Optimization in Aligned Language Models",
+      "link": "https://arxiv.org/abs/2610.29555",
+      "summary": "arXiv:2610.29555v1 Announce Type: new Abstract: Aligned large language models are trained to comply with benign requests while refusing harmful ones. However, recent work shows that this refusal behavior is fragile and can often be disrupted by simple activation- or weight-space interventions. In p",
+      "published": "2026-10-22T00:00:00-04:00",
+      "guid": "oai:arXiv.org:2610.29555v1",
+      "feed_id": "arxiv-cs-lg",
+      "journal": "arXiv",
+      "domain": "computer-science"
+    },
+    {
+      "title": "SOAR: Social and Opinion-Aware Recommendations",
+      "link": "https://arxiv.org/abs/2610.29556",
+      "summary": "arXiv:2610.29556v1 Announce Type: new Abstract: One of the enduring challenges in online platforms is recommendation. Both communities and advertisers face difficulties in analyzing complex user behavior, identifying habits and evolving preferences, and providing timely recommendations that are rel",
+      "published": "2026-10-22T00:00:00-04:00",
+      "guid": "oai:arXiv.org:2610.29556v1",
+      "feed_id": "arxiv-cs-lg",
+      "journal": "arXiv",
+      "domain": "computer-science"
+    },
+    {
+      "title": "Implicit Feature Reweighting for Label-Free Graph Generalization",
+      "link": "https://arxiv.org/abs/2610.29571",
+      "summary": "arXiv:2610.29571v1 Announce Type: new Abstract: Graph-level out-of-distribution (OOD) generalization is critical for deploying graph neural networks in real-world applications where distribution shifts are inevitable. Existing approaches typically require class labels during representation learning",
+      "published": "2026-10-22T00:00:00-04:00",
+      "guid": "oai:arXiv.org:2610.29571v1",
+      "feed_id": "arxiv-cs-lg",
+      "journal": "arXiv",
+      "domain": "computer-science"
+    },
+    {
+      "title": "Private Online Prediction from Experts with Small Losses",
+      "link": "https://arxiv.org/abs/2610.29575",
+      "summary": "arXiv:2610.29575v1 Announce Type: new Abstract: We consider online prediction from experts, a fundamental problem in machine learning, under differential privacy constraints. Existing private algorithms achieve near-optimal regret $\\tilde{O}(\\sqrt{T})$, where $T$ is the time horizon. However, this",
+      "published": "2026-10-22T00:00:00-04:00",
+      "guid": "oai:arXiv.org:2610.29575v1",
+      "feed_id": "arxiv-cs-lg",
+      "journal": "arXiv",
+      "domain": "computer-science"
+    },
+    {
+      "title": "The Reflexivity Threshold: A Phase Transition for Multi-Agent Performative Prediction",
+      "link": "https://arxiv.org/abs/2610.29577",
+      "summary": "arXiv:2610.29577v1 Announce Type: new Abstract: Many learning systems are performative: once deployed, their predictions change the data distribution on which future models are trained. In multi-agent settings, this feedback is routed through a network of interacting learners, so stability depends",
+      "published": "2026-10-22T00:00:00-04:00",
+      "guid": "oai:arXiv.org:2610.29577v1",
+      "feed_id": "arxiv-cs-lg",
+      "journal": "arXiv",
+      "domain": "computer-science"
+    },
+    {
+      "title": "Fast Bayesian Optimization Through Linear Models",
+      "link": "https://arxiv.org/abs/2610.29580",
+      "summary": "arXiv:2610.29580v1 Announce Type: new Abstract: Bayesian optimization (BO) is typically used only for problems where the underlying function is deemed \"expensive\" (e.g. in time or money), with the speed of the BO algorithm being of little importance. In the real world, however, problems span a cont",
+      "published": "2026-10-22T00:00:00-04:00",
+      "guid": "oai:arXiv.org:2610.29580v1",
+      "feed_id": "arxiv-cs-lg",
+      "journal": "arXiv",
+      "domain": "computer-science"
+    },
+    {
+      "title": "Fragment-Level Graph Encoding for Interpretable Molecular Property Prediction",
+      "link": "https://arxiv.org/abs/2610.29589",
+      "summary": "arXiv:2610.29589v1 Announce Type: new Abstract: Graph neural networks (GNNs) are among the standard tools for molecular property prediction, but the atom-level explanations of their predictions are hard for medicinal chemists to act on. We propose a change of input representation rather than a new",
+      "published": "2026-10-22T00:00:00-04:00",
+      "guid": "oai:arXiv.org:2610.29589v1",
+      "feed_id": "arxiv-cs-lg",
+      "journal": "arXiv",
+      "domain": "computer-science"
+    },
+    {
+      "title": "A Transfer Learning-Driven Methodology for Efficient and Sustainable Indoor Localization Using VLC",
+      "link": "https://arxiv.org/abs/2610.29594",
+      "summary": "arXiv:2610.29594v1 Announce Type: new Abstract: The rapid expansion of the Internet of Things enables seamless collaboration among connected devices, making indoor localization a critical component of industrial automation. However, conventional localization techniques struggle in dynamic environme",
+      "published": "2026-10-22T00:00:00-04:00",
+      "guid": "oai:arXiv.org:2610.29594v1",
+      "feed_id": "arxiv-cs-lg",
+      "journal": "arXiv",
+      "domain": "computer-science"
+    },
+    {
+      "title": "Local and Global Recursive Ridge Regression for Online Residual Correction of Frozen Multivariate Forecasters under Label Delay",
+      "link": "https://arxiv.org/abs/2610.29604",
+      "summary": "arXiv:2610.29604v1 Announce Type: new Abstract: A frozen multi-horizon forecaster can be corrected online from its own residuals. However, under label delay the target of a block arrives only after the whole horizon has passed, and the corrector's retained state grows with the number of channels. A",
+      "published": "2026-10-22T00:00:00-04:00",
+      "guid": "oai:arXiv.org:2610.29604v1",
+      "feed_id": "arxiv-cs-lg",
+      "journal": "arXiv",
+      "domain": "computer-science"
+    },
+    {
+      "title": "Improved Training of Strong Stochastic Flow Maps",
+      "link": "https://arxiv.org/abs/2610.29605",
+      "summary": "arXiv:2610.29605v1 Announce Type: new Abstract: Stochastic flow maps promise few-step sampling of stochastic differential equations (SDEs) by learning to directly jump between times along the solution path, yet training these models to learn this solution map remains difficult. The primary obstacle",
+      "published": "2026-10-22T00:00:00-04:00",
+      "guid": "oai:arXiv.org:2610.29605v1",
+      "feed_id": "arxiv-cs-lg",
+      "journal": "arXiv",
+      "domain": "computer-science"
+    },
+    {
+      "title": "Reliability-Aware Probabilistic Fusion for Multimodal Learning with Incomplete Evidence",
+      "link": "https://arxiv.org/abs/2610.29621",
+      "summary": "arXiv:2610.29621v1 Announce Type: new Abstract: Multimodal inputs may be missing or degraded, raising distinct questions of evidence availability and trust. We introduce a reliability-aware Gaussian Product-of-Experts (PoE) in which an input-dependent reliability weight tempers each modality's late",
+      "published": "2026-10-22T00:00:00-04:00",
+      "guid": "oai:arXiv.org:2610.29621v1",
+      "feed_id": "arxiv-cs-lg",
+      "journal": "arXiv",
+      "domain": "computer-science"
+    },
+    {
+      "title": "Cross-Area Transfer Learning for VLC-based Indoor Localization with a Transfer Efficiency Score",
+      "link": "https://arxiv.org/abs/2610.29638",
+      "summary": "arXiv:2610.29638v1 Announce Type: new Abstract: Indoor localization systems are critical for Industry-4.0 applications. Visible Light Communication (VLC)-based systems offer advantages such as immunity to electromagnetic interference, high accuracy, and energy efficiency, but their performance is h",
+      "published": "2026-10-22T00:00:00-04:00",
+      "guid": "oai:arXiv.org:2610.29638v1",
+      "feed_id": "arxiv-cs-lg",
+      "journal": "arXiv",
+      "domain": "computer-science"
+    },
+    {
+      "title": "Probabilistic Machine Learning for Short-Term Atmospheric Seeing Forecasting",
+      "link": "https://arxiv.org/abs/2610.29654",
+      "summary": "arXiv:2610.29654v1 Announce Type: new Abstract: Accurate short-term forecasting of atmospheric seeing is of significant interest for astronomical observations and free-space optical communication systems, where rapid variations in optical turbulence can affect system performance and operational pla",
+      "published": "2026-10-22T00:00:00-04:00",
+      "guid": "oai:arXiv.org:2610.29654v1",
+      "feed_id": "arxiv-cs-lg",
+      "journal": "arXiv",
+      "domain": "computer-science"
+    },
+    {
+      "title": "SPARE: Sparsity Allocation via Routing Entropy for Efficient MoEs",
+      "link": "https://arxiv.org/abs/2610.29662",
+      "summary": "arXiv:2610.29662v1 Announce Type: new Abstract: Mixture-of-Experts (MoE) architectures scale model capacity efficiently, yet their substantial memory footprint poses a major barrier to deployment. Expert pruning reduces this footprint, but most methods focus on which experts to remove and prune eve",
+      "published": "2026-10-22T00:00:00-04:00",
+      "guid": "oai:arXiv.org:2610.29662v1",
+      "feed_id": "arxiv-cs-lg",
+      "journal": "arXiv",
+      "domain": "computer-science"
+    },
+    {
+      "title": "Leveraging Time-Series Foundation Models for Financial Crime Detection",
+      "link": "https://arxiv.org/abs/2610.29667",
+      "summary": "arXiv:2610.29667v1 Announce Type: new Abstract: Financial crime detection requires identifying illicit activity within large transaction networks, where suspicious behaviour is rare and unfolds over time. Existing graph-based methods capture relationships among accounts but typically underuse the t",
+      "published": "2026-10-22T00:00:00-04:00",
+      "guid": "oai:arXiv.org:2610.29667v1",
+      "feed_id": "arxiv-cs-lg",
+      "journal": "arXiv",
+      "domain": "computer-science"
+    },
+    {
+      "title": "Characterizing Oblivious Common-Reward Multi-Player Bandits: Universal Stationarity, Coordination Traps, and Certified Global Rates",
+      "link": "https://arxiv.org/abs/2610.29673",
+      "summary": "arXiv:2610.29673v1 Announce Type: new Abstract: This paper presents a theoretical analysis of the oblivious common-reward multi-player multi-armed bandit (OC-MPMAB), a minimal multi-player bandit model in which multiple players select arms simultaneously and observe only a shared reward. Crucially,",
+      "published": "2026-10-22T00:00:00-04:00",
+      "guid": "oai:arXiv.org:2610.29673v1",
+      "feed_id": "arxiv-cs-lg",
+      "journal": "arXiv",
+      "domain": "computer-science"
+    },
+    {
+      "title": "DriveMLP: When Training Strategy Outperforms Model Complexity in Autonomous Driving",
+      "link": "https://arxiv.org/abs/2610.29676",
+      "summary": "arXiv:2610.29676v1 Announce Type: new Abstract: Learning motion planning policies that remain reliable under closed-loop execution is a central challenge in Autonomous Driving (AD). Imitation Learning (IL) scales well to large AD datasets but suffers from distribution shift, causal confusion, and c",
+      "published": "2026-10-22T00:00:00-04:00",
+      "guid": "oai:arXiv.org:2610.29676v1",
+      "feed_id": "arxiv-cs-lg",
+      "journal": "arXiv",
+      "domain": "computer-science"
+    },
+    {
+      "title": "Structure-Aware Message Passing on Petri Nets through Directed Walks and Incidence Diffusion",
+      "link": "https://arxiv.org/abs/2610.29725",
+      "summary": "arXiv:2610.29725v1 Announce Type: new Abstract: A common application of the process mining discipline is to connect observed event data with Petri nets, which are bipartite, directed graphical process models with rich formal underpinnings. Recent work learns vector representations of Petri nets to",
+      "published": "2026-10-22T00:00:00-04:00",
+      "guid": "oai:arXiv.org:2610.29725v1",
+      "feed_id": "arxiv-cs-lg",
+      "journal": "arXiv",
+      "domain": "computer-science"
+    },
+    {
+      "title": "Monitorability Is Trainable: Post-Training for Chain-of-Thought Monitorability",
+      "link": "https://arxiv.org/abs/2610.29734",
+      "summary": "arXiv:2610.29734v1 Announce Type: new Abstract: Chain-of-thought (CoT) monitoring is one of the few practical tools available for overseeing capable AI systems, but it is fragile: a model's reasoning is only useful to a monitor if it remains coupled to what the model actually does. This coupling ca",
+      "published": "2026-10-22T00:00:00-04:00",
+      "guid": "oai:arXiv.org:2610.29734v1",
+      "feed_id": "arxiv-cs-lg",
+      "journal": "arXiv",
+      "domain": "computer-science"
+    },
+    {
+      "title": "Asymmetric Likelihood-Free Hypothesis Testing",
+      "link": "https://arxiv.org/abs/2610.29798",
+      "summary": "arXiv:2610.29798v1 Announce Type: new Abstract: In likelihood-free hypothesis testing (LFHT), given samples from two unknown distributions $P,Q$ on $[n]$ with $\\mathrm{d_{TV}}(P,Q)\\geq\\varepsilon$, and from a third distribution $D\\in\\{P,Q\\}$, the goal is to identify whether $D=P$ or $D=Q$. We study",
+      "published": "2026-10-22T00:00:00-04:00",
+      "guid": "oai:arXiv.org:2610.29798v1",
+      "feed_id": "arxiv-cs-lg",
+      "journal": "arXiv",
+      "domain": "computer-science"
+    },
+    {
+      "title": "A Sharp Dynamic Haussler Lemma",
+      "link": "https://arxiv.org/abs/2610.29898",
+      "summary": "arXiv:2610.29898v1 Announce Type: new Abstract: Haussler's covering lemma (JCTA 1995) gives the sharp $(C/\\delta)^d$ metric-entropy bound for binary VC classes under normalized $\\ell_1$ distance. We prove a sharp global dynamic analogue for bounded real-valued classes in normalized $\\ell_p$, for ev",
+      "published": "2026-10-22T00:00:00-04:00",
+      "guid": "oai:arXiv.org:2610.29898v1",
+      "feed_id": "arxiv-cs-lg",
+      "journal": "arXiv",
+      "domain": "computer-science"
+    },
+    {
+      "title": "Preventing Model Extraction in Contextual Linear Optimization",
+      "link": "https://arxiv.org/abs/2610.29918",
+      "summary": "arXiv:2610.29918v1 Announce Type: new Abstract: Consider a contextual linear optimization problem, where a predict-then-optimize (PTO) system returns optimal decisions without revealing the cost vectors used in its downstream linear program. Our focus is on how to prevent attackers, who can submit",
+      "published": "2026-10-22T00:00:00-04:00",
+      "guid": "oai:arXiv.org:2610.29918v1",
+      "feed_id": "arxiv-cs-lg",
+      "journal": "arXiv",
+      "domain": "computer-science"
+    },
+    {
+      "title": "Privacy in Context Is Being Overlooked in the Age of General-Purpose LLMs",
+      "link": "https://arxiv.org/abs/2610.29925",
+      "summary": "arXiv:2610.29925v1 Announce Type: new Abstract: As large language models (LLMs) continue to grow in scope and capability, privacy concerns are on the rise. Since users increasingly interact with a single general-purpose system across many distinct contexts, there is a natural tendency to pursue a o",
+      "published": "2026-10-22T00:00:00-04:00",
+      "guid": "oai:arXiv.org:2610.29925v1",
+      "feed_id": "arxiv-cs-lg",
+      "journal": "arXiv",
+      "domain": "computer-science"
+    },
+    {
+      "title": "Your Benchmark Is an Empirical Measure Over Difficulty",
+      "link": "https://arxiv.org/abs/2610.29927",
+      "summary": "arXiv:2610.29927v1 Announce Type: new Abstract: A benchmark is not merely a collection of test questions; it naturally induces an empirical measure over difficulty. In this work, we develop this measure-based view of benchmark evaluation. This perspective allows us to identify and formalize two cen",
+      "published": "2026-10-22T00:00:00-04:00",
+      "guid": "oai:arXiv.org:2610.29927v1",
+      "feed_id": "arxiv-cs-lg",
+      "journal": "arXiv",
+      "domain": "computer-science"
+    },
+    {
+      "title": "FrontierCS 2: A Benchmark for Computer Science R&D",
+      "link": "https://arxiv.org/abs/2610.29932",
+      "summary": "arXiv:2610.29932v1 Announce Type: new Abstract: Can LLM agents make contributions to frontier computer science R&D? We introduce FrontierCS 2, a benchmark of 48 open-ended tasks. We take a paper and the code its authors released and delete the paper's contribution. The deleted code becomes the huma",
+      "published": "2026-10-22T00:00:00-04:00",
+      "guid": "oai:arXiv.org:2610.29932v1",
+      "feed_id": "arxiv-cs-lg",
+      "journal": "arXiv",
+      "domain": "computer-science"
+    },
+    {
+      "title": "CORD: Conflict-Aware Optimization for Joint RL and Distillation in Agents",
+      "link": "https://arxiv.org/abs/2610.29965",
+      "summary": "arXiv:2610.29965v1 Announce Type: new Abstract: Joint reinforcement learning and self-distillation combines task rewards with dense teacher guidance for agent training, but their gradients can partly cancel. A mixing coefficient controls relative scale without selectively removing opposing componen",
+      "published": "2026-10-22T00:00:00-04:00",
+      "guid": "oai:arXiv.org:2610.29965v1",
+      "feed_id": "arxiv-cs-lg",
+      "journal": "arXiv",
+      "domain": "computer-science"
+    },
+    {
+      "title": "SCDM: Scalable Causal Discovery in Nonlinear Temporal Systems with Meta-Learning",
+      "link": "https://arxiv.org/abs/2610.29992",
+      "summary": "arXiv:2610.29992v1 Announce Type: new Abstract: Causal discovery from nonlinear multivariate time series is challenging in high-dimensional systems, where the number of candidate directed relations grows quadratically with the number of variables. Existing methods are often limited by target-wise m",
+      "published": "2026-10-22T00:00:00-04:00",
+      "guid": "oai:arXiv.org:2610.29992v1",
+      "feed_id": "arxiv-cs-lg",
+      "journal": "arXiv",
+      "domain": "computer-science"
+    },
+    {
+      "title": "EPIC: Rethinking Trust Regions for Autoregressive LLM Policies via Exact-KL Prefix Importance-Ratio Clipping",
+      "link": "https://arxiv.org/abs/2610.29999",
+      "summary": "arXiv:2610.29999v1 Announce Type: new Abstract: Reinforcement learning (RL) based on PPO-style clipping has become an effective approach to improving the reasoning capabilities of large language models (LLMs). However, standard token-level clipping measures policy change only through the conditiona",
+      "published": "2026-10-22T00:00:00-04:00",
+      "guid": "oai:arXiv.org:2610.29999v1",
+      "feed_id": "arxiv-cs-lg",
+      "journal": "arXiv",
+      "domain": "computer-science"
+    },
+    {
+      "title": "Mitigating Model Collapse through Dreaming Learning",
+      "link": "https://arxiv.org/abs/2610.30009",
+      "summary": "arXiv:2610.30009v1 Announce Type: new Abstract: Training generative models on synthetic data causes loss of diversity and a decrease in performance, a phenomenon known as model collapse. We study this degeneration spectrally in a controlled Markov setting. The eigenvalue spectrum of the learned tra",
+      "published": "2026-10-22T00:00:00-04:00",
+      "guid": "oai:arXiv.org:2610.30009v1",
+      "feed_id": "arxiv-cs-lg",
+      "journal": "arXiv",
+      "domain": "computer-science"
+    },
+    {
+      "title": "Agent Behavior Maps: Locating Agents by What They Would Do, Without Running Them",
+      "link": "https://arxiv.org/abs/2610.30014",
+      "summary": "arXiv:2610.30014v1 Announce Type: new Abstract: LLM agents with similar success rates can follow different action sequences. An Agent Behavior Map represents LLM-harness combinations using centered action log-likelihoods on shared reference trajectories, without requiring new environment rollouts f",
+      "published": "2026-10-22T00:00:00-04:00",
+      "guid": "oai:arXiv.org:2610.30014v1",
+      "feed_id": "arxiv-cs-lg",
+      "journal": "arXiv",
+      "domain": "computer-science"
+    },
+    {
+      "title": "ExGrad: Beyond Suppression - Explicit Clean-Gradient Subtraction in Adversarial Training",
+      "link": "https://arxiv.org/abs/2610.30018",
+      "summary": "arXiv:2610.30018v1 Announce Type: new Abstract: Adversarial training derives updates from surrogate losses, but source-loss descent does not directly characterize an update's effect on adversarial margins. We introduce ExGrad (extrapolative gradient recomposition), which constructs clean-input, adv",
+      "published": "2026-10-22T00:00:00-04:00",
+      "guid": "oai:arXiv.org:2610.30018v1",
+      "feed_id": "arxiv-cs-lg",
+      "journal": "arXiv",
+      "domain": "computer-science"
+    },
+    {
+      "title": "Loopholing All the Way: Language Modeling with pure Self-Conditioning",
+      "link": "https://arxiv.org/abs/2610.30068",
+      "summary": "arXiv:2610.30068v1 Announce Type: new Abstract: Recent Diffusion Language Models (DLMs) use Self-Conditioning (SC), or Loopholing, to improve their performance. While SC is traditionally seen as an auxiliary heuristic, its empirical success raises the question: can a continuous generative model be",
+      "published": "2026-10-22T00:00:00-04:00",
+      "guid": "oai:arXiv.org:2610.30068v1",
+      "feed_id": "arxiv-cs-lg",
+      "journal": "arXiv",
+      "domain": "computer-science"
+    },
+    {
+      "title": "From Classifier Heads to Encoder Prototypes: Personalized Federated Learning with Head-Derived Clustering",
+      "link": "https://arxiv.org/abs/2610.30075",
+      "summary": "arXiv:2610.30075v1 Announce Type: new Abstract: Personalized federated learning must decide which clients should share representations. We introduce HDC-FL (Head-Derived Clustering for Personalized Federated Learning), which reads that decision off a signal shared-encoder training already produces:",
+      "published": "2026-10-22T00:00:00-04:00",
+      "guid": "oai:arXiv.org:2610.30075v1",
+      "feed_id": "arxiv-cs-lg",
+      "journal": "arXiv",
+      "domain": "computer-science"
+    },
+    {
+      "title": "Circuits of LLM Classifiers",
+      "link": "https://arxiv.org/abs/2610.30076",
+      "summary": "arXiv:2610.30076v1 Announce Type: new Abstract: Language models make it easy to build classifiers by simply prompting a model with the sample to classify. However, their predictions are neither deterministic nor uniformly reliable across samples. How can we combine predictions from different models",
+      "published": "2026-10-22T00:00:00-04:00",
+      "guid": "oai:arXiv.org:2610.30076v1",
+      "feed_id": "arxiv-cs-lg",
+      "journal": "arXiv",
+      "domain": "computer-science"
+    },
+    {
+      "title": "Orbitol: Crystal Generation on Wyckoff Orbits",
+      "link": "https://arxiv.org/abs/2610.30086",
+      "summary": "arXiv:2610.30086v1 Announce Type: new Abstract: Generative models propose crystalline materials by learning composition and geometry, but unconditional sampling gives no direct control over the space group, which constrains whether responses such as piezoelectricity are symmetry-allowed. We present",
+      "published": "2026-10-22T00:00:00-04:00",
+      "guid": "oai:arXiv.org:2610.30086v1",
+      "feed_id": "arxiv-cs-lg",
+      "journal": "arXiv",
+      "domain": "computer-science"
+    },
+    {
+      "title": "Differentially Private Sparse Reward Estimation with Preference Feedback",
+      "link": "https://arxiv.org/abs/2610.30099",
+      "summary": "arXiv:2610.30099v1 Announce Type: new Abstract: Reinforcement Learning with Human Feedback (RLHF) has become a central paradigm for aligning Large Language Models with human values. However, the reliance on sensitive preference data necessitates rigorous differential privacy (DP) guarantees to prev",
+      "published": "2026-10-22T00:00:00-04:00",
+      "guid": "oai:arXiv.org:2610.30099v1",
+      "feed_id": "arxiv-cs-lg",
+      "journal": "arXiv",
+      "domain": "computer-science"
+    },
+    {
+      "title": "BatchBench: Benchmarking AI Robustness to Batch Effects and Domain Shift in Biomedical Images - A JUMP Cell Painting Leaderboard",
+      "link": "https://arxiv.org/abs/2610.30104",
+      "summary": "arXiv:2610.30104v1 Announce Type: new Abstract: Despite recent advances, current AI systems remain highly susceptible to domain shifts, particularly in biomedical imaging, where images are usually acquired under substantially different experimental conditions. Although recent domain adaptation meth",
+      "published": "2026-10-22T00:00:00-04:00",
+      "guid": "oai:arXiv.org:2610.30104v1",
+      "feed_id": "arxiv-cs-lg",
+      "journal": "arXiv",
+      "domain": "computer-science"
+    },
+    {
+      "title": "Velocity Ambiguity Profiles: Time-Resolved Bayes-Risk Diagnostics for Flow Matching",
+      "link": "https://arxiv.org/abs/2610.30107",
+      "summary": "arXiv:2610.30107v1 Announce Type: new Abstract: Flow matching trains a continuum of velocity regression problems but usually reports a loss averaged over interpolation time, obscuring which regions are limited by intrinsic ambiguity and which remain data-limited. We introduce the Velocity Ambiguity",
+      "published": "2026-10-22T00:00:00-04:00",
+      "guid": "oai:arXiv.org:2610.30107v1",
+      "feed_id": "arxiv-cs-lg",
+      "journal": "arXiv",
+      "domain": "computer-science"
+    },
+    {
+      "title": "The role of locality and weight sharing in convolutional neural networks",
+      "link": "https://arxiv.org/abs/2610.30118",
+      "summary": "arXiv:2610.30118v1 Announce Type: new Abstract: The success of convolutional neural networks is often attributed to locality and weight sharing. However, how these two properties separately shape learning, and how their effects depend on the spatial correlations of natural images, remain poorly und",
+      "published": "2026-10-22T00:00:00-04:00",
+      "guid": "oai:arXiv.org:2610.30118v1",
+      "feed_id": "arxiv-cs-lg",
+      "journal": "arXiv",
+      "domain": "computer-science"
+    },
+    {
+      "title": "Self-normalized Bernstein Inequalities for Regenerative Processes and Applications to Learning Without Independence",
+      "link": "https://arxiv.org/abs/2610.30119",
+      "summary": "arXiv:2610.30119v1 Announce Type: new Abstract: We prove a self-normalized Bernstein inequality for bounded functions of a regenerative process with independent, identically distributed marked cycles of finite mean length. The bound uses observed cycle lengths and retains explicit terms for truncat",
+      "published": "2026-10-22T00:00:00-04:00",
+      "guid": "oai:arXiv.org:2610.30119v1",
+      "feed_id": "arxiv-cs-lg",
+      "journal": "arXiv",
+      "domain": "computer-science"
+    },
+    {
+      "title": "S^3martCirc: Self-supervised Smart Circuit Discovery",
+      "link": "https://arxiv.org/abs/2609.00755",
+      "summary": "arXiv:2609.00755v1 Announce Type: cross Abstract: Large Language Models (LLMs) have demonstrated remarkable performance across diverse tasks, from text summarization to question answering. Despite these capabilities, their black-box nature obscures internal decision-making processes. Mechanistic in",
+      "published": "2026-10-22T00:00:00-04:00",
+      "guid": "oai:arXiv.org:2609.00755v1",
+      "feed_id": "arxiv-cs-lg",
+      "journal": "arXiv",
+      "domain": "computer-science"
+    },
+    {
+      "title": "First Passage Attention",
+      "link": "https://arxiv.org/abs/2610.22714",
+      "summary": "arXiv:2610.22714v1 Announce Type: cross Abstract: Augmenting softmax attention with forget gates typically relies on summing decay contributions along the key--query path. Because such accumulation is monotonic, these mechanisms cannot selectively erase intermediate context while preserving older,",
+      "published": "2026-10-22T00:00:00-04:00",
+      "guid": "oai:arXiv.org:2610.22714v1",
+      "feed_id": "arxiv-cs-lg",
+      "journal": "arXiv",
+      "domain": "computer-science"
+    },
+    {
+      "title": "Breaking Diffusion: Parallel Reasoning with Draft Refinement",
+      "link": "https://arxiv.org/abs/2610.26542",
+      "summary": "arXiv:2610.26542v1 Announce Type: cross Abstract: Drafting an answer allows a reasoning model to reconsider each decision in the context of the others. Yet repeated diffusion denoising does not ensure that individually plausible token updates form a better answer together. We introduce Draft Refine",
+      "published": "2026-10-22T00:00:00-04:00",
+      "guid": "oai:arXiv.org:2610.26542v1",
+      "feed_id": "arxiv-cs-lg",
+      "journal": "arXiv",
+      "domain": "computer-science"
+    },
+    {
+      "title": "Machine-learned spectral PDE solvers for fluids and plasmas",
+      "link": "https://arxiv.org/abs/2610.27317",
+      "summary": "arXiv:2610.27317v1 Announce Type: cross Abstract: Sparse regression methods for discovering governing partial differential equations (PDEs) from data are sensitive to observation noise and are not constrained to reproduce the data under forward integration. We address both limitations by performing",
+      "published": "2026-10-22T00:00:00-04:00",
+      "guid": "oai:arXiv.org:2610.27317v1",
+      "feed_id": "arxiv-cs-lg",
+      "journal": "arXiv",
+      "domain": "computer-science"
+    },
+    {
+      "title": "What Git Does Not Record: Provenance Legibility in Two AI-Assisted Research Repositories",
+      "link": "https://arxiv.org/abs/2610.28655",
+      "summary": "arXiv:2610.28655v1 Announce Type: cross Abstract: Publishers and funders increasingly ask authors to disclose how AI tools contributed to a piece of research. In computational work the repository is where an author or an auditor would look for the answer, and we ask what it can actually supply. We",
+      "published": "2026-10-22T00:00:00-04:00",
+      "guid": "oai:arXiv.org:2610.28655v1",
+      "feed_id": "arxiv-cs-lg",
+      "journal": "arXiv",
+      "domain": "computer-science"
+    },
+    {
+      "title": "Solar System Surface Technosignatures: Searching for Signs of Artificial Design on Extraterrestrial Terrain",
+      "link": "https://arxiv.org/abs/2610.28687",
+      "summary": "arXiv:2610.28687v1 Announce Type: cross Abstract: Artificial radio emissions have historically been a major focus of technosignature searches. Here, we apply an anthropological lens to expand this scope to surface technosignatures: non-random, intentional patterning on planetary terrain, similar to",
+      "published": "2026-10-22T00:00:00-04:00",
+      "guid": "oai:arXiv.org:2610.28687v1",
+      "feed_id": "arxiv-cs-lg",
+      "journal": "arXiv",
+      "domain": "computer-science"
+    },
+    {
+      "title": "Scaling in Games: Continued Pre-Training For Embodied Agents In Diverse Virtual Worlds",
+      "link": "https://arxiv.org/abs/2610.28698",
+      "summary": "arXiv:2610.28698v1 Announce Type: cross Abstract: Scaling data, diversity and model capacity has improved embodied learning in physical environments, where diverse experiences remain grounded in shared physical laws. Whether these gains extend to virtual worlds with different visual styles, dynamic",
+      "published": "2026-10-22T00:00:00-04:00",
+      "guid": "oai:arXiv.org:2610.28698v1",
+      "feed_id": "arxiv-cs-lg",
+      "journal": "arXiv",
+      "domain": "computer-science"
+    },
+    {
+      "title": "Borrowing Strength Across Stores: Transfer Learning for Choice-Based Revenue Management",
+      "link": "https://arxiv.org/abs/2610.28708",
+      "summary": "arXiv:2610.28708v1 Announce Type: cross Abstract: Large retail chains must tailor assortment and pricing decisions to local customer preferences, yet even retailers with extensive sales records often have limited data for estimating demand at the store or local market level, particularly in product",
+      "published": "2026-10-22T00:00:00-04:00",
+      "guid": "oai:arXiv.org:2610.28708v1",
+      "feed_id": "arxiv-cs-lg",
+      "journal": "arXiv",
+      "domain": "computer-science"
+    },
+    {
+      "title": "A Reverse-Gold Theorem: Positive-Data Identification by Substrate-Bounded Contrastive Learners",
+      "link": "https://arxiv.org/abs/2610.28747",
+      "summary": "arXiv:2610.28747v1 Announce Type: cross Abstract: Gold's theorem shows that no learner can identify an arbitrary language in a superfinite class from positive presentations alone. We prove a positive result of a different shape. Fix an innate \\emph{recursive contrast operator} $R$ mapping any strin",
+      "published": "2026-10-22T00:00:00-04:00",
+      "guid": "oai:arXiv.org:2610.28747v1",
+      "feed_id": "arxiv-cs-lg",
+      "journal": "arXiv",
+      "domain": "computer-science"
+    },
+    {
+      "title": "Understanding the Inner Workings of a State-Space Foundation Model for Limit Order Books",
+      "link": "https://arxiv.org/abs/2610.28753",
+      "summary": "arXiv:2610.28753v1 Announce Type: cross Abstract: Autoregressive foundation models offer state-of-the-art capabilities to simulate the market by generating the message flow of limit order books (LOBs). Yet, without understanding their inner workings, research directions are hard to narrow and pract",
+      "published": "2026-10-22T00:00:00-04:00",
+      "guid": "oai:arXiv.org:2610.28753v1",
+      "feed_id": "arxiv-cs-lg",
+      "journal": "arXiv",
+      "domain": "computer-science"
+    },
+    {
+      "title": "GPU-Accelerated Construction of the Gabriel Graph: Parallelization Strategies and Applications to Large-Margin Classification and Graph-Based Clustering",
+      "link": "https://arxiv.org/abs/2610.28759",
+      "summary": "arXiv:2610.28759v1 Announce Type: cross Abstract: The Gabriel graph is a proximity graph widely used in computational geometry and geometric machine learning, underlying large-margin classifiers and, as we show in this work, density-aware clustering methods. Its construction, however, has cubic tim",
+      "published": "2026-10-22T00:00:00-04:00",
+      "guid": "oai:arXiv.org:2610.28759v1",
+      "feed_id": "arxiv-cs-lg",
+      "journal": "arXiv",
+      "domain": "computer-science"
+    },
+    {
+      "title": "Automating ML for Science: Can Frontier Agents Climb Scientific Hills in the Wild?",
+      "link": "https://arxiv.org/abs/2610.28763",
+      "summary": "arXiv:2610.28763v1 Announce Type: cross Abstract: Frontier coding agents are increasingly framed as end-to-end automated researchers, and ML for science offers a demanding test of that promise: improving a scientific model often requires domain insight beyond routine ML engineering. We introduce Ag",
+      "published": "2026-10-22T00:00:00-04:00",
+      "guid": "oai:arXiv.org:2610.28763v1",
+      "feed_id": "arxiv-cs-lg",
+      "journal": "arXiv",
+      "domain": "computer-science"
+    },
+    {
+      "title": "SkillEval: Learning Interpretable Ability Profiles of LLMs via Cognitive Diagnosis Models",
+      "link": "https://arxiv.org/abs/2610.28767",
+      "summary": "arXiv:2610.28767v1 Announce Type: cross Abstract: Current evaluation of LLMs on benchmarks typically aggregates performance over individual examples into a single scalar score. This approach is overly coarse and ignores the diverse scope of skills covered by benchmark datasets. To address this limi",
+      "published": "2026-10-22T00:00:00-04:00",
+      "guid": "oai:arXiv.org:2610.28767v1",
+      "feed_id": "arxiv-cs-lg",
+      "journal": "arXiv",
+      "domain": "computer-science"
+    },
+    {
+      "title": "Is Anyone Enforcing the Cartel? What Reinforcement Learning Teaches LLM Agents in Markets",
+      "link": "https://arxiv.org/abs/2610.28787",
+      "summary": "arXiv:2610.28787v1 Announce Type: cross Abstract: Evaluations of large language model (LLM) agents report that pricing agents collude at others' expense. Yet collusion is defined by enforcement: a cartel, in which competitors share monopoly profits, holds only if a member who cheats is punished. We",
+      "published": "2026-10-22T00:00:00-04:00",
+      "guid": "oai:arXiv.org:2610.28787v1",
+      "feed_id": "arxiv-cs-lg",
+      "journal": "arXiv",
+      "domain": "computer-science"
+    },
+    {
+      "title": "Depth Separation for Neural Networks under Gaussian Measure",
+      "link": "https://arxiv.org/abs/2610.28800",
+      "summary": "arXiv:2610.28800v1 Announce Type: cross Abstract: We revisit the problem of depth separation for neural networks, as studied by Eldan and Shamir, Daniely, and others. Specifically, we consider the natural setting of $L^2$ approximation of radial functions under the standard Gaussian measure in $d$",
+      "published": "2026-10-22T00:00:00-04:00",
+      "guid": "oai:arXiv.org:2610.28800v1",
+      "feed_id": "arxiv-cs-lg",
+      "journal": "arXiv",
+      "domain": "computer-science"
+    },
+    {
+      "title": "Combining Long-Term Memory and LLMs Comes at a High Cost: From Prompt Injection to Persistent Compromise",
+      "link": "https://arxiv.org/abs/2610.28810",
+      "summary": "arXiv:2610.28810v1 Announce Type: cross Abstract: The widespread adoption of generative artificial intelligence in recent years has brought a parallel rise in prompt injection and jailbreak attacks. By embedding malicious instructions, these exploits manipulate language models to bypass intended be",
+      "published": "2026-10-22T00:00:00-04:00",
+      "guid": "oai:arXiv.org:2610.28810v1",
+      "feed_id": "arxiv-cs-lg",
+      "journal": "arXiv",
+      "domain": "computer-science"
+    },
+    {
+      "title": "Brittle by Design? Multi-Scenario Reinforcement Learning for Robust Mission Coordination in Systems of Systems",
+      "link": "https://arxiv.org/abs/2610.28818",
+      "summary": "arXiv:2610.28818v1 Announce Type: cross Abstract: As systems engineering (SE) shifts from monolithic systems to Systems of Systems, Mission Engineering (ME) has emerged as a new line of thinking in SE. Mission environments are uncertain and dynamic, and outcomes depend on how mission assets interac",
+      "published": "2026-10-22T00:00:00-04:00",
+      "guid": "oai:arXiv.org:2610.28818v1",
+      "feed_id": "arxiv-cs-lg",
+      "journal": "arXiv",
+      "domain": "computer-science"
+    },
+    {
+      "title": "Sketch2Sim: an end-to-end modular framework for hand-drawn circuit analysis",
+      "link": "https://arxiv.org/abs/2610.28836",
+      "summary": "arXiv:2610.28836v1 Announce Type: cross Abstract: This study proposes a sketch-to-simulation system to solve handwritten circuit diagrams. The system converts raw images into a Simulation Program with Integrated Circuit Emphasis (SPICE)-compatible netlist and automatically calculates the circuit's",
+      "published": "2026-10-22T00:00:00-04:00",
+      "guid": "oai:arXiv.org:2610.28836v1",
+      "feed_id": "arxiv-cs-lg",
+      "journal": "arXiv",
+      "domain": "computer-science"
+    },
+    {
+      "title": "KIRA: A Full-Stack Reading Screening System with Dual-Pathway Analysis for Children",
+      "link": "https://arxiv.org/abs/2610.28840",
+      "summary": "arXiv:2610.28840v1 Announce Type: cross Abstract: Early-grade reading screening is critical for identifying children at risk of reading difficulty. Existing AI-based screeners are often limited in the scope of their analyses and evaluation metrics, or are proprietary systems that lack transparent m",
+      "published": "2026-10-22T00:00:00-04:00",
+      "guid": "oai:arXiv.org:2610.28840v1",
+      "feed_id": "arxiv-cs-lg",
+      "journal": "arXiv",
+      "domain": "computer-science"
+    },
+    {
+      "title": "Self-Supervised Tuning of Low-Fidelity Optimization Models via High-Fidelity Feedback",
+      "link": "https://arxiv.org/abs/2610.28851",
+      "summary": "arXiv:2610.28851v1 Announce Type: cross Abstract: Low-fidelity (LF) optimization models are widely used in large-scale operations because they can be solved efficiently and reliably, but they often exhibit systematic errors relative to high-fidelity (HF) formulations that better capture physical an",
+      "published": "2026-10-22T00:00:00-04:00",
+      "guid": "oai:arXiv.org:2610.28851v1",
+      "feed_id": "arxiv-cs-lg",
+      "journal": "arXiv",
+      "domain": "computer-science"
+    },
+    {
+      "title": "DualHeads: Reward-tilted few-step diffusion made simple",
+      "link": "https://arxiv.org/abs/2610.28858",
+      "summary": "arXiv:2610.28858v1 Announce Type: cross Abstract: Distilled diffusion models generate high-quality images in a few sampling steps, but aligning them with task requirements and human preferences is difficult. Methods developed for multi-step diffusion models rely on differentiable rewards, or on sco",
+      "published": "2026-10-22T00:00:00-04:00",
+      "guid": "oai:arXiv.org:2610.28858v1",
+      "feed_id": "arxiv-cs-lg",
+      "journal": "arXiv",
+      "domain": "computer-science"
+    },
+    {
+      "title": "CSD: Common-Support Distillation for Cross-Tokenizer Knowledge Transfer",
+      "link": "https://arxiv.org/abs/2610.28895",
+      "summary": "arXiv:2610.28895v1 Announce Type: cross Abstract: Cross-tokenizer logits distillation enables knowledge transfer across model families, allowing students to learn from stronger or more specialized teachers. However, differences in vocabulary and segmentation make teacher and student next-token dist",
+      "published": "2026-10-22T00:00:00-04:00",
+      "guid": "oai:arXiv.org:2610.28895v1",
+      "feed_id": "arxiv-cs-lg",
+      "journal": "arXiv",
+      "domain": "computer-science"
+    },
+    {
+      "title": "Is Refusal Direction Universal across Low-Resourced Languages?",
+      "link": "https://arxiv.org/abs/2610.28897",
+      "summary": "arXiv:2610.28897v1 Announce Type: cross Abstract: Refusal directions have been shown to transfer cross-lingually with near-perfect effectiveness across safety-aligned languages (Wang et al., 2025), reportedly regardless of resource level. However, the only truly low-resourced language evaluated is",
+      "published": "2026-10-22T00:00:00-04:00",
+      "guid": "oai:arXiv.org:2610.28897v1",
+      "feed_id": "arxiv-cs-lg",
+      "journal": "arXiv",
+      "domain": "computer-science"
+    },
+    {
+      "title": "Tropical Cyclone Attributes in Sparse Autoencoder Features of an AI Weather Model",
+      "link": "https://arxiv.org/abs/2610.28904",
+      "summary": "arXiv:2610.28904v1 Announce Type: cross Abstract: Artificial intelligence (AI) weather models now forecast weather events skillfully, but how they represent these events internally remains unknown. Sparse autoencoders (SAEs) provide sparse features for probing hidden states, but how information abo",
+      "published": "2026-10-22T00:00:00-04:00",
+      "guid": "oai:arXiv.org:2610.28904v1",
+      "feed_id": "arxiv-cs-lg",
+      "journal": "arXiv",
+      "domain": "computer-science"
+    },
+    {
+      "title": "JaxMARL-BC: Multi-Agent Reinforcement Learning for Macroeconomic Modelling, in Seconds",
+      "link": "https://arxiv.org/abs/2610.28907",
+      "summary": "arXiv:2610.28907v1 Announce Type: cross Abstract: Multi-agent reinforcement learning (MARL) offers a principled way of populating simulated economies with many heterogeneous decision makers. Its adoption, pioneered in finance, has nonetheless been slow in macroeconomics because of two main limitati",
+      "published": "2026-10-22T00:00:00-04:00",
+      "guid": "oai:arXiv.org:2610.28907v1",
+      "feed_id": "arxiv-cs-lg",
+      "journal": "arXiv",
+      "domain": "computer-science"
+    },
+    {
+      "title": "Backtracking Direct, Indirect and Total Effects",
+      "link": "https://arxiv.org/abs/2610.28910",
+      "summary": "arXiv:2610.28910v1 Announce Type: cross Abstract: Natural direct and indirect effects are defined through cross-world interventional counterfactuals. We propose an alternative construction based on backtracking counterfactuals. Rather than intervening on the treatment or mediator, we use a backtrac",
+      "published": "2026-10-22T00:00:00-04:00",
+      "guid": "oai:arXiv.org:2610.28910v1",
+      "feed_id": "arxiv-cs-lg",
+      "journal": "arXiv",
+      "domain": "computer-science"
+    },
+    {
+      "title": "One Policy, Many Styles: Where to Aggregate Preferences for Steerable Humanoid Control?",
+      "link": "https://arxiv.org/abs/2610.28925",
+      "summary": "arXiv:2610.28925v1 Announce Type: cross Abstract: Modern robotic agents are increasingly expected to support steerable control, where a single policy can adjust its behavioral style at runtime under changing user preferences. Preference-conditioned reinforcement learning provides this interface, bu",
+      "published": "2026-10-22T00:00:00-04:00",
+      "guid": "oai:arXiv.org:2610.28925v1",
+      "feed_id": "arxiv-cs-lg",
+      "journal": "arXiv",
+      "domain": "computer-science"
+    },
+    {
+      "title": "HyperDrone: Simulation-to-Reality Transfer at Millions of Frames per Second",
+      "link": "https://arxiv.org/abs/2610.28950",
+      "summary": "arXiv:2610.28950v1 Announce Type: cross Abstract: We present HyperDrone, an extremely fast quadrotor simulator focused on high-performance batch rendering that is more than 20x faster than existing state-of-the-art batch quadrotor simulators. HyperDrone combines highly optimized multirotor dynamics",
+      "published": "2026-10-22T00:00:00-04:00",
+      "guid": "oai:arXiv.org:2610.28950v1",
+      "feed_id": "arxiv-cs-lg",
+      "journal": "arXiv",
+      "domain": "computer-science"
+    },
+    {
+      "title": "Can Quantum Layers offer Performance and Security Advantages in Vision-Language Models?",
+      "link": "https://arxiv.org/abs/2610.28964",
+      "summary": "arXiv:2610.28964v1 Announce Type: cross Abstract: As quantum computing moves from the noisy intermediate-scale quantum (NISQ) era toward early fault-tolerant quantum computing (EFTQC), quantum-enhanced AI is shifting from a conceptual idea to experimental research. Quantum components are expected t",
+      "published": "2026-10-22T00:00:00-04:00",
+      "guid": "oai:arXiv.org:2610.28964v1",
+      "feed_id": "arxiv-cs-lg",
+      "journal": "arXiv",
+      "domain": "computer-science"
+    },
+    {
+      "title": "Is In-Context Reinforcement Learning A Posterior Sampler? An Empirical Study",
+      "link": "https://arxiv.org/abs/2610.28977",
+      "summary": "arXiv:2610.28977v1 Announce Type: cross Abstract: In-context reinforcement learning (ICRL) exploits the impressive in-context learning ability of large language models to zero-shot generalize to new, unseen tasks at inference time without any parameter updates. Among many approaches, the Decision-P",
+      "published": "2026-10-22T00:00:00-04:00",
+      "guid": "oai:arXiv.org:2610.28977v1",
+      "feed_id": "arxiv-cs-lg",
+      "journal": "arXiv",
+      "domain": "computer-science"
+    },
+    {
+      "title": "From Common Information to Canonical Correlation Analysis and Beyond: Bridging Information Theory, Signal Processing, and Machine Learning",
+      "link": "https://arxiv.org/abs/2610.28978",
+      "summary": "arXiv:2610.28978v1 Announce Type: cross Abstract: Many problems in signal processing, machine learning, and neuroimaging provide several jointly observed measurements of one process, each mixing a component common to all of them with a component private to itself, and require the common component t",
+      "published": "2026-10-22T00:00:00-04:00",
+      "guid": "oai:arXiv.org:2610.28978v1",
+      "feed_id": "arxiv-cs-lg",
+      "journal": "arXiv",
+      "domain": "computer-science"
+    },
+    {
+      "title": "AgentPolicyForge: From Executable Environments to Policy Benchmarks and Adaptive Guards",
+      "link": "https://arxiv.org/abs/2610.28989",
+      "summary": "arXiv:2610.28989v1 Announce Type: cross Abstract: Customized agent deployments define policies over tools, resources, and execution conditions. Providing these policies in the task agent's prompt does not reliably prevent violations. Training a guard requires examples of tool calls that comply with",
+      "published": "2026-10-22T00:00:00-04:00",
+      "guid": "oai:arXiv.org:2610.28989v1",
+      "feed_id": "arxiv-cs-lg",
+      "journal": "arXiv",
+      "domain": "computer-science"
+    },
+    {
+      "title": "The Optimal Sampler for Diverse TSP Solutions: Characterization, Limits, and Learning",
+      "link": "https://arxiv.org/abs/2610.28994",
+      "summary": "arXiv:2610.28994v1 Announce Type: cross Abstract: We address the Diverse Traveling Salesman Problem (D-TSP) that seeks a set of $k$ distinct TSP tours. Each selected tour must not exceed a prescribed multiple of the optimal tour length, while the maximum pairwise Jaccard similarity within the selec",
+      "published": "2026-10-22T00:00:00-04:00",
+      "guid": "oai:arXiv.org:2610.28994v1",
+      "feed_id": "arxiv-cs-lg",
+      "journal": "arXiv",
+      "domain": "computer-science"
+    },
+    {
+      "title": "A Jump-Modified Wasserstein Gradient Flow for Maximum Mean Discrepancy with Energy Kernels",
+      "link": "https://arxiv.org/abs/2610.29007",
+      "summary": "arXiv:2610.29007v1 Announce Type: cross Abstract: We study a jump-modified Wasserstein gradient flow of the squared maximum mean discrepancy generated by the energy kernels $K(z)=-|z|^q$, $0<q<2$, in every dimension $d\\ge2$ as well as the one-dimensional range $1\\le q<2$. Under subcritical density",
+      "published": "2026-10-22T00:00:00-04:00",
+      "guid": "oai:arXiv.org:2610.29007v1",
+      "feed_id": "arxiv-cs-lg",
+      "journal": "arXiv",
+      "domain": "computer-science"
+    },
+    {
+      "title": "Target Regeneration Shrinks the Gains of Draft-Training Objectives in Speculative Decoding",
+      "link": "https://arxiv.org/abs/2610.29013",
+      "summary": "arXiv:2610.29013v1 Announce Type: cross Abstract: Speculative decoding accelerates large language models by verifying drafted tokens in parallel. New draft-training objectives are usually credited with the acceptance they add over cross-entropy on externally written responses, yet many pipelines le",
+      "published": "2026-10-22T00:00:00-04:00",
+      "guid": "oai:arXiv.org:2610.29013v1",
+      "feed_id": "arxiv-cs-lg",
+      "journal": "arXiv",
+      "domain": "computer-science"
+    },
+    {
+      "title": "Our Own Jev: Typed Decisions in One Forward Pass, from an In-House Judge to Open LoRA Models",
+      "link": "https://arxiv.org/abs/2610.29052",
+      "summary": "arXiv:2610.29052v1 Announce Type: cross Abstract: A typed decision maps evidence, a question and a fixed set of options to a probability for every option, computed in one forward pass, by reading a language model's logits or a small head over its hidden states, instead of generating and parsing tex",
+      "published": "2026-10-22T00:00:00-04:00",
+      "guid": "oai:arXiv.org:2610.29052v1",
+      "feed_id": "arxiv-cs-lg",
+      "journal": "arXiv",
+      "domain": "computer-science"
+    },
+    {
+      "title": "OccJEPA: Occlusion as Masking for Amodal Video Segmentation",
+      "link": "https://arxiv.org/abs/2610.29061",
+      "summary": "arXiv:2610.29061v1 Announce Type: cross Abstract: Amodal video segmentation asks for the complete mask of an object in every frame, including the parts hidden behind other objects. The best current methods generate these masks with fine-tuned video diffusion models, which need many denoising steps",
+      "published": "2026-10-22T00:00:00-04:00",
+      "guid": "oai:arXiv.org:2610.29061v1",
+      "feed_id": "arxiv-cs-lg",
+      "journal": "arXiv",
+      "domain": "computer-science"
+    },
+    {
+      "title": "Internal Guidance as a Sampling Method for Tilted Diffusion Models",
+      "link": "https://arxiv.org/abs/2610.29086",
+      "summary": "arXiv:2610.29086v1 Announce Type: cross Abstract: Reward guidance methods sample an exponential tilt of a base density using a diffusion model trained with only samples from the base distribution. Existing methods use what we call external guidance: additive terms in the drift or multiplicative ter",
+      "published": "2026-10-22T00:00:00-04:00",
+      "guid": "oai:arXiv.org:2610.29086v1",
+      "feed_id": "arxiv-cs-lg",
+      "journal": "arXiv",
+      "domain": "computer-science"
+    },
+    {
+      "title": "Dual-Channel Contrastive Encoding of Sperm Whale Coda",
+      "link": "https://arxiv.org/abs/2610.29101",
+      "summary": "arXiv:2610.29101v1 Announce Type: cross Abstract: Sperm whales (Physeter macrocephalus) communicate through short click sequences called codas, whose structure includes the rhythmic pattern of inter-click intervals (ICI) and the spectral composition of the clicks. In this paper, we propose the Dual",
+      "published": "2026-10-22T00:00:00-04:00",
+      "guid": "oai:arXiv.org:2610.29101v1",
+      "feed_id": "arxiv-cs-lg",
+      "journal": "arXiv",
+      "domain": "computer-science"
+    },
+    {
+      "title": "DriftNeRF: Cross-Ray Density Drifting for Sparse-View Neural Radiance Fields",
+      "link": "https://arxiv.org/abs/2610.29106",
+      "summary": "arXiv:2610.29106v1 Announce Type: cross Abstract: Neural Radiance Fields (NeRF) synthesize photorealistic novel views from dense image collections, but degrade sharply when few views are available. We attribute a specific, measurable defect to the objective itself: the rendering loss is a sum over",
+      "published": "2026-10-22T00:00:00-04:00",
+      "guid": "oai:arXiv.org:2610.29106v1",
+      "feed_id": "arxiv-cs-lg",
+      "journal": "arXiv",
+      "domain": "computer-science"
+    },
+    {
+      "title": "SU(2)-Equivariant Spinor Message Passing for Molecular Magnetism",
+      "link": "https://arxiv.org/abs/2610.29111",
+      "summary": "arXiv:2610.29111v1 Announce Type: cross Abstract: Predicting molecular magnetism often requires electronic-structure calculations with spin-orbit coupling (SOC), which are costly to repeat across many molecules. The underlying electronic states can transform as spinors, yet equivariant surrogates t",
+      "published": "2026-10-22T00:00:00-04:00",
+      "guid": "oai:arXiv.org:2610.29111v1",
+      "feed_id": "arxiv-cs-lg",
+      "journal": "arXiv",
+      "domain": "computer-science"
+    },
+    {
+      "title": "Recursive Self-Improvement on a Budget: Scoring Code Edits Before They Run",
+      "link": "https://arxiv.org/abs/2610.29121",
+      "summary": "arXiv:2610.29121v1 Announce Type: cross Abstract: A coding agent that rewrites its own scaffold has to choose which proposed edit to expand before that edit has been evaluated, and the search then has to return one agent. Each run fits one linear readout on the parent's steering-split solve rate an",
+      "published": "2026-10-22T00:00:00-04:00",
+      "guid": "oai:arXiv.org:2610.29121v1",
+      "feed_id": "arxiv-cs-lg",
+      "journal": "arXiv",
+      "domain": "computer-science"
+    },
+    {
+      "title": "SAFTER: Safety-Aware Filtering Through Explicit Recoverability for Robust Reinforcement Learning under Distribution Shift",
+      "link": "https://arxiv.org/abs/2610.29149",
+      "summary": "arXiv:2610.29149v1 Announce Type: cross Abstract: Learning safe policies that generalize to unseen environments is difficult under bounded actuation, where an unsafe decision may become unrecoverable. Conventional control barrier function (CBF) filters enforce only instantaneous safety and ignore f",
+      "published": "2026-10-22T00:00:00-04:00",
+      "guid": "oai:arXiv.org:2610.29149v1",
+      "feed_id": "arxiv-cs-lg",
+      "journal": "arXiv",
+      "domain": "computer-science"
+    },
+    {
+      "title": "From Augmentation to Synthetic Evidence: Evaluating Generated Chest Radiographs at Dataset Intake",
+      "link": "https://arxiv.org/abs/2610.29152",
+      "summary": "arXiv:2610.29152v1 Announce Type: cross Abstract: A generated chest radiograph can be useful as declared augmentation, but the same image becomes unsupported evidence when submitted as the record of a real examination. We study this problem by separating three questions: whether an image passes an",
+      "published": "2026-10-22T00:00:00-04:00",
+      "guid": "oai:arXiv.org:2610.29152v1",
+      "feed_id": "arxiv-cs-lg",
+      "journal": "arXiv",
+      "domain": "computer-science"
+    },
+    {
+      "title": "TeachBack: Learning to Teach via Bidirectional Preference Optimization for On-Policy Self-Distillation",
+      "link": "https://arxiv.org/abs/2610.29167",
+      "summary": "arXiv:2610.29167v1 Announce Type: cross Abstract: On-policy self-distillation (OPSD) enables a language model to learn from a Teacher instantiated from the same model but given access to privileged information, such as a reference solution. We find that access to sufficient privileged information a",
+      "published": "2026-10-22T00:00:00-04:00",
+      "guid": "oai:arXiv.org:2610.29167v1",
+      "feed_id": "arxiv-cs-lg",
+      "journal": "arXiv",
+      "domain": "computer-science"
+    },
+    {
+      "title": "ROCOCO: Robust Outline Completion of Occluded Curvilinear Objects",
+      "link": "https://arxiv.org/abs/2610.29177",
+      "summary": "arXiv:2610.29177v1 Announce Type: cross Abstract: We propose a learning-based generative model for completing curvilinear features under occlusion by environmental obstacles. To this end, we adopt a flow matching-based approach that supports the inpainting of occluded regions with the appropriate c",
+      "published": "2026-10-22T00:00:00-04:00",
+      "guid": "oai:arXiv.org:2610.29177v1",
+      "feed_id": "arxiv-cs-lg",
+      "journal": "arXiv",
+      "domain": "computer-science"
+    },
+    {
+      "title": "A Decade of Learning-Based Control: From Theoretic Foundations to Practical Deployment",
+      "link": "https://arxiv.org/abs/2610.29187",
+      "summary": "arXiv:2610.29187v1 Announce Type: cross Abstract: Motivated by ten years of Learning-Based Control Invited Sessions at the IEEE Conference on Decision and Control (CDC), this tutorial paper reviews key advances at the intersection of machine learning and control. We focus on methods that combine th",
+      "published": "2026-10-22T00:00:00-04:00",
+      "guid": "oai:arXiv.org:2610.29187v1",
+      "feed_id": "arxiv-cs-lg",
+      "journal": "arXiv",
+      "domain": "computer-science"
+    },
+    {
+      "title": "Curvature-Scaled Sharpness-Aware Minimization: Convergence Beyond Smoothness",
+      "link": "https://arxiv.org/abs/2610.29192",
+      "summary": "arXiv:2610.29192v1 Announce Type: cross Abstract: Sharpness-Aware Minimization (SAM) has established itself as a widely used method for training deep neural networks. Despite its popularity, existing convergence guarantees for SAM-type methods require smoothness, a restrictive assumption. Generaliz",
+      "published": "2026-10-22T00:00:00-04:00",
+      "guid": "oai:arXiv.org:2610.29192v1",
+      "feed_id": "arxiv-cs-lg",
+      "journal": "arXiv",
+      "domain": "computer-science"
+    },
+    {
+      "title": "A Unified Evaluation Framework of Physical Adversarial Robustness in the Edge VLM Era",
+      "link": "https://arxiv.org/abs/2610.29196",
+      "summary": "arXiv:2610.29196v1 Announce Type: cross Abstract: Recent advancements in Vision-Language Models (VLMs) enable end-to-end visual grounding via language prompts and generative decoding, demonstrating largely improved zero-shot and open-vocabulary detection capabilities. As a result, VLMs are rapidly",
+      "published": "2026-10-22T00:00:00-04:00",
+      "guid": "oai:arXiv.org:2610.29196v1",
+      "feed_id": "arxiv-cs-lg",
+      "journal": "arXiv",
+      "domain": "computer-science"
+    },
+    {
+      "title": "Reconstruction differences rival individual differences in the fly compass connectome and break trained circuit models",
+      "link": "https://arxiv.org/abs/2610.29205",
+      "summary": "arXiv:2610.29205v1 Announce Type: cross Abstract: Neural network models are increasingly constructed from synapse-resolution connectomes, and the same circuit is now available in reconstructions from other animals and pipelines. We do not know whether such models are dependent on the reconstruction",
+      "published": "2026-10-22T00:00:00-04:00",
+      "guid": "oai:arXiv.org:2610.29205v1",
+      "feed_id": "arxiv-cs-lg",
+      "journal": "arXiv",
+      "domain": "computer-science"
+    },
+    {
+      "title": "On the gradient conjecture at infinity: Finite spherical length for gradient trajectories of definable potentials",
+      "link": "https://arxiv.org/abs/2610.29211",
+      "summary": "arXiv:2610.29211v1 Announce Type: cross Abstract: We prove that for every open $ U \\subseteq \\mathbb R^n $ the spherical projection of every gradient trajectory $\\theta(t)$, $t \\geq 0$, of a definable $C^1$-potential $F \\colon U \\to \\mathbb R$ has finite length and, in particular, converges (direct",
+      "published": "2026-10-22T00:00:00-04:00",
+      "guid": "oai:arXiv.org:2610.29211v1",
+      "feed_id": "arxiv-cs-lg",
+      "journal": "arXiv",
+      "domain": "computer-science"
+    },
+    {
+      "title": "Preference Is Not Permission: Personalizing the Auto-Purchase Line in Agentic Commerce",
+      "link": "https://arxiv.org/abs/2610.29216",
+      "summary": "arXiv:2610.29216v1 Announce Type: cross Abstract: Personalized shopping benchmarks ask which item fits the user; we ask how far an agent may commit on that item, and pose learning the individual's auto-purchase line as a task. The boundary is evidence-conditioned and three-valued: whether committin",
+      "published": "2026-10-22T00:00:00-04:00",
+      "guid": "oai:arXiv.org:2610.29216v1",
+      "feed_id": "arxiv-cs-lg",
+      "journal": "arXiv",
+      "domain": "computer-science"
+    },
+    {
+      "title": "Schr\\\"odinger-Bass Bridge Barycenter Models for Measure-Valued Data",
+      "link": "https://arxiv.org/abs/2610.29227",
+      "summary": "arXiv:2610.29227v1 Announce Type: cross Abstract: Barycenter models, based on stochastic and deterministic optimal transport bridges between probability measures, have proven to be useful for supervised and unsupervised learning for (probability) measure-valued data. In this paper, we utilize the d",
+      "published": "2026-10-22T00:00:00-04:00",
+      "guid": "oai:arXiv.org:2610.29227v1",
+      "feed_id": "arxiv-cs-lg",
+      "journal": "arXiv",
+      "domain": "computer-science"
+    },
+    {
+      "title": "Cache Locally, Recompute Selectively for Streaming Video Understanding",
+      "link": "https://arxiv.org/abs/2610.29229",
+      "summary": "arXiv:2610.29229v1 Announce Type: cross Abstract: Streaming video understanding (SVU) requires video-LLMs to process incoming video continuously while answering user queries with low latency. Recent methods reduce query-time cost by prefilling frames into KV caches during idle time and reusing the",
+      "published": "2026-10-22T00:00:00-04:00",
+      "guid": "oai:arXiv.org:2610.29229v1",
+      "feed_id": "arxiv-cs-lg",
+      "journal": "arXiv",
+      "domain": "computer-science"
+    },
+    {
+      "title": "Group Distributionally Robust Optimization over Decentralized Networks",
+      "link": "https://arxiv.org/abs/2610.29261",
+      "summary": "arXiv:2610.29261v1 Announce Type: cross Abstract: We study group distributionally robust optimization (GDRO) over decentralized networks, where workers collaborate to learn robust models by minimizing the maximum local risk. Existing methods optimize only dual-regularized surrogates and establish g",
+      "published": "2026-10-22T00:00:00-04:00",
+      "guid": "oai:arXiv.org:2610.29261v1",
+      "feed_id": "arxiv-cs-lg",
+      "journal": "arXiv",
+      "domain": "computer-science"
+    },
+    {
+      "title": "Compressing Onboard Language Models for Space Robots under a Behavioral-Fidelity Requirement",
+      "link": "https://arxiv.org/abs/2610.29302",
+      "summary": "arXiv:2610.29302v1 Announce Type: cross Abstract: Language models are being explored as the interface through which space robots interpret operator commands and select among verified skills. Running them onboard calls for low-bit compression, and flight use adds requirements that generic post-train",
+      "published": "2026-10-22T00:00:00-04:00",
+      "guid": "oai:arXiv.org:2610.29302v1",
+      "feed_id": "arxiv-cs-lg",
+      "journal": "arXiv",
+      "domain": "computer-science"
+    },
+    {
+      "title": "Data-driven and physics-guided hindcasting of measured wave spectra",
+      "link": "https://arxiv.org/abs/2610.29306",
+      "summary": "arXiv:2610.29306v1 Announce Type: cross Abstract: Short-range hindcasts of measured wave spectra are evaluated using a recurrent model initialized by one hourly buoy spectrum and supplied with local wind, fetch and depth. Measurements from three Baltic Sea stations are combined for training in 2017",
+      "published": "2026-10-22T00:00:00-04:00",
+      "guid": "oai:arXiv.org:2610.29306v1",
+      "feed_id": "arxiv-cs-lg",
+      "journal": "arXiv",
+      "domain": "computer-science"
+    },
+    {
+      "title": "Decodability Is Not Controllability: Local and Anisotropic Speaker Control in Continuous-Latent TTS",
+      "link": "https://arxiv.org/abs/2610.29345",
+      "summary": "arXiv:2610.29345v1 Announce Type: cross Abstract: High linear decodability does not entail causal controllability in continuous-latent text-to-speech (TTS). In VoxCPM2, position-matched probes and equal-norm interventions across 30 speakers and 60 directed dyads expose this separation: reference-au",
+      "published": "2026-10-22T00:00:00-04:00",
+      "guid": "oai:arXiv.org:2610.29345v1",
+      "feed_id": "arxiv-cs-lg",
+      "journal": "arXiv",
+      "domain": "computer-science"
+    },
+    {
+      "title": "Closed-Loop Dual-Reference Guidance for Accent Control in Cross-Lingual Voice Cloning",
+      "link": "https://arxiv.org/abs/2610.29351",
+      "summary": "arXiv:2610.29351v1 Announce Type: cross Abstract: Zero-shot cross-lingual voice cloning often carries the reference speaker's accent into the target language. We propose closed-loop dual-reference guidance, which pairs the original reference with a reusable native anchor constructed by voice conver",
+      "published": "2026-10-22T00:00:00-04:00",
+      "guid": "oai:arXiv.org:2610.29351v1",
+      "feed_id": "arxiv-cs-lg",
+      "journal": "arXiv",
+      "domain": "computer-science"
+    },
+    {
+      "title": "Right On Q: Recovering Reasoning under Quantization via Self-Generated Trajectories",
+      "link": "https://arxiv.org/abs/2610.29378",
+      "summary": "arXiv:2610.29378v1 Announce Type: cross Abstract: Quantization-aware training (QAT) aims to recover reasoning capabilities in low-bit large language models (LLMs). Existing recipes typically supervise the quantized student with the original full-precision model on fixed response sequences. However,",
+      "published": "2026-10-22T00:00:00-04:00",
+      "guid": "oai:arXiv.org:2610.29378v1",
+      "feed_id": "arxiv-cs-lg",
+      "journal": "arXiv",
+      "domain": "computer-science"
+    },
+    {
+      "title": "Region-Aware Multi-View Inspection Using Deep Learning and Domain-Informed Decision Fusion",
+      "link": "https://arxiv.org/abs/2610.29398",
+      "summary": "arXiv:2610.29398v1 Announce Type: cross Abstract: Automated optical inspection of precision components with tiny surface defects remains challenging when different regions of the same component exhibit different defect characteristics and, therefore, different acceptance criteria. This paper presen",
+      "published": "2026-10-22T00:00:00-04:00",
+      "guid": "oai:arXiv.org:2610.29398v1",
+      "feed_id": "arxiv-cs-lg",
+      "journal": "arXiv",
+      "domain": "computer-science"
+    },
+    {
+      "title": "When Thoughts Become Memory: Unifying In-Context Learning and Fine-Tuning",
+      "link": "https://arxiv.org/abs/2610.29419",
+      "summary": "arXiv:2610.29419v1 Announce Type: cross Abstract: We are the first to give a certified rule for whether unseen data belong in a pretrained model's context or its weights, built on an exact law for their information value. That value, the code length saved on held-out queries, equals in expectation",
+      "published": "2026-10-22T00:00:00-04:00",
+      "guid": "oai:arXiv.org:2610.29419v1",
+      "feed_id": "arxiv-cs-lg",
+      "journal": "arXiv",
+      "domain": "computer-science"
+    },
+    {
+      "title": "OmniSimulator: Aligning Small Language Models for Authentic Heterogeneous Behavior Modeling",
+      "link": "https://arxiv.org/abs/2610.29472",
+      "summary": "arXiv:2610.29472v1 Announce Type: cross Abstract: Large language models (LLMs) have shown great potential as general-purpose user simulators for interactive systems. Prior studies have demonstrated that training on high-quality data can substantially improve model reasoning and downstream task perf",
+      "published": "2026-10-22T00:00:00-04:00",
+      "guid": "oai:arXiv.org:2610.29472v1",
+      "feed_id": "arxiv-cs-lg",
+      "journal": "arXiv",
+      "domain": "computer-science"
+    },
+    {
+      "title": "Asynchronous, Generation-Free ABC: Streaming AMIS Reweighting for Heterogeneous Simulator Workloads on HPC",
+      "link": "https://arxiv.org/abs/2610.29506",
+      "summary": "arXiv:2610.29506v1 Announce Type: cross Abstract: Approximate Bayesian computation (ABC) enables Bayesian inference for models with intractable likelihoods by estimating parameter posterior distributions from simulated data. Sequential ABC methods improve sampling efficiency by iteratively adapting",
+      "published": "2026-10-22T00:00:00-04:00",
+      "guid": "oai:arXiv.org:2610.29506v1",
+      "feed_id": "arxiv-cs-lg",
+      "journal": "arXiv",
+      "domain": "computer-science"
+    },
+    {
+      "title": "A unified approach for estimation of unnormalized models via Stein operators",
+      "link": "https://arxiv.org/abs/2610.29510",
+      "summary": "arXiv:2610.29510v1 Announce Type: cross Abstract: In this paper, we develop a unified framework connecting proper scoring rules and Stein's method for the estimation of unnormalized models. We construct a class of proper scoring rules that encompasses score matching, ratio matching, pseudolikelihoo",
+      "published": "2026-10-22T00:00:00-04:00",
+      "guid": "oai:arXiv.org:2610.29510v1",
+      "feed_id": "arxiv-cs-lg",
+      "journal": "arXiv",
+      "domain": "computer-science"
+    },
+    {
+      "title": "Mitigating Query Shortcuts in Chain-of-Thought with Context-Aware Decoding",
+      "link": "https://arxiv.org/abs/2610.29518",
+      "summary": "arXiv:2610.29518v1 Announce Type: cross Abstract: While Chain-of-Thought (CoT) prompting improves the reasoning performance of large language models (LLMs), recent studies have shown that final answers do not always depend on the generated rationales. In particular, LLMs may rely on query-specific",
+      "published": "2026-10-22T00:00:00-04:00",
+      "guid": "oai:arXiv.org:2610.29518v1",
+      "feed_id": "arxiv-cs-lg",
+      "journal": "arXiv",
+      "domain": "computer-science"
+    },
+    {
+      "title": "Supervision-Adaptive Curriculum and Guarded Anti-Curriculum Learning for Dense Prediction",
+      "link": "https://arxiv.org/abs/2610.29519",
+      "summary": "arXiv:2610.29519v1 Announce Type: cross Abstract: Curriculum learning orders samples by difficulty, but difficulty alone does not establish supervision reliability for dense prediction. Easy samples can expose shortcuts, hard samples can be informative, and noisy or ambiguous samples can mislead tr",
+      "published": "2026-10-22T00:00:00-04:00",
+      "guid": "oai:arXiv.org:2610.29519v1",
+      "feed_id": "arxiv-cs-lg",
+      "journal": "arXiv",
+      "domain": "computer-science"
+    },
+    {
+      "title": "pplx-embed-v2-late Technical Report",
+      "link": "https://arxiv.org/abs/2610.29523",
+      "summary": "arXiv:2610.29523v1 Announce Type: cross Abstract: In this report, we introduce pplx-embed-v2-late, a pair of 0.6B and 9B multilingual and multimodal late-interaction models. Both models achieve state-of-the-art results within their respective size classes across a range of text, image, and visual d",
+      "published": "2026-10-22T00:00:00-04:00",
+      "guid": "oai:arXiv.org:2610.29523v1",
+      "feed_id": "arxiv-cs-lg",
+      "journal": "arXiv",
+      "domain": "computer-science"
+    },
+    {
+      "title": "Residual-Based Causal Discovery via Pretrained In-Context Quantile Regression",
+      "link": "https://arxiv.org/abs/2610.29530",
+      "summary": "arXiv:2610.29530v1 Announce Type: cross Abstract: Residual-based causal discovery assumes that each variable is generated from its parents and an independent noise source. It estimates this noise and tests its independence from candidate causes. For identifiable functions such as additive-noise mod",
+      "published": "2026-10-22T00:00:00-04:00",
+      "guid": "oai:arXiv.org:2610.29530v1",
+      "feed_id": "arxiv-cs-lg",
+      "journal": "arXiv",
+      "domain": "computer-science"
+    },
+    {
+      "title": "Hyperspherical Simplex Representations for Backward-Compatible Retrieval",
+      "link": "https://arxiv.org/abs/2610.29550",
+      "summary": "arXiv:2610.29550v1 Announce Type: cross Abstract: Training modern AI models has become increasingly expensive, and updating deployed models can alter their internal feature representations, affecting applications built upon them. In retrieval systems, such updates often require complete gallery re-",
+      "published": "2026-10-22T00:00:00-04:00",
+      "guid": "oai:arXiv.org:2610.29550v1",
+      "feed_id": "arxiv-cs-lg",
+      "journal": "arXiv",
+      "domain": "computer-science"
+    },
+    {
+      "title": "Certified Neural Approximation of Robust Nonlinear Model Predictive Control",
+      "link": "https://arxiv.org/abs/2610.29559",
+      "summary": "arXiv:2610.29559v1 Announce Type: cross Abstract: Model predictive control is a high-performance control method, but it incurs comparatively high online computational costs across many control tasks and is challenging to realize in low-level hardware settings. To address this, we present a framewor",
+      "published": "2026-10-22T00:00:00-04:00",
+      "guid": "oai:arXiv.org:2610.29559v1",
+      "feed_id": "arxiv-cs-lg",
+      "journal": "arXiv",
+      "domain": "computer-science"
+    },
+    {
+      "title": "What Prediction-Market Contracts Reveal at Launch: Trading Volume and Dispute Risk",
+      "link": "https://arxiv.org/abs/2610.29578",
+      "summary": "arXiv:2610.29578v1 Announce Type: cross Abstract: Using a near-census of 802,863 resolved markets listed on Polymarket between January 2023 and May 2026, and only information available at listing (the market's title and description, named resolution source, and contract metadata), we predict lifeti",
+      "published": "2026-10-22T00:00:00-04:00",
+      "guid": "oai:arXiv.org:2610.29578v1",
+      "feed_id": "arxiv-cs-lg",
+      "journal": "arXiv",
+      "domain": "computer-science"
+    },
+    {
+      "title": "Unlocking Spatial Grounding in Flow-Matching Models via SNR Tuning",
+      "link": "https://arxiv.org/abs/2610.29581",
+      "summary": "arXiv:2610.29581v1 Announce Type: cross Abstract: Despite the success of foundation models in image synthesis, achieving fine-grained spatial control remains a significant challenge, typically requiring auxiliary structural adapters or complex inference-time steering. While modern vision-language (",
+      "published": "2026-10-22T00:00:00-04:00",
+      "guid": "oai:arXiv.org:2610.29581v1",
+      "feed_id": "arxiv-cs-lg",
+      "journal": "arXiv",
+      "domain": "computer-science"
+    },
+    {
+      "title": "Near Minimax Rate for Quantile Distributional Reinforcement Learning",
+      "link": "https://arxiv.org/abs/2610.29595",
+      "summary": "arXiv:2610.29595v1 Announce Type: cross Abstract: In this paper, we study quantile distributional policy evaluation, where the return distribution under a given policy is approximated by the quantile Bellman fixed point $\\bm\\eta_m$. We investigate the statistical accuracy of estimating $\\bm\\eta_m$",
+      "published": "2026-10-22T00:00:00-04:00",
+      "guid": "oai:arXiv.org:2610.29595v1",
+      "feed_id": "arxiv-cs-lg",
+      "journal": "arXiv",
+      "domain": "computer-science"
+    },
+    {
+      "title": "A Diagnostic Study of Faithfulness in Diffusion Language Models for Table-to-Text Generation",
+      "link": "https://arxiv.org/abs/2610.29602",
+      "summary": "arXiv:2610.29602v1 Announce Type: cross Abstract: Diffusion language models generate by iteratively denoising a masked sequence under bidirectional attention, without the strict left-to-right commitment of autoregressive decoding. Whether this difference affects how reliably they remain grounded in",
+      "published": "2026-10-22T00:00:00-04:00",
+      "guid": "oai:arXiv.org:2610.29602v1",
+      "feed_id": "arxiv-cs-lg",
+      "journal": "arXiv",
+      "domain": "computer-science"
+    },
+    {
+      "title": "No Frames, Just Frequencies: Bandwidth-Efficient Deployment-Time Adaptation for Smart Glasses",
+      "link": "https://arxiv.org/abs/2610.29607",
+      "summary": "arXiv:2610.29607v1 Announce Type: cross Abstract: Deep neural networks deployed on smart glasses must adapt to changes in the distribution of incoming data while adhering to strict privacy and device constraints. We present No Frames, Just Frequencies, a bandwidth-efficient source-assisted adaptati",
+      "published": "2026-10-22T00:00:00-04:00",
+      "guid": "oai:arXiv.org:2610.29607v1",
+      "feed_id": "arxiv-cs-lg",
+      "journal": "arXiv",
+      "domain": "computer-science"
+    },
+    {
+      "title": "Watch Your Step: Anticipated Perception for Humanoid Locomotion",
+      "link": "https://arxiv.org/abs/2610.29612",
+      "summary": "arXiv:2610.29612v1 Announce Type: cross Abstract: Perceptive locomotion policies typically observe a dense robot-centric elevation map, although only the terrain beneath and around the next footsteps informs the control decision. Learned encoders compress the whole visual input, leaving the policy",
+      "published": "2026-10-22T00:00:00-04:00",
+      "guid": "oai:arXiv.org:2610.29612v1",
+      "feed_id": "arxiv-cs-lg",
+      "journal": "arXiv",
+      "domain": "computer-science"
+    },
+    {
+      "title": "Space weather dependence of decameter-scale ionospheric irregularities spatial distribution",
+      "link": "https://arxiv.org/abs/2610.29630",
+      "summary": "arXiv:2610.29630v1 Announce Type: cross Abstract: This paper describes an approach to constructing nowcast and forecast predictive models for the occurrence of high-latitude decameter ionospheric irregularities based on SuperDARN and SECIRA radar data and space weather parameters. The method relies",
+      "published": "2026-10-22T00:00:00-04:00",
+      "guid": "oai:arXiv.org:2610.29630v1",
+      "feed_id": "arxiv-cs-lg",
+      "journal": "arXiv",
+      "domain": "computer-science"
+    },
+    {
+      "title": "Recursive Code Evolution for Task-Oriented Semantic Communications",
+      "link": "https://arxiv.org/abs/2610.29641",
+      "summary": "arXiv:2610.29641v1 Announce Type: cross Abstract: Semantic communication jointly optimizes inference accuracy, channel use, and computation, yet the underlying communication program is typically specified before training. This paper presents ComRSI (Communications-Oriented Recursive Self-Improvemen",
+      "published": "2026-10-22T00:00:00-04:00",
+      "guid": "oai:arXiv.org:2610.29641v1",
+      "feed_id": "arxiv-cs-lg",
+      "journal": "arXiv",
+      "domain": "computer-science"
+    },
+    {
+      "title": "Lineage-Aware Search Control for LLM-Based Evolutionary Factor Mining",
+      "link": "https://arxiv.org/abs/2610.29663",
+      "summary": "arXiv:2610.29663v1 Announce Type: cross Abstract: Formulaic alpha factor mining searches for symbolic expressions that transform market data into predictive signals. Recent LLM-based evolutionary factor mining methods use large language models as semantic variation operators. Under the conventional",
+      "published": "2026-10-22T00:00:00-04:00",
+      "guid": "oai:arXiv.org:2610.29663v1",
+      "feed_id": "arxiv-cs-lg",
+      "journal": "arXiv",
+      "domain": "computer-science"
+    },
+    {
+      "title": "Lifting PCA in the Wasserstein Space",
+      "link": "https://arxiv.org/abs/2610.29679",
+      "summary": "arXiv:2610.29679v1 Announce Type: cross Abstract: Principal Component Analysis (PCA) is a fundamental tool for statistical dimension reduction, yet no canonical extension to distribution-valued data has emerged within the framework of optimal transport. While Wasserstein barycenters and Wasserstein",
+      "published": "2026-10-22T00:00:00-04:00",
+      "guid": "oai:arXiv.org:2610.29679v1",
+      "feed_id": "arxiv-cs-lg",
+      "journal": "arXiv",
+      "domain": "computer-science"
+    },
+    {
+      "title": "TraceForge: Distilling with Your Own Thinking",
+      "link": "https://arxiv.org/abs/2610.29680",
+      "summary": "arXiv:2610.29680v1 Announce Type: cross Abstract: Using an LLM to generate training data for another is among the most general ways to train one, and it remains common practice. Some frontier teams have closed that route for their own models: what comes back is an answer, or a short summary, withou",
+      "published": "2026-10-22T00:00:00-04:00",
+      "guid": "oai:arXiv.org:2610.29680v1",
+      "feed_id": "arxiv-cs-lg",
+      "journal": "arXiv",
+      "domain": "computer-science"
+    },
+    {
+      "title": "Rethinking Post-hoc Debiasing of Large Pretrained Models",
+      "link": "https://arxiv.org/abs/2610.29688",
+      "summary": "arXiv:2610.29688v1 Announce Type: cross Abstract: Large pretrained models such as CLIP are widely used as frozen feature extractors. However, their embeddings inherit spurious correlations from training data, introducing bias into the features. A growing body of research has sought to address this",
+      "published": "2026-10-22T00:00:00-04:00",
+      "guid": "oai:arXiv.org:2610.29688v1",
+      "feed_id": "arxiv-cs-lg",
+      "journal": "arXiv",
+      "domain": "computer-science"
+    },
+    {
+      "title": "Post-hoc Epistemic Uncertainty for Vision-Language-Action Policies",
+      "link": "https://arxiv.org/abs/2610.29730",
+      "summary": "arXiv:2610.29730v1 Announce Type: cross Abstract: Vision-language-action (VLA) policies need to recognize gaps in their training knowledge to request useful demonstrations or assistance in new situations, especially when failures are costly. Disagreement within an ensemble of independently trained",
+      "published": "2026-10-22T00:00:00-04:00",
+      "guid": "oai:arXiv.org:2610.29730v1",
+      "feed_id": "arxiv-cs-lg",
+      "journal": "arXiv",
+      "domain": "computer-science"
+    },
+    {
+      "title": "Where Do LLMs Learn to Recommend AI?",
+      "link": "https://arxiv.org/abs/2610.29785",
+      "summary": "arXiv:2610.29785v1 Announce Type: cross Abstract: Asked what to study, which career to pursue, or what product to build, large language models (LLMs) often recommend AI-related options. We ask where this tendency comes from by comparing models before and after fine-tuning and by varying how questio",
+      "published": "2026-10-22T00:00:00-04:00",
+      "guid": "oai:arXiv.org:2610.29785v1",
+      "feed_id": "arxiv-cs-lg",
+      "journal": "arXiv",
+      "domain": "computer-science"
+    }
+  ]
+}

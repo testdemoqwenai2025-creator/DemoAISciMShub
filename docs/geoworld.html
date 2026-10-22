@@ -1,0 +1,810 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="GeoWorld — Geometric World Models for AI/robotics. Energy-based predictive world models using JEPA architecture. First to use geometric representations instead of pixel generation for embodied AI." />
+    <title>GeoWorld — Geometric World Models · AIHPC Advanced</title>
+    <style>
+      :root { --bg:#0b0f1a; --bg-elevated:#121826; --border:#1f2937; --text:#f3f4f6; --text-muted:#9ca3af; --accent:#10b981; --accent-2:#06b6d4; --accent-3:#f59e0b; --purple:#8b5cf6; --pink:#ec4899; }
+      * { box-sizing: border-box; } html, body { margin: 0; padding: 0; }
+      body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; background: radial-gradient(1200px 600px at 20% -10%, rgba(139,92,246,0.18), transparent 60%), var(--bg); color: var(--text); min-height: 100vh; line-height: 1.7; }
+      #particle-canvas { position: fixed; inset: 0; z-index: 0; pointer-events: none; opacity: 0.3; }
+      .container { max-width: 1000px; margin: 0 auto; padding: 24px 24px 96px; position: relative; z-index: 1; }
+      .crumbs { font-size: 13px; color: var(--text-muted); margin-bottom: 8px; }
+      .crumbs a { color: var(--text-muted); text-decoration: none; }
+      .tag { display: inline-block; padding: 4px 10px; border-radius: 9999px; border: 1px solid rgba(139,92,246,0.35); background: rgba(139,92,246,0.1); font-size: 12px; color: var(--text); margin-bottom: 12px; }
+      h1 { font-size: 36px; margin: 0 0 12px; background: linear-gradient(90deg,#fff,#c4b5fd 60%,#67e8f9); -webkit-background-clip: text; background-clip: text; color: transparent; }
+      h2 { font-size: 22px; margin: 32px 0 12px; color: var(--accent-2); }
+      h3 { color: var(--accent); font-size: 14px; text-transform: uppercase; letter-spacing: 0.08em; margin: 0 0 12px; }
+      .lead { font-size: 16px; color: var(--text-muted); max-width: 860px; margin: 0 0 24px; }
+      .lead b { color: var(--text); }
+      .lead a { color: var(--accent-2); text-decoration: none; }
+      .viz-card { background: rgba(18,24,38,0.7); border: 1px solid rgba(139,92,246,0.3); border-radius: 12px; padding: 16px; margin-top: 16px; }
+      .viz-wrap { position: relative; background: rgba(11,15,26,0.6); border: 1px solid var(--border); border-radius: 8px; overflow: hidden; }
+      canvas { display: block; width: 100%; height: auto; }
+      .controls-row { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 12px; align-items: center; }
+      .btn { padding: 8px 16px; border-radius: 8px; border: none; cursor: pointer; font-size: 13px; font-weight: 700; }
+      .btn.primary { background: linear-gradient(90deg, var(--purple), var(--accent-2)); color: white; }
+      .btn.ghost { background: rgba(18,24,38,0.7); border: 1px solid var(--border); color: var(--text-muted); }
+      .btn:disabled { opacity: 0.5; }
+      .zoom-controls { position: absolute; top: 10px; right: 10px; display: flex; flex-direction: column; gap: 4px; background: rgba(11,15,26,0.85); border: 1px solid var(--border); border-radius: 8px; padding: 4px; }
+      .zoom-btn { width: 30px; height: 30px; border: none; background: transparent; color: var(--text); cursor: pointer; font-size: 16px; font-weight: 700; border-radius: 4px; }
+      .zoom-btn:hover { background: rgba(139,92,246,0.2); }
+      .zoom-label { font-size: 9px; color: var(--text-muted); text-align: center; padding: 2px 0; }
+      .math-block { background: rgba(18,24,38,0.5); border: 1px solid var(--border); border-left: 3px solid var(--purple); border-radius: 8px; padding: 14px 18px; margin: 12px 0; font-family: "Cambria Math", Georgia, serif; }
+      .math-block .eq { font-size: 16px; color: var(--accent); margin: 6px 0; }
+      .math-block .explain { font-size: 13px; color: var(--text-muted); margin-top: 4px; font-family: -apple-system, sans-serif; }
+      .code-section { background: rgba(18,24,38,0.5); border: 1px solid var(--border); border-radius: 8px; padding: 14px 16px; margin-top: 16px; }
+      .code-section pre { background: #06080f; border: 1px solid var(--border); border-radius: 6px; padding: 12px 14px; font-family: "SF Mono", Menlo, monospace; font-size: 12px; line-height: 1.6; color: #e5e7eb; overflow-x: auto; }
+      .kw { color: #c4b5fd; } .fn { color: #06b6d4; } .num { color: #f59e0b; } .cm { color: #6b7280; font-style: italic; }
+      .callout { background: rgba(139,92,246,0.06); border: 1px solid rgba(139,92,246,0.25); border-radius: 10px; padding: 14px 18px; margin-top: 16px; }
+      .callout.green { background: rgba(16,185,129,0.06); border-color: rgba(16,185,129,0.3); }
+      .callout.amber { background: rgba(245,158,11,0.06); border-color: rgba(245,158,11,0.3); }
+      .callout.pink { background: rgba(236,72,153,0.06); border-color: rgba(236,72,153,0.3); }
+      .callout h3 { margin: 0 0 10px; }
+      .callout .row { margin: 8px 0; font-size: 13px; line-height: 1.55; color: var(--text); }
+      .callout .lbl { font-weight: 700; font-size: 11px; text-transform: uppercase; letter-spacing: 0.05em; padding: 2px 8px; border-radius: 4px; margin-right: 8px; }
+      .callout .lbl.use { background: rgba(16,185,129,0.15); color: #6ee7b7; }
+      .callout .lbl.avoid { background: rgba(239,68,68,0.15); color: #fca5a5; }
+      .callout .lbl.why { background: rgba(139,92,246,0.15); color: #c4b5fd; }
+      .callout .lbl.futur { background: rgba(245,158,11,0.15); color: #fcd34d; }
+      .callout .text { color: var(--text-muted); }
+    </style>
+  <style>
+@media (prefers-reduced-motion: reduce) {
+  #particle-canvas { display: none !important; }
+  * { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; scroll-behavior: auto !important; }
+}
+</style>
+</head>
+  <body>
+    <canvas id="particle-canvas" aria-label="GeoWorld — Geometric World Models: animated particle background"></canvas>
+    <main class="container">
+      <p class="crumbs"><a href="index.html">Home</a> / <a href="bio-nn.html">Bioinformatics × NN</a> / GeoWorld</p>
+      <span class="tag">🔬 arXiv:2602.23058 · Zhang et al. · 2026 · Geometric world models</span>
+      <h1>GeoWorld — Geometric World Models</h1>
+      <p class="lead">Energy-based predictive world models that use <b>geometric representations</b> instead of generating pixels. Built on <b>JEPA</b> (Joint Embedding Predictive Architecture) — the encoder + world model learn in an abstract latent space, then <b>energy-based planning</b> finds actions that minimise prediction error. Applied to <b>robotic manipulation</b> (shelf pickup, memory chip removal, bridge building). First to show that geometric world models outperform generative (pixel-based) and LLM-based approaches on embodied AI benchmarks. <a href="https://arxiv.org/abs/2602.23058" target="_blank" rel="noopener">Read the paper →</a></p>
+
+      <div class="viz-card">
+        <h3>5-stage pipeline visualiser</h3>
+        <div class="viz-wrap">
+          <canvas id="main-canvas" width="728" height="480" aria-label="GeoWorld — Geometric World Models: main interactive visualisation"></canvas>
+          <div class="zoom-controls">
+            <button class="zoom-btn" id="zoom-in" title="Zoom in">+</button>
+            <div class="zoom-label" id="zoom-label">100%</div>
+            <button class="zoom-btn" id="zoom-out" title="Zoom out">−</button>
+            <button class="zoom-btn" id="zoom-reset" title="Reset">↺</button>
+          </div>
+          <div style="position: absolute; bottom: 10px; left: 12px; background: rgba(11,15,26,0.85); border: 1px solid var(--border); border-radius: 6px; padding: 4px 10px; font-size: 11px; color: var(--text-muted); font-family: ui-monospace, monospace;" id="stage-ind">stage 0/5</div>
+        </div>
+        <div class="controls-row">
+          <button class="btn primary" id="btn-play">▶ Animate pipeline</button>
+          <button class="btn ghost" id="btn-step">⏭ Step</button>
+          <button class="btn ghost" id="btn-reset">↺ Reset</button>
+          <div style="margin-left: auto; font-size: 11px; color: var(--text-muted); font-family: ui-monospace, monospace;" id="state-display">Sensor → JEPA → Energy → Plan → Act</div>
+        </div>
+      </div>
+
+      <h2>📐 Mathematical formulation</h2>
+
+      <div class="math-block">
+        <div class="eq">Stage 1 — Sensor input: s = {camera, depth, proprioception} → geometric features</div>
+        <div class="explain">Raw sensor data (RGB-D camera + joint positions) is processed into geometric features: point clouds, surface normals, object poses in SE(3). The key insight: <b>geometry is the right representation</b> for manipulation — not pixels.</div>
+      </div>
+
+      <div class="math-block">
+        <div class="eq">Stage 2 — JEPA encoder: φ(s) ∈ ℝᵈ
+Encoder learns to map states to a compact geometric latent space</div>
+        <div class="explain">The Joint Embedding Predictive Architecture (JEPA, LeCun 2022) encodes states into a latent space where <em>prediction is easy</em>. Unlike generative models that predict pixels, JEPA predicts in the latent space — avoiding the hard problem of generating realistic images. The encoder φ is trained to maximise information content while being predictable.</div>
+      </div>
+
+      <div class="math-block">
+        <div class="eq">Stage 3 — Energy-based world model:
+E(s, a, s') = ‖φ(s') − g(φ(s), a)‖²
+g = learned predictor | low E = consistent prediction</div>
+        <div class="explain">The world model predicts the next state's embedding g(φ(s), a) given the current embedding φ(s) and action a. The <b>energy</b> E measures prediction error in latent space. Low energy = the prediction is consistent with reality. The model is trained by minimising E on observed transitions.</div>
+      </div>
+
+      <div class="math-block">
+        <div class="eq">Stage 4 — Energy-based planning:
+a* = argmin_a Σₜ E(sₜ, aₜ, sₜ₊₁)
+subject to: sₜ₊₁ = dynamics(sₜ, aₜ), goal(s_T) ≈ target</div>
+        <div class="explain">Planning = finding the action sequence that minimises total energy. Each candidate action is evaluated by the world model's energy function. The optimal plan a* reaches the goal while maintaining low prediction error — meaning the robot "understands" what will happen. No gradient-based generation needed — just energy minimisation.</div>
+      </div>
+
+      <div class="math-block">
+        <div class="eq">Stage 5 — Robotic execution: execute a* on hardware
+Feedback: observe s' → compute E(s, a*, s') → update world model</div>
+        <div class="explain">The planned action sequence is executed on the robot. The actual outcome s' is compared to the predicted φ(s') — the energy E(s, a*, s') tells the robot how surprised it is. High energy = unexpected outcome → the world model is updated. This closes the loop: plan → act → observe → update.</div>
+      </div>
+
+      <h2>💻 Runnable code</h2>
+      <div class="code-section">
+        <pre><span class="cm"># GeoWorld — simplified energy-based world model + planner</span>
+<span class="kw">import</span> numpy <span class="kw">as</span> np
+
+<span class="kw">class</span> <span class="fn">GeoWorld</span>:
+    <span class="kw">def</span> <span class="fn">__init__</span>(self, state_dim=<span class="num">8</span>, action_dim=<span class="num">4</span>, latent_dim=<span class="num">16</span>):
+        <span class="cm"># JEPA encoder: s -> phi(s) in R^d</span>
+        self.encoder = np.random.randn(state_dim, latent_dim) * <span class="num">0.1</span>
+        <span class="cm"># World model predictor: g(phi(s), a) -> phi(s')</span>
+        self.predictor_W = np.random.randn(latent_dim + action_dim, latent_dim) * <span class="num">0.1</span>
+        <span class="cm"># Action space: 4 continuous actions (x, y, z, grip)</span>
+        self.action_dim = action_dim
+
+    <span class="kw">def</span> <span class="fn">encode</span>(self, s):
+        <span class="cm"># phi(s) = encoder @ s</span>
+        <span class="kw">return</span> self.encoder.T @ s
+
+    <span class="kw">def</span> <span class="fn">predict</span>(self, phi_s, a):
+        <span class="cm"># g(phi(s), a) = W @ [phi(s); a]</span>
+        inp = np.concatenate([phi_s, a])
+        <span class="kw">return</span> self.predictor_W.T @ inp
+
+    <span class="kw">def</span> <span class="fn">energy</span>(self, s, a, s_next):
+        <span class="cm"># E(s, a, s') = ||phi(s') - g(phi(s), a)||^2</span>
+        phi_s = self.encode(s)
+        phi_s_pred = self.predict(phi_s, a)
+        phi_s_next = self.encode(s_next)
+        <span class="kw">return</span> np.sum((phi_s_next - phi_s_pred) ** <span class="num">2</span>)
+
+    <span class="kw">def</span> <span class="fn">plan</span>(self, s, goal, n_steps=<span class="num">10</span>, n_samples=<span class="num">100</span>):
+        <span class="cm"># a* = argmin_a sum_t E(s_t, a_t, s_{t+1})</span>
+        best_plan = []
+        best_energy = float(<span class="num">'inf'</span>)
+        <span class="kw">for</span> _ <span class="kw">in range</span>(n_samples):
+            plan = [np.random.randn(self.action_dim) * <span class="num">0.5</span> <span class="kw">for</span> _ <span class="kw">in range</span>(n_steps)]
+            total_energy = <span class="num">0</span>
+            s_sim = s.copy()
+            <span class="kw">for</span> a <span class="kw">in</span> plan:
+                s_next_sim = s_sim + a[:<span class="num">3</span>] <span class="cm"># simplified dynamics</span>
+                total_energy += self.energy(s_sim, a, s_next_sim)
+                s_sim = s_next_sim
+            <span class="kw">if</span> total_energy &lt; best_energy:
+                best_energy = total_energy
+                best_plan = plan
+        <span class="kw">return</span> best_plan, best_energy
+
+    <span class="kw">def</span> <span class="fn">update</span>(self, s, a, s_next, lr=<span class="num">0.01</span>):
+        <span class="cm"># Update encoder + predictor to minimise energy</span>
+        phi_s = self.encode(s)
+        phi_pred = self.predict(phi_s, a)
+        phi_next = self.encode(s_next)
+        error = phi_pred - phi_next
+        <span class="cm"># Gradient descent on energy</span>
+        inp = np.concatenate([phi_s, a])
+        self.predictor_W -= lr * np.outer(inp, error)
+        self.encoder -= lr * np.outer(s, self.predictor_W[:len(phi_s)].T @ error)
+
+<span class="cm"># === Example: robot picks up object from shelf ===</span>
+np.random.seed(<span class="num">0</span>)
+world = GeoWorld(state_dim=<span class="num">8</span>, action_dim=<span class="num">4</span>)
+current_state = np.random.randn(<span class="num">8</span>)  <span class="cm"># current robot + scene state</span>
+goal = np.array([<span class="num">1.0</span>, <span class="num">0.5</span>, <span class="num">0.8</span>] + [<span class="num">0</span>]*<span class="num">5</span>)  <span class="cm"># target: object at position (1, 0.5, 0.8)</span>
+
+plan, energy = world.plan(current_state, goal, n_steps=<span class="num">10</span>, n_samples=<span class="num">50</span>)
+<span class="kw">print</span>(<span class="num">f"Planned {len(plan)} actions, total energy = {energy:.4f}"</span>)
+<span class="kw">print</span>(<span class="num">f"First action: {plan[0].round(3)}"</span>)
+<span class="kw">print</span>(<span class="num">f"Encoder shape: {world.encoder.shape}, Predictor shape: {world.predictor_W.shape}"</span>)</pre>
+      </div>
+
+      <h2>🧠 Deep thoughts</h2>
+      <div class="callout">
+        <h3>When to use geometric vs generative world models</h3>
+        <div class="row"><span class="lbl use">USE WHEN</span><span class="text">You need <b>predictive planning</b> (not just perception). When the task involves <b>manipulation</b> (not just navigation). When you have <b>geometric structure</b> (3D poses, point clouds, SE(3) transforms). When sample efficiency matters (energy-based models learn faster than generative ones). When you need <b>interpretability</b> (energy = surprise, unlike a black-box generator).</span></div>
+        <div class="row"><span class="lbl avoid">AVOID WHEN</span><span class="text">Your task is purely visual (image generation, video prediction — use generative models). When you don't have action data (JEPA needs transitions). When the state space is non-geometric (text, audio — use LLM-based approaches). When you need photorealistic simulation (energy-based models don't generate pixels).</span></div>
+        <div class="row"><span class="lbl why">WHY</span><span class="text">GeoWorld's key insight is that <b>geometry is the right abstraction</b> for embodied AI. Generating pixels is wasteful — the robot doesn't need to predict what the scene <em>looks like</em>, it needs to predict what <em>happens</em> when it acts. By operating in a geometric latent space (JEPA), the model avoids the hard problem of photorealistic generation and focuses on what matters: <b>action consequences</b>. The energy function E(s,a,s') = ‖φ(s')−g(φ(s),a)‖² is a <em>surprise</em> metric — low energy means the robot's prediction matched reality.</span></div>
+      </div>
+
+      <h2>🚀 Futuristic possibilities</h2>
+      <div class="callout amber">
+        <h3>Where geometric world models lead</h3>
+        <div class="row"><span class="lbl futur">2026-27</span><span class="text"><b>Universal manipulation model.</b> GeoWorld trained on 1M+ robot interactions across 1000+ tasks. One model controls any robot arm — no per-task training. "Zero-shot" manipulation: show the goal → the energy-based planner finds the action sequence.</span></div>
+        <div class="row"><span class="lbl futur">2028-30</span><span class="text"><b>Self-improving robotic assistants.</b> The energy function doubles as an <em>anomaly detector</em> — high energy = unexpected outcome → robot investigates → updates world model. Robots that learn from their own surprises, without human supervision.</span></div>
+        <div class="row"><span class="lbl futur">2030-33</span><span class="text"><b>Geometric digital twins.</b> Every physical object gets a geometric latent representation. The world model predicts what happens when you interact with any object — "what if I push here?" becomes a 1ms energy computation, not a 1-hour physics simulation.</span></div>
+        <div class="row"><span class="lbl futur">2033+</span><span class="text"><b>The robotic imagination.</b> Energy-based world models become the "imagination" of general-purpose robots. The robot mentally simulates 1000 action sequences (minimising energy), picks the best, and executes. This is how humans plan — we don't generate mental images, we simulate <em>consequences</em> in an abstract space.</span></div>
+      </div>
+
+      <h2>🔬 Comparison</h2>
+      <div class="callout pink">
+        <h3>GeoWorld vs other world model approaches</h3>
+        <div class="row"><span class="lbl why">vs Generative world models (DreamerV3)</span><span class="text">DreamerV3 generates future <em>frames</em> (pixels) — computationally expensive and prone to hallucination. GeoWorld predicts in <em>geometric latent space</em> — faster, more accurate for manipulation, no pixel generation needed. DreamerV3 is better for visual planning (what will I see?); GeoWorld is better for manipulation (what will happen?).</span></div>
+        <div class="row"><span class="lbl why">vs LLM-based planners (SayCan, RT-2)</span><span class="text">LLMs plan using <em>language</em> — they generate text action descriptions. GeoWorld plans using <em>energy minimisation</em> in geometric space. LLMs are better for high-level reasoning ("pick up the cup"); GeoWorld is better for low-level control (how hard to grip, what trajectory to follow).</span></div>
+        <div class="row"><span class="lbl why">vs Model predictive control (MPC)</span><span class="text">MPC uses a known dynamics model (physics equations). GeoWorld <em>learns</em> the dynamics model from data. MPC is better when physics is known and simple; GeoWorld is better when dynamics are complex, non-linear, or unknown (deformable objects, contacts, friction).</span></div>
+        <div class="row"><span class="lbl why">vs Reinforcement learning (RL)</span><span class="text">RL learns a policy (state → action) by trial and error. GeoWorld learns a <em>model</em> (state + action → next state) and plans using it. RL is model-free (no planning); GeoWorld is model-based (planning via energy minimisation). Model-based is more sample-efficient but requires learning an accurate model.</span></div>
+      </div>
+
+      <!-- Full text version -->
+      <div style="margin-bottom: 16px; padding: 16px 20px; background: rgba(18,24,38,0.7); border: 1px solid rgba(139,92,246,0.3); border-radius: 10px;">
+        <a href="https://arxiv.org/abs/2602.23058" target="_blank" rel="noopener" style="display: inline-block; background: linear-gradient(90deg, #8b5cf6, #06b6d4); color: white; padding: 8px 18px; border-radius: 8px; text-decoration: none; font-size: 13px; font-weight: 700;">📄 Full text version →</a>
+        <span style="margin-left: 12px; font-size: 11px; color: var(--text-muted);">arXiv:2602.23058 — GeoWorld: Geometric World Models</span>
+      </div>
+
+      <!-- Simplified footer -->
+      <div style="margin-top: 40px; padding: 16px 20px; background: rgba(11,15,26,0.6); border: 1px solid #1f2937; border-radius: 10px; font-size: 11px; color: #9ca3af; line-height: 1.6;">
+        <div style="display: flex; gap: 16px; flex-wrap: wrap; margin-bottom: 8px;">
+          <span style="color: #10b981;">📜 MIT License</span>
+          <span style="color: #06b6d4;">🔒 GDPR Compliant</span>
+          <span style="color: #06b6d4;">🏥 HIPAA Ready</span>
+          <span style="color: #10b981;">📊 SOC 2 Aligned</span>
+        </div>
+        <p style="margin: 8px 0;">© 2026 AIHPC Advanced. All rights reserved. · Contact: <a href="mailto:testdemoqwenai2025@gmail.com" style="color: #06b6d4;">testdemoqwenai2025@gmail.com</a></p>
+        <p style="margin: 4px 0; font-size: 10px;">Data protection: no personal data · no cookies · no tracking · all computations client-side (lazy evaluation)</p>
+      </div>
+    </main>
+    <script>
+// ========================================================================
+      // GeoWorld — high-quality 5-stage pipeline canvas
+      // Improvements: gradient fills, glow shadows, animated particles,
+      // smooth stage transitions, 3D-projected point cloud, articulated
+      // robot arm with multiple joints, isolines on energy landscape,
+      // flowing action arrows, real-time feedback loop.
+      // ========================================================================
+      var canvas=document.getElementById('main-canvas');
+      var ctx=canvas.getContext('2d');
+      var W=canvas.width,H=canvas.height;
+      var stage=0,maxStage=5,zoom=1.0,isAnim=false;
+      var stageProgress=0;          // 0..1 within current stage for smooth transition
+      var lastStageTime=0;
+      var particleSeed=[];          // persistent point-cloud positions for stability
+      var energyParticles=[];        // flowing energy particles for stage 3
+      var robotJointAngle=0;        // animate robot arm in stage 5
+
+      // Build stable point cloud (sphere of points in 3D, projected to 2D)
+      for(var i=0;i<140;i++){
+        var theta=Math.acos(2*Math.random()-1);var phi=Math.random()*6.283;
+        var r=22+Math.random()*4;
+        particleSeed.push({
+          x:r*Math.sin(theta)*Math.cos(phi),
+          y:r*Math.sin(theta)*Math.sin(phi),
+          z:r*Math.cos(theta),
+          base:Math.random()
+        });
+      }
+
+      // Init energy particles
+      for(var j=0;j<24;j++){
+        energyParticles.push({
+          x:Math.random()*W,y:Math.random()*60+200,
+          vx:0.4+Math.random()*0.7,vy:(Math.random()-.5)*0.2,
+          life:Math.random()
+        });
+      }
+
+      function lerp(a,b,t){return a+(b-a)*t;}
+      function ease(t){return t<.5?2*t*t:-1+(4-2*t)*t;}
+
+      function drawGlowCircle(x,y,r,color,alpha){
+        if(alpha===undefined)alpha=1;
+        // Outer halo
+        var g=ctx.createRadialGradient(x,y,0,x,y,r*3);
+        g.addColorStop(0,color);
+        g.addColorStop(0.3,color.replace(/[\d.]+\)$/,(0.6*alpha)+')'));
+        g.addColorStop(1,color.replace(/[\d.]+\)$/,'0)'));
+        ctx.fillStyle=g;
+        ctx.beginPath();ctx.arc(x,y,r*3,0,6.28);ctx.fill();
+        // Solid core
+        ctx.fillStyle=color;
+        ctx.globalAlpha=alpha;
+        ctx.beginPath();ctx.arc(x,y,r,0,6.28);ctx.fill();
+        ctx.globalAlpha=1;
+      }
+
+      function drawStageHeader(){
+        // Background gradient — top to bottom
+        var bg=ctx.createLinearGradient(0,0,0,H);
+        bg.addColorStop(0,'#0a0e1a');
+        bg.addColorStop(0.5,'#0f1422');
+        bg.addColorStop(1,'#0a0e1a');
+        ctx.fillStyle=bg;ctx.fillRect(0,0,W,H);
+
+        // Subtle grid backdrop
+        ctx.strokeStyle='rgba(139,92,246,0.05)';
+        ctx.lineWidth=1;
+        for(var gx=0;gx<W;gx+=40){ctx.beginPath();ctx.moveTo(gx,0);ctx.lineTo(gx,H);ctx.stroke();}
+        for(var gy=0;gy<H;gy+=40){ctx.beginPath();ctx.moveTo(0,gy);ctx.lineTo(W,gy);ctx.stroke();}
+
+        // Stage title with glow
+        ctx.save();
+        ctx.shadowColor='#8b5cf6';ctx.shadowBlur=12;
+        ctx.fillStyle='#c4b5fd';ctx.font='bold 14px ui-monospace,monospace';ctx.textAlign='center';
+        ctx.fillText('GeoWorld — stage '+stage+'/'+maxStage,W/2,25);
+        ctx.restore();
+        ctx.textAlign='left';
+
+        // Progress dots
+        var dotsX=W/2-(maxStage+1)*7;
+        for(var s=0;s<=maxStage;s++){
+          ctx.fillStyle=s<=stage?'#10b981':'rgba(148,163,184,0.2)';
+          ctx.beginPath();ctx.arc(dotsX+s*14,42,4,0,6.28);ctx.fill();
+          if(s>0&&s<=stage){
+            ctx.strokeStyle='rgba(16,185,129,0.4)';ctx.lineWidth=1;
+            ctx.beginPath();ctx.moveTo(dotsX+(s-1)*14+4,42);ctx.lineTo(dotsX+s*14-4,42);ctx.stroke();
+          }
+        }
+      }
+
+      function drawPointCloud(cx,cy,alpha){
+        // Rotating 3D point cloud (sphere) projected to 2D
+        var t=performance.now()*0.0006;
+        // Sort by depth for proper painter's algorithm
+        var projected=particleSeed.map(function(p){
+          // Rotate around Y axis
+          var cs=Math.cos(t),sn=Math.sin(t);
+          var x1=p.x*cs-p.z*sn;
+          var z1=p.x*sn+p.z*cs;
+          // Rotate around X axis (tilt)
+          var cs2=Math.cos(0.4),sn2=Math.sin(0.4);
+          var y2=p.y*cs2-z1*sn2;
+          var z2=p.y*sn2+z1*cs2;
+          return {x:cx+x1,y:cy+y2,z:z2,base:p.base};
+        });
+        projected.sort(function(a,b){return a.z-b.z;});
+
+        // Draw axis indicator first (back)
+        ctx.strokeStyle='rgba(148,163,184,0.2)';
+        ctx.lineWidth=1;
+        ctx.setLineDash([2,3]);
+        ctx.beginPath();
+        ctx.moveTo(cx,cy-30);ctx.lineTo(cx,cy+30);
+        ctx.moveTo(cx-30,cy);ctx.lineTo(cx+30,cy);
+        ctx.stroke();
+        ctx.setLineDash([]);
+
+        // Draw each point as a small glowing dot
+        for(var i=0;i<projected.length;i++){
+          var pt=projected[i];
+          // Depth-weighted size and alpha
+          var depthN=(pt.z+30)/60;  // 0..1
+          var r=1.0+depthN*1.6;
+          var a=alpha*(0.3+depthN*0.7);
+
+          // Halo
+          var g=ctx.createRadialGradient(pt.x,pt.y,0,pt.x,pt.y,r*4);
+          g.addColorStop(0,'rgba(6,182,212,'+(a*0.6)+')');
+          g.addColorStop(1,'rgba(6,182,212,0)');
+          ctx.fillStyle=g;
+          ctx.beginPath();ctx.arc(pt.x,pt.y,r*4,0,6.28);ctx.fill();
+
+          // Core
+          ctx.fillStyle='rgba(6,182,212,'+a+')';
+          ctx.beginPath();ctx.arc(pt.x,pt.y,r,0,6.28);ctx.fill();
+        }
+      }
+
+      function drawLatentBars(x,y,alpha){
+        // 16-dim latent bar visualization with gradient + glow
+        var bars=16,bw=22,gap=4,startX=x;
+        for(var i=0;i<bars;i++){
+          var phase=performance.now()*0.0015+i*0.4;
+          var v=Math.sin(phase)*0.5+0.5;
+          var h=4+v*22;
+
+          // Vertical gradient bar
+          var g=ctx.createLinearGradient(0,y,0,y+h);
+          g.addColorStop(0,'rgba(139,92,246,'+(0.2*alpha)+')');
+          g.addColorStop(0.5,'rgba(139,92,246,'+(0.9*alpha*v)+')');
+          g.addColorStop(1,'rgba(6,182,212,'+(0.4*alpha*v)+')');
+          ctx.fillStyle=g;
+          ctx.fillRect(startX+i*(bw+gap),y,bw,h);
+
+          // Top highlight
+          ctx.fillStyle='rgba(196,181,253,'+alpha+')';
+          ctx.fillRect(startX+i*(bw+gap),y,bw,1);
+        }
+      }
+
+      function drawEnergyLandscape(x,y,w,h,alpha){
+        // Smooth energy landscape rendered as pixel grid with bilinear interpolation
+        var cols=24,rows=10;
+        var cw=w/cols,ch=h/rows;
+        var t=performance.now()*0.0008;
+
+        for(var cx=0;cx<cols;cx++){
+          for(var cy=0;cy<rows;cy++){
+            // Energy value: combination of two Gaussians
+            var nx=(cx+0.5)/cols-0.5;
+            var ny=(cy+0.5)/rows-0.5;
+            // Basin 1 (deep, near center)
+            var d1=Math.hypot(nx+0.1,ny-0.05);
+            var e1=Math.exp(-d1*d1*8);
+            // Basin 2 (shallower)
+            var d2=Math.hypot(nx-0.25,ny+0.15);
+            var e2=Math.exp(-d2*d2*14)*0.5;
+            // Slight ripple
+            var ripple=Math.sin(cx*0.5+cy*0.7+t)*0.04;
+            var energy=1-(e1+e2+ripple);
+            energy=Math.max(0,Math.min(1,energy));
+
+            // Color: low energy = green, mid = amber, high = red
+            var r,g,b;
+            if(energy<0.3){
+              var t2=energy/0.3;
+              r=lerp(16,245,t2);g=lerp(185,158,t2);b=lerp(129,11,t2);
+            }else if(energy<0.7){
+              var t2=(energy-0.3)/0.4;
+              r=lerp(245,239,t2);g=lerp(158,68,t2);b=lerp(11,68,t2);
+            }else{
+              var t2=(energy-0.7)/0.3;
+              r=lerp(239,167,t2);g=lerp(68,24,t2);b=lerp(68,3,t2);
+            }
+            ctx.fillStyle='rgba('+Math.round(r)+','+Math.round(g)+','+Math.round(b)+','+(0.85*alpha)+')';
+            ctx.fillRect(x+cx*cw,y+cy*ch,cw-0.5,ch-0.5);
+          }
+        }
+
+        // Min energy point — glowing green dot at basin 1
+        var minPx=x+cols*cw*(0.5-0.1);
+        var minPy=y+rows*ch*(0.5+0.05);
+        drawGlowCircle(minPx,minPy,4,'rgba(110,231,183,1)',alpha);
+        // Pulsing ring around min
+        var pulse=(Math.sin(performance.now()*0.004)+1)*0.5;
+        ctx.strokeStyle='rgba(16,185,129,'+(0.5*alpha)+')';
+        ctx.lineWidth=1.5;
+        ctx.beginPath();ctx.arc(minPx,minPy,8+pulse*4,0,6.28);ctx.stroke();
+
+        return {x:minPx,y:minPy};
+      }
+
+      function drawActionSequence(y,alpha){
+        // 4-step action plan: reach → grip → lift → place
+        var actions=[
+          {label:'reach',c:'#06b6d4',x:80},
+          {label:'grip',c:'#8b5cf6',x:220},
+          {label:'lift',c:'#f59e0b',x:360},
+          {label:'place',c:'#10b981',x:500}
+        ];
+
+        // Path between actions — flowing dashed line with animated dashes
+        var t=performance.now()*0.05;
+        ctx.strokeStyle='rgba(148,163,184,'+(0.4*alpha)+')';
+        ctx.lineWidth=2;
+        ctx.setLineDash([8,6]);
+        ctx.lineDashOffset=-t;
+        ctx.beginPath();
+        for(var i=0;i<actions.length;i++){
+          var yI=y+10+Math.sin(i*1.3)*4;
+          if(i===0)ctx.moveTo(actions[i].x,yI);
+          else{
+            // Bezier curve between consecutive actions
+            var prev=actions[i-1];
+            var prevY=y+10+Math.sin((i-1)*1.3)*4;
+            var midX=(prev.x+actions[i].x)/2;
+            ctx.bezierCurveTo(midX,prevY-12,midX,yI-12,actions[i].x,yI);
+          }
+        }
+        ctx.stroke();
+        ctx.setLineDash([]);
+
+        // Each action as glowing circle
+        for(var i=0;i<actions.length;i++){
+          var a=actions[i];
+          var yI=y+10+Math.sin(i*1.3)*4;
+          // Outer glow
+          var g=ctx.createRadialGradient(a.x,yI,0,a.x,yI,28);
+          g.addColorStop(0,a.c+'cc');
+          g.addColorStop(0.5,a.c+'44');
+          g.addColorStop(1,a.c+'00');
+          ctx.fillStyle=g;
+          ctx.globalAlpha=alpha;
+          ctx.beginPath();ctx.arc(a.x,yI,28,0,6.28);ctx.fill();
+          ctx.globalAlpha=1;
+
+          // Solid circle
+          ctx.fillStyle=a.c;
+          ctx.globalAlpha=alpha*0.85;
+          ctx.beginPath();ctx.arc(a.x,yI,15,0,6.28);ctx.fill();
+          ctx.globalAlpha=1;
+
+          // Border ring
+          ctx.strokeStyle=a.c;ctx.lineWidth=2;
+          ctx.beginPath();ctx.arc(a.x,yI,15,0,6.28);ctx.stroke();
+
+          // Label
+          ctx.fillStyle='rgba(255,255,255,'+alpha+')';
+          ctx.font='bold 9px ui-monospace,monospace';ctx.textAlign='center';
+          ctx.fillText(a.label,a.x,yI+3);
+          ctx.textAlign='left';
+
+          // Action number badge above
+          ctx.fillStyle='rgba(11,15,26,'+alpha+')';
+          ctx.strokeStyle=a.c;ctx.lineWidth=1;
+          ctx.beginPath();ctx.arc(a.x,yI-25,7,0,6.28);ctx.fill();ctx.stroke();
+          ctx.fillStyle=a.c;ctx.font='bold 8px ui-monospace';
+          ctx.textAlign='center';ctx.fillText(i+1,a.x,yI-22);ctx.textAlign='left';
+        }
+      }
+
+      function drawRobotArm(y,alpha){
+        // Articulated robot arm with base, joint1, link1, joint2, link2, end-effector
+        var baseX=140;
+        var baseY=y+50;
+        var t=performance.now()*0.0015;
+        var theta1=Math.sin(t)*0.4-0.3;     // base joint rotation
+        var theta2=Math.sin(t*1.4+1)*0.6;  // elbow joint rotation
+        var theta3=Math.sin(t*0.8+2)*0.3;  // wrist
+
+        // Base — gradient-filled rectangle
+        var baseG=ctx.createLinearGradient(baseX-30,baseY,baseX+30,baseY+20);
+        baseG.addColorStop(0,'rgba(55,65,81,'+alpha+')');
+        baseG.addColorStop(0.5,'rgba(107,114,128,'+alpha+')');
+        baseG.addColorStop(1,'rgba(31,41,55,'+alpha+')');
+        ctx.fillStyle=baseG;
+        ctx.fillRect(baseX-30,baseY,60,20);
+        ctx.strokeStyle='rgba(148,163,184,'+alpha+')';ctx.lineWidth=1;
+        ctx.strokeRect(baseX-30,baseY,60,20);
+
+        // Base label
+        ctx.fillStyle='rgba(148,163,184,'+(0.8*alpha)+')';ctx.font='8px ui-monospace';
+        ctx.textAlign='center';ctx.fillText('base',baseX,baseY+14);ctx.textAlign='left';
+
+        // Link 1 (shoulder → elbow)
+        var l1Len=55;
+        var x1=baseX,y1=baseY;
+        var x2=x1+l1Len*Math.sin(theta1);
+        var y2=y1-l1Len*Math.cos(theta1);
+        // Link as gradient stroke with shadow
+        ctx.save();
+        ctx.shadowColor='rgba(16,185,129,0.6)';ctx.shadowBlur=8;
+        var linkG=ctx.createLinearGradient(x1,y1,x2,y2);
+        linkG.addColorStop(0,'rgba(16,185,129,'+alpha+')');
+        linkG.addColorStop(1,'rgba(6,182,212,'+alpha+')');
+        ctx.strokeStyle=linkG;ctx.lineWidth=6;ctx.lineCap='round';
+        ctx.beginPath();ctx.moveTo(x1,y1);ctx.lineTo(x2,y2);ctx.stroke();
+        ctx.restore();
+
+        // Joint 1 (shoulder) — glowing circle
+        drawGlowCircle(x1,y1,5,'rgba(16,185,129,1)',alpha);
+
+        // Link 2 (elbow → wrist)
+        var l2Len=48;
+        var x3=x2+l2Len*Math.sin(theta1+theta2);
+        var y3=y2-l2Len*Math.cos(theta1+theta2);
+        ctx.save();
+        ctx.shadowColor='rgba(139,92,246,0.6)';ctx.shadowBlur=8;
+        var linkG2=ctx.createLinearGradient(x2,y2,x3,y3);
+        linkG2.addColorStop(0,'rgba(139,92,246,'+alpha+')');
+        linkG2.addColorStop(1,'rgba(245,158,11,'+alpha+')');
+        ctx.strokeStyle=linkG2;ctx.lineWidth=5;ctx.lineCap='round';
+        ctx.beginPath();ctx.moveTo(x2,y2);ctx.lineTo(x3,y3);ctx.stroke();
+        ctx.restore();
+
+        // Joint 2 (elbow)
+        drawGlowCircle(x2,y2,4,'rgba(139,92,246,1)',alpha);
+
+        // Link 3 (wrist → end-effector)
+        var l3Len=24;
+        var x4=x3+l3Len*Math.sin(theta1+theta2+theta3);
+        var y4=y3-l3Len*Math.cos(theta1+theta2+theta3);
+        ctx.save();
+        ctx.shadowColor='rgba(245,158,11,0.6)';ctx.shadowBlur=6;
+        ctx.strokeStyle='rgba(245,158,11,'+alpha+')';ctx.lineWidth=3;ctx.lineCap='round';
+        ctx.beginPath();ctx.moveTo(x3,y3);ctx.lineTo(x4,y4);ctx.stroke();
+        ctx.restore();
+
+        // Joint 3 (wrist)
+        drawGlowCircle(x3,y3,3,'rgba(245,158,11,1)',alpha);
+
+        // End-effector (gripper) — two fingers
+        var gripAngle=0.3+Math.sin(t*2)*0.15;
+        var fingerLen=10;
+        // Left finger
+        ctx.strokeStyle='rgba(16,185,129,'+alpha+')';ctx.lineWidth=2;
+        ctx.beginPath();
+        ctx.moveTo(x4,y4);
+        ctx.lineTo(x4-fingerLen*Math.sin(gripAngle),y4+fingerLen*Math.cos(gripAngle));
+        ctx.stroke();
+        // Right finger
+        ctx.beginPath();
+        ctx.moveTo(x4,y4);
+        ctx.lineTo(x4+fingerLen*Math.sin(gripAngle),y4+fingerLen*Math.cos(gripAngle));
+        ctx.stroke();
+        // Glow at end-effector
+        drawGlowCircle(x4,y4,3,'rgba(16,185,129,1)',alpha);
+
+        // Target object (cube to grasp)
+        var targetX=baseX+90,targetY=baseY+10;
+        ctx.save();
+        ctx.shadowColor='rgba(245,158,11,0.5)';ctx.shadowBlur=10;
+        var cubeG=ctx.createLinearGradient(targetX-6,targetY-6,targetX+6,targetY+6);
+        cubeG.addColorStop(0,'rgba(245,158,11,'+alpha+')');
+        cubeG.addColorStop(1,'rgba(180,100,8,'+alpha+')');
+        ctx.fillStyle=cubeG;
+        ctx.fillRect(targetX-6,targetY-6,12,12);
+        ctx.strokeStyle='rgba(252,211,77,'+alpha+')';ctx.lineWidth=1;
+        ctx.strokeRect(targetX-6,targetY-6,12,12);
+        ctx.restore();
+
+        // Feedback loop — curved dashed arrow back to energy landscape
+        if(stage>=5){
+          ctx.save();
+          ctx.strokeStyle='rgba(245,158,11,'+(0.6*alpha)+')';ctx.lineWidth=1.5;
+          ctx.setLineDash([5,4]);
+          ctx.lineDashOffset=-performance.now()*0.05;
+          ctx.beginPath();
+          ctx.moveTo(x4,y4);
+          ctx.bezierCurveTo(x4+80,y4-30,W-40,y4-10,W-30,y-30);
+          ctx.stroke();
+          ctx.setLineDash([]);
+          // Arrowhead
+          ctx.fillStyle='rgba(245,158,11,'+(0.7*alpha)+')';
+          ctx.beginPath();
+          ctx.moveTo(W-30,y-30);
+          ctx.lineTo(W-36,y-23);
+          ctx.lineTo(W-24,y-23);
+          ctx.closePath();ctx.fill();
+          ctx.restore();
+
+          // Label
+          ctx.fillStyle='rgba(245,158,11,'+(0.8*alpha)+')';
+          ctx.font='9px ui-monospace';
+          ctx.fillText('feedback: E(s,a,s\') → update',W-260,y-50);
+        }
+      }
+
+      function drawStageBadge(x,y,num,color,alpha){
+        if(alpha===undefined)alpha=1;
+        ctx.save();
+        ctx.shadowColor=color;ctx.shadowBlur=10;
+        ctx.fillStyle='rgba(11,15,26,'+alpha+')';
+        ctx.strokeStyle=color;ctx.lineWidth=2;
+        ctx.beginPath();ctx.arc(x,y,12,0,6.28);ctx.fill();ctx.stroke();
+        ctx.fillStyle=color;ctx.font='bold 11px ui-monospace';
+        ctx.textAlign='center';ctx.fillText(num,x,y+4);ctx.textAlign='left';
+        ctx.restore();
+      }
+
+      function render(){
+        ctx.save();
+        ctx.fillStyle='#0a0e1a';ctx.fillRect(0,0,W,H);
+        ctx.translate(W/2,H/2);ctx.scale(zoom,zoom);ctx.translate(-W/2,-H/2);
+        drawStageHeader();
+
+        var baseY=70;
+
+        // ===== Stage 1: Sensor input → geometric features (point cloud) =====
+        if(stage>=1){
+          var s1Alpha=stage===1?stageProgress:(stage>1?1:0);
+          ctx.fillStyle='#06b6d4';ctx.font='bold 11px ui-monospace';
+          ctx.globalAlpha=s1Alpha;
+          ctx.fillText('1. Sensor input → geometric features (point cloud)',30,baseY);
+          ctx.globalAlpha=1;
+          drawStageBadge(W-50,baseY-4,'1','rgba(6,182,212,1)',s1Alpha);
+          drawPointCloud(120,baseY+35,s1Alpha);
+          // Depth legend
+          ctx.fillStyle='rgba(148,163,184,'+(0.6*s1Alpha)+')';
+          ctx.font='9px ui-monospace';
+          ctx.fillText('RGB-D camera + joints → SE(3) poses',30,baseY+90);
+        }
+
+        // ===== Stage 2: JEPA encoder → latent space =====
+        if(stage>=2){
+          var eY=baseY+110;
+          var s2Alpha=stage===2?stageProgress:(stage>2?1:0);
+          ctx.fillStyle='#8b5cf6';ctx.font='bold 11px ui-monospace';
+          ctx.globalAlpha=s2Alpha;
+          ctx.fillText('2. JEPA encoder: φ(s) ∈ ℝᵈ — compact geometric latent',30,eY);
+          ctx.globalAlpha=1;
+          drawStageBadge(W-50,eY-4,'2','rgba(139,92,246,1)',s2Alpha);
+          drawLatentBars(30,eY+10,s2Alpha);
+          ctx.fillStyle='rgba(148,163,184,'+(0.6*s2Alpha)+')';ctx.font='9px ui-monospace';
+          ctx.fillText('16-dim latent (no pixels — geometric abstraction)',30,eY+50);
+        }
+
+        // ===== Stage 3: Energy-based world model =====
+        if(stage>=3){
+          var wY=baseY+200;
+          var s3Alpha=stage===3?stageProgress:(stage>3?1:0);
+          ctx.fillStyle='#f59e0b';ctx.font='bold 11px ui-monospace';
+          ctx.globalAlpha=s3Alpha;
+          ctx.fillText('3. World model: E(s,a,s\') = ‖φ(s\')−g(φ(s),a)‖²',30,wY);
+          ctx.globalAlpha=1;
+          drawStageBadge(W-50,wY-4,'3','rgba(245,158,11,1)',s3Alpha);
+          var minPt=drawEnergyLandscape(30,wY+10,500,80,s3Alpha);
+          ctx.fillStyle='rgba(110,231,183,'+(0.9*s3Alpha)+')';ctx.font='8px ui-monospace';
+          ctx.fillText('min E — predicted (green)',minPt.x-30,minPt.y-12);
+          ctx.fillStyle='rgba(148,163,184,'+(0.6*s3Alpha)+')';ctx.font='9px ui-monospace';
+          ctx.fillText('energy landscape (red=high, green=low) — low E = consistent prediction',30,wY+105);
+        }
+
+        // ===== Stage 4: Planning (energy minimisation) =====
+        if(stage>=4){
+          var pY=baseY+320;
+          var s4Alpha=stage===4?stageProgress:(stage>4?1:0);
+          ctx.fillStyle='#ec4899';ctx.font='bold 11px ui-monospace';
+          ctx.globalAlpha=s4Alpha;
+          ctx.fillText('4. Planning: a* = argmin_a Σ E(sₜ,aₜ,sₜ₊₁)',30,pY);
+          ctx.globalAlpha=1;
+          drawStageBadge(W-50,pY-4,'4','rgba(236,72,153,1)',s4Alpha);
+          drawActionSequence(pY+10,s4Alpha);
+          ctx.fillStyle='rgba(148,163,184,'+(0.6*s4Alpha)+')';ctx.font='9px ui-monospace';
+          ctx.fillText('minimise total energy → optimal action sequence',30,pY+65);
+        }
+
+        // ===== Stage 5: Robotic execution =====
+        if(stage>=5){
+          var rY=baseY+400;
+          var s5Alpha=stage===5?stageProgress:(stage>5?1:0);
+          ctx.fillStyle='#10b981';ctx.font='bold 11px ui-monospace';
+          ctx.globalAlpha=s5Alpha;
+          ctx.fillText('5. Execute on robot → observe → update world model',30,rY);
+          ctx.globalAlpha=1;
+          drawStageBadge(W-50,rY-4,'5','rgba(16,185,129,1)',s5Alpha);
+          drawRobotArm(rY,s5Alpha);
+        }
+
+        ctx.restore();
+        var states=['idle','sensor → geometry','JEPA encode','energy model','plan (argmin E)','execute + update'];
+        document.getElementById('stage-ind').textContent='stage '+stage+'/'+maxStage+' · '+(states[stage]||'');
+        document.getElementById('state-display').textContent='Sensor → '+(states[stage]||'');
+      }
+
+      // Smooth animation loop
+      function tick(now){
+        if(stageProgress<1){
+          var dt=Math.min(0.05,(now-lastStageTime)/600);
+          stageProgress=Math.min(1,stageProgress+dt);
+          lastStageTime=now;
+        }
+        render();
+        requestAnimationFrame(tick);
+      }
+
+      function animate(){
+        stage=0;stageProgress=1;lastStageTime=performance.now();
+        function step(){
+          if(stage>maxStage){
+            isAnim=false;
+            document.getElementById('btn-play').disabled=false;
+            document.getElementById('btn-play').textContent='▶ Animate pipeline';
+            document.getElementById('stage-ind').textContent='done ✓ · execute + update';
+            return;
+          }
+          stage++;stageProgress=0;lastStageTime=performance.now();
+          // Wait for stage to settle, then advance
+          setTimeout(step,1100);
+        }
+        step();
+      }
+
+      document.getElementById('btn-play').addEventListener('click',function(){
+        if(isAnim)return;
+        isAnim=true;
+        document.getElementById('btn-play').disabled=true;
+        document.getElementById('btn-play').textContent='▶ running…';
+        animate();
+      });
+      document.getElementById('btn-step').addEventListener('click',function(){
+        if(isAnim)return;
+        if(stage>maxStage)return;
+        stage++;stageProgress=0;lastStageTime=performance.now();
+      });
+      document.getElementById('btn-reset').addEventListener('click',function(){
+        stage=0;stageProgress=1;isAnim=false;
+        document.getElementById('btn-play').disabled=false;
+        document.getElementById('btn-play').textContent='▶ Animate pipeline';
+      });
+      document.getElementById('zoom-in').addEventListener('click',function(){
+        zoom=Math.min(3,zoom+0.2);
+        document.getElementById('zoom-label').textContent=Math.round(zoom*100)+'%';
+      });
+      document.getElementById('zoom-out').addEventListener('click',function(){
+        zoom=Math.max(0.5,zoom-0.2);
+        document.getElementById('zoom-label').textContent=Math.round(zoom*100)+'%';
+      });
+      document.getElementById('zoom-reset').addEventListener('click',function(){
+        zoom=1;document.getElementById('zoom-label').textContent='100%';
+      });
+
+      // Start animation loop
+      lastStageTime=performance.now();
+      requestAnimationFrame(tick);
+    </script>
+    <script src="header-banner.js"></script>
+    <script src="zoom-loader.js"></script>
+    <script src="accessibility.js"></script>
+    <script src="particle-bg.js"></script>
+    <script src="mobile-touch-polyfill.js"></script>
+  </body>
+</html>
