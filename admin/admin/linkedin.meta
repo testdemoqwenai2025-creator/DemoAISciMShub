@@ -1,0 +1,16 @@
+{
+  "headers": {
+    "x-nextjs-stale-time": "300",
+    "x-nextjs-prerender": "1",
+    "x-next-cache-tags": "_N_T_/layout,_N_T_/admin/layout,_N_T_/admin/linkedin/layout,_N_T_/admin/linkedin/page,_N_T_/admin/linkedin"
+  },
+  "segmentPaths": [
+    "/_tree",
+    "/_full",
+    "/admin/linkedin/__PAGE__",
+    "/admin/linkedin",
+    "/admin",
+    "/_index",
+    "/_head"
+  ]
+}

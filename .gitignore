@@ -1,0 +1,5 @@
+
+# build output (not for storefront)
+.next/
+node_modules/
+.gitignore.local
