@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>OSIRIS / AISciImg360 — Universal Scientific Imaging Intelligence</title>
+<meta name="description" content="OSIRIS — Equivariant Observation, Spatial Integrity, and Reconstruction Inference System. Viewport-agnostic, multi-modal 3D spatial intelligence running on consumer-grade CPU.">
+<meta name="author" content="AISciImg360 Team">
+<meta name="keywords" content="OSIRIS, AISciImg360, TME-FUSE, EGNN, equivariant, scientific imaging, medical imaging, cryo-EM, climate, JWST, AlphaFold, Segment Anything">
+<style>
+:root {
+  --bg: #0f0f15;
+  --fg: #f5f5f5;
+  --primary: #10b981;
+  --muted: #a3a3a3;
+  --card: #1a1a25;
+  --border: #2a2a35;
+  --scientific: #14b8a6;
+  --environmental: #16a34a;
+  --climatic: #f59e0b;
+  --space: #d946ef;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+  background: var(--bg);
+  color: var(--fg);
+  line-height: 1.6;
+  min-height: 100vh;
+  background-image: 
+    radial-gradient(ellipse 60% 50% at 50% 0%, rgba(16, 185, 129, 0.15), transparent 70%),
+    linear-gradient(to right, rgba(255,255,255,0.03) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255,255,255,0.03) 1px, transparent 1px);
+  background-size: 100% 100%, 48px 48px, 48px 48px;
+  background-attachment: fixed;
+}
+.container { max-width: 1100px; margin: 0 auto; padding: 0 1.5rem; }
+header { padding: 1.5rem 0; border-bottom: 1px solid var(--border); }
+.logo { display: flex; align-items: center; gap: 0.75rem; }
+.logo-mark {
+  width: 40px; height: 40px; border-radius: 8px;
+  background: var(--primary); color: var(--bg);
+  display: flex; align-items: center; justify-content: center;
+  font-weight: bold; font-size: 1.25rem;
+}
+.logo-text { display: flex; flex-direction: column; line-height: 1.1; }
+.logo-text strong { font-size: 1.1rem; }
+.logo-text span { font-size: 0.7rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.18em; }
+.hero { padding: 4rem 0 3rem; text-align: center; }
+.hero h1 {
+  font-size: clamp(2.5rem, 6vw, 4.5rem);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  margin-bottom: 1rem;
+  background: linear-gradient(120deg, var(--scientific), var(--environmental), var(--climatic), var(--space));
+  background-size: 300% 300%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: aurora 18s ease infinite;
+}
+@keyframes aurora { 0%,100% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } }
+.hero p {
+  font-size: 1.15rem;
+  color: var(--muted);
+  max-width: 700px;
+  margin: 1.5rem auto;
+}
+.hero .badges { display: flex; flex-wrap: wrap; gap: 0.5rem; justify-content: center; margin: 2rem 0; }
+.badge {
+  display: inline-flex; align-items: center; gap: 0.35rem;
+  padding: 0.3rem 0.75rem; border: 1px solid var(--border);
+  border-radius: 9999px; font-size: 0.75rem; font-family: monospace;
+  background: rgba(255,255,255,0.02);
+}
+.preview-cta {
+  margin: 2.5rem 0;
+  padding: 1.5rem 2rem;
+  border: 1px solid var(--primary);
+  border-radius: 16px;
+  background: rgba(16, 185, 129, 0.08);
+  text-align: center;
+}
+.preview-cta h2 { font-size: 1.5rem; margin-bottom: 0.5rem; }
+.preview-cta p { color: var(--muted); margin-bottom: 1.25rem; }
+.preview-btn {
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  padding: 0.75rem 1.5rem; border-radius: 9999px;
+  background: var(--primary); color: var(--bg);
+  text-decoration: none; font-weight: 600;
+  transition: transform 0.2s;
+}
+.preview-btn:hover { transform: translateY(-2px); }
+.preview-btn small { opacity: 0.7; font-size: 0.7rem; margin-left: 0.5rem; }
+.domains { padding: 3rem 0; }
+.domains h2 { font-size: 2rem; margin-bottom: 1.5rem; text-align: center; }
+.domain-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1rem; }
+.domain-card {
+  padding: 1.5rem; border: 1px solid var(--border); border-radius: 12px;
+  background: rgba(255,255,255,0.02);
+  transition: transform 0.3s, border-color 0.3s;
+}
+.domain-card:hover { transform: translateY(-4px); }
+.domain-card .accent-bar { width: 100%; height: 3px; border-radius: 9999px; margin-bottom: 1rem; }
+.domain-card h3 { font-size: 1.1rem; margin-bottom: 0.5rem; }
+.domain-card p { font-size: 0.85rem; color: var(--muted); }
+.scientific-bg .accent-bar { background: var(--scientific); }
+.environmental-bg .accent-bar { background: var(--environmental); }
+.climatic-bg .accent-bar { background: var(--climatic); }
+.space-bg .accent-bar { background: var(--space); }
+.pages { padding: 3rem 0; border-top: 1px solid var(--border); }
+.pages h2 { font-size: 2rem; margin-bottom: 1.5rem; text-align: center; }
+.page-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1rem; }
+.page-card {
+  padding: 1.25rem; border: 1px solid var(--border); border-radius: 10px;
+  background: rgba(255,255,255,0.02);
+  text-decoration: none; color: var(--fg);
+  display: flex; flex-direction: column; gap: 0.4rem;
+  transition: border-color 0.2s, background 0.2s;
+}
+.page-card:hover { border-color: var(--primary); background: rgba(16, 185, 129, 0.05); }
+.page-card strong { font-size: 0.95rem; }
+.page-card small { font-size: 0.75rem; color: var(--muted); }
+.compliance { padding: 2.5rem 0; border-top: 1px solid var(--border); background: rgba(255,255,255,0.02); }
+.compliance-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem; }
+.compliance-card { padding: 1rem; border: 1px solid var(--border); border-radius: 8px; }
+.compliance-card h4 { color: var(--primary); font-size: 0.9rem; margin-bottom: 0.5rem; }
+.compliance-card p { font-size: 0.8rem; color: var(--muted); }
+footer { padding: 2rem 0; border-top: 1px solid var(--border); text-align: center; color: var(--muted); font-size: 0.8rem; }
+footer a { color: var(--primary); text-decoration: none; }
+@media (max-width: 600px) {
+  .hero h1 { font-size: 2rem; }
+  .container { padding: 0 1rem; }
+}
+</style>
+</head>
+<body>
+<header>
+<div class="container">
+<div class="logo">
+<div class="logo-mark">A</div>
+<div class="logo-text">
+<strong>OSIRIS / AISciImg360</strong>
+<span>Universal Imaging Intelligence</span>
+</div>
+</div>
+</div>
+</header>
+
+<section class="hero">
+<div class="container">
+<h1>Universal scientific<br>imaging intelligence</h1>
+<p>
+OSIRIS — <strong>E</strong>quivariant <strong>O</strong>bservation, <strong>S</strong>patial <strong>I</strong>ntegrity, and <strong>R</strong>eonstruction <strong>I</strong>nference <strong>S</strong>ystem — unifies scientific, environmental, climatic, and space imaging under one viewport-agnostic equivariant reasoning engine. Built to surpass category-defining systems like AlphaFold and Segment Anything by replacing statistical pixel distributions with hard mathematical filters (1-Lipschitz norm-clamp, Theorem 7 cumulative bound).
+</p>
+<div class="badges">
+<span class="badge">MIT License</span>
+<span class="badge">HIPAA-aware</span>
+<span class="badge">GDPR-aligned</span>
+<span class="badge">CPU-only &lt;200MB</span>
+<span class="badge">v0.1.0-mvp</span>
+</div>
+</div>
+</section>
+
+<div class="container">
+<div class="preview-cta">
+<h2>Live preview</h2>
+<p>The full interactive application (concept cards, in-browser IDE studio, Jupyter notebooks, live E(3) invariance tests, 3D ConvTranspose voxel decoder, AskAI copilot) runs on the live preview endpoint below. Click to open the running app in a new tab.</p>
+<a class="preview-btn" href="https://preview-aisciimg360.space-z.ai/" target="_blank" rel="noopener noreferrer">
+  → Open OSIRIS / AISciImg360 preview
+  <small>(live app)</small>
+</a>
+<p style="margin-top:1rem; font-size:0.85rem; color: var(--muted);">
+  Note: the public GitHub repository (this page) is a customer-facing storefront containing only the README and LICENSE — no source code, no NDA. The full source lives in a private development repository and is shared with partners under separate agreement.
+</p>
+</div>
+</div>
+
+<section class="domains">
+<div class="container">
+<h2>Four domain pillars</h2>
+<div class="domain-grid">
+<div class="domain-card scientific-bg">
+<div class="accent-bar"></div>
+<h3>🔬 Scientific</h3>
+<p>Cryo-EM 3D density reconstruction, super-resolution microscopy, X-ray crystallography, materials STEM/TEM. TME-FUSE with c=0.5 Å clamp — sub-atomic safety bound.</p>
+</div>
+<div class="domain-card environmental-bg">
+<div class="accent-bar"></div>
+<h3>🌿 Environmental</h3>
+<p>Hyperspectral satellite (EnMAP/PRISMA/EMIT), ocean color (MODIS/PACE), TROPOMI air quality, LULC change. TME-FUSE with c=2 m clamp.</p>
+</div>
+<div class="domain-card climatic-bg">
+<div class="accent-bar"></div>
+<h3>☁️ Climatic</h3>
+<p>Atmospheric circulation, SST/AMOC/ENSO, sea ice extent & thickness, CMIP6 downscaling. Mass-conserved neural fields.</p>
+</div>
+<div class="domain-card space-bg">
+<div class="accent-bar"></div>
+<h3>🛰️ Space</h3>
+<p>JWST/Euclid/Hubble galaxy morphology, exoplanet transmission spectroscopy, SDO solar EUV, Planck CMB lensing.</p>
+</div>
+</div>
+</div>
+</section>
+
+<section class="pages">
+<div class="container">
+<h2>Live pages in the application</h2>
+<div class="page-grid">
+<a class="page-card" href="https://preview-aisciimg360.space-z.ai/concepts" target="_blank" rel="noopener noreferrer">
+<strong>Concept cards</strong>
+<small>7 popup cards × 6 tabs each — Math → Code → 3D-ND Observations → Deep Thoughts → Comparison → Futuristic</small>
+</a>
+<a class="page-card" href="https://preview-aisciimg360.space-z.ai/playground" target="_blank" rel="noopener noreferrer">
+<strong>Playground</strong>
+<small>Live E(3) rotational invariance tester (PASS/FAIL) + 3D ConvTranspose voxel decoder (Theorem 7 compliance)</small>
+</a>
+<a class="page-card" href="https://preview-aisciimg360.space-z.ai/ide" target="_blank" rel="noopener noreferrer">
+<strong>IDE Studio</strong>
+<small>Monaco editor + Pyodide. Write Python, run in browser. No signup, no GPU.</small>
+</a>
+<a class="page-card" href="https://preview-aisciimg360.space-z.ai/notebooks" target="_blank" rel="noopener noreferrer">
+<strong>Notebooks</strong>
+<small>JupyterLite + Google Colab + Binder. Pre-built example notebooks per domain.</small>
+</a>
+<a class="page-card" href="https://preview-aisciimg360.space-z.ai/datasets" target="_blank" rel="noopener noreferrer">
+<strong>Datasets</strong>
+<small>23 free public datasets — EMPIAR, PDB, ERA5, CMIP6, JWST/MAST, Planck, arXiv.</small>
+</a>
+<a class="page-card" href="https://preview-aisciimg360.space-z.ai/ask-ai" target="_blank" rel="noopener noreferrer">
+<strong>Ask AI copilot</strong>
+<small>Grounded in OSIRIS modality catalog + TME-FUSE math + Theorem 7 bound.</small>
+</a>
+<a class="page-card" href="https://preview-aisciimg360.space-z.ai/vision" target="_blank" rel="noopener noreferrer">
+<strong>Vision & manifesto</strong>
+<small>10-year horizon, 6 engineering commitments, 6 research agenda items, open questions.</small>
+</a>
+<a class="page-card" href="https://preview-aisciimg360.space-z.ai/about" target="_blank" rel="noopener noreferrer">
+<strong>About</strong>
+<small>Mission, principles, comparison to AlphaFold/SAM/CryoDRGN, full roadmap.</small>
+</a>
+</div>
+</div>
+</section>
+
+<section class="compliance">
+<div class="container">
+<h2 style="font-size: 1.75rem; margin-bottom: 1.5rem; text-align: center;">Compliance & legal</h2>
+<div class="compliance-grid">
+<div class="compliance-card">
+<h4>GDPR</h4>
+<p>Personal data is processed lawfully, minimally, and transparently. For EU deployments set AISCIIMG360_DATA_REGION=eu. Data subject requests honored via audit log replay.</p>
+</div>
+<div class="compliance-card">
+<h4>HIPAA</h4>
+<p>For medical imaging workflows set AISCIIMG360_PHI_MODE=safe_harbor. The 18 HIPAA identifiers are redacted by default. PHI never leaves the user's environment.</p>
+</div>
+<div class="compliance-card">
+<h4>MIT License</h4>
+<p>All MVP source is MIT-licensed. Fork, embed, modify, ship commercial products on top — no strings attached. The full source lives in a private development repository.</p>
+</div>
+<div class="compliance-card">
+<h4>Theorem 7 safety case</h4>
+<p>Every OSIRIS forward pass logs Π_compliance (must be 100.00%). Cumulative displacement bounded by L·c. This is the mathematical safety case for FDA pre-submission.</p>
+</div>
+</div>
+</div>
+</section>
+
+<footer>
+<div class="container">
+<p>© 2026 OSIRIS / AISciImg360 Team. Released under the MIT License.</p>
+<p style="margin-top: 0.5rem;">
+Contact: <a href="mailto:testdemoqwenai2025@gmail.com">testdemoqwenai2025@gmail.com</a> · 
+Public repo: <a href="https://github.com/testdemoqwenai2025-creator/DemoAISciMShub" target="_blank" rel="noopener noreferrer">github.com/testdemoqwenai2025-creator/DemoAISciMShub</a>
+</p>
+<p style="margin-top: 1rem; font-size: 0.7rem; opacity: 0.6;">
+Built on the TME-FUSE norm-clamped geometric fusion framework (Zenodo: 10.5281/zenodo.21849798).
+</p>
+</div>
+</footer>
+
+</body>
+</html>
