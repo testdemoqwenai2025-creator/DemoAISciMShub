@@ -1,0 +1,21 @@
+[build-system]
+requires = ["setuptools>=64", "wheel"]
+build-backend = "setuptools.backends._legacy:_legacy"
+
+[project]
+name = "aisciimg360"
+version = "0.2.0"
+description = "OSIRIS — Universal Scientific Imaging Intelligence. Norm-clamped equivariant GNN for multi-modal 3D reconstruction."
+readme = "README.md"
+license = {text = "MIT"}
+authors = [{name = "AISciImg360 Team", email = "testdemoqwenai2025@gmail.com"}]
+keywords = ["equivariant", "GNN", "EGNN", "TME-FUSE", "OSIRIS", "imaging", "3D reconstruction", "norm-clamp", "Lipschitz"]
+requires-python = ">=3.8"
+dependencies = ["numpy>=1.20"]
+
+[project.optional-dependencies]
+torch = ["torch>=2.0"]
+dev = ["pytest", "scipy"]
+
+[tool.setuptools]
+packages = ["aisciimg360", "aisciimg360.engine", "aisciimg360.training", "aisciimg360.skills", "aisciimg360.utils"]
