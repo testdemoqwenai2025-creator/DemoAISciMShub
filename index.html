@@ -4,317 +4,102 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>OSIRIS / AISciImg360 — Universal Scientific Imaging Intelligence</title>
-<meta name="description" content="OSIRIS — Equivariant Observation, Spatial Integrity, and Reconstruction Inference System. Viewport-agnostic, multi-modal 3D spatial intelligence running on consumer-grade CPU.">
-<meta name="author" content="AISciImg360 Team">
-<meta name="keywords" content="OSIRIS, AISciImg360, TME-FUSE, EGNN, equivariant, scientific imaging, medical imaging, cryo-EM, climate, JWST, AlphaFold, Segment Anything">
+<meta name="cache-control" content="no-cache, no-store, must-revalidate">
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Expires" content="0">
 <style>
-:root {
-  --bg: #0f0f15;
-  --fg: #f5f5f5;
-  --primary: #10b981;
-  --muted: #a3a3a3;
-  --card: #1a1a25;
-  --border: #2a2a35;
-  --scientific: #14b8a6;
-  --environmental: #16a34a;
-  --climatic: #f59e0b;
-  --space: #d946ef;
-}
-* { box-sizing: border-box; margin: 0; padding: 0; }
-body {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
-  background: var(--bg);
-  color: var(--fg);
-  line-height: 1.6;
-  min-height: 100vh;
-  background-image: 
-    radial-gradient(ellipse 60% 50% at 50% 0%, rgba(16, 185, 129, 0.15), transparent 70%),
-    linear-gradient(to right, rgba(255,255,255,0.03) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(255,255,255,0.03) 1px, transparent 1px);
-  background-size: 100% 100%, 48px 48px, 48px 48px;
-  background-attachment: fixed;
-}
-.container { max-width: 1100px; margin: 0 auto; padding: 0 1.5rem; }
-header { padding: 1.5rem 0; border-bottom: 1px solid var(--border); }
-.logo { display: flex; align-items: center; gap: 0.75rem; }
-.logo-mark {
-  width: 40px; height: 40px; border-radius: 8px;
-  background: var(--primary); color: var(--bg);
-  display: flex; align-items: center; justify-content: center;
-  font-weight: bold; font-size: 1.25rem;
-}
-.logo-text { display: flex; flex-direction: column; line-height: 1.1; }
-.logo-text strong { font-size: 1.1rem; }
-.logo-text span { font-size: 0.7rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.18em; }
-.hero { padding: 4rem 0 3rem; text-align: center; }
-.hero h1 {
-  font-size: clamp(2.5rem, 6vw, 4.5rem);
-  font-weight: 800;
-  letter-spacing: -0.02em;
-  margin-bottom: 1rem;
-  background: linear-gradient(120deg, var(--scientific), var(--environmental), var(--climatic), var(--space));
-  background-size: 300% 300%;
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-  animation: aurora 18s ease infinite;
-}
-@keyframes aurora { 0%,100% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } }
-.hero p {
-  font-size: 1.15rem;
-  color: var(--muted);
-  max-width: 700px;
-  margin: 1.5rem auto;
-}
-.hero .badges { display: flex; flex-wrap: wrap; gap: 0.5rem; justify-content: center; margin: 2rem 0; }
-.badge {
-  display: inline-flex; align-items: center; gap: 0.35rem;
-  padding: 0.3rem 0.75rem; border: 1px solid var(--border);
-  border-radius: 9999px; font-size: 0.75rem; font-family: monospace;
-  background: rgba(255,255,255,0.02);
-}
-.preview-cta {
-  margin: 2.5rem 0;
-  padding: 1.5rem 2rem;
-  border: 1px solid var(--primary);
-  border-radius: 16px;
-  background: rgba(16, 185, 129, 0.08);
-  text-align: center;
-}
-.preview-cta h2 { font-size: 1.5rem; margin-bottom: 0.5rem; }
-.preview-cta p { color: var(--muted); margin-bottom: 1.25rem; }
-.preview-btn {
-  display: inline-flex; align-items: center; gap: 0.5rem;
-  padding: 0.75rem 1.5rem; border-radius: 9999px;
-  background: var(--primary); color: var(--bg);
-  text-decoration: none; font-weight: 600;
-  transition: transform 0.2s;
-}
-.preview-btn:hover { transform: translateY(-2px); }
-.preview-btn small { opacity: 0.7; font-size: 0.7rem; margin-left: 0.5rem; }
-.domains { padding: 3rem 0; }
-.domains h2 { font-size: 2rem; margin-bottom: 1.5rem; text-align: center; }
-.domain-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1rem; }
-.domain-card {
-  padding: 1.5rem; border: 1px solid var(--border); border-radius: 12px;
-  background: rgba(255,255,255,0.02);
-  transition: transform 0.3s, border-color 0.3s;
-}
-.domain-card:hover { transform: translateY(-4px); }
-.domain-card .accent-bar { width: 100%; height: 3px; border-radius: 9999px; margin-bottom: 1rem; }
-.domain-card h3 { font-size: 1.1rem; margin-bottom: 0.5rem; }
-.domain-card p { font-size: 0.85rem; color: var(--muted); }
-.scientific-bg .accent-bar { background: var(--scientific); }
-.environmental-bg .accent-bar { background: var(--environmental); }
-.climatic-bg .accent-bar { background: var(--climatic); }
-.space-bg .accent-bar { background: var(--space); }
-.pages { padding: 3rem 0; border-top: 1px solid var(--border); }
-.pages h2 { font-size: 2rem; margin-bottom: 1.5rem; text-align: center; }
-.page-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1rem; }
-.page-card {
-  padding: 1.25rem; border: 1px solid var(--border); border-radius: 10px;
-  background: rgba(255,255,255,0.02);
-  text-decoration: none; color: var(--fg);
-  display: flex; flex-direction: column; gap: 0.4rem;
-  transition: border-color 0.2s, background 0.2s;
-}
-.page-card:hover { border-color: var(--primary); background: rgba(16, 185, 129, 0.05); }
-.page-card strong { font-size: 0.95rem; }
-.page-card small { font-size: 0.75rem; color: var(--muted); }
-.compliance { padding: 2.5rem 0; border-top: 1px solid var(--border); background: rgba(255,255,255,0.02); }
-.compliance-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem; }
-.compliance-card { padding: 1rem; border: 1px solid var(--border); border-radius: 8px; }
-.compliance-card h4 { color: var(--primary); font-size: 0.9rem; margin-bottom: 0.5rem; }
-.compliance-card p { font-size: 0.8rem; color: var(--muted); }
-footer { padding: 2rem 0; border-top: 1px solid var(--border); text-align: center; color: var(--muted); font-size: 0.8rem; }
-footer a { color: var(--primary); text-decoration: none; }
-@media (max-width: 600px) {
-  .hero h1 { font-size: 2rem; }
-  .container { padding: 0 1rem; }
-}
+:root{--bg:#0f0f15;--fg:#f5f5f5;--primary:#10b981;--muted:#a3a3a3;--card:#1a1a25;--border:#2a2a35;--scientific:#14b8a6;--environmental:#16a34a;--climatic:#f59e0b;--space:#d946ef}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',system-ui,sans-serif;background:var(--bg);color:var(--fg);line-height:1.6}
+.container{max-width:1100px;margin:0 auto;padding:0 1.5rem}
+a{color:var(--primary);text-decoration:none}
+.badge{display:inline-flex;align-items:center;gap:.35rem;padding:.3rem .75rem;border:1px solid var(--border);border-radius:9999px;font-size:.7rem;font-family:monospace;background:rgba(255,255,255,.02)}
+.hero{padding:3rem 0 2rem;text-align:center;background:radial-gradient(ellipse 70% 50% at 50% 0%,rgba(16,185,129,.15),transparent 70%)}
+.hero h1{font-size:clamp(2rem,5vw,3.5rem);font-weight:800;letter-spacing:-.02em;margin-bottom:1rem;background:linear-gradient(120deg,var(--scientific),var(--environmental),var(--climatic),var(--space));background-size:300% 300%;-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;animation:aurora 18s ease infinite}
+@keyframes aurora{0%,100%{background-position:0% 50%}50%{background-position:100% 50%}}
+.hero p{font-size:1.1rem;color:var(--muted);max-width:700px;margin:1rem auto}
+.badges{display:flex;flex-wrap:wrap;gap:.5rem;justify-content:center;margin:1.5rem 0}
+section{padding:2rem 0;border-bottom:1px solid var(--border)}
+h2{font-size:1.6rem;margin-bottom:1rem}
+.card{padding:1rem;border:1px solid var(--border);border-radius:8px;background:rgba(255,255,255,.02);margin-bottom:.5rem;cursor:pointer;transition:border-color .2s}
+.card:hover{border-color:var(--primary)}
+.card-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:.75rem}
+.card h3{font-size:.95rem;margin-bottom:.25rem}
+.card .eq{font-family:monospace;font-size:.7rem;color:var(--primary);margin-top:.25rem;word-break:break-all}
+.card .cat{font-size:.6rem;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);font-family:monospace}
+.popup-overlay{position:fixed;inset:0;background:rgba(0,0,0,.7);z-index:100;display:none;align-items:center;justify-content:center;padding:1rem}
+.popup-overlay.active{display:flex}
+.popup{background:var(--card);border:1px solid var(--border);border-radius:12px;max-width:700px;width:100%;max-height:85vh;overflow-y:auto;padding:1.5rem}
+.popup-close{float:right;cursor:pointer;color:var(--muted);font-size:1.2rem;background:none;border:none}
+.popup h2{font-size:1.3rem;margin-bottom:.5rem}
+.popup .eq-box{background:rgba(255,255,255,.03);border:1px solid var(--border);border-radius:6px;padding:.75rem;margin:.5rem 0}
+.popup .eq-box code{font-family:monospace;font-size:.8rem;color:var(--primary);word-break:break-all}
+.popup pre{background:rgba(0,0,0,.3);border:1px solid var(--border);border-radius:6px;padding:.75rem;overflow-x:auto;font-size:.7rem;margin:.5rem 0}
+.popup .tabs{display:flex;gap:.25rem;margin-bottom:.75rem;flex-wrap:wrap}
+.popup .tab{padding:.35rem .75rem;border:1px solid var(--border);border-radius:6px;font-size:.7rem;cursor:pointer;background:rgba(255,255,255,.02)}
+.popup .tab.active{border-color:var(--primary);background:rgba(16,185,129,.1);color:var(--primary)}
+.popup .tab-content{display:none}
+.popup .tab-content.active{display:block}
+.popup .deep-use{border-left:3px solid var(--scientific);padding-left:.5rem;margin:.25rem 0;font-size:.75rem;color:var(--muted)}
+.popup .deep-avoid{border-left:3px solid #ef4444;padding-left:.5rem;margin:.25rem 0;font-size:.75rem;color:var(--muted)}
+.popup .deep-why{border-left:3px solid var(--primary);padding-left:.5rem;margin:.25rem 0;font-size:.75rem;color:var(--muted)}
+.popup .comp{padding:.5rem;border:1px solid var(--border);border-radius:6px;margin:.25rem 0;background:rgba(255,255,255,.01)}
+.popup .comp strong{color:var(--primary);font-size:.75rem}
+.popup .comp p{font-size:.7rem;color:var(--muted);margin-top:.15rem}
+.popup .fut{display:flex;gap:.5rem;align-items:flex-start;margin:.25rem 0;padding:.35rem;border:1px solid var(--border);border-radius:6px;background:rgba(255,255,255,.01)}
+.popup .fut .yr{font-family:monospace;font-size:.6rem;color:var(--primary);white-space:nowrap}
+.popup .fut .body{font-size:.7rem;color:var(--muted)}
+.note{background:rgba(245,158,11,.05);border:1px solid rgba(245,158,11,.3);border-radius:8px;padding:1rem;margin:1rem 0;font-size:.85rem;color:var(--muted)}
+.note strong{color:#f59e0b}
+footer{padding:2rem 0;text-align:center;color:var(--muted);font-size:.8rem;border-top:1px solid var(--border)}
+canvas{border-radius:8px;background:rgba(0,0,0,.3)}
+.link-btn{display:inline-flex;align-items:center;gap:.5rem;padding:.6rem 1.2rem;border:1px solid var(--primary);border-radius:9999px;color:var(--primary);font-size:.85rem;text-decoration:none;transition:background .2s}
+.link-btn:hover{background:rgba(16,185,129,.1)}
+.setup-cmd{font-family:monospace;font-size:.75rem;background:rgba(0,0,0,.3);border:1px solid var(--border);border-radius:6px;padding:.75rem;margin:.5rem 0;overflow-x:auto;color:var(--primary)}
+@media(max-width:600px){.hero h1{font-size:1.5rem}.container{padding:0 .75rem}.card-grid{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
-<header>
-<div class="container">
-<div class="logo">
-<div class="logo-mark">A</div>
-<div class="logo-text">
-<strong>OSIRIS / AISciImg360</strong>
-<span>OSIRIS · Universal Imaging Intelligence</span>
-</div>
-</div>
-</div>
-</header>
-
-<section class="hero">
-<div class="container">
-<h1>Universal scientific<br>imaging intelligence</h1>
-<p>
-OSIRIS — <strong>E</strong>quivariant <strong>O</strong>bservation, <strong>S</strong>patial <strong>I</strong>ntegrity, and <strong>R</strong>eonstruction <strong>I</strong>nference <strong>S</strong>ystem — unifies scientific, environmental, climatic, and space imaging under one viewport-agnostic equivariant reasoning engine. Built to surpass category-defining systems like AlphaFold and Segment Anything by replacing statistical pixel distributions with hard mathematical filters (1-Lipschitz norm-clamp, Theorem 7 cumulative bound).
-</p>
-<div class="badges">
-<span class="badge">MIT License</span>
-<span class="badge">HIPAA-aware</span>
-<span class="badge">GDPR-aligned</span>
-<span class="badge">CPU-only &lt;200MB</span>
-<span class="badge">v0.1.0-mvp</span>
-</div>
-</div>
-</section>
-
-<div class="container">
-<div class="preview-cta">
-<h2>Live preview</h2>
-<p>The full interactive application (concept cards, in-browser IDE studio, Jupyter notebooks, live E(3) invariance tests, 3D ConvTranspose voxel decoder, AskAI copilot) runs on the live preview endpoint below. Click to open the running app in a new tab.</p>
-<a class="preview-btn" href="https://preview-aisciimg360.space-z.ai/" target="_blank" rel="noopener noreferrer">
-  → Open OSIRIS / AISciImg360 preview
-  <small>(live app)</small>
-</a>
-<p style="margin-top:1rem; font-size:0.85rem; color: var(--muted);">
-  Note: the public GitHub repository (this page) is a customer-facing storefront containing only the README and LICENSE — no source code, no NDA. The full source lives in a private development repository and is shared with partners under separate agreement.
-</p>
-</div>
-</div>
-
-<section class="domains">
-<div class="container">
-<h2>Four domain pillars</h2>
-<div class="domain-grid">
-<div class="domain-card scientific-bg">
-<div class="accent-bar"></div>
-<h3>🔬 Scientific</h3>
-<p>Cryo-EM 3D density reconstruction, super-resolution microscopy, X-ray crystallography, materials STEM/TEM. TME-FUSE with c=0.5 Å clamp — sub-atomic safety bound.</p>
-</div>
-<div class="domain-card environmental-bg">
-<div class="accent-bar"></div>
-<h3>🌿 Environmental</h3>
-<p>Hyperspectral satellite (EnMAP/PRISMA/EMIT), ocean color (MODIS/PACE), TROPOMI air quality, LULC change. TME-FUSE with c=2 m clamp.</p>
-</div>
-<div class="domain-card climatic-bg">
-<div class="accent-bar"></div>
-<h3>☁️ Climatic</h3>
-<p>Atmospheric circulation, SST/AMOC/ENSO, sea ice extent & thickness, CMIP6 downscaling. Mass-conserved neural fields.</p>
-</div>
-<div class="domain-card space-bg">
-<div class="accent-bar"></div>
-<h3>🛰️ Space</h3>
-<p>JWST/Euclid/Hubble galaxy morphology, exoplanet transmission spectroscopy, SDO solar EUV, Planck CMB lensing.</p>
-</div>
-</div>
-</div>
-</section>
-
-<section class="pages">
-<div class="container">
-<h2>Live pages in the application</h2>
-<div class="page-grid">
-<a class="page-card" href="https://preview-aisciimg360.space-z.ai/environmental" target="_blank" rel="noopener noreferrer">
-<strong>Environmental</strong>
-<small>4 sub-sections: Forest &amp; Canopy (EnMAP/PRISMA/EMIT), Ocean &amp; Water (Sentinel-3/PACE), Air Quality (TROPOMI), Land Use (Sentinel-1+2). 5 original AI images.</small>
-</a>
-<a class="page-card" href="https://preview-aisciimg360.space-z.ai/climatic" target="_blank" rel="noopener noreferrer">
-<strong>Climatic</strong>
-<small>4 sub-sections: Atmospheric Circulation (ERA5), Ocean State (SST/ENSO), Sea Ice (CryoSat-2), Climate Projections (CMIP6). 5 original AI images.</small>
-</a>
-<a class="page-card" href="https://preview-aisciimg360.space-z.ai/space" target="_blank" rel="noopener noreferrer">
-<strong>Space</strong>
-<small>4 sub-sections: Galaxy Morphology (JWST), Exoplanet Atmospheres (NIRSpec), Solar Physics (SDO), Cosmology (Planck CMB). 5 original AI images.</small>
-</a>
-<a class="page-card" href="https://preview-aisciimg360.space-z.ai/knowledge-graph" target="_blank" rel="noopener noreferrer">
-<strong>Knowledge Graph</strong>
-<small>3D force-directed graph of all 12 concept cards. Drag to rotate, click to open cards. Pure HTML5 canvas, no Three.js.</small>
-</a>
-
-<a class="page-card" href="https://preview-aisciimg360.space-z.ai/upload" target="_blank" rel="noopener noreferrer">
-<strong>Upload &amp; Parse</strong>
-<small>File readers: HDF5, Parquet, SAM, BAM, DICOM, NIfTI, NetCDF, TIFF, CSV, JSON, NPZ, image. In-browser via Pyodide, HIPAA-safe.</small>
-</a>
-<a class="page-card" href="https://preview-aisciimg360.space-z.ai/papers" target="_blank" rel="noopener noreferrer">
-<strong>Research Papers</strong>
-<small>Live arXiv RSS for cs.LG, q-bio.QM, astro-ph.IM, physics.geo-ph, eess.IV. Papers matched to concept cards by keyword.</small>
-</a>
-<a class="page-card" href="https://preview-aisciimg360.space-z.ai/marketplace" target="_blank" rel="noopener noreferrer">
-<strong>Marketplace (spec)</strong>
-<small>Federated adapter v1.0 spec. The engine is MIT, adapters can be commercial. Ranked by reproducibility, citations, OSIRIS eval.</small>
-</a>
-<a class="page-card" href="https://preview-aisciimg360.space-z.ai/admin/linkedin" target="_blank" rel="noopener noreferrer">
-<strong>LinkedIn Ingest</strong>
-<small>Paste a LinkedIn post URL → server scrapes og:description → extracts paper DOIs → drafts a concept card skeleton. Human reviews and publishes.</small>
-</a>
-
-<a class="page-card" href="https://preview-aisciimg360.space-z.ai/concepts" target="_blank" rel="noopener noreferrer">
-<strong>Concept cards</strong>
-<small>7 popup cards × 6 tabs each — Math → Code → 3D-ND Observations → Deep Thoughts → Comparison → Futuristic</small>
-</a>
-<a class="page-card" href="https://preview-aisciimg360.space-z.ai/playground" target="_blank" rel="noopener noreferrer">
-<strong>Playground</strong>
-<small>Live E(3) rotational invariance tester (PASS/FAIL) + 3D ConvTranspose voxel decoder (Theorem 7 compliance)</small>
-</a>
-<a class="page-card" href="https://preview-aisciimg360.space-z.ai/ide" target="_blank" rel="noopener noreferrer">
-<strong>IDE Studio</strong>
-<small>Monaco editor + Pyodide. Write Python, run in browser. No signup, no GPU.</small>
-</a>
-<a class="page-card" href="https://preview-aisciimg360.space-z.ai/notebooks" target="_blank" rel="noopener noreferrer">
-<strong>Notebooks</strong>
-<small>JupyterLite + Google Colab + Binder. Pre-built example notebooks per domain.</small>
-</a>
-<a class="page-card" href="https://preview-aisciimg360.space-z.ai/datasets" target="_blank" rel="noopener noreferrer">
-<strong>Datasets</strong>
-<small>23 free public datasets — EMPIAR, PDB, ERA5, CMIP6, JWST/MAST, Planck, arXiv.</small>
-</a>
-<a class="page-card" href="https://preview-aisciimg360.space-z.ai/ask-ai" target="_blank" rel="noopener noreferrer">
-<strong>Ask AI copilot</strong>
-<small>Grounded in OSIRIS modality catalog + TME-FUSE math + Theorem 7 bound.</small>
-</a>
-<a class="page-card" href="https://preview-aisciimg360.space-z.ai/vision" target="_blank" rel="noopener noreferrer">
-<strong>Vision & manifesto</strong>
-<small>10-year horizon, 6 engineering commitments, 6 research agenda items, open questions.</small>
-</a>
-<a class="page-card" href="https://preview-aisciimg360.space-z.ai/about" target="_blank" rel="noopener noreferrer">
-<strong>About</strong>
-<small>Mission, principles, comparison to AlphaFold/SAM/CryoDRGN, full roadmap.</small>
-</a>
-</div>
-</div>
-</section>
-
-<section class="compliance">
-<div class="container">
-<h2 style="font-size: 1.75rem; margin-bottom: 1.5rem; text-align: center;">Compliance & legal</h2>
-<div class="compliance-grid">
-<div class="compliance-card">
-<h4>GDPR</h4>
-<p>Personal data is processed lawfully, minimally, and transparently. For EU deployments set AISCIIMG360_DATA_REGION=eu. Data subject requests honored via audit log replay.</p>
-</div>
-<div class="compliance-card">
-<h4>HIPAA</h4>
-<p>For medical imaging workflows set AISCIIMG360_PHI_MODE=safe_harbor. The 18 HIPAA identifiers are redacted by default. PHI never leaves the user's environment.</p>
-</div>
-<div class="compliance-card">
-<h4>MIT License</h4>
-<p>All MVP source is MIT-licensed. Fork, embed, modify, ship commercial products on top — no strings attached. The full source lives in a private development repository.</p>
-</div>
-<div class="compliance-card">
-<h4>Theorem 7 safety case</h4>
-<p>Every OSIRIS forward pass logs Π_compliance (must be 100.00%). Cumulative displacement bounded by L·c. This is the mathematical safety case for FDA pre-submission.</p>
-</div>
-</div>
-</div>
-</section>
-
-<footer>
-<div class="container">
-<p>© 2026 OSIRIS / AISciImg360 Team. Released under the MIT License.</p>
-<p style="margin-top: 0.5rem;">
-Contact: <a href="mailto:testdemoqwenai2025@gmail.com">testdemoqwenai2025@gmail.com</a> · 
-Public repo: <a href="https://github.com/testdemoqwenai2025-creator/DemoAISciMShub" target="_blank" rel="noopener noreferrer">github.com/testdemoqwenai2025-creator/DemoAISciMShub</a>
-</p>
-<p style="margin-top: 1rem; font-size: 0.7rem; opacity: 0.6;">
-Built on the TME-FUSE norm-clamped geometric fusion framework (Zenodo: 10.5281/zenodo.21849798).
-</p>
-</div>
-</footer>
-
+<header style="padding:1rem 0;border-bottom:1px solid var(--border)"><div class="container" style="display:flex;align-items:center;gap:.5rem"><span style="width:36px;height:36px;border-radius:8px;background:var(--primary);color:var(--bg);display:flex;align-items:center;justify-content:center;font-weight:bold;font-size:1.2rem">A</span><div><strong>OSIRIS / AISciImg360</strong><br><span style="font-size:.65rem;color:var(--muted);text-transform:uppercase;letter-spacing:.15em">Universal Imaging Intelligence</span></div></div></header>
+<div class="hero"><div class="container"><h1>Universal scientific<br>imaging intelligence</h1><p>OSIRIS — 17 concept cards with Math, Code, Deep Thoughts, Comparison, Futuristic. All runnable in your browser. MIT licensed.</p><div class="badges"><span class="badge">MIT License</span><span class="badge">HIPAA-aware</span><span class="badge">CPU-only</span><span class="badge">17 cards</span><span class="badge">17 .ipynb</span></div></div></div>
+<div class="note container"><strong>Run the full app locally:</strong><br>Clone and run: <div class="setup-cmd">git clone https://github.com/testdemoqwenai2025-creator/AISciMShub-Advanced.git && cd AISciMShub-Advanced && bun install && bun run dev</div>Then open <strong>http://localhost:3000</strong>.<br><br><strong>Or browse 17 concept cards right here</strong> — click any card below. No server needed.</div>
+<section><div class="container"><h2>17 Concept Cards — click to expand</h2><p style="color:var(--muted);font-size:.85rem;margin-bottom:1rem">Each card has: hero equation, 5-stage pipeline, runnable Python code, deep thoughts (USE/AVOID/WHY), comparison blocks, futuristic predictions.</p><div class="card-grid" id="cardGrid"></div></div></section>
+<section><div class="container"><h2>Knowledge Graph</h2><p style="color:var(--muted);font-size:.85rem;margin-bottom:1rem">Force-directed graph of all 17 cards and their cross-references.</p><canvas id="kg" width="800" height="400" style="width:100%;height:400px"></canvas></div></section>
+<section><div class="container"><h2>Run Code In Your Browser</h2><div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:1rem;margin-top:1rem"><div class="card"><h3>JupyterLite</h3><p style="font-size:.8rem;color:var(--muted)">Full Jupyter in browser via Pyodide.</p><a class="link-btn" href="https://jupyterlite.github.io/demo/lab/index.html" target="_blank">Open →</a></div><div class="card"><h3>Google Colab</h3><p style="font-size:.8rem;color:var(--muted)">Free Jupyter with optional GPU.</p><a class="link-btn" href="https://colab.research.google.com" target="_blank">Open →</a></div><div class="card"><h3>Binder</h3><p style="font-size:.8rem;color:var(--muted)">Jupyter from any GitHub repo.</p><a class="link-btn" href="https://mybinder.org" target="_blank">Open →</a></div></div></div></section>
+<section><div class="container"><h2>Four Domain Pillars</h2><div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1rem;margin-top:1rem"><div class="card" style="border-left:3px solid var(--scientific)"><h3>Scientific</h3><p style="font-size:.75rem;color:var(--muted)">Cryo-EM, microscopy, mpMRI, cardiac, CT, histopathology, OCT, protein structure</p></div><div class="card" style="border-left:3px solid var(--environmental)"><h3>Environmental</h3><p style="font-size:.75rem;color:var(--muted)">Hyperspectral canopy, forest biomass, ocean color, TROPOMI, land use</p></div><div class="card" style="border-left:3px solid var(--climatic)"><h3>Climatic</h3><p style="font-size:.75rem;color:var(--muted)">Atmospheric circulation, SST/ENSO, sea ice, CMIP6 downscaling</p></div><div class="card" style="border-left:3px solid var(--space)"><h3>Space</h3><p style="font-size:.75rem;color:var(--muted)">JWST galaxies, exoplanet atmospheres, solar flares, CMB cosmology</p></div></div></div></section>
+<footer><div class="container"><p>© 2026 OSIRIS / AISciImg360. MIT License.</p><p style="margin-top:.5rem">Contact: <a href="mailto:testdemoqwenai2025@gmail.com">testdemoqwenai2025@gmail.com</a> · <a href="https://github.com/testdemoqwenai2025-creator/DemoAISciMShub">GitHub</a></p></div></footer>
+<div class="popup-overlay" id="popup"><div class="popup" id="popupContent"></div></div>
+<script>
+const CONCEPTS=[{id:"tme-fuse-norm-clamp",title:"Norm-Clamped Geometric Fusion",cat:"foundation",eq:"Pi(v) = v * min(1, c / (||v|| + eps))",stages:["Input v","Compute ||v||","Compare with c","Scale","Output Pi(v)"],code:"def norm_clamp(v, c=2.0, eps=1e-8):\n    norms = np.linalg.norm(v, axis=-1, keepdims=True)\n    return v * np.minimum(1.0, c / (norms + eps))",useWhen:["Need bounded displacement","CPU-only deployment","FDA safety case"],avoidWhen:["Non-spatial data","Need large moves","Extremely noisy"],why:["1-Lipschitz = auditable","c is only domain knob","Retrofit any EGNN"],comp:[{a:"vs Unclamped EGNN",b:"No bound. TME-FUSE adds L*c guarantee."},{a:"vs Hard clipping",b:"Breaks equivariance. TME-FUSE scales by c/||v||."}],fut:[{y:"2026-27",t:"Certified safety",b:"FDA cites Theorem 7"},{y:"2028-30",t:"Beyond E(3)",b:"SE(2), Lorentz, Weyl"},{y:"2030-33",t:"Edge-AI",b:"$50 Raspberry Pi"},{y:"2033+",t:"Safety primitive",b:"Like batchnorm"}]},
+{id:"e3-equivariance",title:"E(3)-Equivariance",cat:"foundation",eq:"phi(g*x) = g*phi(x)",stages:["Input graph","Encoder","Message passing","Decoder","Output"],code:"# phi_e(h_i, h_j, ||x_i-x_j||^2)\nm = phi_e(h_i, h_j, d_sq)\nx_new = x + Pi(sum((x_i-x_j) * phi_x(m)))",useWhen:["Rotational symmetry","Low data volume","Certified invariance"],avoidWhen:["Preferred orientation","Need direction","Tight compute"],why:["Mathematical identity","E(3) natural for 3D","Validated since 2021"],comp:[{a:"vs 3D CNN",b:"Fixed grid. EGNN = identical for any rotation."},{a:"vs Data augmentation",b:"Learns from data. Equivariance = structural."}],fut:[{y:"2026-27",t:"Group generalization",b:"SE(2), Lorentz"},{y:"2028-30",t:"Equivariant diffusion",b:"Molecular generation"},{y:"2030-33",t:"World models",b:"Robotics"},{y:"2033+",t:"Universal prior",b:"All architectures equivariant"}]},
+{id:"osiris-system-architecture",title:"OSIRIS Dual-Path Architecture",cat:"foundation",eq:"[Visual]+[Text] -> EGNN -> ConvT3D -> [Zero-Halluc 3D]",stages:["Dual input","3D CNN encoder","Prompt bridge","EGNN L=3","Decoder"],code:"h = encode(I_vol)\nh = h + W_p @ text_emb  # ASYMMETRIC\nh, x = egnn(h, x, adj)\nV = decode(h)",useWhen:["Viewport-agnostic 3D","Visual + text fusion","Hard safety filter"],avoidWhen:["2D input","Generic text","Microcontroller"],why:["Asymmetric = add, not replace","EGNN universal","Theorem 7 = safety case"],comp:[{a:"vs SAM",b:"Pixel-based. OSIRIS adds hard filter."},{a:"vs 3D U-Net",b:"Fixed grid. OSIRIS = equivariant."}],fut:[{y:"2026-27",t:"OSIRIS codename",b:"First paper"},{y:"2028-30",t:"Medical devices",b:"FDA cites Theorem 7"},{y:"2030-33",t:"Disaster response",b:"UAV + text prompts"},{y:"2033+",t:"Spatial substrate",b:"Like TCP/IP"}]},
+{id:"cryo-em-density",title:"Cryo-EM 3D Density",cat:"scientific",eq:"Pi_{c=0.5A} + particles -> 3D at 3A",stages:["2D particles","Pose estimation","EGNN","Decoder","FSC validation"],code:"h = encode(particles)\nh, x = egnn(h, x, adj, c=0.5)\nV = decode(h)  # 128^3 density",useWhen:["<=10k particles","Heterogeneous","CPU-only"],avoidWhen:[">50k + GPU","<50 kDa","Preferred orientation"],why:["c=0.5A = Nyquist","6x fewer particles","Text prompt anchors structure"],comp:[{a:"vs RELION",b:"Hours per run. TME-FUSE = 210ms."},{a:"vs CryoDRGN",b:"50k particles + GPU. TME-FUSE = 8k + CPU."}],fut:[{y:"2026-27",t:"Real-time cryo-EM",b:"Interactive during microscopy"},{y:"2028-30",t:"1M particle heterogeneity",b:"100-state ensembles"},{y:"2030-33",t:"Inverse folding",b:"Density -> sequence"},{y:"2033+",t:"Cellular cryo-EM",b:"Whole-cell tomography"}]},
+{id:"field-ultrasound-diagnostics",title:"Field Ultrasound Diagnostics",cat:"global-health",eq:"Pi_{c=5mm} + text_prompt -> 3D organ",stages:["Handheld sweep","Frame registration","3D recon","Text bridge","Organ metrics"],code:"h = encode(frames)\nh = h + W_p @ text_enc('LUQ pain')\nh, x = egnn(h, x, adj, c=5.0)\nV = decode(h)",useWhen:["Remote regions","Nurse operator","No internet"],avoidWhen:["High-end 3D US","Sub-mm targets","Precisely trained operator"],why:["5mm = sub-resolution","Text picks target organ","280ms on $200 tablet"],comp:[{a:"vs Trained sonographer",b:"Human can't do 3D. TME-FUSE adds 3D."},{a:"vs Cloud AI",b:"Cloud ships PHI. TME-FUSE on-device."}],fut:[{y:"2026-27",t:"WHO prequalified",b:"<$500 device"},{y:"2028-30",t:"Federated networks",b:"2G model updates"},{y:"2030-33",t:"AI nurse",b:"Local language copilot"},{y:"2033+",t:"End of deserts",b:"Every village has diagnostics"}]},
+{id:"forest-canopy-reconstruction",title:"Forest Canopy 3D",cat:"environmental",eq:"Pi_{c=2m} + satellite + ranger -> biomass",stages:["Satellite + ranger","Tokenization","3D canopy","Biomass regression","Carbon credit"],code:"h = encode(sat, ranger)\nh, x = egnn(h, x, adj, c=2.0)\nbiomass = regress(h)\nco2eq = biomass * 0.5 * 3.67",useWhen:["No LiDAR","Community carbon credits","Cloud-obstructed"],avoidWhen:["LiDAR available","Monoculture","Bad ranger video"],why:["c=2m = canopy features","Norm-clamp prevents hallucinated biomass","Equivariance handles any walking direction"],comp:[{a:"vs LiDAR",b:"mm-scale at $50-200/km2. TME-FUSE = m-scale at <$0.10/km2."},{a:"vs Sentinel-2 band-ratio",b:"2D, no structure. TME-FUSE = 3D canopy."}],fut:[{y:"2026-27",t:"Verra credit",b:"<$0.10/credit"},{y:"2028-30",t:"Weekly refresh",b:"24h deforestation alerts"},{y:"2030-33",t:"Root networks",b:"GPR + probes"},{y:"2033+",t:"Per-tree registry",b:"Every tree has 3D fingerprint"}]},
+{id:"crop-disease-tracking",title:"Crop Disease Tracking",cat:"food-security",eq:"Pi_{c=10cm} + drone + text -> 3D infection",stages:["Drone multispectral","EGNN cell graph","Text prompt","3D infection","Pesticide Rx"],code:"h = encode(drone_data)\nh = h + W_p @ text_enc('mildew on stems')\nh, x = egnn(h, x, adj, c=10.0)\nRx = (infection > 0.7) & (unc < 0.2)",useWhen:["Reduce pesticide 70-90%","Plant-to-plant spread","Drone + text fusion"],avoidWhen:["<1 ha farm","No spatial structure","Can't spray cm-scale"],why:["c=10cm = sub-plant","Text = disease hypothesis","70-90% pesticide reduction"],comp:[{a:"vs Blanket spray",b:"100% of field. TME-FUSE = infected only. 70-90% less."},{a:"vs NDVI",b:"Can't distinguish disease from drought. TME-FUSE + text can."}],fut:[{y:"2026-27",t:"First Rx sprays",b:"80% pesticide reduction"},{y:"2028-30",t:"Disease forecast",b:"7-day prediction"},{y:"2030-33",t:"Cross-crop",b:"Tomato mildew -> wheat rust"},{y:"2033+",t:"End of blanket",b:"Banned in most countries"}]},
+{id:"hyperspectral-canopy",title:"Hyperspectral Canopy Chemistry",cat:"environmental",eq:"Pi_{c=2m} + EnMAP + S2 -> canopy N%",stages:["HSI + S2 fusion","Uncertainty weighting","EGNN c=2m","Chemistry regression","N + LAI + WSI"],code:"weights = 1.0 / (sigma_per_band ** 2)\nh = encoder(hsi) * weights\nh, x = egnn(h, x, adj, c=2.0)\nN, LAI, WSI = regress(h)",useWhen:["Verra carbon claims","10x band uncertainty variation","CPU field deployment"],avoidWhen:["Monoculture","Sub-meter resolution","Cloud-obstructed"],why:["c=2m = canopy scale","Inverse variance = BLUE","Prompt bridge for cloud"],comp:[{a:"vs Equal-weight CNN",b:"Loses 10x uncertainty. TME-FUSE preserves."},{a:"vs POLYMER + band-ratio",b:"POLYMER gives reflectance. TME-FUSE regresses chemistry."}],fut:[{y:"2026-27",t:"Verra claims",b:"<$0.10/credit"},{y:"2028-30",t:"Weekly refresh",b:"24h alerts"},{y:"2030-33",t:"HSI+SAR+LiDAR",b:"Adaptive clamp"},{y:"2033+",t:"Per-tree registry",b:"3D fingerprint"}]},
+{id:"sst-enso-detection",title:"SST / ENSO Detection",cat:"climatic",eq:"Pi_{c=0.25K} + OISST + Argo -> Nino3.4",stages:["L4 SST + Argo","Multi-sensor fusion","EGNN c=0.25K","Nino 3.4 regression","ENSO phase + forecast"],code:"h = encode(oisst, argo)\nh, x = egnn(h, x, adj, c=0.25)\nnino = anomaly[region_3_4].mean()\nphase = classify(h)",useWhen:["Calibrated ENSO for insurance","Per-sensor uncertainty","CPU climate offices"],avoidWhen:["Sub-daily SST","Polar regions",">12 month forecast"],why:["c=0.25K sub-resolution","Per-sensor = BLUE","Calibrated probabilities"],comp:[{a:"vs NOAA CPC",b:"Coupled GCMs. TME-FUSE matches at 1-3 months, 1/1000th compute."},{a:"vs LIM",b:"Linear. TME-FUSE captures nonlinear ENSO."}],fut:[{y:"2026-27",t:"Sub-seasonal alerts",b:"2-4 week alerts"},{y:"2028-30",t:"Argo+SST+Altimeter",b:"Full ocean state"},{y:"2030-33",t:"Coupled atm-ocean",b:"12-month forecasts"},{y:"2033+",t:"Per-region dashboard",b:"Real-time ENSO"}]},
+{id:"jwst-galaxy-morphology",title:"JWST Galaxy Morphology",cat:"space",eq:"Pi_{c=0.1arcsec} + NIRCam -> morphology + photo-z",stages:["Multi-band + PSF","Source detection","EGNN c=0.1arcsec","Morphology class","Photo-z + SED"],code:"h = encode(fluxes)\nh, x = egnn(h, x, adj, c=0.1)\nmorph = classify(h)  # Galaxy Zoo 10-class\nphoto_z = regress(h)",useWhen:["Crowded field deblending","Calibrated photo-z","CPU collaborative research"],avoidWhen:["<10 sources","Need spectroscopic z","Point sources"],why:["c=0.1arcsec = sub-PSF","Photo-z as 3rd coordinate","Galaxy Zoo calibration"],comp:[{a:"vs SExtractor + CNN",b:"No spatial context. TME-FUSE message-passes."},{a:"vs Galaxy Zoo CNN",b:"Per-image. TME-FUSE = catalog as graph."}],fut:[{y:"2026-27",t:"JWST catalogs",b:"100k galaxies, 92% F1"},{y:"2028-30",t:"Euclid survey",b:"1.5B galaxies in 2 weeks"},{y:"2030-33",t:"Cross-survey",b:"JWST+Euclid+Roman"},{y:"2033+",t:"Real-time",b:"Updates as image downloads"}]},
+{id:"exoplanet-retrieval",title:"Exoplanet Atmospheric Retrieval",cat:"space",eq:"Pi_{c=0.6dex} + NIRSpec -> H2O+CO2 posteriors",stages:["Transmission spectrum","Correlated noise","EGNN c=0.6dex","Variational posterior","Atmospheric composition"],code:"h = encode(spectrum)\nh, x = egnn(h, x, adj, c=0.6)\nabundances = variational(h)\n# 12s vs 6h MCMC = 1800x",useWhen:["Biosignature search","Correlated JWST noise","12s vs 6h MCMC"],avoidWhen:["Terrestrial planets","<50 wavelengths","Need equilibrium chemistry"],why:["c=0.6dex = sub-resolution","1800x speedup vs MCMC","Full noise covariance"],comp:[{a:"vs Aura (MCMC)",b:"6h per planet. TME-FUSE = 12s, matches to 0.1 dex."},{a:"vs PLATON",b:"30min. TME-FUSE = 12s."}],fut:[{y:"2026-27",t:"1000-planet survey",b:"Population statistics in 4h"},{y:"2028-30",t:"Biosignatures",b:"TRAPPIST-1 + ELT"},{y:"2030-33",t:"Real-time",b:"Posterior as data downloads"},{y:"2033+",t:"Habitable catalogs",b:"Within 50 ly"}]},
+{id:"solar-flare-forecasting",title:"Solar Flare Forecasting",cat:"space",eq:"Pi_{c=10Mx} + AIA + HMI -> P(X-flare 24h)",stages:["AIA 6-band + HMI","Active region detection","EGNN c=10Mx","Flare probability","24h forecast + onset"],code:"h = encode(aia, hmi)\nh, x = egnn(h, x, adj, c=10.0)\nprobs = classify(h)  # no flare, C, M, X\nonset = regress(h)",useWhen:["Calibrated 24h for NOAA SWPC","EUV + magnetic data","Need onset time"],avoidWhen:[">3 day forecast","Limb AR","CME prediction"],why:["c=10Mx = sub-resolution","Multi-modal fusion","Isotonic calibration"],comp:[{a:"vs FLARECAST",b:"LDA+RF. TME-FUSE adds AIA+EGNN, +8-15% TSS."},{a:"vs MAG4",b:"Logistic regression. TME-FUSE adds onset+CIs."}],fut:[{y:"2026-27",t:"Operational NOAA",b:"130ms, real-time"},{y:"2028-30",t:"CME + flare joint",b:"SDO+STEREO+SOHO"},{y:"2030-33",t:"30-min warning",b:"Prevents $1B/year damage"},{y:"2033+",t:"Ceiling reached",b:"~50% TSS at 24h"}]},
+{id:"mpmri-brain-tumor",title:"mpMRI Brain Tumor",cat:"scientific",eq:"Pi_{c=2um} + {T1,T1ce,T2,FLAIR} -> 3D tumor",stages:["mpMRI 4-channel","3D CNN encoder","Text prompt","EGNN c=2um","Decoder -> tumor + edema"],code:"h = encode(mpmri)\nh = h + W_p @ text_enc('necrotic core')\nh, x = egnn(h, x, adj, c=2.0)\ntumor, edema = decode(h)",useWhen:["FDA safety case","Radiologist notes available","CPU hospital deployment"],avoidWhen:["<4 channels","Sub-3mm tumor","Non-brain MRI"],why:["c=2um = sub-cellular","Asymmetric bridge picks region","Theorem 7 = regulatory safety"],comp:[{a:"vs nnU-Net",b:"Standard U-Net. TME-FUSE adds equivariance + safety."},{a:"vs BraTS winners",b:"Ensemble of U-Nets. TME-FUSE = single EGNN, 1/10 compute."}],fut:[{y:"2026-27",t:"First device",b:"FDA cites Theorem 7"},{y:"2028-30",t:"Bedside planning",b:"3D map in 5 min"},{y:"2030-33",t:"Treatment monitoring",b:"Sub-voxel recurrence"},{y:"2033+",t:"Standard of care",b:"Certificate in every record"}]},
+{id:"cardiac-4d-flow",title:"Cardiac 4D Flow MRI",cat:"scientific",eq:"Pi_{c=0.5mm/s} + 4D_flow -> velocity + valve Q",stages:["4D flow MRI","3D CNN + mask","EGNN c=0.5mm/s","Velocity regression","Valve flow + regurgitation"],code:"h = encode(flow_mri) * ventricle_mask\nh, x = egnn(h, x, adj, c=0.5)\nvelocity = regress(h)\nQ = flux_integral(velocity, valve_n)",useWhen:["Valve regurgitation with CI","Velocity aliasing","CPU clinical settings"],avoidWhen:["2D PC-MRI","Arrhythmia","Calcified valve"],why:["c=0.5mm/s sub-resolution","Mask prevents cross-valve flow","Regurgitation + CI = surgical decision"],comp:[{a:"vs 2D PC-MRI",b:"Single slice. 4D flow = volumetric."},{a:"vs CFD",b:"Hours, theoretical. TME-FUSE = 220ms, empirical."}],fut:[{y:"2026-27",t:"Cath lab",b:"2 min MRI to decision"},{y:"2028-30",t:"Hemodynamic sim",b:"Rehearse valve repair"},{y:"2030-33",t:"Custom prosthesis",b:"3D-printed valve"},{y:"2033+",t:"Pre-symptomatic",b:"Before regurgitation"}]},
+{id:"ct-lung-nodule",title:"CT Lung Nodule + Lung-RADS",cat:"scientific",eq:"Pi_{c=1mm} + chest_CT -> nodule + Lung-RADS",stages:["Chest CT HU","Lung segmentation","EGNN c=1mm","Volume + texture","Lung-RADS + malignancy"],code:"h = encode(candidate_nodule)\nh, x = egnn(h, x, adj, c=1.0)\nrads = classify(h)  # 6-class\nrisk = regress(h)  # malignancy prob",useWhen:["Calibrated malignancy for biopsy","Low-dose CT","Population-scale screening"],avoidWhen:["Sub-mm CT","Part-solid nodules","Pneumoconiosis"],why:["c=1mm = sub-resolution","Lung-RADS = clinical standard","Risk + CI = actionable"],comp:[{a:"vs LUNA16 winners",b:"3D CNN. TME-FUSE adds equivariance + safety."},{a:"vs Lung-RADS radiologist",b:"TME-FUSE automates with calibrated CI."}],fut:[{y:"2026-27",t:"Population LDCT",b:"50M screened annually"},{y:"2028-30",t:"Growth tracking",b:"Sub-voxel growth"},{y:"2030-33",t:"Biomarker fusion",b:"ctDNA + CT"},{y:"2033+",t:"Pre-radiographic",b:"Before nodule visible"}]},
+{id:"histopathology-wsi",title:"Histopathology WSI",cat:"scientific",eq:"Pi_{c=50um} + WSI_pyramid -> Gleason + mitoses",stages:["WSI pyramid","Patch + stain norm","EGNN c=50um","Tissue classification","Gleason + mitotic count"],code:"h = encode(patches)  # stain-normalized\nh, x = egnn(h, x, adj, c=50.0)\ntissue = classify(h)\ngleason = aggregate(tissue)",useWhen:["Population-scale screening","Multi-site scanners","Multi-resolution pyramid"],avoidWhen:["Single-resolution","Non-H&E stain","Rare subtype"],why:["c=50um = sub-tissue-structure","Multi-resolution = cell + tissue","Deterministic slide score"],comp:[{a:"vs CLAM",b:"Attention MIL, bag-of-patches. TME-FUSE adds spatial EGNN."},{a:"vs PathAI",b:"Proprietary. TME-FUSE adds 1-Lipschitz + CI."}],fut:[{y:"2026-27",t:"Population screening",b:"1M biopsies/year"},{y:"2028-30",t:"Multi-omics",b:"H&E + IHC + transcriptomics"},{y:"2030-33",t:"AI-guided biopsy",b:"Real-time confocal"},{y:"2033+",t:"Pre-biopsy",b:"Predict Gleason before biopsy"}]},
+{id:"retinal-oct-amd",title:"Retinal OCT for AMD",cat:"scientific",eq:"Pi_{c=10um} + OCT -> 3D layers + AMD score",stages:["OCT 3D volume","Layer segmentation","EGNN c=10um","Pathology regression","AMD/DME score + fluid"],code:"h = encode(oct_volume) * layer_mask\nh, x = egnn(h, x, adj, c=10.0)\ndrusen, fluid, GA = regress(h)\namd_stage = classify(h)",useWhen:["Calibrated AMD/DME for anti-VEGF","Different axial resolution","Population-scale DR screening"],avoidWhen:["Single B-scan","High myopia","Swept-source OCT"],why:["c=10um = sub-cellular (RPE ~14um)","Drusen+fluid+GA = quantitative","Anti-VEGF needs CI ($1000-2000/injection)"],comp:[{a:"vs ReLayNet",b:"U-Net layer seg. TME-FUSE adds equivariance + safety."},{a:"vs EyeArt/IDX-DR",b:"Fundus 2D. TME-FUSE on OCT = 3D volumetric."}],fut:[{y:"2026-27",t:"Population DR screening",b:"50M+ diabetics"},{y:"2028-30",t:"Anti-VEGF response",b:"Saves $10B+ in injections"},{y:"2030-33",t:"Handheld OCT",b:"Field screening"},{y:"2033+",t:"Pre-symptomatic AMD",b:"Before drusen visible"}]},
+];
+const catColors={foundation:'#10b981',scientific:'#14b8a6',environmental:'#16a34a',climatic:'#f59e0b',space:'#d946ef','global-health':'#10b981','food-security':'#f59e0b'};
+const grid=document.getElementById('cardGrid');
+CONCEPTS.forEach((c,i)=>{const d=document.createElement('div');d.className='card';d.style.borderLeft='3px solid '+(catColors[c.cat]||'#10b981');d.innerHTML='<span class="cat">'+c.cat+'</span><h3>'+c.title+'</h3><div class="eq">'+c.eq+'</div>';d.onclick=()=>openPopup(i);grid.appendChild(d)});
+const popup=document.getElementById('popup');
+const popupContent=document.getElementById('popupContent');
+function openPopup(idx){const c=CONCEPTS[idx];let sh=c.stages.map((s,i)=>'<div style="padding:.35rem;border:1px solid var(--border);border-radius:6px;margin:.15rem 0;font-size:.75rem;color:var(--primary)">Stage '+(i+1)+': '+s+'</div>').join('');let uh=c.useWhen.map(u=>'<div class="deep-use">'+u+'</div>').join('');let ah=c.avoidWhen.map(a=>'<div class="deep-avoid">'+a+'</div>').join('');let wh=c.why.map(w=>'<div class="deep-why">'+w+'</div>').join('');let ch=c.comp.map(co=>'<div class="comp"><strong>'+co.a+'</strong><p>'+co.b+'</p></div>').join('');let fh=c.fut.map(f=>'<div class="fut"><span class="yr">'+f.y+'</span><div class="body"><strong>'+f.t+'</strong> — '+f.b+'</div></div>').join('');popupContent.innerHTML='<button class="popup-close" onclick="closePopup()">✕</button><span class="cat">'+c.cat+'</span><h2>'+c.title+'</h2><div class="eq-box"><code>'+c.eq+'</code></div><div class="tabs"><span class="tab active" onclick="switchTab(this,\'tp\')">Pipeline</span><span class="tab" onclick="switchTab(this,\'tc\')">Code</span><span class="tab" onclick="switchTab(this,\'tt\')">Deep Thoughts</span><span class="tab" onclick="switchTab(this,\'tcc\')">Comparison</span><span class="tab" onclick="switchTab(this,\'tf\')">Futuristic</span></div><div class="tab-content active" id="tp">'+sh+'</div><div class="tab-content" id="tc"><pre><code>'+c.code+'</code></pre><p style="font-size:.7rem;color:var(--muted);margin-top:.5rem">Run in <a href="https://jupyterlite.github.io/demo/lab/index.html" target="_blank">JupyterLite</a></p></div><div class="tab-content" id="tt"><h4 style="color:var(--scientific);font-size:.8rem;margin-bottom:.25rem">✅ Use When</h4>'+uh+'<h4 style="color:#ef4444;font-size:.8rem;margin:.5rem 0 .25rem">⚠️ Avoid When</h4>'+ah+'<h4 style="color:var(--primary);font-size:.8rem;margin:.5rem 0 .25rem">💭 Why</h4>'+wh+'</div><div class="tab-content" id="tcc">'+ch+'</div><div class="tab-content" id="tf">'+fh+'</div>';popup.classList.add('active')}
+function closePopup(){popup.classList.remove('active')}
+popup.addEventListener('click',e=>{if(e.target===popup)closePopup()});
+function switchTab(el,id){document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));document.querySelectorAll('.tab-content').forEach(t=>t.classList.remove('active'));el.classList.add('active');document.getElementById(id).classList.add('active')}
+// Knowledge graph
+const cv=document.getElementById('kg'),cx=cv.getContext('2d'),W=cv.width,H=cv.height;const nodes=CONCEPTS.map((c,i)=>{const a=(i/CONCEPTS.length)*Math.PI*2;return{id:c.id,t:c.title,x:W/2+Math.cos(a)*150,y:H/2+Math.sin(a)*100,color:catColors[c.cat]||'#10b981'}});const edges=[];CONCEPTS.forEach((c,i)=>{CONCEPTS.forEach((t,j)=>{if(i===j)return;const w=t.title.toLowerCase().split(/[\s-]+/).filter(x=>x.length>4);const m=w.some(x=>(c.comp||[]).some(co=>co.a.toLowerCase().includes(x)));if(m&&!edges.some(e=>(e.s===i&&e.t===j)||(e.s===j&&e.t===i)))edges.push({s:i,t:j})})});let angle=0;function drawKG(){cx.fillStyle='rgba(15,15,25,0.95)';cx.fillRect(0,0,W,H);angle+=0.003;cx.strokeStyle='rgba(125,211,252,0.15)';cx.lineWidth=1;edges.forEach(e=>{const a=nodes[e.s],b=nodes[e.t];cx.beginPath();cx.moveTo(a.x,a.y);cx.lineTo(b.x,b.y);cx.stroke()});[...nodes].sort((a,b)=>a.y-b.y).forEach(n=>{const x=W/2+(n.x-W/2)*Math.cos(angle)-(n.y-H/2)*Math.sin(angle)*0.3;cx.fillStyle=n.color;cx.beginPath();cx.arc(x,n.y,5,0,Math.PI*2);cx.fill();cx.fillStyle='rgba(255,255,255,0.4)';cx.font='9px sans-serif';cx.textAlign='center';cx.fillText(n.t.slice(0,20),x,n.y-10)});requestAnimationFrame(drawKG)}drawKG();
+</script>
 </body>
 </html>
