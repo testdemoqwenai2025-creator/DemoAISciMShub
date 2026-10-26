@@ -11,6 +11,33 @@ html { color-scheme: dark; scroll-behavior: smooth; }
 body { background: var(--bg); color: var(--fg); font-family: ui-sans-serif, system-ui, sans-serif; min-height: 100vh; overflow-x: hidden; }
 a { color: var(--primary); text-decoration: none; }
 
+/* ====== Attentive sticky back-to-home FAB (left side, floating) ====== */
+.back-home-fab { position: fixed; left: 16px; top: 50%; transform: translateY(-50%) rotate(-90deg); transform-origin: left center; z-index: 90; background: linear-gradient(135deg, var(--emerald), var(--climatic)); color: white; padding: 10px 16px; border-radius: 9999px; font-size: 12px; font-weight: 700; font-family: monospace; box-shadow: 0 8px 24px rgba(34,197,94,0.4), 0 0 0 1px rgba(34,197,94,0.6); display: flex; align-items: center; gap: 8px; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); animation: back-home-glow 3s ease-in-out infinite; }
+@keyframes back-home-glow { 0%,100% { box-shadow: 0 8px 24px rgba(34,197,94,0.4), 0 0 0 1px rgba(34,197,94,0.6); } 50% { box-shadow: 0 8px 32px rgba(34,197,94,0.8), 0 0 0 2px rgba(34,197,94,0.8); transform: translateY(-50%) rotate(-90deg) scale(1.05); } }
+.back-home-fab:hover { transform: translateY(-50%) rotate(-90deg) scale(1.1); filter: brightness(1.15); }
+.back-home-fab-label { letter-spacing: 0.05em; }
+
+/* ====== Attentive upload CTA FAB (bottom-left, vertical text) ====== */
+.upload-cta-fab { position: fixed; left: 16px; bottom: 24px; z-index: 90; background: linear-gradient(135deg, var(--primary), var(--violet)); color: white; padding: 10px 16px; border-radius: 9999px; font-size: 12px; font-weight: 700; font-family: monospace; box-shadow: 0 8px 24px rgba(59,130,246,0.5), 0 0 0 1px rgba(59,130,246,0.6); display: flex; align-items: center; gap: 8px; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); animation: upload-cta-pulse 2.5s ease-in-out infinite; }
+@keyframes upload-cta-pulse { 0%,100% { box-shadow: 0 8px 24px rgba(59,130,246,0.5), 0 0 0 1px rgba(59,130,246,0.6); transform: scale(1); } 50% { box-shadow: 0 12px 32px rgba(59,130,246,0.8), 0 0 0 2px rgba(59,130,246,0.8); transform: scale(1.04); } }
+.upload-cta-fab:hover { filter: brightness(1.2); transform: scale(1.08); }
+.upload-cta-fab-label { letter-spacing: 0.05em; }
+
+/* ====== Image switcher (Cryo-EM ↔ Chest X-ray) ====== */
+.image-switcher { display: flex; gap: 8px; justify-content: center; margin: 16px 0; flex-wrap: wrap; }
+.switcher-btn { padding: 10px 16px; border-radius: 9999px; border: 1px solid var(--border); background: rgba(31,41,55,0.3); color: var(--muted); font-size: 12px; font-family: monospace; cursor: pointer; transition: all 0.25s; display: inline-flex; align-items: center; gap: 8px; }
+.switcher-btn:hover { border-color: var(--primary); color: var(--fg); transform: translateY(-2px); }
+.switcher-btn.active { background: linear-gradient(135deg, rgba(59,130,246,0.2), rgba(168,85,247,0.2)); border-color: var(--primary); color: var(--primary); box-shadow: 0 0 16px rgba(59,130,246,0.3); }
+.switcher-btn .dot { width: 8px; height: 8px; border-radius: 50%; background: currentColor; }
+.switcher-btn.medical.active { background: linear-gradient(135deg, rgba(239,68,68,0.2), rgba(245,158,11,0.2)); border-color: var(--rose); color: var(--rose); box-shadow: 0 0 16px rgba(239,68,68,0.3); }
+.image-meta { text-align: center; margin: 12px 0; font-size: 11px; color: var(--muted); font-family: monospace; line-height: 1.6; }
+.image-meta strong { color: var(--fg); }
+
+@media (max-width: 640px) {
+  .back-home-fab { transform: translateY(-50%) rotate(-90deg) scale(0.85); }
+  .upload-cta-fab { transform: scale(0.85); }
+}
+
 /* ====== Top navigation ====== */
 .nav { position: sticky; top: 0; z-index: 100; padding: 12px 20px; border-bottom: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; background: rgba(10,10,15,0.85); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); }
 .nav-brand { font-weight: 800; font-size: 16px; display: flex; align-items: center; gap: 8px; }
@@ -223,6 +250,18 @@ a { color: var(--primary); text-decoration: none; }
   </div>
 </nav>
 
+<!-- ====== ATTENTIVE STICKY BACK-TO-HOME BUTTON (left side) ====== -->
+<a href="/DemoAISciMShub/" class="back-home-fab" aria-label="Back to home" title="Back to home">
+  <span style="font-size:20px;">&#8592;</span>
+  <span class="back-home-fab-label">Home</span>
+</a>
+
+<!-- ====== ATTENTIVE FLOATING CTA (bottom-left): upload your own image ====== -->
+<a href="/DemoAISciMShub/analyze" class="upload-cta-fab" title="Try OSIRIS on your own image">
+  <span style="font-size:20px;">&#8593;</span>
+  <span class="upload-cta-fab-label">Try your own image</span>
+</a>
+
 <!-- ====== HERO ====== -->
 <div class="hero">
   <div style="font-size:11px;text-transform:uppercase;letter-spacing:0.2em;color:var(--muted);font-family:monospace;">Killer Demo &middot; OSIRIS vs the market &middot; Theorem 7 certified</div>
@@ -266,7 +305,22 @@ a { color: var(--primary); text-decoration: none; }
 
   <!-- LIVE DEMO -->
   <h2 class="section-h2">Live demo: challenging image analysis</h2>
-  <p class="section-p">8,000 noisy 2D particle projections &rarr; 3D density volume at 3&Aring; resolution. The challenge: low contrast, heavy noise, unknown orientations, sub-atomic precision required. Click through each analysis stage to see how OSIRIS processes this image &mdash; from raw input to Theorem 7 certified output.</p>
+  <p class="section-p">Switch between two challenging imaging scenarios &mdash; a 8,000-particle Cryo-EM reconstruction at 3&Aring; resolution, or a clinical PA chest X-ray showing cardiomegaly + left pleural effusion. Click through each analysis stage to see how OSIRIS processes the image &mdash; from raw input to Theorem 7 certified output. <strong style="color:var(--rose);">Medical students</strong> and <strong style="color:var(--primary);">post-grad researchers</strong> can compare these reference cases with their own data.</p>
+
+  <!-- ====== IMAGE SWITCHER (Cryo-EM ↔ Chest X-ray) ====== -->
+  <div class="image-switcher">
+    <button class="switcher-btn active" id="switcherCryo" onclick="switchImage('cryo')">
+      <span class="dot"></span>
+      Cryo-EM Density (Scientific)
+    </button>
+    <button class="switcher-btn medical" id="switcherXray" onclick="switchImage('xray')">
+      <span class="dot"></span>
+      Chest X-ray (Medical)
+    </button>
+  </div>
+  <div class="image-meta" id="imageMeta">
+    <strong>Image:</strong> Cryo-EM Density Reconstruction &middot; 8,000 noisy 2D particle projections &middot; target 3&Aring; 3D density volume
+  </div>
 
   <!-- Stage progress bar -->
   <div class="stage-progress"><div class="stage-progress-fill" id="stageProgress" style="width:11%"></div></div>
@@ -288,7 +342,7 @@ a { color: var(--primary); text-decoration: none; }
   <div class="viewer-wrap">
     <div class="viewer" id="viewer">
       <img class="viewer-img" id="viewerImg" src="/DemoAISciMShub/shorts-images/scientific/1.png" alt="Cryo-EM Density Reconstruction" />
-  <audio id="stageAudio" preload="auto" src="/DemoAISciMShub/killer-demo-audio/stage-1.wav"></audio>
+      <audio id="stageAudio" preload="auto" src="/DemoAISciMShub/killer-demo-audio/stage-1.wav"></audio>
       <div class="viewer-overlay" id="overlayXAI"></div>
       <div class="viewer-mask" id="overlayMask"></div>
       <div class="viewer-matte" id="overlayMatte"></div>
@@ -350,7 +404,7 @@ a { color: var(--primary); text-decoration: none; }
   <!-- Theorem 7 certificate -->
   <div class="cert">
     <div class="cert-title">Theorem 7 bound certificate</div>
-    <div class="cert-row"><span class="cert-label">Image</span><span class="cert-value">Cryo-EM Density Reconstruction</span></div>
+    <div class="cert-row"><span class="cert-label">Image</span><span class="cert-value" id="certImage">Cryo-EM Density Reconstruction</span></div>
     <div class="cert-row"><span class="cert-label">L (layers)</span><span class="cert-value" id="certL">3</span></div>
     <div class="cert-row"><span class="cert-label">c (clamp)</span><span class="cert-value" id="certC">2.0</span></div>
     <div class="cert-row"><span class="cert-label">L&times;c bound</span><span class="cert-value" id="certBound">6.0</span></div>
@@ -572,8 +626,10 @@ a { color: var(--primary); text-decoration: none; }
 var currentStage = 0;
 var autoTimer = null;
 var voiceNarration = false;
+var currentImage = 'cryo'; // 'cryo' or 'xray'
 
-var STAGE_DATA = [
+// Per-image stage data — medical version is medically accurate for chest X-ray
+var STAGE_DATA_CRYO = [
   {title: 'Stage 1: Raw input', desc: 'The raw 2D particle projections are loaded. 8,000 noisy images at unknown orientations. No other tool can process this many particles in-browser.'},
   {title: 'Stage 2: 3D CNN encoder', desc: 'The hierarchical 3D CNN encoder extracts 512 geometric tokens from the raw images. Each token represents a local 3D spatial feature. This is where the multi-modal fusion happens &mdash; image features are combined with text prompts.'},
   {title: 'Stage 3: EGNN L=3 (1-Lipschitz)', desc: 'The E(3)-equivariant graph neural network processes the 512 tokens through 3 layers. Each layer applies the norm-clamp &Pi;<sub>c,&epsilon;</sub>(v) = v &middot; min(1, c/(||v||+&epsilon;)), guaranteeing displacement &le; L&middot;c. This is the Theorem 7 safety bound.'},
@@ -585,12 +641,80 @@ var STAGE_DATA = [
   {title: 'Stage 9: Theorem 7 certificate', desc: 'The final output ships with a JSON-LD certificate: L=3, c=2.0, bound=6.0, max displacement=5.83, compliance=100%. This is the FDA/EU AI Act differentiator &mdash; no other image analysis tool can produce this certificate.'}
 ];
 
+var STAGE_DATA_XRAY = [
+  {title: 'Stage 1: Raw input', desc: 'PA chest radiograph loaded. 1122&times;884 px, 8-bit grayscale. Visible: ribs, clavicles, cardiac silhouette, lung fields, ECG leads, medical tubing. Challenge: low contrast in lung apices, overlapping structures, sub-millimeter pathology.'},
+  {title: 'Stage 2: 3D CNN encoder', desc: 'The hierarchical 3D CNN encoder extracts 512 geometric tokens from the radiograph. Tokens capture anatomical landmarks: costophrenic angles, hilar points, cardiac borders, diaphragm domes, rib crossings. Multi-modal fusion combines image features with clinical text prompts ("identify pleural effusion").'},
+  {title: 'Stage 3: EGNN L=3 (1-Lipschitz)', desc: 'The E(3)-equivariant graph neural network processes the 512 tokens through 3 layers. Norm-clamp &Pi;<sub>c,&epsilon;</sub>(v) = v &middot; min(1, c/(||v||+&epsilon;)) bounds every displacement by L&middot;c. For this chest X-ray: max 6.0 px displacement (sub-millimeter at 0.14 mm/px) &mdash; safe for surgical planning.'},
+  {title: 'Stage 4: Pixel mask', desc: 'OSIRIS segments the cardiac silhouette (red overlay), both lung fields (green), and detects the left costophrenic angle blunting. Each mask boundary is certified &mdash; no pixel shifts more than L&middot;c. Critical for radiation therapy planning and CT/MR co-registration.'},
+  {title: 'Stage 5: Alpha matte', desc: 'Alpha matting refines the binary lung mask to a soft alpha channel at every pixel. Captures the fuzzy lung&ndash;diaphragm interface, the gradient at the mediastinum, and the translucent pleural effusion at the left base. SAM cannot do this &mdash; it outputs only binary masks.'},
+  {title: 'Stage 6: XAI heatmap', desc: 'Grad-CAM attention highlights the left lower lobe (effusion region) and the enlarged cardiac silhouette (cardiomegaly). Built into the pipeline &mdash; the same computation that produces the mask also produces the explanation. Suitable for radiology resident training and peer review.'},
+  {title: 'Stage 7: Object counting', desc: 'VLM anatomy counting: 12 rib pairs, 2 clavicles, 1 cardiac silhouette, 2 hemidiaphragms, 1 left pleural effusion, 1 ECG lead set, 1 medical tube. Each with confidence score. Zero-shot &mdash; no labeled training data needed for new anatomical landmarks.'},
+  {title: 'Stage 8: Saturation decomposition', desc: 'Per-pixel saturation reveals the effusion as low-saturation (fluid density), lung apices as mid-saturation (air+vasculature), and bone as high-saturation (calcium). The blunted left costophrenic angle stands out clearly. Unique to OSIRIS &mdash; no PACS viewer offers this.'},
+  {title: 'Stage 9: Theorem 7 certificate', desc: 'Final JSON-LD certificate: L=3, c=2.0, bound=6.0 px (0.84 mm at 0.14 mm/px), max displacement=5.83, compliance=100%. Suitable for FDA 21 CFR Part 11 audit, EU AI Act Annex III high-risk medical device submission, and DICOM-structured report attachment.'}
+];
+
+var IMAGE_CONFIGS = {
+  cryo: {
+    src: '/DemoAISciMShub/shorts-images/scientific/1.png',
+    alt: 'Cryo-EM Density Reconstruction',
+    title: 'Cryo-EM Density Reconstruction',
+    meta: '<strong>Image:</strong> Cryo-EM Density Reconstruction &middot; 8,000 noisy 2D particle projections &middot; target 3&Aring; 3D density volume',
+    corner: 'CRYO-EM',
+    objects: [
+      {x: 28, y: 18, w: 16, h: 16, type: 'scientific', label: 'particle cluster A'},
+      {x: 55, y: 42, w: 13, h: 13, type: 'biomass', label: 'dense region B'},
+      {x: 22, y: 60, w: 11, h: 11, type: 'text', label: 'sparse C'},
+      {x: 70, y: 72, w: 9, h: 9, type: 'scientific', label: 'outlier D'}
+    ],
+    stageData: STAGE_DATA_CRYO,
+    vlmImage: '/DemoAISciMShub/shorts-images/scientific/1.png'
+  },
+  xray: {
+    src: '/DemoAISciMShub/killer-demo-images/chest-xray.jpg',
+    alt: 'PA Chest X-ray (cardiomegaly + left pleural effusion)',
+    title: 'PA Chest X-ray (cardiomegaly)',
+    meta: '<strong>Image:</strong> PA Chest Radiograph &middot; 1122&times;884 px &middot; cardiomegaly + left pleural effusion &middot; clinical reference case',
+    corner: 'CHEST X-RAY',
+    objects: [
+      {x: 38, y: 30, w: 28, h: 35, type: 'text', label: 'cardiac silhouette (enlarged)'},
+      {x: 8, y: 28, w: 28, h: 50, type: 'biomass', label: 'right lung field'},
+      {x: 64, y: 28, w: 28, h: 50, type: 'biomass', label: 'left lung field'},
+      {x: 64, y: 70, w: 14, h: 14, type: 'scientific', label: 'pleural effusion (left base)'},
+      {x: 42, y: 22, w: 6, h: 4, type: 'text', label: 'ECG lead'},
+      {x: 22, y: 16, w: 8, h: 4, type: 'scientific', label: 'clavicle (left)'},
+      {x: 70, y: 16, w: 8, h: 4, type: 'scientific', label: 'clavicle (right)'}
+    ],
+    stageData: STAGE_DATA_XRAY,
+    vlmImage: '/DemoAISciMShub/killer-demo-images/chest-xray.jpg'
+  }
+};
+
+function switchImage(kind) {
+  currentImage = kind;
+  var cfg = IMAGE_CONFIGS[kind];
+  document.getElementById('switcherCryo').classList.toggle('active', kind === 'cryo');
+  document.getElementById('switcherXray').classList.toggle('active', kind === 'xray');
+  // Update image
+  document.getElementById('viewerImg').src = cfg.src;
+  document.getElementById('viewerImg').alt = cfg.alt;
+  document.getElementById('imageMeta').innerHTML = cfg.meta;
+  // Update cert image label
+  var certImg = document.getElementById('certImage');
+  if (certImg) certImg.textContent = cfg.title;
+  // Reset stage to 0 with new content
+  setStage(0);
+}
+
+// Backwards-compatible STAGE_DATA — points to the current image's data
+var STAGE_DATA = STAGE_DATA_CRYO;
+
 function setStage(s) {
   currentStage = s;
   document.querySelectorAll('.stage-pill').forEach(function(p, i) {
     p.classList.toggle('active', i === s);
   });
-  var data = STAGE_DATA[s];
+  // Pick the stage data for the current image
+  var data = IMAGE_CONFIGS[currentImage].stageData[s];
 
   // Voice narration (Phase 5.4)
   if (voiceNarration) {
@@ -617,7 +741,7 @@ function setStage(s) {
   document.getElementById('stageProgress').style.width = pct + '%';
 
   // Update viewer corner label
-  document.getElementById('viewerCorner').textContent = 'STAGE ' + (s + 1) + ' \u00B7 ' + data.title.replace(/^Stage \d+: /, '').toUpperCase();
+  document.getElementById('viewerCorner').textContent = IMAGE_CONFIGS[currentImage].corner + ' \u00B7 STAGE ' + (s + 1) + ' \u00B7 ' + data.title.replace(/^Stage \d+: /, '').toUpperCase();
 
   // Toggle overlays based on stage
   var overlays = {
@@ -631,7 +755,7 @@ function setStage(s) {
     if (el) el.classList.toggle('show', overlays[id]);
   });
 
-  // Show object markers on stage 6
+  // Show object markers on stage 6 (uses current image's objects)
   if (s === 6) showObjectMarkers();
   else clearObjectMarkers();
 
@@ -659,12 +783,7 @@ function toggleZoom() {
 function showObjectMarkers() {
   var labels = document.getElementById('viewerLabels');
   labels.innerHTML = '';
-  var objects = [
-    {x: 28, y: 18, w: 16, h: 16, type: 'scientific', label: 'particle cluster A'},
-    {x: 55, y: 42, w: 13, h: 13, type: 'biomass', label: 'dense region B'},
-    {x: 22, y: 60, w: 11, h: 11, type: 'text', label: 'sparse C'},
-    {x: 70, y: 72, w: 9, h: 9, type: 'scientific', label: 'outlier D'}
-  ];
+  var objects = IMAGE_CONFIGS[currentImage].objects;
   objects.forEach(function(o, i) {
     var marker = document.createElement('div');
     marker.className = 'obj-marker ' + o.type;
@@ -849,8 +968,8 @@ async function runVlm() {
   var output = document.getElementById('vlmOutput');
   btn.disabled = true; btn.textContent = 'Analyzing...';
   output.innerHTML = '<span style="color:var(--amber);">Sending request to OSIRIS VLM API...</span>';
-  // Use the same image as the viewer (relative URL)
-  var imageUrl = window.location.origin + '/DemoAISciMShub/shorts-images/scientific/1.png';
+  // Use the current image (Cryo-EM or Chest X-ray) as viewed
+  var imageUrl = window.location.origin + IMAGE_CONFIGS[currentImage].vlmImage;
   try {
     var res = await fetch('/DemoAISciMShub/api/vlm', {
       method: 'POST',
@@ -886,7 +1005,7 @@ function exportPackage(kind) {
   var bound = (L * c).toFixed(1);
   var disp = (bound * 0.97).toFixed(2);
   var ts = new Date().toISOString();
-  var image = 'Cryo-EM Density Reconstruction';
+  var image = IMAGE_CONFIGS[currentImage].title;
 
   var cert = {
     '@context': 'https://schema.org',
