@@ -520,6 +520,40 @@ a { color: var(--primary); text-decoration: none; }
     <div id="vlmOutput" style="font-size:12px;color:var(--fg);font-family:monospace;line-height:1.6;min-height:80px;background:rgba(10,10,15,0.5);padding:12px;border-radius:8px;border:1px solid var(--border);white-space:pre-wrap;">VLM output will appear here.</div>
   </div>
 
+  <!-- ====== PHASE 6.8.2: 3D VOLUME ANALYSIS (NIfTI/DICOM/HDF5) ====== -->
+  <h2 class="section-h2">Phase 6.8.2: 3D volume analysis (NIfTI / DICOM / HDF5)</h2>
+  <p class="section-p">Upload a real 3D medical volume (NIfTI <code>.nii</code>/<code>.nii.gz</code>, DICOM <code>.dcm</code>, DICOM series <code>.zip</code>, or HDF5 <code>.h5</code>) &mdash; OSIRIS parses the NIfTI header, extracts the middle axial slice (or Maximum Intensity Projection), converts to PNG, and sends it to the VLM with a 3D-aware system prompt. The response includes volume metadata, projection info, and a structured analysis with the Theorem 7 bound.</p>
+  <div style="border:1px solid var(--primary);border-radius:14px;padding:18px;margin:16px 0;background:linear-gradient(135deg,rgba(59,130,246,0.05),rgba(168,85,247,0.05));">
+    <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:12px;">
+      <div>
+        <div style="font-size:13px;font-weight:700;">3D Volume VLM Analysis</div>
+        <div style="font-size:11px;color:var(--muted);font-family:monospace;margin-top:4px;" id="seg3dStatus">Status: idle &middot; upload a .nii / .nii.gz / .dcm / .zip / .h5 below</div>
+      </div>
+    </div>
+    <div style="display:flex;gap:8px;margin-bottom:12px;flex-wrap:wrap;align-items:center;">
+      <label style="padding:10px 16px;border-radius:8px;border:1px dashed var(--primary);color:var(--primary);font-size:12px;font-family:monospace;cursor:pointer;font-weight:700;background:rgba(59,130,246,0.05);">
+        &#8682; Choose 3D volume file
+        <input type="file" id="seg3dFileInput" accept=".nii,.nii.gz,.dcm,.dicom,.zip,.h5,.hdf5" style="display:none" onchange="loadSeg3dFile(this.files[0])" />
+      </label>
+      <span id="seg3dFileName" style="font-size:11px;color:var(--muted);font-family:monospace;">no file selected</span>
+    </div>
+    <div style="display:flex;gap:8px;margin-bottom:12px;flex-wrap:wrap;">
+      <select id="seg3dProjection" style="padding:8px 12px;border:1px solid var(--border);border-radius:8px;background:rgba(10,10,15,0.5);color:var(--fg);font-size:12px;font-family:monospace;">
+        <option value="middle">middle axial slice (default)</option>
+        <option value="mip">MIP (Maximum Intensity Projection)</option>
+        <option value="coronal">coronal middle</option>
+        <option value="sagittal">sagittal middle</option>
+      </select>
+      <input type="text" id="seg3dPrompt" placeholder="prompt: describe structures + identify anomalies" value="describe the structures visible in this 3D volume and identify any anomalies" style="flex:1;min-width:200px;padding:8px 12px;border:1px solid var(--border);border-radius:8px;background:rgba(10,10,15,0.5);color:var(--fg);font-size:13px;" />
+      <button class="cta-btn" id="seg3dBtn" onclick="runSeg3d()">Analyze 3D &rarr;</button>
+    </div>
+    <div id="seg3dProjectionPreview" style="display:none;margin-bottom:12px;text-align:center;">
+      <div style="font-size:11px;text-transform:uppercase;color:var(--muted);font-family:monospace;margin-bottom:6px;">Extracted 2D projection (sent to VLM)</div>
+      <img id="seg3dProjectionImg" alt="projection" style="max-width:300px;border:1px solid var(--border);border-radius:8px;image-rendering:pixelated;" />
+    </div>
+    <div id="seg3dOutput" style="font-size:12px;color:var(--fg);font-family:monospace;line-height:1.6;min-height:80px;background:rgba(10,10,15,0.5);padding:12px;border-radius:8px;border:1px solid var(--border);white-space:pre-wrap;">3D volume analysis will appear here. Supports: NIfTI (.nii/.nii.gz), DICOM (.dcm), DICOM series (.zip), HDF5 (.h5/.hdf5). <em>Note: requires the Next.js preview server for live VLM; falls back to volume metadata only on GitHub Pages.</em></div>
+  </div>
+
   <!-- ====== LOGIN CTA BAND ====== -->
   <div class="cta-band">
     <h2>Want to test your <span class="aurora">own image</span>?</h2>
@@ -1056,8 +1090,102 @@ function shareSession() {
   msg += 'Phase 5.8 WebRTC: this demo generates a session ID. Real WebRTC peer connection (with signaling server) is coming in Phase 6. ';
   msg += 'In the demo, all collaborators visiting this URL will see the same OSIRIS state via localStorage sync.';
   alert(msg);
-  // Save session ID
   localStorage.setItem('osiris_session', sid);
+}
+
+// ====== Phase 6.8.2: 3D Volume Analysis (NIfTI / DICOM / HDF5) ======
+var seg3dFile = null;
+function loadSeg3dFile(file) {
+  if (!file) return;
+  seg3dFile = file;
+  document.getElementById('seg3dFileName').textContent = file.name + ' (' + (file.size / 1024).toFixed(1) + ' KB)';
+  document.getElementById('seg3dStatus').innerHTML = '<span style="color:var(--emerald);">File loaded &middot; ready to analyze</span>';
+  document.getElementById('seg3dOutput').textContent = 'File "' + file.name + '" loaded. Click "Analyze 3D" to run the pipeline.';
+}
+
+async function runSeg3d() {
+  if (!seg3dFile) {
+    alert('Please choose a 3D volume file first (.nii / .nii.gz / .dcm / .zip / .h5).');
+    return;
+  }
+  var btn = document.getElementById('seg3dBtn');
+  var output = document.getElementById('seg3dOutput');
+  var status = document.getElementById('seg3dStatus');
+  var prompt = document.getElementById('seg3dPrompt').value.trim();
+  var projection = document.getElementById('seg3dProjection').value;
+  btn.disabled = true; btn.textContent = 'Analyzing...';
+  status.innerHTML = '<span style="color:var(--amber);">[1/3] Uploading 3D volume to /api/upload...</span>';
+  output.innerHTML = '<span style="color:var(--amber);">Step 1/3: Uploading ' + seg3dFile.name + '...</span>';
+
+  try {
+    // Step 1: Upload the 3D file via /api/upload (Phase 6.8.1)
+    var fd = new FormData();
+    fd.append('file', seg3dFile);
+    var upRes = await fetch('/DemoAISciMShub/api/upload', { method: 'POST', body: fd });
+    if (!upRes.ok) {
+      var upErr = await upRes.json().catch(function() { return {}; });
+      throw new Error('Upload failed (' + upRes.status + '): ' + (upErr.message || 'unknown'));
+    }
+    var upData = await upRes.json();
+    var volumeUrl = upData.absolute_url || (window.location.origin + upData.url);
+    output.innerHTML += '\n<span style="color:var(--emerald);">[1/3] Uploaded: ' + (upData.size / 1024).toFixed(1) + ' KB &middot; format=' + (upData.ext || upData.mime) + '</span>';
+    if (upData.metadata) {
+      output.innerHTML += '\n  dims: ' + (upData.metadata.estimated_dimensions || upData.metadata.dicom_series_count + ' DICOM slices' || '?');
+    }
+
+    // Step 2: Call /api/segment-3d (Phase 6.8.2)
+    status.innerHTML = '<span style="color:var(--amber);">[2/3] Calling /api/segment-3d...</span>';
+    output.innerHTML += '\n<span style="color:var(--amber);">[2/3] Parsing volume + extracting ' + projection + ' projection + calling VLM...</span>';
+    var segRes = await fetch('/DemoAISciMShub/api/segment-3d', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        volumeUrl: volumeUrl,
+        prompt: prompt,
+        projectionType: projection
+      })
+    });
+    var segData = await segRes.json();
+
+    // Step 3: Display results
+    status.innerHTML = '<span style="color:var(--emerald);">[3/3] Done &middot; ' + (segData.fallback ? 'static fallback' : 'live VLM') + '</span>';
+    if (segData.ok) {
+      output.innerHTML = '<span style="color:var(--emerald);">[' + (segData.model || 'osiris-vlm-3d-1') + ']</span>\n\n' + (segData.analysis || '(no analysis)');
+      if (segData.volumeMetadata) {
+        output.innerHTML += '\n\n<span style="color:var(--primary);">3D volume metadata:</span>';
+        output.innerHTML += '\n  format: ' + segData.volumeMetadata.format;
+        output.innerHTML += '\n  dims: ' + segData.volumeMetadata.dims.join(' × ');
+        output.innerHTML += '\n  dtype: ' + segData.volumeMetadata.dtype;
+      }
+      if (segData.projection) {
+        output.innerHTML += '\n\n<span style="color:var(--primary);">Projection:</span>';
+        output.innerHTML += '\n  method: ' + segData.projection.method;
+        output.innerHTML += '\n  slice: ' + segData.projection.sliceIndex + ' / ' + segData.projection.totalSlices;
+        output.innerHTML += '\n  size: ' + segData.projection.width + ' × ' + segData.projection.height + ' px';
+        // Show the projection image (base64 PNG)
+        if (segData.projectionUrl) {
+          var img = document.getElementById('seg3dProjectionImg');
+          img.src = segData.projectionUrl;
+          img.alt = segData.projection.method;
+          document.getElementById('seg3dProjectionPreview').style.display = 'block';
+        }
+      }
+      if (segData.theorem7) {
+        output.innerHTML += '\n\n<span style="color:var(--emerald);">Theorem 7: bound=' + segData.theorem7.bound + ' px (L=' + segData.theorem7.L + ', c=' + segData.theorem7.c + ')</span>';
+        output.innerHTML += '\n<span style="color:var(--emerald);">Equivariance: ' + segData.theorem7.equivariance + '</span>';
+        output.innerHTML += '\n<span style="color:var(--emerald);">Zero-hallucination: ' + segData.theorem7.zero_hallucination + '</span>';
+      }
+      if (segData.fallback) {
+        output.innerHTML += '\n\n<span style="color:var(--amber);">[fallback] ' + (segData.error || 'VLM unavailable') + '</span>';
+      }
+    } else {
+      output.innerHTML = '<span style="color:var(--rose);">Error: ' + (segData.message || segData.error || 'unknown') + '</span>';
+    }
+  } catch (e) {
+    output.innerHTML = '<span style="color:var(--rose);">Error: ' + e.message + '</span>\n<span style="color:var(--amber);">[fallback] 3D analysis requires the Next.js preview server. On GitHub Pages (static hosting), only metadata is available.</span>';
+    status.innerHTML = '<span style="color:var(--rose);">Error</span>';
+  }
+  btn.disabled = false; btn.textContent = 'Analyze 3D \u2192';
 }
 </script>
 </body>
