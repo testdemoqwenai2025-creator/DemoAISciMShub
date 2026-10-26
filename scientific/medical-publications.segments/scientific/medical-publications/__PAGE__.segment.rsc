@@ -1,6 +1,6 @@
 1:"$Sreact.fragment"
-2:I[1899,["/DemoAISciMShub/_next/static/chunks/d8adbc64bb395c44.js","/DemoAISciMShub/_next/static/chunks/dfb68ded78249aa5.js","/DemoAISciMShub/_next/static/chunks/58d3390855b93ef1.js","/DemoAISciMShub/_next/static/chunks/bb45758bb712981d.js","/DemoAISciMShub/_next/static/chunks/cbdf158a79490c20.js"],"MedicalPublicationsContent"]
+2:I[1899,["/DemoAISciMShub/_next/static/chunks/d8adbc64bb395c44.js","/DemoAISciMShub/_next/static/chunks/2813737ebaaab6d4.js","/DemoAISciMShub/_next/static/chunks/eb65dd8b51a66fac.js","/DemoAISciMShub/_next/static/chunks/77d2cc7af7be0247.js","/DemoAISciMShub/_next/static/chunks/cbdf158a79490c20.js"],"MedicalPublicationsContent"]
 3:I[97367,["/DemoAISciMShub/_next/static/chunks/ff1a16fafef87110.js","/DemoAISciMShub/_next/static/chunks/d2be314c3ece3fbe.js"],"OutletBoundary"]
 4:"$Sreact.suspense"
-0:{"buildId":"xm7DqkftI5LCexoYMH-EH","rsc":["$","$1","c",{"children":[["$","$L2",null,{}],[["$","script","script-0",{"src":"/DemoAISciMShub/_next/static/chunks/bb45758bb712981d.js","async":true}],["$","script","script-1",{"src":"/DemoAISciMShub/_next/static/chunks/cbdf158a79490c20.js","async":true}]],["$","$L3",null,{"children":["$","$4",null,{"name":"Next.MetadataOutlet","children":"$@5"}]}]]}],"loading":null,"isPartial":false}
+0:{"buildId":"Y3M7dyA4GUzCKLptFdJy3","rsc":["$","$1","c",{"children":[["$","$L2",null,{}],[["$","script","script-0",{"src":"/DemoAISciMShub/_next/static/chunks/77d2cc7af7be0247.js","async":true}],["$","script","script-1",{"src":"/DemoAISciMShub/_next/static/chunks/cbdf158a79490c20.js","async":true}]],["$","$L3",null,{"children":["$","$4",null,{"name":"Next.MetadataOutlet","children":"$@5"}]}]]}],"loading":null,"isPartial":false}
 5:null

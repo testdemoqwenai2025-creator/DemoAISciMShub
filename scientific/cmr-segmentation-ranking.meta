@@ -1,0 +1,16 @@
+{
+  "headers": {
+    "x-nextjs-stale-time": "300",
+    "x-nextjs-prerender": "1",
+    "x-next-cache-tags": "_N_T_/layout,_N_T_/scientific/layout,_N_T_/scientific/cmr-segmentation-ranking/layout,_N_T_/scientific/cmr-segmentation-ranking/page,_N_T_/scientific/cmr-segmentation-ranking"
+  },
+  "segmentPaths": [
+    "/_tree",
+    "/_full",
+    "/scientific/cmr-segmentation-ranking/__PAGE__",
+    "/scientific/cmr-segmentation-ranking",
+    "/scientific",
+    "/_index",
+    "/_head"
+  ]
+}
