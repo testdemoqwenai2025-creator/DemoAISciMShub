@@ -104,14 +104,17 @@ function renderAnalyses(analyses, storage) {
   analyses.forEach(function(a) {
     var item = document.createElement('div');
     item.className = 'analysis-item';
-    var imgSrc = (a.imageSrc || '').substring(0, 500);
+    // Prefer the persisted GitHub DB image URL; fall back to the (truncated) data URL
+    var imgSrc = a.imageUrl || (a.imageSrc || '').substring(0, 500);
+    var hasVlm = !!(a.certificate && a.certificate.vlmAnalysis);
     item.innerHTML =
       '<img class="analysis-thumb" src="' + imgSrc + '" alt="' + a.imageName + '" onerror="this.style.display=\'none\'" />' +
       '<div class="analysis-info">' +
-      '<div class="analysis-name">' + a.imageName + '</div>' +
+      '<div class="analysis-name">' + a.imageName + (a.imageId ? ' <span style="color:var(--muted);font-size:10px;font-family:monospace;">#' + a.imageId.substring(0, 8) + '</span>' : '') + '</div>' +
       '<div class="analysis-meta">L=' + (a.params && a.params.L) + ' · c=' + (a.params && a.params.c) + ' · N=' + (a.params && a.params.N) + ' · ' + new Date(a.timestamp).toLocaleString() + '</div>' +
       '<div class="analysis-cert">✓ Theorem 7: bound=' + (a.results && a.results.bound) + ' · disp=' + (a.results && a.results.displacement) + ' · ' + (a.results && a.results.compliance) + '</div>' +
-      (storage === 'github' ? '<div class="analysis-meta" style="color:var(--emerald);">📂 stored on GitHub</div>' : '') +
+      (hasVlm ? '<div class="analysis-meta" style="color:var(--violet);">🧠 VLM analysis: ' + (a.certificate.vlmAnalysis.substring(0, 80) + '...') + '</div>' : '') +
+      (storage === 'github' ? '<div class="analysis-meta" style="color:var(--emerald);">📂 stored on GitHub' + (a.branch ? ' (branch: ' + a.branch + ')' : '') + '</div>' : '') +
       '</div>';
     list.appendChild(item);
   });

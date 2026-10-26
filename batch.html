@@ -402,11 +402,37 @@ function runAll() {
 }
 
 // Save analysis — tries GitHub DB first, falls back to IndexedDB
+// Phase 6.6: also uploads the image binary to GitHub
 async function saveToDashboard(item) {
+  // Phase 6.6: upload the image binary first
+  var imageId = null;
+  var imageUrl = null;
+  if (item.file) {
+    try {
+      var fd = new FormData();
+      fd.append('file', item.file);
+      fd.append('email', user.email);
+      var upRes = await fetch('/DemoAISciMShub/api/db/images', {
+        method: 'POST',
+        headers: { 'X-User-Email': user.email },
+        body: fd
+      });
+      if (upRes.ok) {
+        var upData = await upRes.json();
+        if (upData.ok) {
+          imageId = upData.id;
+          imageUrl = upData.url;
+        }
+      }
+    } catch (e) { /* image upload failed — save analysis without image */ }
+  }
+
   var analysis = {
     userId: user.email,
     imageName: item.name,
-    imageSrc: (item.src || '').substring(0, 1000),
+    imageSrc: (item.src || '').substring(0, 500),
+    imageId: imageId,
+    imageUrl: imageUrl,
     timestamp: new Date().toISOString(),
     params: { c: item.results.c, L: item.results.L, N: item.results.N },
     results: {
@@ -427,7 +453,7 @@ async function saveToDashboard(item) {
     if (res.ok) {
       var data = await res.json();
       if (data.ok) {
-        item.meta = (item.meta || '') + ' · GitHub DB ✓';
+        item.meta = (item.meta || '') + (imageId ? ' · image+analysis ✓' : ' · analysis-only ✓');
         status();
         return;
       }

@@ -364,7 +364,8 @@ function updateParams() {
   if (currentStage >= 8) showResults();
 }
 
-// Save analysis — GitHub DB first, IndexedDB fallback
+// Save analysis — GitHub DB first, IndexedDB fallback.
+// Phase 6.6: also uploads the image binary to GitHub (user-<email> branch)
 async function saveAnalysis() {
   var c = parseFloat(document.getElementById('sliderC').value);
   var L = parseInt(document.getElementById('sliderL').value);
@@ -372,10 +373,45 @@ async function saveAnalysis() {
   var bound = (L * c).toFixed(1);
   var disp = (bound * 0.97).toFixed(2);
 
+  // Disable the save button to prevent double-submit
+  var saveBtn = document.getElementById('saveBtn');
+  saveBtn.disabled = true;
+  saveBtn.textContent = 'Saving...';
+
+  // Phase 6.6: upload the image binary first (if it's a File)
+  var imageId = null;
+  var imageUrl = null;
+  var imageSha = null;
+  if (imageData.isFile && imageData.file) {
+    try {
+      var fd = new FormData();
+      fd.append('file', imageData.file);
+      fd.append('email', user.email);
+      var upRes = await fetch('/DemoAISciMShub/api/db/images', {
+        method: 'POST',
+        headers: { 'X-User-Email': user.email },
+        body: fd
+      });
+      if (upRes.ok) {
+        var upData = await upRes.json();
+        if (upData.ok) {
+          imageId = upData.id;
+          imageUrl = upData.url;
+          imageSha = upData.sha256;
+        }
+      }
+    } catch (e) {
+      // Image upload failed — save analysis without image reference
+    }
+  }
+
   var analysis = {
     userId: user.email,
     imageName: imageData.name,
-    imageSrc: (imageData.src || '').substring(0, 1000),
+    imageSrc: (imageData.src || '').substring(0, 500),
+    imageId: imageId,
+    imageUrl: imageUrl,
+    imageSha256: imageSha,
     timestamp: new Date().toISOString(),
     params: { c: c, L: L, N: N },
     results: {
@@ -403,7 +439,14 @@ async function saveAnalysis() {
     if (res.ok) {
       var data = await res.json();
       if (data.ok) {
-        alert('Analysis saved to GitHub DB!\n\nTheorem 7 certificate stored at:\n  db/analyses/' + user.email.replace(/[^a-z0-9]+/gi, '-').toLowerCase() + '/' + data.analysis.id + '.json\n\nYou can browse the file at:\nhttps://github.com/testdemoqwenai2025-creator/AISciMShub-Advanced/tree/main/db');
+        var msg = 'Analysis saved to GitHub DB!\n\n';
+        msg += 'Theorem 7 certificate:\n  db/analyses/' + data.analysis.id + '.json\n';
+        if (imageId) {
+          msg += 'Image binary:\n  db/images/' + imageId + '.' + (imageData.file.name.split('.').pop() || 'jpg') + '\n';
+        }
+        msg += 'Branch: ' + data.branch + '\n\n';
+        msg += 'Browse at:\nhttps://github.com/testdemoqwenai2025-creator/AISciMShub-Advanced/tree/' + data.branch + '/db';
+        alert(msg);
         saved = true;
         setTimeout(function() { window.location.href = '/DemoAISciMShub/dashboard'; }, 800);
         return;
@@ -413,13 +456,14 @@ async function saveAnalysis() {
     // fall through to IndexedDB
   }
   if (!saved) {
-    // IndexedDB fallback
     var db = await new Promise(function(r, j) { var req = indexedDB.open('osiris_db', 1); req.onsuccess = function(e) { r(e.target.result); }; req.onerror = j; });
     var tx = db.transaction('analyses', 'readwrite');
     await new Promise(function(r) { var q = tx.objectStore('analyses').add(analysis); q.onsuccess = r; q.onerror = r; });
     alert('Analysis saved to IndexedDB (GitHub DB unreachable on GitHub Pages).');
     setTimeout(function() { window.location.href = '/DemoAISciMShub/dashboard'; }, 500);
   }
+  saveBtn.disabled = false;
+  saveBtn.textContent = 'Save to dashboard';
 }
 
 // Drag-drop
