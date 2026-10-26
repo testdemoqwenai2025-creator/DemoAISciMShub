@@ -169,8 +169,43 @@ function openDB() {
 }
 
 // ====== Default admin account provisioning ======
-// admin/admin is the demo account. We pre-provision it on first run so any
-// visitor can login with admin/admin without registering.
+// admin/admin is the demo account. Pre-provisioned server-side via
+// /api/db/login when accessed on the Next.js preview. On GitHub Pages
+// (no API routes), we fall back to IndexedDB.
+
+// Try GitHub-backed auth first; fall back to IndexedDB if preview API not reachable
+async function tryGithubLogin(email, password) {
+  try {
+    var res = await fetch('/DemoAISciMShub/api/db/login', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email: email, password: password })
+    });
+    if (res.status === 404) return null; // route not found (GitHub Pages)
+    var data = await res.json();
+    if (data.ok) return data;
+    return { ok: false, error: data.error, message: data.message };
+  } catch (e) {
+    return null; // network error
+  }
+}
+
+async function tryGithubRegister(name, email, password, institution) {
+  try {
+    var res = await fetch('/DemoAISciMShub/api/db/register', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ name: name, email: email, password: password, institution: institution })
+    });
+    if (res.status === 404) return null;
+    var data = await res.json();
+    return data;
+  } catch (e) {
+    return null;
+  }
+}
+
+// IndexedDB fallback (GitHub Pages)
 async function provisionDefaultAdmin() {
   await openDB();
   var tx = db.transaction('users', 'readwrite');
@@ -190,16 +225,29 @@ async function provisionDefaultAdmin() {
   }
 }
 
-// One-click admin login
+// One-click admin login — tries GitHub API first, falls back to IndexedDB
 async function loginAsAdmin() {
+  showMsg('Logging in as admin (admin/admin)...', 'success');
+  // Try GitHub-backed first
+  var gh = await tryGithubLogin('admin', 'admin');
+  if (gh && gh.ok) {
+    localStorage.setItem('osiris_user', JSON.stringify({
+      name: gh.user.name,
+      email: gh.user.email,
+      institution: gh.user.institution,
+      isDefault: gh.isDefault,
+      storage: 'github'
+    }));
+    showMsg('Logged in via GitHub-backed DB. Redirecting...', 'success');
+    setTimeout(function() { window.location.href = '/DemoAISciMShub/dashboard'; }, 700);
+    return;
+  }
+  // Fallback to IndexedDB
   await provisionDefaultAdmin();
   localStorage.setItem('osiris_user', JSON.stringify({
-    name: 'Demo Admin',
-    email: 'admin',
-    institution: 'OSIRIS Demo Lab',
-    isDefault: true
+    name: 'Demo Admin', email: 'admin', institution: 'OSIRIS Demo Lab', isDefault: true, storage: 'indexeddb'
   }));
-  showMsg('Logged in as admin (admin/admin). Redirecting to dashboard...', 'success');
+  showMsg('Logged in as admin (IndexedDB fallback). Redirecting...', 'success');
   setTimeout(function() { window.location.href = '/DemoAISciMShub/dashboard'; }, 700);
 }
 
@@ -209,15 +257,30 @@ async function doRegister() {
   var pass = document.getElementById('regPass').value;
   var inst = document.getElementById('regInst').value.trim();
   if (!name || !email || !pass) { showMsg('Please fill in name, email, and password.', 'error'); return; }
-  await provisionDefaultAdmin(); // ensure admin exists
+  // Try GitHub-backed first
+  var gh = await tryGithubRegister(name, email, pass, inst);
+  if (gh && gh.ok) {
+    localStorage.setItem('osiris_user', JSON.stringify({
+      name: gh.user.name, email: gh.user.email, institution: gh.user.institution, storage: 'github'
+    }));
+    showMsg('Account created on GitHub DB! Redirecting...', 'success');
+    setTimeout(function() { window.location.href = '/DemoAISciMShub/dashboard'; }, 1000);
+    return;
+  }
+  if (gh && !gh.ok && gh.error === 'exists') {
+    showMsg('Email already registered. Login instead.', 'error'); return;
+  }
+  if (gh && !gh.ok) { showMsg('Error: ' + (gh.message || gh.error), 'error'); return; }
+  // Fallback to IndexedDB
+  await provisionDefaultAdmin();
   var tx = db.transaction('users', 'readwrite');
   var store = tx.objectStore('users');
   var existing = await new Promise(function(r) { var q = store.get(email); q.onsuccess = function(e) { r(e.target.result); }; q.onerror = function() { r(null); }; });
   if (existing) { showMsg('Email already registered. Please login instead.', 'error'); return; }
   var user = { name: name, email: email, password: btoa(pass), institution: inst, created: new Date().toISOString(), analysisCount: 0 };
   await new Promise(function(r) { var q = store.add(user); q.onsuccess = r; q.onerror = r; });
-  localStorage.setItem('osiris_user', JSON.stringify({ name: name, email: email, institution: inst }));
-  showMsg('Account created! Redirecting to dashboard...', 'success');
+  localStorage.setItem('osiris_user', JSON.stringify({ name: name, email: email, institution: inst, storage: 'indexeddb' }));
+  showMsg('Account created (IndexedDB fallback — preview API not reachable).', 'success');
   setTimeout(function() { window.location.href = '/DemoAISciMShub/dashboard'; }, 1000);
 }
 
@@ -226,32 +289,44 @@ async function doLogin() {
   var pass = document.getElementById('loginPass').value;
   if (!email || !pass) { showMsg('Please enter email/username and password.', 'error'); return; }
 
-  // Hard-coded admin/admin shortcut (also works before IndexedDB init)
-  if (email === 'admin' && pass === 'admin') {
-    await provisionDefaultAdmin();
+  // Try GitHub-backed auth first
+  var gh = await tryGithubLogin(email, pass);
+  if (gh && gh.ok) {
     localStorage.setItem('osiris_user', JSON.stringify({
-      name: 'Demo Admin',
-      email: 'admin',
-      institution: 'OSIRIS Demo Lab',
-      isDefault: true
+      name: gh.user.name, email: gh.user.email, institution: gh.user.institution,
+      isDefault: gh.isDefault, storage: 'github'
     }));
-    showMsg('Logged in as admin. Redirecting to dashboard...', 'success');
+    showMsg('Logged in via GitHub DB. Redirecting...', 'success');
     setTimeout(function() { window.location.href = '/DemoAISciMShub/dashboard'; }, 700);
     return;
   }
+  if (gh && !gh.ok && gh.error !== 'github_not_configured') {
+    // GitHub API was reachable but rejected the login
+    showMsg(gh.message || 'Login failed.', 'error'); return;
+  }
 
+  // Fallback to IndexedDB (GitHub Pages or preview API not reachable)
+  if (email === 'admin' && pass === 'admin') {
+    await provisionDefaultAdmin();
+    localStorage.setItem('osiris_user', JSON.stringify({
+      name: 'Demo Admin', email: 'admin', institution: 'OSIRIS Demo Lab', isDefault: true, storage: 'indexeddb'
+    }));
+    showMsg('Logged in as admin (IndexedDB fallback). Redirecting...', 'success');
+    setTimeout(function() { window.location.href = '/DemoAISciMShub/dashboard'; }, 700);
+    return;
+  }
   await provisionDefaultAdmin();
   var tx = db.transaction('users', 'readonly');
   var store = tx.objectStore('users');
   var user = await new Promise(function(r) { var q = store.get(email); q.onsuccess = function(e) { r(e.target.result); }; q.onerror = function() { r(null); }; });
-  if (!user) { showMsg('No account found with this email. Try admin/admin or register first.', 'error'); return; }
+  if (!user) { showMsg('No account found. Try admin/admin or register.', 'error'); return; }
   if (user.password !== btoa(pass)) { showMsg('Incorrect password.', 'error'); return; }
-  localStorage.setItem('osiris_user', JSON.stringify({ name: user.name, email: user.email, institution: user.institution }));
+  localStorage.setItem('osiris_user', JSON.stringify({ name: user.name, email: user.email, institution: user.institution, storage: 'indexeddb' }));
   showMsg('Login successful! Redirecting...', 'success');
   setTimeout(function() { window.location.href = '/DemoAISciMShub/dashboard'; }, 800);
 }
 
-// Pre-provision admin account on page load
+// Pre-provision admin account on page load (for IndexedDB fallback)
 provisionDefaultAdmin().then(function() {
   // Check if already logged in
   if (localStorage.getItem('osiris_user')) {

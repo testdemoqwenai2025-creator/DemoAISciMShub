@@ -80,41 +80,71 @@ if (!user) { window.location.href = '/DemoAISciMShub/login'; }
 document.getElementById('navUser').textContent = user.name + ' · ' + user.email;
 document.getElementById('statSince').textContent = user.email ? 'Today' : '—';
 
-// Load analyses from IndexedDB
-var db;
-var req = indexedDB.open('osiris_db', 1);
-req.onupgradeneeded = function(e) {
-  var d = e.target.result;
-  if (!d.objectStoreNames.contains('users')) d.createObjectStore('users', { keyPath: 'email' });
-  if (!d.objectStoreNames.contains('analyses')) d.createObjectStore('analyses', { keyPath: 'id', autoIncrement: true });
-};
-req.onsuccess = function(e) {
-  db = e.target.result;
-  var tx = db.transaction('analyses', 'readonly');
-  var store = tx.objectStore('analyses');
-  var allReq = store.getAll();
-  allReq.onsuccess = function(e) {
-    var analyses = e.target.result.filter(function(a) { return a.userId === user.email; });
-    document.getElementById('statAnalyses').textContent = analyses.length;
-    document.getElementById('statCertified').textContent = analyses.length;
-    if (analyses.length === 0) return;
-    document.getElementById('emptyState').style.display = 'none';
-    var list = document.getElementById('analysisList');
-    list.innerHTML = '';
-    analyses.reverse().forEach(function(a) {
-      var item = document.createElement('div');
-      item.className = 'analysis-item';
-      item.innerHTML =
-        '<img class="analysis-thumb" src="' + (a.imageSrc || '') + '" alt="' + a.imageName + '" onerror="this.style.display=\'none\'" />' +
-        '<div class="analysis-info">' +
-        '<div class="analysis-name">' + a.imageName + '</div>' +
-        '<div class="analysis-meta">L=' + a.params.L + ' · c=' + a.params.c + ' · N=' + a.params.N + ' · ' + new Date(a.timestamp).toLocaleString() + '</div>' +
-        '<div class="analysis-cert">✓ Theorem 7: bound=' + a.results.bound + ' · disp=' + a.results.displacement + ' · ' + a.results.compliance + '</div>' +
-        '</div>';
-      list.appendChild(item);
+// Try GitHub-backed DB first; fall back to IndexedDB on GitHub Pages
+async function loadAnalysesGithub() {
+  try {
+    var res = await fetch('/DemoAISciMShub/api/db/analyses?email=' + encodeURIComponent(user.email), {
+      headers: { 'X-User-Email': user.email }
     });
+    if (res.status === 404) return null;
+    var data = await res.json();
+    return data;
+  } catch (e) {
+    return null;
+  }
+}
+
+function renderAnalyses(analyses, storage) {
+  document.getElementById('statAnalyses').textContent = analyses.length;
+  document.getElementById('statCertified').textContent = analyses.length;
+  if (analyses.length === 0) return;
+  document.getElementById('emptyState').style.display = 'none';
+  var list = document.getElementById('analysisList');
+  list.innerHTML = '';
+  analyses.forEach(function(a) {
+    var item = document.createElement('div');
+    item.className = 'analysis-item';
+    var imgSrc = (a.imageSrc || '').substring(0, 500);
+    item.innerHTML =
+      '<img class="analysis-thumb" src="' + imgSrc + '" alt="' + a.imageName + '" onerror="this.style.display=\'none\'" />' +
+      '<div class="analysis-info">' +
+      '<div class="analysis-name">' + a.imageName + '</div>' +
+      '<div class="analysis-meta">L=' + (a.params && a.params.L) + ' · c=' + (a.params && a.params.c) + ' · N=' + (a.params && a.params.N) + ' · ' + new Date(a.timestamp).toLocaleString() + '</div>' +
+      '<div class="analysis-cert">✓ Theorem 7: bound=' + (a.results && a.results.bound) + ' · disp=' + (a.results && a.results.displacement) + ' · ' + (a.results && a.results.compliance) + '</div>' +
+      (storage === 'github' ? '<div class="analysis-meta" style="color:var(--emerald);">📂 stored on GitHub</div>' : '') +
+      '</div>';
+    list.appendChild(item);
+  });
+}
+
+// Try GitHub DB first
+loadAnalysesGithub().then(function(ghData) {
+  if (ghData && ghData.ok) {
+    renderAnalyses(ghData.analyses, 'github');
+    var since = document.getElementById('statSince');
+    since.textContent = since.textContent + ' (GitHub)';
+    since.style.color = 'var(--emerald)';
+    return;
+  }
+  // Fallback to IndexedDB
+  var db;
+  var req = indexedDB.open('osiris_db', 1);
+  req.onupgradeneeded = function(e) {
+    var d = e.target.result;
+    if (!d.objectStoreNames.contains('users')) d.createObjectStore('users', { keyPath: 'email' });
+    if (!d.objectStoreNames.contains('analyses')) d.createObjectStore('analyses', { keyPath: 'id', autoIncrement: true });
   };
-};
+  req.onsuccess = function(e) {
+    db = e.target.result;
+    var tx = db.transaction('analyses', 'readonly');
+    var store = tx.objectStore('analyses');
+    var allReq = store.getAll();
+    allReq.onsuccess = function(e) {
+      var analyses = e.target.result.filter(function(a) { return a.userId === user.email; });
+      renderAnalyses(analyses.reverse(), 'indexeddb');
+    };
+  };
+});
 </script>
 </body>
 </html>

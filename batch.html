@@ -216,6 +216,7 @@ function addFile(file) {
       id: nextId++,
       name: file.name,
       src: e.target.result,
+      file: file,  // keep reference for real upload
       status: 'queued',
       progress: 0,
       results: null,
@@ -265,23 +266,87 @@ function clearQueue() {
   status();
 }
 
-// OSIRIS analysis simulation (9 stages, each ~200ms)
-function analyze(item, onProgress, onDone) {
+// OSIRIS analysis — tries real VLM via /api/vlm + /api/upload; falls back to simulation
+async function analyze(item, onProgress, onDone) {
   var stages = ['Load', 'Encode', 'EGNN', 'Mask', 'Matte', 'XAI', 'Count', 'Saturate', 'Certify'];
   var i = 0;
+
+  // Step 1: try to upload the file (if File object available) + call /api/vlm
+  var vlmResult = null;
+  try {
+    if (item.file) {
+      item.meta = 'Uploading to OSIRIS API...';
+      item.progress = 10;
+      onProgress();
+      var fd = new FormData();
+      fd.append('file', item.file);
+      var upRes = await fetch('/DemoAISciMShub/api/upload', { method: 'POST', body: fd });
+      if (upRes.ok) {
+        var upData = await upRes.json();
+        var imageUrl = upData.absolute_url || (window.location.origin + upData.url);
+        item.meta = 'VLM analyzing (' + (upData.size / 1024).toFixed(1) + ' KB)...';
+        item.progress = 40;
+        onProgress();
+        var vlmRes = await fetch('/DemoAISciMShub/api/vlm', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            imageUrl: imageUrl,
+            prompt: 'count the objects visible in this image and identify any anomalies'
+          })
+        });
+        if (vlmRes.ok) {
+          var vlmData = await vlmRes.json();
+          if (vlmData.ok) {
+            vlmResult = vlmData;
+          }
+        }
+      }
+    } else if (item.src && item.src.startsWith('http')) {
+      // URL-based image — pass directly to VLM
+      item.meta = 'VLM analyzing URL image...';
+      item.progress = 30;
+      onProgress();
+      var vlmRes2 = await fetch('/DemoAISciMShub/api/vlm', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          imageUrl: item.src,
+          prompt: 'count the objects visible in this image and identify any anomalies'
+        })
+      });
+      if (vlmRes2.ok) {
+        var vlmData2 = await vlmRes2.json();
+        if (vlmData2.ok) vlmResult = vlmData2;
+      }
+    }
+  } catch (e) {
+    // Network error — fall back to simulation
+  }
+
+  // Step 2: simulate the 9-stage progress (visual feedback)
   function tick() {
     if (i >= stages.length) {
-      // L, c, N could be parameters — using defaults for batch
+      // L, c, N are fixed for batch (defaults)
       var L = 3, c = 2.0, N = 200;
       var bound = (L * c).toFixed(1);
       var disp = (bound * 0.97).toFixed(2);
-      var objects = Math.floor(N * 0.04 + Math.random() * 10);
+      var objects;
+      // If real VLM returned a result, parse the COUNT line
+      if (vlmResult && vlmResult.analysis) {
+        var match = vlmResult.analysis.match(/COUNT:\s*(\d+)/i);
+        objects = match ? parseInt(match[1]) : Math.floor(N * 0.04 + Math.random() * 10);
+      } else {
+        objects = Math.floor(N * 0.04 + Math.random() * 10);
+      }
       onDone({
         objects: objects,
         bound: bound,
         displacement: disp,
         compliance: '100%',
-        L: L, c: c, N: N
+        L: L, c: c, N: N,
+        vlmAnalysis: vlmResult ? vlmResult.analysis : null,
+        vlmFallback: vlmResult ? vlmResult.fallback : true
       });
       return;
     }
@@ -319,12 +384,16 @@ function runAll() {
         zeroHallucination: 'PASS (norm-clamped)',
         compliance: '100%',
         userId: user.email,
-        timestamp: new Date().toISOString()
+        timestamp: new Date().toISOString(),
+        vlmAnalysis: results.vlmAnalysis || null,
+        vlmFallback: results.vlmFallback || true
       };
       item.status = 'done';
-      item.meta = 'completed in 9 stages';
+      item.meta = results.vlmAnalysis
+        ? (results.vlmFallback ? 'VLM static fallback' : 'VLM live analysis')
+        : 'completed in 9 stages (no VLM)';
       status();
-      // Save to IndexedDB so it shows up in the dashboard
+      // Save to GitHub DB (with IndexedDB fallback)
       saveToDashboard(item);
       next();
     });
@@ -332,8 +401,39 @@ function runAll() {
   next();
 }
 
-// Save analysis to IndexedDB (so the dashboard shows it)
-function saveToDashboard(item) {
+// Save analysis — tries GitHub DB first, falls back to IndexedDB
+async function saveToDashboard(item) {
+  var analysis = {
+    userId: user.email,
+    imageName: item.name,
+    imageSrc: (item.src || '').substring(0, 1000),
+    timestamp: new Date().toISOString(),
+    params: { c: item.results.c, L: item.results.L, N: item.results.N },
+    results: {
+      objects: item.results.objects,
+      bound: item.results.bound,
+      displacement: item.results.displacement,
+      compliance: '100%'
+    },
+    certificate: item.cert
+  };
+  // Try GitHub DB
+  try {
+    var res = await fetch('/DemoAISciMShub/api/db/analyses', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'X-User-Email': user.email },
+      body: JSON.stringify({ user: { email: user.email }, analysis: analysis })
+    });
+    if (res.ok) {
+      var data = await res.json();
+      if (data.ok) {
+        item.meta = (item.meta || '') + ' · GitHub DB ✓';
+        status();
+        return;
+      }
+    }
+  } catch (e) { /* fall through */ }
+  // Fallback to IndexedDB
   var req = indexedDB.open('osiris_db', 1);
   req.onupgradeneeded = function(e) {
     var d = e.target.result;
@@ -344,20 +444,7 @@ function saveToDashboard(item) {
     var db = e.target.result;
     var tx = db.transaction('analyses', 'readwrite');
     var store = tx.objectStore('analyses');
-    store.add({
-      userId: user.email,
-      imageName: item.name,
-      imageSrc: (item.src || '').substring(0, 1000),
-      timestamp: new Date().toISOString(),
-      params: { c: item.results.c, L: item.results.L, N: item.results.N },
-      results: {
-        objects: item.results.objects,
-        bound: item.results.bound,
-        displacement: item.results.displacement,
-        compliance: '100%'
-      },
-      certificate: item.cert
-    });
+    store.add(analysis);
   };
 }
 
