@@ -162,6 +162,24 @@ a { color: var(--primary); text-decoration: none; }
   </div>
 
   <button class="btn emerald" id="saveBtn" style="display:none;width:100%;margin-top:12px;" onclick="saveAnalysis()">Save to dashboard</button>
+
+  <!-- ====== REAL VLM ANALYSIS (Phase 6.3) ====== -->
+  <div style="border:1px solid var(--primary);border-radius:14px;padding:18px;margin-top:20px;background:linear-gradient(135deg,rgba(59,130,246,0.05),rgba(168,85,247,0.05));">
+    <div style="font-size:11px;text-transform:uppercase;letter-spacing:0.05em;color:var(--primary);font-family:monospace;margin-bottom:8px;font-weight:700;">Phase 6.3 &middot; Real VLM analysis on your image</div>
+    <p style="font-size:12px;color:var(--muted);line-height:1.6;margin-bottom:12px;">Upload your image to the OSIRIS VLM API. Real vision-language model answers your prompt with structured analysis + Theorem 7 bound metadata. (Requires the Next.js preview server; falls back to static OSIRIS analysis on GitHub Pages.)</p>
+    <div style="display:flex;gap:8px;margin-bottom:10px;flex-wrap:wrap;">
+      <input type="text" id="vlmPrompt" placeholder="count objects / identify tumor / describe texture" value="describe what is visible in this image and identify any anomalies" style="flex:1;min-width:200px;padding:10px 12px;border:1px solid var(--border);border-radius:8px;background:rgba(10,10,15,0.5);color:var(--fg);font-size:13px;" />
+      <button class="btn" id="vlmBtn" onclick="runRealVlm()">Run real VLM &rarr;</button>
+    </div>
+    <div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px;">
+      <button class="btn" style="background:rgba(31,41,55,0.7);font-size:11px;" onclick="document.getElementById('vlmPrompt').value='count the objects'; runRealVlm();">Count objects</button>
+      <button class="btn" style="background:rgba(31,41,55,0.7);font-size:11px;" onclick="document.getElementById('vlmPrompt').value='identify the tumor region'; runRealVlm();">Identify tumor</button>
+      <button class="btn" style="background:rgba(31,41,55,0.7);font-size:11px;" onclick="document.getElementById('vlmPrompt').value='describe the texture'; runRealVlm();">Describe texture</button>
+      <button class="btn" style="background:rgba(31,41,55,0.7);font-size:11px;" onclick="document.getElementById('vlmPrompt').value='point at anomalies'; runRealVlm();">Point anomalies</button>
+    </div>
+    <div id="vlmOutput" style="font-size:12px;color:var(--fg);font-family:monospace;line-height:1.6;min-height:80px;background:rgba(10,10,15,0.5);padding:12px;border-radius:8px;border:1px solid var(--border);white-space:pre-wrap;">VLM output will appear here after you load an image.</div>
+  </div>
+
 </div>
 
 <!-- Toolbar -->
@@ -193,21 +211,26 @@ var STAGE_INFO = [
 ];
 
 function handleFile(file) {
+  // Keep a reference to the actual File object so we can upload it to /api/upload later
+  imageData = { src: null, name: file.name, file: file, isFile: true };
   var reader = new FileReader();
-  reader.onload = function(e) { loadImage(e.target.result, file.name); };
+  reader.onload = function(e) {
+    imageData.src = e.target.result;
+    loadImage(e.target.result, file.name);
+  };
   reader.readAsDataURL(file);
 }
 
 function handleUrl() {
   var url = document.getElementById('urlInput').value.trim();
   if (!url) return;
+  imageData = { src: url, name: url.split('/').pop() || 'url-image', file: null, isUrl: true };
   loadImage(url, url.split('/').pop() || 'url-image');
 }
 
 function loadImage(src, name) {
   document.getElementById('viewerImg').src = src;
   document.getElementById('viewer').classList.add('show');
-  imageData = { src: src, name: name };
   imageLoaded = true;
   currentStage = -1;
   // Reset stages
@@ -216,6 +239,69 @@ function loadImage(src, name) {
   document.getElementById('results').style.display = 'none';
   document.getElementById('cert').style.display = 'none';
   document.getElementById('saveBtn').style.display = 'none';
+  document.getElementById('vlmOutput').textContent = 'Image loaded. Click "Run real VLM" to analyze it.';
+}
+
+// ====== Phase 6.3: Real VLM analysis ======
+async function runRealVlm() {
+  if (!imageLoaded || !imageData) {
+    alert('Please load an image first.');
+    return;
+  }
+  var prompt = document.getElementById('vlmPrompt').value.trim();
+  if (!prompt) { alert('Enter a prompt.'); return; }
+  var btn = document.getElementById('vlmBtn');
+  var output = document.getElementById('vlmOutput');
+  btn.disabled = true; btn.textContent = 'Analyzing...';
+  output.innerHTML = '<span style="color:var(--amber);">[1/2] Uploading image to OSIRIS API...</span>';
+
+  var imageUrl;
+  try {
+    if (imageData.isFile && imageData.file) {
+      // Upload the file first via /api/upload
+      var fd = new FormData();
+      fd.append('file', imageData.file);
+      var upRes = await fetch('/DemoAISciMShub/api/upload', { method: 'POST', body: fd });
+      if (!upRes.ok) {
+        var errBody = await upRes.json().catch(function() { return {}; });
+        throw new Error('Upload failed (' + upRes.status + '): ' + (errBody.message || 'unknown'));
+      }
+      var upData = await upRes.json();
+      imageUrl = upData.absolute_url || (window.location.origin + upData.url);
+      output.innerHTML += '<br/><span style="color:var(--emerald);">[1/2] Uploaded: ' + (upData.size / 1024).toFixed(1) + ' KB &middot; sha256:' + upData.sha256.substring(0, 16) + '...</span>';
+    } else if (imageData.isUrl) {
+      // URL-based image: pass directly to VLM
+      imageUrl = imageData.src;
+      output.innerHTML += '<br/><span style="color:var(--emerald);">[1/2] Using URL directly (no upload needed).</span>';
+    } else {
+      throw new Error('No image source available.');
+    }
+
+    // Call /api/vlm
+    output.innerHTML += '<br/><span style="color:var(--amber);">[2/2] Calling OSIRIS VLM with prompt: "' + prompt + '"...</span>';
+    var vlmRes = await fetch('/DemoAISciMShub/api/vlm', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ imageUrl: imageUrl, prompt: prompt })
+    });
+    var data = await vlmRes.json();
+    if (data.ok) {
+      output.innerHTML = '<span style="color:var(--emerald);">[' + (data.model || 'osiris-vlm-1') + ']</span>\n\n' + (data.analysis || '(no response)');
+      if (data.theorem7) {
+        output.innerHTML += '\n\n<span style="color:var(--emerald);">Theorem 7 bound: L=' + data.theorem7.L + ', c=' + data.theorem7.c + ', bound=' + data.theorem7.bound + ' px</span>';
+        output.innerHTML += '\n<span style="color:var(--emerald);">Equivariance: ' + data.theorem7.equivariance + '</span>';
+        output.innerHTML += '\n<span style="color:var(--emerald);">Zero-hallucination: ' + data.theorem7.zero_hallucination + '</span>';
+      }
+      if (data.fallback) {
+        output.innerHTML += '\n\n<span style="color:var(--amber);">[fallback] ' + (data.error || 'VLM unavailable') + ' &mdash; static OSIRIS analysis returned. Bound still certified.</span>';
+      }
+    } else {
+      output.innerHTML = '<span style="color:var(--rose);">Error: ' + (data.message || 'unknown') + '</span>';
+    }
+  } catch (e) {
+    output.innerHTML = '<span style="color:var(--rose);">Error: ' + e.message + '</span>\n<span style="color:var(--amber);">[fallback] This happens on GitHub Pages (static hosting has no API routes). Use the Next.js preview server for live VLM: https://preview-&lt;bot-id&gt;.space-z.ai/DemoAISciMShub/analyze</span>';
+  }
+  btn.disabled = false; btn.textContent = 'Run real VLM \u2192';
 }
 
 function runStage(s) {
