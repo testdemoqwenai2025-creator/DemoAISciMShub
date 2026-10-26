@@ -1,0 +1,16 @@
+{
+  "headers": {
+    "x-nextjs-stale-time": "300",
+    "x-nextjs-prerender": "1",
+    "x-next-cache-tags": "_N_T_/layout,_N_T_/scientific/layout,_N_T_/scientific/surgical-ai-explainability/layout,_N_T_/scientific/surgical-ai-explainability/page,_N_T_/scientific/surgical-ai-explainability"
+  },
+  "segmentPaths": [
+    "/_tree",
+    "/_full",
+    "/scientific/surgical-ai-explainability/__PAGE__",
+    "/scientific/surgical-ai-explainability",
+    "/scientific",
+    "/_index",
+    "/_head"
+  ]
+}
