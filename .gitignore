@@ -3,3 +3,4 @@
 .next/
 node_modules/
 .gitignore.local
+*.orig
