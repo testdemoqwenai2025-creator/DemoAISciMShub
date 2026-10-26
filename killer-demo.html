@@ -230,6 +230,9 @@ a { color: var(--primary); text-decoration: none; }
   .nav-link { padding: 4px 8px; font-size: 11px; }
 }
 </style>
+<style>/* z-fix: reveal opacity:0 cards (rendering bug workaround) */
+[style*="opacity:0"]{opacity:1!important;transform:none!important}[style*="opacity: 0"]{opacity:1!important;transform:none!important}
+</style>
 </head>
 <body>
 

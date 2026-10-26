@@ -62,6 +62,9 @@ a { color: var(--primary); text-decoration: none; }
 .footer { padding: 24px 16px; text-align: center; border-top: 1px solid var(--border); margin-top: 40px; color: var(--muted); font-size: 11px; font-family: monospace; }
 .footer a { margin: 0 8px; }
 </style>
+<style>/* z-fix: reveal opacity:0 cards (rendering bug workaround) */
+[style*="opacity:0"]{opacity:1!important;transform:none!important}[style*="opacity: 0"]{opacity:1!important;transform:none!important}
+</style>
 </head>
 <body>
 
