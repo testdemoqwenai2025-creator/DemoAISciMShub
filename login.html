@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Login — OSIRIS / AISciImg360</title>
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+:root { --bg: #0a0a0f; --fg: #e5e7eb; --primary: #3b82f6; --muted: #9ca3af; --border: #1f2937; --emerald: #22c55e; --rose: #f43f5e; }
+html { color-scheme: dark; }
+body { background: var(--bg); color: var(--fg); font-family: ui-sans-serif, system-ui, sans-serif; min-height: 100vh; display: flex; align-items: center; justify-content: center; }
+a { color: var(--primary); text-decoration: none; }
+.container { max-width: 400px; width: 90%; padding: 32px; border: 1px solid var(--border); border-radius: 16px; background: rgba(31,41,55,0.3); backdrop-filter: blur(8px); }
+.logo { text-align: center; margin-bottom: 24px; }
+.logo h1 { font-size: 1.5rem; font-weight: 800; }
+.logo .aurora { background: linear-gradient(90deg, #3b82f6, #06b6d4, #a855f7); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+.logo p { font-size: 12px; color: var(--muted); margin-top: 4px; }
+.tabs { display: flex; gap: 4px; margin-bottom: 20px; border: 1px solid var(--border); border-radius: 8px; padding: 4px; }
+.tab { flex: 1; padding: 8px; text-align: center; border-radius: 6px; cursor: pointer; font-size: 13px; font-weight: 600; transition: all 0.2s; border: none; background: transparent; color: var(--muted); }
+.tab.active { background: rgba(59,130,246,0.15); color: var(--primary); }
+.field { margin-bottom: 16px; }
+.field label { display: block; font-size: 12px; color: var(--muted); margin-bottom: 6px; font-family: monospace; }
+.field input { width: 100%; padding: 10px 12px; border: 1px solid var(--border); border-radius: 8px; background: rgba(10,10,15,0.5); color: var(--fg); font-size: 14px; outline: none; }
+.field input:focus { border-color: var(--primary); box-shadow: 0 0 8px rgba(59,130,246,0.3); }
+.btn { width: 100%; padding: 12px; border: none; border-radius: 8px; background: var(--primary); color: white; font-size: 14px; font-weight: 700; cursor: pointer; transition: all 0.2s; }
+.btn:hover { filter: brightness(1.15); transform: scale(1.02); }
+.msg { text-align: center; margin-top: 12px; font-size: 12px; padding: 8px; border-radius: 6px; }
+.msg.error { background: rgba(244,63,94,0.1); color: var(--rose); border: 1px solid rgba(244,63,94,0.3); }
+.msg.success { background: rgba(34,197,94,0.1); color: var(--emerald); border: 1px solid rgba(34,197,94,0.3); }
+.links { text-align: center; margin-top: 20px; font-size: 12px; color: var(--muted); }
+.links a { margin: 0 8px; }
+.note { text-align: center; margin-top: 16px; font-size: 10px; color: var(--muted); padding: 8px; border: 1px dashed var(--border); border-radius: 6px; }
+</style>
+</head>
+<body>
+<div class="container">
+  <div class="logo">
+    <h1><span class="aurora">OSIRIS</span></h1>
+    <p>Universal Image Intelligence — login to analyze</p>
+  </div>
+  <div class="tabs">
+    <button class="tab active" id="tabLogin" onclick="switchTab('login')">Login</button>
+    <button class="tab" id="tabRegister" onclick="switchTab('register')">Register</button>
+  </div>
+  <div id="loginForm">
+    <div class="field"><label>Email</label><input type="email" id="loginEmail" placeholder="you@university.edu" /></div>
+    <div class="field"><label>Password</label><input type="password" id="loginPass" placeholder="••••••••" /></div>
+    <button class="btn" onclick="doLogin()">Login &rarr;</button>
+  </div>
+  <div id="registerForm" style="display:none;">
+    <div class="field"><label>Full name</label><input type="text" id="regName" placeholder="Dr. Jane Smith" /></div>
+    <div class="field"><label>Email</label><input type="email" id="regEmail" placeholder="you@university.edu" /></div>
+    <div class="field"><label>Password</label><input type="password" id="regPass" placeholder="••••••••" /></div>
+    <div class="field"><label>Institution (optional)</label><input type="text" id="regInst" placeholder="University of West Attica" /></div>
+    <button class="btn" onclick="doRegister()">Create account &rarr;</button>
+  </div>
+  <div id="msg"></div>
+  <div class="links">
+    <a href="/DemoAISciMShub/killer-demo">Killer demo</a>
+    <a href="/DemoAISciMShub/shorts">Shorts</a>
+    <a href="/DemoAISciMShub/concepts">Concept cards</a>
+  </div>
+  <div class="note">Client-side authentication (IndexedDB). Your data stays in your browser. No server, no tracking, HIPAA-safe.</div>
+</div>
+<script>
+function switchTab(t) {
+  document.getElementById('tabLogin').classList.toggle('active', t === 'login');
+  document.getElementById('tabRegister').classList.toggle('active', t === 'register');
+  document.getElementById('loginForm').style.display = t === 'login' ? 'block' : 'none';
+  document.getElementById('registerForm').style.display = t === 'register' ? 'block' : 'none';
+  document.getElementById('msg').innerHTML = '';
+}
+
+function showMsg(text, type) {
+  var el = document.getElementById('msg');
+  el.innerHTML = '<div class="msg ' + type + '">' + text + '</div>';
+}
+
+// IndexedDB wrapper
+var db;
+function openDB() {
+  return new Promise(function(resolve, reject) {
+    var req = indexedDB.open('osiris_db', 1);
+    req.onupgradeneeded = function(e) {
+      var d = e.target.result;
+      if (!d.objectStoreNames.contains('users')) {
+        d.createObjectStore('users', { keyPath: 'email' });
+      }
+      if (!d.objectStoreNames.contains('analyses')) {
+        d.createObjectStore('analyses', { keyPath: 'id', autoIncrement: true });
+      }
+    };
+    req.onsuccess = function(e) { db = e.target.result; resolve(db); };
+    req.onerror = function(e) { reject(e); };
+  });
+}
+
+async function doRegister() {
+  var name = document.getElementById('regName').value.trim();
+  var email = document.getElementById('regEmail').value.trim();
+  var pass = document.getElementById('regPass').value;
+  var inst = document.getElementById('regInst').value.trim();
+  if (!name || !email || !pass) { showMsg('Please fill in name, email, and password.', 'error'); return; }
+  await openDB();
+  var tx = db.transaction('users', 'readwrite');
+  var store = tx.objectStore('users');
+  var existing = await new Promise(function(r) { var q = store.get(email); q.onsuccess = function(e) { r(e.target.result); }; q.onerror = function() { r(null); }; });
+  if (existing) { showMsg('Email already registered. Please login instead.', 'error'); return; }
+  var user = { name: name, email: email, password: btoa(pass), institution: inst, created: new Date().toISOString(), analysisCount: 0 };
+  await new Promise(function(r) { var q = store.add(user); q.onsuccess = r; q.onerror = r; });
+  // Auto-login
+  localStorage.setItem('osiris_user', JSON.stringify({ name: name, email: email, institution: inst }));
+  showMsg('Account created! Redirecting to dashboard...', 'success');
+  setTimeout(function() { window.location.href = '/DemoAISciMShub/dashboard'; }, 1000);
+}
+
+async function doLogin() {
+  var email = document.getElementById('loginEmail').value.trim();
+  var pass = document.getElementById('loginPass').value;
+  if (!email || !pass) { showMsg('Please enter email and password.', 'error'); return; }
+  await openDB();
+  var tx = db.transaction('users', 'readonly');
+  var store = tx.objectStore('users');
+  var user = await new Promise(function(r) { var q = store.get(email); q.onsuccess = function(e) { r(e.target.result); }; q.onerror = function() { r(null); }; });
+  if (!user) { showMsg('No account found with this email. Please register first.', 'error'); return; }
+  if (user.password !== btoa(pass)) { showMsg('Incorrect password.', 'error'); return; }
+  localStorage.setItem('osiris_user', JSON.stringify({ name: user.name, email: user.email, institution: user.institution }));
+  showMsg('Login successful! Redirecting...', 'success');
+  setTimeout(function() { window.location.href = '/DemoAISciMShub/dashboard'; }, 800);
+}
+
+// Check if already logged in
+if (localStorage.getItem('osiris_user')) {
+  showMsg('Already logged in. Redirecting to dashboard...', 'success');
+  setTimeout(function() { window.location.href = '/DemoAISciMShub/dashboard'; }, 800);
+}
+</script>
+</body>
+</html>
