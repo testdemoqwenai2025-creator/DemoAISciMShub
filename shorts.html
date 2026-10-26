@@ -4,9 +4,14 @@
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 <title>Shorts — OSIRIS / AISciImg360</title>
-<link rel="stylesheet" href="/DemoAISciMShub/_next/static/chunks/61c21e224db88e49.css"/>
-<link rel="stylesheet" href="/DemoAISciMShub/_next/static/chunks/9812882e33f1674f.css"/>
+
+
 <style>
+/* Dark theme base */
+:root { --background: #0a0a0f; --foreground: #e5e7eb; }
+html { color-scheme: dark; }
+body { background: #0a0a0f !important; color: #e5e7eb !important; }
+
 * { box-sizing: border-box; margin: 0; padding: 0; }
 body { background: #0a0a0f; color: #e5e7eb; font-family: ui-sans-serif, system-ui, sans-serif; }
 a { color: #3b82f6; text-decoration: none; }
@@ -123,13 +128,6 @@ a:hover { text-decoration: underline; }
   .btn-label { display: none; }
   .popup-body { grid-template-columns: 1fr; }
 }
-
-/* XAI overlay */
-.xai-toggle {{ position: fixed; bottom: 20px; right: 20px; z-index: 50; background: rgba(59,130,246,0.9); color: white; border: none; border-radius: 9999px; padding: 10px 20px; font-size: 12px; font-weight: 600; cursor: pointer; box-shadow: 0 4px 12px rgba(0,0,0,0.3); }}
-.xai-toggle:hover {{ filter: brightness(1.1); }}
-.xai-toggle.active {{ background: rgba(168,85,247,0.9); }}
-.short-xai-overlay {{ position: absolute; inset: 0; pointer-events: none; opacity: 0; transition: opacity 0.3s; background: linear-gradient(135deg, rgba(59,130,246,0.3) 0%, rgba(168,85,247,0.3) 30%, rgba(236,72,153,0.4) 60%, rgba(239,68,68,0.4) 100%); mix-blend-mode: overlay; }}
-.short-xai-overlay.show {{ opacity: 1; }}
 </style>
 </head>
 <body>
@@ -161,12 +159,11 @@ a:hover { text-decoration: underline; }
       <div class="short-card snap-start" data-section="scientific" data-index="1">
         <div class="short-card-inner">
           <img class="short-img" src="/DemoAISciMShub/shorts-images/scientific/1.png" alt="Cryo-EM at 3 Å resolution" loading="lazy" onclick="openPopup('scientific', 1)" />
-          <div class="short-xai-overlay"></div>
-<div class="short-overlay-top"></div>
+          <div class="short-overlay-top"></div>
           <div class="short-controls">
             <div class="short-progress-bar"><div class="short-progress-fill"></div></div>
             <button class="short-btn short-btn-mute" onclick="toggleMute(this)">🔇 <span class="btn-label">Muted</span></button>
-            <button class="short-btn short-btn-play" onclick="togglePlay(this)">▶ <span class="btn-label">Play</span></button>
+            <button class="short-btn short-btn-play" onclick="togglePlay(this)">⏸ <span class="btn-label">Pause</span></button>
           </div>
           <div class="short-badge-section">scientific</div>
           <div class="short-badge-index"><span class="idx-num">1</span>/20</div>
@@ -192,12 +189,11 @@ a:hover { text-decoration: underline; }
       </div>      <div class="short-card snap-start" data-section="scientific" data-index="2">
         <div class="short-card-inner">
           <img class="short-img" src="/DemoAISciMShub/shorts-images/scientific/2.png" alt="mpMRI brain tumor + edema" loading="lazy" onclick="openPopup('scientific', 2)" />
-          <div class="short-xai-overlay"></div>
-<div class="short-overlay-top"></div>
+          <div class="short-overlay-top"></div>
           <div class="short-controls">
             <div class="short-progress-bar"><div class="short-progress-fill"></div></div>
             <button class="short-btn short-btn-mute" onclick="toggleMute(this)">🔇 <span class="btn-label">Muted</span></button>
-            <button class="short-btn short-btn-play" onclick="togglePlay(this)">▶ <span class="btn-label">Play</span></button>
+            <button class="short-btn short-btn-play" onclick="togglePlay(this)">⏸ <span class="btn-label">Pause</span></button>
           </div>
           <div class="short-badge-section">scientific</div>
           <div class="short-badge-index"><span class="idx-num">2</span>/20</div>
@@ -223,12 +219,11 @@ a:hover { text-decoration: underline; }
       </div>      <div class="short-card snap-start" data-section="scientific" data-index="3">
         <div class="short-card-inner">
           <img class="short-img" src="/DemoAISciMShub/shorts-images/scientific/3.png" alt="4D cardiac flow MRI" loading="lazy" onclick="openPopup('scientific', 3)" />
-          <div class="short-xai-overlay"></div>
-<div class="short-overlay-top"></div>
+          <div class="short-overlay-top"></div>
           <div class="short-controls">
             <div class="short-progress-bar"><div class="short-progress-fill"></div></div>
             <button class="short-btn short-btn-mute" onclick="toggleMute(this)">🔇 <span class="btn-label">Muted</span></button>
-            <button class="short-btn short-btn-play" onclick="togglePlay(this)">▶ <span class="btn-label">Play</span></button>
+            <button class="short-btn short-btn-play" onclick="togglePlay(this)">⏸ <span class="btn-label">Pause</span></button>
           </div>
           <div class="short-badge-section">scientific</div>
           <div class="short-badge-index"><span class="idx-num">3</span>/20</div>
@@ -254,12 +249,11 @@ a:hover { text-decoration: underline; }
       </div>      <div class="short-card snap-start" data-section="scientific" data-index="4">
         <div class="short-card-inner">
           <img class="short-img" src="/DemoAISciMShub/shorts-images/scientific/4.png" alt="8,432 cells, 6 clusters" loading="lazy" onclick="openPopup('scientific', 4)" />
-          <div class="short-xai-overlay"></div>
-<div class="short-overlay-top"></div>
+          <div class="short-overlay-top"></div>
           <div class="short-controls">
             <div class="short-progress-bar"><div class="short-progress-fill"></div></div>
             <button class="short-btn short-btn-mute" onclick="toggleMute(this)">🔇 <span class="btn-label">Muted</span></button>
-            <button class="short-btn short-btn-play" onclick="togglePlay(this)">▶ <span class="btn-label">Play</span></button>
+            <button class="short-btn short-btn-play" onclick="togglePlay(this)">⏸ <span class="btn-label">Pause</span></button>
           </div>
           <div class="short-badge-section">scientific</div>
           <div class="short-badge-index"><span class="idx-num">4</span>/20</div>
@@ -285,12 +279,11 @@ a:hover { text-decoration: underline; }
       </div>      <div class="short-card snap-start" data-section="scientific" data-index="5">
         <div class="short-card-inner">
           <img class="short-img" src="/DemoAISciMShub/shorts-images/scientific/5.png" alt="Mass-spec m/z 138.068" loading="lazy" onclick="openPopup('scientific', 5)" />
-          <div class="short-xai-overlay"></div>
-<div class="short-overlay-top"></div>
+          <div class="short-overlay-top"></div>
           <div class="short-controls">
             <div class="short-progress-bar"><div class="short-progress-fill"></div></div>
             <button class="short-btn short-btn-mute" onclick="toggleMute(this)">🔇 <span class="btn-label">Muted</span></button>
-            <button class="short-btn short-btn-play" onclick="togglePlay(this)">▶ <span class="btn-label">Play</span></button>
+            <button class="short-btn short-btn-play" onclick="togglePlay(this)">⏸ <span class="btn-label">Pause</span></button>
           </div>
           <div class="short-badge-section">scientific</div>
           <div class="short-badge-index"><span class="idx-num">5</span>/20</div>
@@ -316,12 +309,11 @@ a:hover { text-decoration: underline; }
       </div>      <div class="short-card snap-start" data-section="environmental" data-index="1">
         <div class="short-card-inner">
           <img class="short-img" src="/DemoAISciMShub/shorts-images/environmental/1.png" alt="Forest canopy 3D · 1,247 trees" loading="lazy" onclick="openPopup('environmental', 1)" />
-          <div class="short-xai-overlay"></div>
-<div class="short-overlay-top"></div>
+          <div class="short-overlay-top"></div>
           <div class="short-controls">
             <div class="short-progress-bar"><div class="short-progress-fill"></div></div>
             <button class="short-btn short-btn-mute" onclick="toggleMute(this)">🔇 <span class="btn-label">Muted</span></button>
-            <button class="short-btn short-btn-play" onclick="togglePlay(this)">▶ <span class="btn-label">Play</span></button>
+            <button class="short-btn short-btn-play" onclick="togglePlay(this)">⏸ <span class="btn-label">Pause</span></button>
           </div>
           <div class="short-badge-section">environmental</div>
           <div class="short-badge-index"><span class="idx-num">1</span>/20</div>
@@ -347,12 +339,11 @@ a:hover { text-decoration: underline; }
       </div>      <div class="short-card snap-start" data-section="environmental" data-index="2">
         <div class="short-card-inner">
           <img class="short-img" src="/DemoAISciMShub/shorts-images/environmental/2.png" alt="EnMAP + PRISMA + EMIT fusion" loading="lazy" onclick="openPopup('environmental', 2)" />
-          <div class="short-xai-overlay"></div>
-<div class="short-overlay-top"></div>
+          <div class="short-overlay-top"></div>
           <div class="short-controls">
             <div class="short-progress-bar"><div class="short-progress-fill"></div></div>
             <button class="short-btn short-btn-mute" onclick="toggleMute(this)">🔇 <span class="btn-label">Muted</span></button>
-            <button class="short-btn short-btn-play" onclick="togglePlay(this)">▶ <span class="btn-label">Play</span></button>
+            <button class="short-btn short-btn-play" onclick="togglePlay(this)">⏸ <span class="btn-label">Pause</span></button>
           </div>
           <div class="short-badge-section">environmental</div>
           <div class="short-badge-index"><span class="idx-num">2</span>/20</div>
@@ -378,12 +369,11 @@ a:hover { text-decoration: underline; }
       </div>      <div class="short-card snap-start" data-section="environmental" data-index="3">
         <div class="short-card-inner">
           <img class="short-img" src="/DemoAISciMShub/shorts-images/environmental/3.png" alt="Drone RGB + NIR + thermal" loading="lazy" onclick="openPopup('environmental', 3)" />
-          <div class="short-xai-overlay"></div>
-<div class="short-overlay-top"></div>
+          <div class="short-overlay-top"></div>
           <div class="short-controls">
             <div class="short-progress-bar"><div class="short-progress-fill"></div></div>
             <button class="short-btn short-btn-mute" onclick="toggleMute(this)">🔇 <span class="btn-label">Muted</span></button>
-            <button class="short-btn short-btn-play" onclick="togglePlay(this)">▶ <span class="btn-label">Play</span></button>
+            <button class="short-btn short-btn-play" onclick="togglePlay(this)">⏸ <span class="btn-label">Pause</span></button>
           </div>
           <div class="short-badge-section">environmental</div>
           <div class="short-badge-index"><span class="idx-num">3</span>/20</div>
@@ -409,12 +399,11 @@ a:hover { text-decoration: underline; }
       </div>      <div class="short-card snap-start" data-section="environmental" data-index="4">
         <div class="short-card-inner">
           <img class="short-img" src="/DemoAISciMShub/shorts-images/environmental/4.png" alt="Sentinel-2 land-use change" loading="lazy" onclick="openPopup('environmental', 4)" />
-          <div class="short-xai-overlay"></div>
-<div class="short-overlay-top"></div>
+          <div class="short-overlay-top"></div>
           <div class="short-controls">
             <div class="short-progress-bar"><div class="short-progress-fill"></div></div>
             <button class="short-btn short-btn-mute" onclick="toggleMute(this)">🔇 <span class="btn-label">Muted</span></button>
-            <button class="short-btn short-btn-play" onclick="togglePlay(this)">▶ <span class="btn-label">Play</span></button>
+            <button class="short-btn short-btn-play" onclick="togglePlay(this)">⏸ <span class="btn-label">Pause</span></button>
           </div>
           <div class="short-badge-section">environmental</div>
           <div class="short-badge-index"><span class="idx-num">4</span>/20</div>
@@ -440,12 +429,11 @@ a:hover { text-decoration: underline; }
       </div>      <div class="short-card snap-start" data-section="environmental" data-index="5">
         <div class="short-card-inner">
           <img class="short-img" src="/DemoAISciMShub/shorts-images/environmental/5.png" alt="TROPOMI NO₂ over city" loading="lazy" onclick="openPopup('environmental', 5)" />
-          <div class="short-xai-overlay"></div>
-<div class="short-overlay-top"></div>
+          <div class="short-overlay-top"></div>
           <div class="short-controls">
             <div class="short-progress-bar"><div class="short-progress-fill"></div></div>
             <button class="short-btn short-btn-mute" onclick="toggleMute(this)">🔇 <span class="btn-label">Muted</span></button>
-            <button class="short-btn short-btn-play" onclick="togglePlay(this)">▶ <span class="btn-label">Play</span></button>
+            <button class="short-btn short-btn-play" onclick="togglePlay(this)">⏸ <span class="btn-label">Pause</span></button>
           </div>
           <div class="short-badge-section">environmental</div>
           <div class="short-badge-index"><span class="idx-num">5</span>/20</div>
@@ -471,12 +459,11 @@ a:hover { text-decoration: underline; }
       </div>      <div class="short-card snap-start" data-section="climatic" data-index="1">
         <div class="short-card-inner">
           <img class="short-img" src="/DemoAISciMShub/shorts-images/climatic/1.png" alt="El Niño 3.4 = +0.83 K" loading="lazy" onclick="openPopup('climatic', 1)" />
-          <div class="short-xai-overlay"></div>
-<div class="short-overlay-top"></div>
+          <div class="short-overlay-top"></div>
           <div class="short-controls">
             <div class="short-progress-bar"><div class="short-progress-fill"></div></div>
             <button class="short-btn short-btn-mute" onclick="toggleMute(this)">🔇 <span class="btn-label">Muted</span></button>
-            <button class="short-btn short-btn-play" onclick="togglePlay(this)">▶ <span class="btn-label">Play</span></button>
+            <button class="short-btn short-btn-play" onclick="togglePlay(this)">⏸ <span class="btn-label">Pause</span></button>
           </div>
           <div class="short-badge-section">climatic</div>
           <div class="short-badge-index"><span class="idx-num">1</span>/20</div>
@@ -502,12 +489,11 @@ a:hover { text-decoration: underline; }
       </div>      <div class="short-card snap-start" data-section="climatic" data-index="2">
         <div class="short-card-inner">
           <img class="short-img" src="/DemoAISciMShub/shorts-images/climatic/2.png" alt="Arctic sea ice · 4.2 M km²" loading="lazy" onclick="openPopup('climatic', 2)" />
-          <div class="short-xai-overlay"></div>
-<div class="short-overlay-top"></div>
+          <div class="short-overlay-top"></div>
           <div class="short-controls">
             <div class="short-progress-bar"><div class="short-progress-fill"></div></div>
             <button class="short-btn short-btn-mute" onclick="toggleMute(this)">🔇 <span class="btn-label">Muted</span></button>
-            <button class="short-btn short-btn-play" onclick="togglePlay(this)">▶ <span class="btn-label">Play</span></button>
+            <button class="short-btn short-btn-play" onclick="togglePlay(this)">⏸ <span class="btn-label">Pause</span></button>
           </div>
           <div class="short-badge-section">climatic</div>
           <div class="short-badge-index"><span class="idx-num">2</span>/20</div>
@@ -533,12 +519,11 @@ a:hover { text-decoration: underline; }
       </div>      <div class="short-card snap-start" data-section="climatic" data-index="3">
         <div class="short-card-inner">
           <img class="short-img" src="/DemoAISciMShub/shorts-images/climatic/3.png" alt="Hadley · Ferrel · Polar cells" loading="lazy" onclick="openPopup('climatic', 3)" />
-          <div class="short-xai-overlay"></div>
-<div class="short-overlay-top"></div>
+          <div class="short-overlay-top"></div>
           <div class="short-controls">
             <div class="short-progress-bar"><div class="short-progress-fill"></div></div>
             <button class="short-btn short-btn-mute" onclick="toggleMute(this)">🔇 <span class="btn-label">Muted</span></button>
-            <button class="short-btn short-btn-play" onclick="togglePlay(this)">▶ <span class="btn-label">Play</span></button>
+            <button class="short-btn short-btn-play" onclick="togglePlay(this)">⏸ <span class="btn-label">Pause</span></button>
           </div>
           <div class="short-badge-section">climatic</div>
           <div class="short-badge-index"><span class="idx-num">3</span>/20</div>
@@ -564,12 +549,11 @@ a:hover { text-decoration: underline; }
       </div>      <div class="short-card snap-start" data-section="climatic" data-index="4">
         <div class="short-card-inner">
           <img class="short-img" src="/DemoAISciMShub/shorts-images/climatic/4.png" alt="SSP1-1.9 vs SSP5-8.5 by 2100" loading="lazy" onclick="openPopup('climatic', 4)" />
-          <div class="short-xai-overlay"></div>
-<div class="short-overlay-top"></div>
+          <div class="short-overlay-top"></div>
           <div class="short-controls">
             <div class="short-progress-bar"><div class="short-progress-fill"></div></div>
             <button class="short-btn short-btn-mute" onclick="toggleMute(this)">🔇 <span class="btn-label">Muted</span></button>
-            <button class="short-btn short-btn-play" onclick="togglePlay(this)">▶ <span class="btn-label">Play</span></button>
+            <button class="short-btn short-btn-play" onclick="togglePlay(this)">⏸ <span class="btn-label">Pause</span></button>
           </div>
           <div class="short-badge-section">climatic</div>
           <div class="short-badge-index"><span class="idx-num">4</span>/20</div>
@@ -595,12 +579,11 @@ a:hover { text-decoration: underline; }
       </div>      <div class="short-card snap-start" data-section="climatic" data-index="5">
         <div class="short-card-inner">
           <img class="short-img" src="/DemoAISciMShub/shorts-images/climatic/5.png" alt="Argo floats · 8 dive profiles" loading="lazy" onclick="openPopup('climatic', 5)" />
-          <div class="short-xai-overlay"></div>
-<div class="short-overlay-top"></div>
+          <div class="short-overlay-top"></div>
           <div class="short-controls">
             <div class="short-progress-bar"><div class="short-progress-fill"></div></div>
             <button class="short-btn short-btn-mute" onclick="toggleMute(this)">🔇 <span class="btn-label">Muted</span></button>
-            <button class="short-btn short-btn-play" onclick="togglePlay(this)">▶ <span class="btn-label">Play</span></button>
+            <button class="short-btn short-btn-play" onclick="togglePlay(this)">⏸ <span class="btn-label">Pause</span></button>
           </div>
           <div class="short-badge-section">climatic</div>
           <div class="short-badge-index"><span class="idx-num">5</span>/20</div>
@@ -626,12 +609,11 @@ a:hover { text-decoration: underline; }
       </div>      <div class="short-card snap-start" data-section="space" data-index="1">
         <div class="short-card-inner">
           <img class="short-img" src="/DemoAISciMShub/shorts-images/space/1.png" alt="JWST CEERS · 3 galaxies" loading="lazy" onclick="openPopup('space', 1)" />
-          <div class="short-xai-overlay"></div>
-<div class="short-overlay-top"></div>
+          <div class="short-overlay-top"></div>
           <div class="short-controls">
             <div class="short-progress-bar"><div class="short-progress-fill"></div></div>
             <button class="short-btn short-btn-mute" onclick="toggleMute(this)">🔇 <span class="btn-label">Muted</span></button>
-            <button class="short-btn short-btn-play" onclick="togglePlay(this)">▶ <span class="btn-label">Play</span></button>
+            <button class="short-btn short-btn-play" onclick="togglePlay(this)">⏸ <span class="btn-label">Pause</span></button>
           </div>
           <div class="short-badge-section">space</div>
           <div class="short-badge-index"><span class="idx-num">1</span>/20</div>
@@ -657,12 +639,11 @@ a:hover { text-decoration: underline; }
       </div>      <div class="short-card snap-start" data-section="space" data-index="2">
         <div class="short-card-inner">
           <img class="short-img" src="/DemoAISciMShub/shorts-images/space/2.png" alt="Exoplanet · H₂O + CO₂ + CH₄" loading="lazy" onclick="openPopup('space', 2)" />
-          <div class="short-xai-overlay"></div>
-<div class="short-overlay-top"></div>
+          <div class="short-overlay-top"></div>
           <div class="short-controls">
             <div class="short-progress-bar"><div class="short-progress-fill"></div></div>
             <button class="short-btn short-btn-mute" onclick="toggleMute(this)">🔇 <span class="btn-label">Muted</span></button>
-            <button class="short-btn short-btn-play" onclick="togglePlay(this)">▶ <span class="btn-label">Play</span></button>
+            <button class="short-btn short-btn-play" onclick="togglePlay(this)">⏸ <span class="btn-label">Pause</span></button>
           </div>
           <div class="short-badge-section">space</div>
           <div class="short-badge-index"><span class="idx-num">2</span>/20</div>
@@ -688,12 +669,11 @@ a:hover { text-decoration: underline; }
       </div>      <div class="short-card snap-start" data-section="space" data-index="3">
         <div class="short-card-inner">
           <img class="short-img" src="/DemoAISciMShub/shorts-images/space/3.png" alt="AR-13842 · M-class flare 68%" loading="lazy" onclick="openPopup('space', 3)" />
-          <div class="short-xai-overlay"></div>
-<div class="short-overlay-top"></div>
+          <div class="short-overlay-top"></div>
           <div class="short-controls">
             <div class="short-progress-bar"><div class="short-progress-fill"></div></div>
             <button class="short-btn short-btn-mute" onclick="toggleMute(this)">🔇 <span class="btn-label">Muted</span></button>
-            <button class="short-btn short-btn-play" onclick="togglePlay(this)">▶ <span class="btn-label">Play</span></button>
+            <button class="short-btn short-btn-play" onclick="togglePlay(this)">⏸ <span class="btn-label">Pause</span></button>
           </div>
           <div class="short-badge-section">space</div>
           <div class="short-badge-index"><span class="idx-num">3</span>/20</div>
@@ -719,12 +699,11 @@ a:hover { text-decoration: underline; }
       </div>      <div class="short-card snap-start" data-section="space" data-index="4">
         <div class="short-card-inner">
           <img class="short-img" src="/DemoAISciMShub/shorts-images/space/4.png" alt="GW150914 chirp · 36 + 29 M☉" loading="lazy" onclick="openPopup('space', 4)" />
-          <div class="short-xai-overlay"></div>
-<div class="short-overlay-top"></div>
+          <div class="short-overlay-top"></div>
           <div class="short-controls">
             <div class="short-progress-bar"><div class="short-progress-fill"></div></div>
             <button class="short-btn short-btn-mute" onclick="toggleMute(this)">🔇 <span class="btn-label">Muted</span></button>
-            <button class="short-btn short-btn-play" onclick="togglePlay(this)">▶ <span class="btn-label">Play</span></button>
+            <button class="short-btn short-btn-play" onclick="togglePlay(this)">⏸ <span class="btn-label">Pause</span></button>
           </div>
           <div class="short-badge-section">space</div>
           <div class="short-badge-index"><span class="idx-num">4</span>/20</div>
@@ -750,12 +729,11 @@ a:hover { text-decoration: underline; }
       </div>      <div class="short-card snap-start" data-section="space" data-index="5">
         <div class="short-card-inner">
           <img class="short-img" src="/DemoAISciMShub/shorts-images/space/5.png" alt="M87* shadow · 42 μas" loading="lazy" onclick="openPopup('space', 5)" />
-          <div class="short-xai-overlay"></div>
-<div class="short-overlay-top"></div>
+          <div class="short-overlay-top"></div>
           <div class="short-controls">
             <div class="short-progress-bar"><div class="short-progress-fill"></div></div>
             <button class="short-btn short-btn-mute" onclick="toggleMute(this)">🔇 <span class="btn-label">Muted</span></button>
-            <button class="short-btn short-btn-play" onclick="togglePlay(this)">▶ <span class="btn-label">Play</span></button>
+            <button class="short-btn short-btn-play" onclick="togglePlay(this)">⏸ <span class="btn-label">Pause</span></button>
           </div>
           <div class="short-badge-section">space</div>
           <div class="short-badge-index"><span class="idx-num">5</span>/20</div>
@@ -818,7 +796,6 @@ a:hover { text-decoration: underline; }
     </div>
   </div>
 </div>
-<button class="xai-toggle" id="xaiToggle" onclick="toggleXAI()">🔍 XAI Overlay</button>
 
 <script>
 // ===== SHORTS DATA =====
@@ -826,7 +803,7 @@ var SHORTS_DATA = [{"section": "scientific", "index": 1, "title": "Cryo-EM at 3 
 
 var currentFilter = 'all';
 var currentIdx = 0;
-var playing = false;
+var playing = true;
 var autoplayTimer = null;
 var progressTimer = null;
 var progressPct = 0;
@@ -883,7 +860,7 @@ function updateCardStates() {
     } else {
       if (progressFill) progressFill.classList.remove('playing');
       if (autoBadge) autoBadge.classList.remove('show');
-      if (playBtn) { playBtn.innerHTML = '▶ <span class="btn-label">Play</span>'; }
+      if (playBtn) { playBtn.innerHTML = '⏸ <span class="btn-label">Pause</span>'; }
     }
   });
 }
@@ -985,34 +962,12 @@ if (window.location.hash) {
   }
 }
 
+// Auto-start animations + autoplay
+startAutoplay();
+updateCardStates();
+
 // Auto-scroll to first card
 setTimeout(function() { scrollToCard(0); }, 100);
-
-// XAI overlay toggle
-var xaiActive = false;
-function toggleXAI() {
-  xaiActive = !xaiActive;
-  var btn = document.getElementById('xaiToggle');
-  btn.classList.toggle('active', xaiActive);
-  btn.textContent = xaiActive ? '🔍 XAI Active' : '🔍 XAI Overlay';
-  document.querySelectorAll('.short-xai-overlay').forEach(function(el) {
-    el.classList.toggle('show', xaiActive);
-  });
-  if (xaiActive) {
-    // Update overlays per active card
-    updateXAIOverlays();
-  }
-}
-function updateXAIOverlays() {
-  // Different heatmap pattern per card (simulated Grad-CAM)
-  var overlays = document.querySelectorAll('.short-xai-overlay');
-  overlays.forEach(function(el, i) {
-    var hue1 = (i * 47) % 360;
-    var hue2 = (hue1 + 60) % 360;
-    el.style.background = 'linear-gradient(135deg, hsla(' + hue1 + ',70%,50%,0.3) 0%, hsla(' + hue2 + ',70%,50%,0.3) 30%, hsla(' + (hue2+60) + ',70%,50%,0.4) 60%, hsla(0,80%,50%,0.4) 100%)';
-  });
-}
-
 </script>
 </body>
 </html>
