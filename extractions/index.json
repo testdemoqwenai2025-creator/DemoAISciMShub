@@ -16,5 +16,104 @@
       "mpmri-brain-tumor-reconstruction"
     ],
     "notes": "Full JSON at /extractions/medsam-linkedin-infographic.json"
+  },
+  {
+    "slug": "autobinder-agent-2026",
+    "title": "AutoBinder Agent: An MCP-Based Agent for End-to-End Protein Binder Design",
+    "source_type": "arXiv preprint",
+    "extracted_at": "2026-10-27T17:30:00.000Z",
+    "author": "Ge et al. (arXiv:2602.00019, Feb 2026)",
+    "topic": "LLM + Model Context Protocol coordinates MaSIF + Rosetta + ProteinMPNN + AlphaFold3 for end-to-end protein binder design from target structure.",
+    "key_claims": [
+      "Protocol-driven LLM coordination replaces rigid script-based workflows for drug design",
+      "Integrates four SOTA components (MaSIF, Rosetta, ProteinMPNN, AlphaFold3) under one MCP-based agent",
+      "Improves reproducibility, extensibility, portability, and auditability",
+      "Auditability is protocol-level (which tool ran when), not mathematical (no per-step displacement bound)"
+    ],
+    "matched_concept_ids": [
+      "agentic-protein-discovery",
+      "protein-pipeline-orchestration",
+      "drug-target-binding-affinity"
+    ],
+    "notes": "Full JSON at /extractions/autobinder-agent-2026.json. Strong parallel to OSIRIS agentic-protein-discovery card — both use agent layers above tools, but AutoBinder has no Theorem 7-style certification."
+  },
+  {
+    "slug": "mdrna-cat-2026",
+    "title": "mdRNAcat: A Molecular Dynamics RNA Catalog of REST2 Conformational Ensembles",
+    "source_type": "arXiv preprint",
+    "extracted_at": "2026-10-27T17:30:00.000Z",
+    "author": "Dorn et al. (arXiv:2610.35204, Oct 2026)",
+    "topic": "48-RNA all-atom MD catalog with REST2 replica-exchange (32 Hamiltonian states, 200-300 ns each) and reference-Hamiltonian force reevaluation. Released on HuggingFace (HelmholtzAI-FZJ).",
+    "key_claims": [
+      "First broad-purpose RNA MD catalog with consistent reference-Hamiltonian force reevaluation",
+      "48 RNA systems selected for sequence diversity (not just functional class)",
+      "REST2 captures conformational variability that single-trajectory MD misses",
+      "Reusable resource for data-driven RNA models including coarse-grained force fields"
+    ],
+    "matched_concept_ids": [
+      "natural-language-protein-design",
+      "cryo-em-density"
+    ],
+    "notes": "Full JSON at /extractions/mdrna-cat-2026.json. Extends the protein-design dataset thesis to RNA — a candidate for OSIRIS to certify RNA design workflows in future."
+  },
+  {
+    "slug": "medsam-agent-2026",
+    "title": "MedSAM-Agent: Empowering Interactive Medical Image Segmentation with Multi-modal Large Language Models",
+    "source_type": "arXiv preprint",
+    "extracted_at": "2026-10-27T17:30:00.000Z",
+    "author": "arXiv:2602.03320 (Feb 2026)",
+    "topic": "MedSAM augmented with a multi-modal LLM agent loop for natural-language-driven, generalizable medical image segmentation across CT/MRI/X-ray/Ultrasound/Endoscopy/Pathology.",
+    "key_claims": [
+      "Generalizable framework: single system handles diverse medical segmentation tasks",
+      "Multi-modal LLM enables natural-language interaction with non-expert users",
+      "Agent loop improves accuracy through iterative refinement",
+      "No mathematical bound on segmentation accuracy — heuristic agent loop"
+    ],
+    "matched_concept_ids": [
+      "pixel-level-segmentation",
+      "mpmri-brain-tumor-reconstruction",
+      "histopathology-wsi"
+    ],
+    "notes": "Full JSON at /extractions/medsam-agent-2026.json. Companion to the existing medsam-linkedin-infographic extraction — adds the agentic LLM loop on top of MedSAM."
+  },
+  {
+    "slug": "rpca-psf-reconstruction-2026",
+    "title": "RPCA: a Resolved PSF reconstruction method for undersampled images",
+    "source_type": "arXiv preprint",
+    "extracted_at": "2026-10-27T17:30:00.000Z",
+    "author": "arXiv:2610.19909 (Oct 2026)",
+    "topic": "Resolved Point-Spread Function reconstruction for undersampled astronomical images, using pixel-integrated forward modeling + PCA-style spatial decomposition. Recovers sub-pixel PSF structure for deconvolution, photometry, and weak-lensing shape measurement.",
+    "key_claims": [
+      "Recovers sub-pixel PSF structure even when the data is undersampled",
+      "Pixel-integrated forward model removes bias from pixel-sample approximations",
+      "Low-rank spatial decomposition captures field-dependent PSF variation compactly",
+      "Sub-pixel structure is statistically inferred — confidence intervals matter"
+    ],
+    "matched_concept_ids": [
+      "jwst-galaxy-morphology",
+      "camera-agnostic-ray-fields",
+      "black-hole-imaging-eht"
+    ],
+    "notes": "Full JSON at /extractions/rpca-psf-reconstruction-2026.json. Directly relevant to space-domain cards — PSF uncertainty is a key ingredient OSIRIS's Theorem 7 bound would propagate."
+  },
+  {
+    "slug": "coded-aperture-aiml-2026",
+    "title": "A New AI/ML Based Image Reconstruction Technique for Coded-Aperture Instruments",
+    "source_type": "arXiv preprint",
+    "extracted_at": "2026-10-27T17:30:00.000Z",
+    "author": "arXiv:2610.22709 (Oct 2026)",
+    "topic": "AI/ML-based image reconstruction for coded-aperture instruments with embedded real-time path. Replaces/augments iterative decoders with a learned neural-network reconstructor that runs on embedded hardware at acquisition rate.",
+    "key_claims": [
+      "Enables real-time reconstruction on embedded hardware (not just offline post-processing)",
+      "Pathway for deployment in resource-constrained instruments (small satellites, fielded detectors)",
+      "Learned reconstructors can hallucinate sources not present in the data — uncertainty quantification is critical",
+      "Generalization across mask patterns, detector responses, source distributions requires careful training"
+    ],
+    "matched_concept_ids": [
+      "jwst-galaxy-morphology",
+      "camera-agnostic-ray-fields",
+      "black-hole-imaging-eht"
+    ],
+    "notes": "Full JSON at /extractions/coded-aperture-aiml-2026.json. Real-time deployment is the key OSIRIS-relevant angle — a Theorem 7 bound would make real-time output auditable."
   }
 ]

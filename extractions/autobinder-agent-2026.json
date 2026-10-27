@@ -1,0 +1,54 @@
+{
+  "extraction_metadata": {
+    "source_type": "arXiv preprint",
+    "extraction_confidence": "high",
+    "primary_language": "en",
+    "notes": "Reverse-engineered from arXiv:2602.00019 (Ge et al., Feb 2026). Four-component agentic protein binder design framework."
+  },
+  "title": "AutoBinder Agent: An MCP-Based Agent for End-to-End Protein Binder Design",
+  "subtitle_or_tagline": "LLM + Model Context Protocol coordinating MaSIF + Rosetta + ProteinMPNN + AlphaFold3",
+  "topic": "An agentic drug-design framework that uses a Large Language Model together with the Model Context Protocol to coordinate heterogeneous biochemical databases, modular toolchains, and task-specific AI models for end-to-end protein binder generation. Starting from a target structure, the system performs surface analysis, scaffold grafting, pose construction, sequence optimization, and structure prediction in a single protocol-driven workflow.",
+  "architecture": {
+    "components": [
+      { "name": "LLM Coordinator", "role": "Plans and orchestrates tool invocations using Model Context Protocol" },
+      { "name": "MaSIF (site + seed-search)", "role": "Geometric deep learning for protein-protein interaction site identification" },
+      { "name": "Rosetta", "role": "Grafts protein fragments onto backbones to form mini-protein scaffolds" },
+      { "name": "ProteinMPNN", "role": "Redesigns amino-acid sequences for the grafted scaffolds" },
+      { "name": "AlphaFold3", "role": "Predicts complex structures at near-experimental accuracy" }
+    ],
+    "data_flow": "Target structure -> MaSIF site/seed search -> Rosetta scaffold grafting + pose construction -> ProteinMPNN sequence redesign -> AlphaFold3 structure prediction -> designed binder",
+    "input_types": ["target protein structure (PDB)"],
+    "output_types": ["designed protein binder (sequence + predicted complex)"]
+  },
+  "workflow_steps": [
+    "Step 1 - Identify PPI site on target surface (MaSIF-site).",
+    "Step 2 - Search for seed geometries matching the site (MaSIF-seed-search).",
+    "Step 3 - Graft mini-protein scaffold around seed (Rosetta).",
+    "Step 4 - Redesign sequence for stability and affinity (ProteinMPNN).",
+    "Step 5 - Predict binder-target complex (AlphaFold3).",
+    "Step 6 - Iterate or accept based on predicted interface quality."
+  ],
+  "modalities_covered": ["protein structure", "protein sequence", "PPI interface geometry"],
+  "key_claims": [
+    "Protocol-driven LLM coordination replaces rigid script-based workflows for drug design.",
+    "Integrates four state-of-the-art components (MaSIF, Rosetta, ProteinMPNN, AlphaFold3) under a single MCP-based agent.",
+    "Improves reproducibility, extensibility, portability, and auditability across the binder-design process.",
+    "Reduces manual overhead compared to stitching tools by hand."
+  ],
+  "caveats_or_warnings": [
+    "The framework orchestrates existing tools; it does not itself introduce a new geometric or thermodynamic bound on binding.",
+    "Auditability here is protocol-level (which tool ran when), not mathematical (no per-step displacement bound).",
+    "MCP is still emerging as a standard; ecosystem maturity may constrain reproducibility in practice."
+  ],
+  "citations": [
+    { "type": "arxiv", "value": "arXiv:2602.00019" },
+    { "type": "url", "value": "https://arxiv.org/abs/2602.00019" },
+    { "type": "authors", "value": "Fukang Ge, Jiarui Zhu, Linjie Zhang, Haowen Xiao, Xiangcheng Bao, Fangnan Xie, Danyang Chen, Yanrui Lu, Yuting Wang, Ziqian Guan, Lin Gu, Jinhao Bi, Yingying Zhu" },
+    { "type": "submission_date", "value": "2026-02 (Feb 2026)" }
+  ],
+  "visual_elements": ["agentic loop diagram", "MCP architecture", "tool integration schematic"],
+  "keywords_for_concept_matching": ["MCP", "Model Context Protocol", "agent", "protein binder design", "MaSIF", "Rosetta", "ProteinMPNN", "AlphaFold3", "drug design", "PPI", "agentic", "LLM coordinator"],
+  "potential_concept_card_links": ["agentic-protein-discovery", "protein-pipeline-orchestration", "drug-target-binding-affinity"],
+  "extraction_timestamp": "2026-10-27T17:30:00.000Z",
+  "extraction_source": "osiris-weekly-ingestion-cron-476749"
+}

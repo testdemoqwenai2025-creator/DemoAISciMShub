@@ -1,0 +1,53 @@
+{
+  "extraction_metadata": {
+    "source_type": "arXiv preprint",
+    "extraction_confidence": "high",
+    "primary_language": "en",
+    "notes": "Reverse-engineered from arXiv:2610.35204 (Dorn et al., Oct 2026). 48-RNA REST2 replica-exchange MD catalog on HuggingFace."
+  },
+  "title": "mdRNAcat: A Molecular Dynamics RNA Catalog of REST2 Conformational Ensembles",
+  "subtitle_or_tagline": "48-RNA all-atom MD dataset for data-driven RNA modeling",
+  "topic": "A curated dataset of all-atom molecular dynamics simulations of 48 RNA systems selected for sequence diversity. The dataset provides atomic coordinates, instantaneous forces, structural annotations, and metadata in HDF5 format. Forces are reevaluated under an unscaled reference Hamiltonian, enabling consistent training signals for data-driven RNA models including coarse-grained force fields.",
+  "architecture": {
+    "components": [
+      { "name": "REST2 Replica Exchange", "role": "Replica-exchange with solute scaling across 32 Hamiltonian states for enhanced sampling" },
+      { "name": "All-atom MD engine", "role": "Production runs of 200-300 ns per Hamiltonian state" },
+      { "name": "Reference-state reevaluation", "role": "Forces recomputed under unscaled Hamiltonian for consistent training signal" },
+      { "name": "HDF5 catalog", "role": "Atomic coordinates + forces + annotations at 1 ps (reference) and 100 ps (all states)" }
+    ],
+    "data_flow": "RNA sequence -> all-atom MD with REST2 -> reevaluate forces under reference Hamiltonian -> HDF5 catalog on HuggingFace",
+    "input_types": ["RNA sequence", "starting 3D structure"],
+    "output_types": ["MD trajectory (coordinates)", "instantaneous forces", "structural annotations", "replica-exchange metadata"]
+  },
+  "workflow_steps": [
+    "Step 1 - Select 48 RNA systems for sequence diversity.",
+    "Step 2 - Run all-atom MD with REST2 (32 Hamiltonian states, 200-300 ns each).",
+    "Step 3 - Reevaluate forces under unscaled reference Hamiltonian.",
+    "Step 4 - Pack coordinates + forces + annotations into HDF5 at 1 ps / 100 ps cadence.",
+    "Step 5 - Release on HuggingFace (HelmholtzAI-FZJ organization)."
+  ],
+  "modalities_covered": ["RNA 3D structure", "MD trajectories", "force fields"],
+  "key_claims": [
+    "First broad-purpose RNA MD catalog with consistent reference-Hamiltonian force reevaluation.",
+    "48 RNA systems selected for sequence diversity, not just functional class.",
+    "REST2 sampling captures conformational variability that single-trajectory MD misses.",
+    "Reusable resource for developing and evaluating data-driven RNA models including coarse-grained force fields."
+  ],
+  "caveats_or_warnings": [
+    "REST2 enhances sampling of solute conformations but the reference state still needs careful re-weighting for unbiased observables.",
+    "48 systems is small relative to protein design catalogs; broad coverage is not yet possible.",
+    "RNA force-field accuracy (e.g. χ torsions, glycosidic preferences) remains an open issue beyond dataset size."
+  ],
+  "citations": [
+    { "type": "arxiv", "value": "arXiv:2610.35204" },
+    { "type": "url", "value": "https://arxiv.org/abs/2610.35204" },
+    { "type": "authors", "value": "Anton E. Dorn, Emile de Bruyn, Fabrice von der Lehr, Philipp Knechtges, Stefan Kesselheim, Alexander Schug" },
+    { "type": "submission_date", "value": "2026-10 (Oct 2026)" },
+    { "type": "dataset_url", "value": "HuggingFace HelmholtzAI-FZJ organization" }
+  ],
+  "visual_elements": ["conformational ensemble visualization", "REST2 ladder schematic", "force-field training curve"],
+  "keywords_for_concept_matching": ["RNA", "mdRNAcat", "molecular dynamics", "REST2", "replica exchange", "conformational ensemble", "force field", "coarse-grained", "HuggingFace", "HelmholtzAI-FZJ"],
+  "potential_concept_card_links": ["natural-language-protein-design", "cryo-em-density"],
+  "extraction_timestamp": "2026-10-27T17:30:00.000Z",
+  "extraction_source": "osiris-weekly-ingestion-cron-476749"
+}

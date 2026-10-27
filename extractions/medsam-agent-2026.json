@@ -1,0 +1,53 @@
+{
+  "extraction_metadata": {
+    "source_type": "arXiv preprint",
+    "extraction_confidence": "high",
+    "primary_language": "en",
+    "notes": "Reverse-engineered from arXiv:2602.03320 (Feb 2026). Extends MedSAM with multi-modal LLM agent loop for interactive medical image segmentation."
+  },
+  "title": "MedSAM-Agent: Empowering Interactive Medical Image Segmentation with Multi-modal Large Language Models",
+  "subtitle_or_tagline": "Generalizable medical segmentation via multi-modal LLM agent",
+  "topic": "MedSAM-Agent evolves medical image segmentation from task-specific models toward generalizable frameworks. The system augments MedSAM with a multi-modal Large Language Model that interprets user prompts and image context to produce segmentation masks across diverse medical imaging tasks. The agent loop enables interactive refinement and natural-language-driven segmentation.",
+  "architecture": {
+    "components": [
+      { "name": "Multi-modal LLM", "role": "Interprets user intent + image content, plans segmentation strategy" },
+      { "name": "MedSAM image encoder", "role": "Extracts visual features from the medical image" },
+      { "name": "Prompt encoder", "role": "Encodes user-provided prompts (text, box, point, mask)" },
+      { "name": "Mask decoder", "role": "Combines image and prompt features to predict segmentation mask" },
+      { "name": "Agent loop", "role": "Iterative refinement: LLM reviews mask, suggests prompt revisions" }
+    ],
+    "data_flow": "User natural-language prompt + medical image -> multi-modal LLM interprets intent -> MedSAM predicts mask -> LLM reviews -> refines prompt if needed -> final mask",
+    "input_types": ["medical image", "natural-language prompt", "optional box/point/mask prompt"],
+    "output_types": ["segmentation mask", "natural-language explanation"]
+  },
+  "workflow_steps": [
+    "Step 1 - User provides image and natural-language request.",
+    "Step 2 - Multi-modal LLM interprets intent and translates into MedSAM prompts.",
+    "Step 3 - MedSAM produces initial segmentation mask.",
+    "Step 4 - LLM reviews mask against image and intent.",
+    "Step 5 - If unsatisfactory, LLM proposes refined prompts and re-runs MedSAM.",
+    "Step 6 - Returns mask + natural-language rationale."
+  ],
+  "modalities_covered": ["CT", "MRI", "X-ray", "Ultrasound", "Endoscopy", "Pathology"],
+  "key_claims": [
+    "Generalizable framework: single system handles diverse medical segmentation tasks.",
+    "Multi-modal LLM enables natural-language interaction with non-expert users.",
+    "Agent loop improves accuracy through iterative refinement.",
+    "Built on MedSAM, extending it from promptable to interactive."
+  ],
+  "caveats_or_warnings": [
+    "No mathematical bound on segmentation accuracy; agent loop heuristics may produce inconsistent masks across runs.",
+    "Multi-modal LLM inference adds latency and cost per case.",
+    "Failure modes of LLM (hallucination, prompt sensitivity) propagate into segmentation outcomes."
+  ],
+  "citations": [
+    { "type": "arxiv", "value": "arXiv:2602.03320" },
+    { "type": "url", "value": "https://arxiv.org/abs/2602.03320" },
+    { "type": "submission_date", "value": "2026-02 (Feb 2026)" }
+  ],
+  "visual_elements": ["agent loop diagram", "multi-modal prompt flow", "before/after segmentation comparison"],
+  "keywords_for_concept_matching": ["MedSAM", "MedSAM-Agent", "SAM", "medical image segmentation", "multi-modal LLM", "agent loop", "interactive segmentation", "foundation model", "generalizable"],
+  "potential_concept_card_links": ["pixel-level-segmentation", "mpmri-brain-tumor-reconstruction", "histopathology-wsi"],
+  "extraction_timestamp": "2026-10-27T17:30:00.000Z",
+  "extraction_source": "osiris-weekly-ingestion-cron-476749"
+}
