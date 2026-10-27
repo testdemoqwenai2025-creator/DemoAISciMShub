@@ -7,8 +7,9 @@
 [![Live site](https://img.shields.io/badge/Live-DemoAISciMShub-2ea44f?style=for-the-badge&logo=github)](https://testdemoqwenai2025-creator.github.io/DemoAISciMShub/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](./LICENSE)
 [![Deploy workflow](https://github.com/testdemoqwenai2025-creator/AISciMShub-Advanced/actions/workflows/deploy.yml/badge.svg)](https://github.com/testdemoqwenai2025-creator/AISciMShub-Advanced/actions/workflows/deploy.yml)
-[![Concept cards](https://img.shields.io/badge/concept%20cards-38-9cf.svg)](#concept-card-catalog)
+[![Concept cards](https://img.shields.io/badge/concept%20cards-39-9cf.svg)](#concept-card-catalog)
 [![Certified domains](https://img.shields.io/badge/certified%20domains-6-9cf.svg)](#the-six-certified-domains)
+[![Cross-domain bridge](https://img.shields.io/badge/cross--domain%20bridge-1-9cf.svg)](#cross-domain-bridge)
 
 ---
 
@@ -44,7 +45,21 @@ Every card carries the same five-part anatomy: **math (with LaTeX) · Python cod
 
 ---
 
-## Concept card catalog (38 cards, organized by domain)
+## Cross-domain bridge
+
+The `isosteric-pocket-design` card (concept #39) is the platform's **first cross-domain artifact**: a single protein that is simultaneously certified in three domains at three different L·c scales — protein design (c=2.0 Å), drug-target binding (c=0.5 kcal/mol), and medical imaging (c=2.0 μm).
+
+Inspired by the Nature paper *"Rapid assessment of chemical complementarity of ligands for protein design"* (2026), whose two-domain chromophore binder construct is simultaneously a protein-design object, a drug-target binding object, and a microscopy reagent in live cells. The paper's "isosteric and chemically complementary" phrase is exactly the L·c decomposition rediscovered in medicinal-chemistry language.
+
+The `cross-domain-bridge` renderer is the first visualization on the platform that shows ONE protein radiating certification spokes to multiple domains — top spoke (blue, Design, Å-scale), bottom-left (red, Binding, kcal/mol-scale), bottom-right (green, Imaging, μm-scale). The 10-second animation cycles through design → binding → imaging → convergence, where all three certifications pulse back to the central protein.
+
+This card is the prototype for the domain-graph view (v0.6.0 on the roadmap): nodes = artifacts, edges = "certified by the same L·c bound at different scales".
+
+**Live**: https://testdemoqwenai2025-creator.github.io/DemoAISciMShub/concepts#card-isosteric-pocket-design
+
+---
+
+## Concept card catalog (39 cards, organized by domain)
 
 ### Foundation (2)
 - `tme-fuse-norm-clamp` — the 1-Lipschitz operator that bounds displacement
@@ -54,7 +69,7 @@ Every card carries the same five-part anatomy: **math (with LaTeX) · Python cod
 - `mpmri-brain-tumor-reconstruction` · `cardiac-4d-flow-mri` · `ct-lung-nodule-detection` · `histopathology-wsi` · `retinal-oct-macular-degeneration` (5 medical imaging)
 - `enzyme-kinetics-haldane` · `dna-sequence-alignment` · `drug-target-binding-affinity` · `single-cell-rnaseq` (4 bioinformatics)
 - `nmr-chemical-shift-prediction` · `ir-spectrum-peak-assignment` · `mass-spec-fragment-id` · `raman-spectral-unmixing` · `uv-vis-absorption-decomposition` (5 cheminformatics)
-- `cryo-em-density` · `pixel-level-segmentation` · `agentic-protein-discovery` · `protein-pipeline-orchestration` · `adc-therapeutic-response` (ESMO 2026) · `natural-language-protein-design` (Pinal, c=2.0 Å) · `camera-agnostic-ray-fields` (OmniRay)
+- `cryo-em-density` · `pixel-level-segmentation` · `agentic-protein-discovery` · `protein-pipeline-orchestration` · `adc-therapeutic-response` (ESMO 2026) · `natural-language-protein-design` (Pinal, c=2.0 Å) · `camera-agnostic-ray-fields` (OmniRay) · `isosteric-pocket-design` (cross-domain bridge: design + binding + imaging)
 
 ### Environmental (3)
 - `field-ultrasound-diagnostics` · `forest-canopy-reconstruction` · `hyperspectral-canopy-chemistry` · `crop-disease-spatial-tracking` · `drone-multispectral-thermal-fusion`
@@ -168,11 +183,11 @@ These mathematical commitments propagate from the medical TME-FUSE work into eve
 | Version | Status | Highlights |
 | --- | --- | --- |
 | v0.1.0 — MVP | ✅ public | Multi-page Next.js app · 4 domain pages · AskAI copilot · MIT licensed |
-| v0.2.0 — Certified cards | ✅ public | 38 concept cards · 6 certified domains · popups as scientific communication units |
+| v0.2.0 — Certified cards | ✅ public | 39 concept cards · 6 certified domains · popups as scientific communication units · cross-domain bridge |
 | v0.3.0 — Reverse-engineering pipeline | ✅ public | `/admin/reverse-engineer` · `/extractions/` public store · weekly ingestion cron (24/7/365) |
 | v0.4.0 — Deploy automation | ✅ public | GitHub Actions workflow · concurrency control · paths filter · rendering-fix injection |
-| v0.5.0 — Cross-domain bridge visualization | 🚧 planned | Multi-domain artifacts (e.g. isosteric-pocket-design card living in 3 domains simultaneously) |
-| v0.6.0 — Domain graph view | planned | Nodes = artifacts, edges = "certified by the same L·c bound at different scales" |
+| v0.5.0 — Cross-domain bridge | ✅ public | `isosteric-pocket-design` card (#39) · `cross-domain-bridge` renderer · first artifact certified in 3 domains simultaneously (Å + kcal/mol + μm) |
+| v0.6.0 — Domain graph view | 🚧 planned | Nodes = artifacts (proteins, drugs, images, climate models), edges = "certified by the same L·c bound at different scales" |
 | v1.0.0 — Independent reproduction | planned | Reproducible eval scripts against public datasets · federated adapter API |
 
 ---
@@ -216,6 +231,7 @@ This platform stands in continuous dialogue with — and aims to extend the reac
 - **mdRNAcat** (Dorn et al., 2026) — RNA conformational ensemble catalog
 - **MedSAM-Agent** (2026) — multi-modal LLM medical segmentation
 - **RPCA** (2026) — resolved PSF reconstruction for undersampled astronomical images
+- **Rapid assessment of chemical complementarity for protein design** (Nature, 2026) — physics-based isosteric pocket design with single-digit design counts; the inspiration for the cross-domain bridge card
 - **POLYMER** (RSE, 2010) — ocean color atmospheric correction
 - **BCSD** (Clim. Dyn., 2003) — bias-corrected spatial downscaling
 - **Aura/PLATON** — exoplanet atmospheric retrieval
