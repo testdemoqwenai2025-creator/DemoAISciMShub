@@ -7,20 +7,24 @@
 [![Live site](https://img.shields.io/badge/Live-DemoAISciMShub-2ea44f?style=for-the-badge&logo=github)](https://testdemoqwenai2025-creator.github.io/DemoAISciMShub/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](./LICENSE)
 [![Deploy workflow](https://github.com/testdemoqwenai2025-creator/AISciMShub-Advanced/actions/workflows/deploy.yml/badge.svg)](https://github.com/testdemoqwenai2025-creator/AISciMShub-Advanced/actions/workflows/deploy.yml)
-[![Concept cards](https://img.shields.io/badge/concept%20cards-39-9cf.svg)](#concept-card-catalog)
+[![Concept cards](https://img.shields.io/badge/concept%20cards-40-9cf.svg)](#concept-card-catalog)
 [![Certified domains](https://img.shields.io/badge/certified%20domains-6-9cf.svg)](#the-six-certified-domains)
 [![Cross-domain bridge](https://img.shields.io/badge/cross--domain%20bridge-1-9cf.svg)](#cross-domain-bridge)
+[![Extraction graph](https://img.shields.io/badge/extraction%20graph-Phase%20A-9cf.svg)](#extraction-graph)
 
 ---
 
 ## What you can do right now (no signup, no NDA)
 
 1. **Open the live site** → https://testdemoqwenai2025-creator.github.io/DemoAISciMShub/
-2. **Browse the concept catalog** → `/concepts` (38 cards, each with math + code + observation canvas + comparison table + futuristic timeline)
+2. **Browse the concept catalog** → `/concepts` (40 cards, each with math + code + observation canvas + comparison table + futuristic timeline)
 3. **Try a popup** → click any card's "Open popup" button for the full-page scientific communication unit
 4. **Read the reverse-engineered external sources** → every concept card's "Comparison" tab now pulls live extractions from `/extractions/index.json`
-5. **Read the blog** → `/blog` (3 short articles on certified imaging, agentic discovery, and the Theorem 7 thesis)
-6. **Submit your own source** → `/admin/reverse-engineer` accepts a paper URL, an image, or a LinkedIn infographic and (with a PAT) saves the extraction to the public `extractions/` folder
+5. **Explore the extraction graph** → `/extraction-graph` (research-grade KG, every edge weighted by c-bound tightening score)
+6. **Open the Corollary 7.1 theorem card** → `/concepts#card-corollary-7-1-parsimony` (log-log sample-efficiency plot, O(1) vs O((L/c)²))
+7. **Open the cross-domain bridge card** → `/concepts#card-isosteric-pocket-design` (one protein, three certifications)
+8. **Read the blog** → `/blog` (3 short articles on certified imaging, agentic discovery, and the Theorem 7 thesis)
+9. **Submit your own source** → `/admin/reverse-engineer` accepts a paper URL, an image, or a LinkedIn infographic and (with a PAT) saves the extraction to the public `extractions/` folder
 
 ---
 
@@ -59,11 +63,43 @@ This card is the prototype for the domain-graph view (v0.6.0 on the roadmap): no
 
 ---
 
-## Concept card catalog (39 cards, organized by domain)
+## Extraction graph
 
-### Foundation (2)
+The `/extraction-graph` page is the platform's **research-grade knowledge graph**: every node is a paper or dataset that measurably tightened a certified prediction, and every edge weight is the c-bound contribution score (Phase A heuristic proxy; Phase C will use the actual EGNN c-bound delta).
+
+Inspired by the OSI hackathon pattern (Sven Voigt, Engineering Knowledge): use downstream task performance as the KG evaluation metric instead of human annotations, which don't scale and conflate faithfulness with usefulness. The hackathon used a Gaussian Process as a soft certifier; OSIRIS uses Theorem 7's c-bound as a hard certifier. Same pattern, mathematically tighter.
+
+**Three differences from `/knowledge-graph`** (the navigational graph):
+1. Nodes are **extractions** (papers/datasets), not concept cards
+2. Edges are weighted by **c-bound tightening score**, not by cross-reference existence
+3. The graph is **self-evaluating** — low-contribution extractions should be pruned in future rounds (the bandit pattern)
+
+The weekly ingestion cron (now query-specialized, job ID 477104) uses the same heuristic evaluator to direct arXiv search toward cards with loose c-bounds (EXPLOIT, 70% of search budget), seed new cards (EXPLORE, 20%), and skip categories that yielded only noise (PRUNE, 10%). This is the OSI hackathon's iterative downselection loop, ported to Theorem 7.
+
+**Live**: https://testdemoqwenai2025-creator.github.io/DemoAISciMShub/extraction-graph
+
+---
+
+## Corollary 7.1 — Certification Implies Parsimony
+
+The `corollary-7-1-parsimony` card (#40) is the platform's **first theorem card** — distinct from domain cards (which certify predictions in one domain) and bridge cards (which certify one artifact across multiple domains). It formalizes the O(1) vs O((L/c)²) sample-count argument that was implicit in the isosteric-pocket-design card.
+
+**Statement**: For certified methods (Theorem 7 bound known), N(L, c) = O(1). For uncertified methods, N(L, c) ≤ K·(L/c)². At L/c = 100, the gap is 10⁴× — certified methods need one experiment, uncertified methods need 10,000.
+
+The `sample-efficiency-plot` renderer shows this as a log-log plot with the certified regime (green flat line, O(1)) and the uncertified regime (red rising curve, O((L/c)²)). Real-world data points pulse on the plot: TME-FUSE medical (N=1, certified), Nature isosteric (N=5, certified), RFdiffusion (N=3000, uncertified), directed evolution (N=10⁶, uncertified). The yellow arrow at L/c=100 shows the 10⁴× savings gap.
+
+This card is the formal version of the empirical observation the Nature 2026 paper made: single-digit designs to micromolar binders. Corollary 7.1 explains why — certification decouples sample count from bound tightness. The OSI hackathon's 60% GP improvement is the same effect in a different guise.
+
+**Live**: https://testdemoqwenai2025-creator.github.io/DemoAISciMShub/concepts#card-corollary-7-1-parsimony
+
+---
+
+## Concept card catalog (40 cards, organized by domain)
+
+### Foundation (3)
 - `tme-fuse-norm-clamp` — the 1-Lipschitz operator that bounds displacement
 - `e3-equivariance` — E(3)-equivariant graph neural networks
+- `corollary-7-1-parsimony` — **theorem card**: certification implies parsimony (O(1) vs O((L/c)²))
 
 ### Scientific (medical + bio + chemistry, 20)
 - `mpmri-brain-tumor-reconstruction` · `cardiac-4d-flow-mri` · `ct-lung-nodule-detection` · `histopathology-wsi` · `retinal-oct-macular-degeneration` (5 medical imaging)
@@ -183,11 +219,12 @@ These mathematical commitments propagate from the medical TME-FUSE work into eve
 | Version | Status | Highlights |
 | --- | --- | --- |
 | v0.1.0 — MVP | ✅ public | Multi-page Next.js app · 4 domain pages · AskAI copilot · MIT licensed |
-| v0.2.0 — Certified cards | ✅ public | 39 concept cards · 6 certified domains · popups as scientific communication units · cross-domain bridge |
+| v0.2.0 — Certified cards | ✅ public | 40 concept cards (incl. first theorem card + first cross-domain bridge) · 6 certified domains · popups as scientific communication units |
 | v0.3.0 — Reverse-engineering pipeline | ✅ public | `/admin/reverse-engineer` · `/extractions/` public store · weekly ingestion cron (24/7/365) |
 | v0.4.0 — Deploy automation | ✅ public | GitHub Actions workflow · concurrency control · paths filter · rendering-fix injection |
 | v0.5.0 — Cross-domain bridge | ✅ public | `isosteric-pocket-design` card (#39) · `cross-domain-bridge` renderer · first artifact certified in 3 domains simultaneously (Å + kcal/mol + μm) |
-| v0.6.0 — Domain graph view | 🚧 planned | Nodes = artifacts (proteins, drugs, images, climate models), edges = "certified by the same L·c bound at different scales" |
+| v0.6.0 — Extraction graph + Corollary 7.1 | ✅ public | `/extraction-graph` page (Phase A heuristic evaluator) · `corollary-7-1-parsimony` theorem card (#40) · `sample-efficiency-plot` renderer · query-specialized cron (job 477104) |
+| v0.7.0 — Domain graph view | 🚧 planned | Multi-artifact graph: nodes = artifacts, edges = "certified by the same L·c bound at different scales" |
 | v1.0.0 — Independent reproduction | planned | Reproducible eval scripts against public datasets · federated adapter API |
 
 ---
@@ -232,6 +269,7 @@ This platform stands in continuous dialogue with — and aims to extend the reac
 - **MedSAM-Agent** (2026) — multi-modal LLM medical segmentation
 - **RPCA** (2026) — resolved PSF reconstruction for undersampled astronomical images
 - **Rapid assessment of chemical complementarity for protein design** (Nature, 2026) — physics-based isosteric pocket design with single-digit design counts; the inspiration for the cross-domain bridge card
+- **OSI Hackathon / Sven Voigt (Engineering Knowledge)** — GP-grounded downselection pattern for knowledge graph extraction; the inspiration for the extraction-graph page and the query-specialized ingestion cron
 - **POLYMER** (RSE, 2010) — ocean color atmospheric correction
 - **BCSD** (Clim. Dyn., 2003) — bias-corrected spatial downscaling
 - **Aura/PLATON** — exoplanet atmospheric retrieval

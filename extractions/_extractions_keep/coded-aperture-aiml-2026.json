@@ -1,0 +1,51 @@
+{
+  "extraction_metadata": {
+    "source_type": "arXiv preprint",
+    "extraction_confidence": "high",
+    "primary_language": "en",
+    "notes": "Reverse-engineered from arXiv:2610.22709 (Oct 2026). AI/ML image reconstruction for coded-aperture instruments with embedded real-time path."
+  },
+  "title": "A New AI/ML Based Image Reconstruction Technique for Coded-Aperture Instruments",
+  "subtitle_or_tagline": "Embedded real-time reconstruction for coded-aperture imaging",
+  "topic": "A new AI/ML-based image reconstruction method for coded-aperture instruments that provides a pathway for embedded real-time reconstruction. Coded-aperture imaging is used in high-energy astrophysics and security scanning where focusing optics are not feasible; the encoded mask pattern requires computational decoding. The proposed method replaces or augments traditional iterative decoders with a trained neural network capable of running on embedded hardware at acquisition rate.",
+  "architecture": {
+    "components": [
+      { "name": "Coded-mask encoder", "role": "Physical mask casts a shadow pattern on the detector; the shadow encodes the sky/image" },
+      { "name": "Detector readout", "role": "Records the shadow pattern with noise and limited photon statistics" },
+      { "name": "AI/ML reconstructor", "role": "Neural network decodes the shadow pattern into a reconstructed image" },
+      { "name": "Embedded runtime", "role": "Runs the reconstructor on-device for real-time feedback" }
+    ],
+    "data_flow": "Source sky + coded mask -> shadowgram on detector -> AI/ML reconstructor -> reconstructed image (real-time)",
+    "input_types": ["coded-aperture shadowgram"],
+    "output_types": ["reconstructed image (sky or scene)"]
+  },
+  "workflow_steps": [
+    "Step 1 - Acquire shadowgram from coded-aperture detector.",
+    "Step 2 - Preprocess (calibration, denoising).",
+    "Step 3 - Run neural-network reconstructor on embedded hardware.",
+    "Step 4 - Return reconstructed image at acquisition rate.",
+    "Step 5 - Optional iterative refinement if compute budget allows."
+  ],
+  "modalities_covered": ["high-energy astrophysics (X-ray/gamma-ray)", "security imaging", "medical imaging"],
+  "key_claims": [
+    "Enables real-time reconstruction on embedded hardware (not just offline post-processing).",
+    "Pathway for deployment in resource-constrained instruments (small satellites, fielded detectors).",
+    "Replaces or augments traditional iterative decoders with a learned reconstruction.",
+    "Maintains reconstruction quality despite photon-limited, noisy shadowgrams."
+  ],
+  "caveats_or_warnings": [
+    "Learned reconstructors can hallucinate sources not present in the data; uncertainty quantification is critical.",
+    "Generalization across mask patterns, detector responses, and source distributions requires careful training.",
+    "Real-time performance depends on hardware availability on the instrument."
+  ],
+  "citations": [
+    { "type": "arxiv", "value": "arXiv:2610.22709" },
+    { "type": "url", "value": "https://arxiv.org/abs/2610.22709" },
+    { "type": "submission_date", "value": "2026-10 (Oct 2026)" }
+  ],
+  "visual_elements": ["coded mask schematic", "shadowgram example", "reconstruction comparison"],
+  "keywords_for_concept_matching": ["coded aperture", "image reconstruction", "AI/ML", "real-time", "embedded", "astronomical instrumentation", "high-energy astrophysics", "neural network reconstructor"],
+  "potential_concept_card_links": ["jwst-galaxy-morphology", "camera-agnostic-ray-fields", "black-hole-imaging-eht"],
+  "extraction_timestamp": "2026-10-27T17:30:00.000Z",
+  "extraction_source": "osiris-weekly-ingestion-cron-476749"
+}
