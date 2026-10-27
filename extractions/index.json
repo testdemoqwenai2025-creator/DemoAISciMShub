@@ -1,0 +1,20 @@
+[
+  {
+    "slug": "medsam-linkedin-infographic",
+    "title": "How does MedSAM segment any medical image with one box?",
+    "source_type": "LinkedIn infographic",
+    "extracted_at": "2026-10-26T20:45:00.000Z",
+    "author": "Navansh (AI/ML Engineer)",
+    "topic": "MedSAM adapts SAM (Segment Anything Model) for medical images via 2D box prompts: image encoder + prompt encoder + mask decoder → 2D segmentation mask.",
+    "key_claims": [
+      "One box can segment any medical image",
+      "A single model works across diverse medical-image tasks",
+      "Based on SAM (adapted for medical images)"
+    ],
+    "matched_concept_ids": [
+      "pixel-level-segmentation",
+      "mpmri-brain-tumor-reconstruction"
+    ],
+    "notes": "Full JSON at /extractions/medsam-linkedin-infographic.json"
+  }
+]
