@@ -5,7 +5,7 @@
     "source_type": "LinkedIn infographic",
     "extracted_at": "2026-10-26T20:45:00.000Z",
     "author": "Navansh (AI/ML Engineer)",
-    "topic": "MedSAM adapts SAM (Segment Anything Model) for medical images via 2D box prompts: image encoder + prompt encoder + mask decoder → 2D segmentation mask.",
+    "topic": "MedSAM adapts SAM (Segment Anything Model) for medical images via 2D box prompts: image encoder + prompt encoder + mask decoder \u2192 2D segmentation mask.",
     "key_claims": [
       "One box can segment any medical image",
       "A single model works across diverse medical-image tasks",
@@ -35,7 +35,7 @@
       "protein-pipeline-orchestration",
       "drug-target-binding-affinity"
     ],
-    "notes": "Full JSON at /extractions/autobinder-agent-2026.json. Strong parallel to OSIRIS agentic-protein-discovery card — both use agent layers above tools, but AutoBinder has no Theorem 7-style certification."
+    "notes": "Full JSON at /extractions/autobinder-agent-2026.json. Strong parallel to OSIRIS agentic-protein-discovery card \u2014 both use agent layers above tools, but AutoBinder has no Theorem 7-style certification."
   },
   {
     "slug": "mdrna-cat-2026",
@@ -54,7 +54,7 @@
       "natural-language-protein-design",
       "cryo-em-density"
     ],
-    "notes": "Full JSON at /extractions/mdrna-cat-2026.json. Extends the protein-design dataset thesis to RNA — a candidate for OSIRIS to certify RNA design workflows in future."
+    "notes": "Full JSON at /extractions/mdrna-cat-2026.json. Extends the protein-design dataset thesis to RNA \u2014 a candidate for OSIRIS to certify RNA design workflows in future."
   },
   {
     "slug": "medsam-agent-2026",
@@ -67,14 +67,14 @@
       "Generalizable framework: single system handles diverse medical segmentation tasks",
       "Multi-modal LLM enables natural-language interaction with non-expert users",
       "Agent loop improves accuracy through iterative refinement",
-      "No mathematical bound on segmentation accuracy — heuristic agent loop"
+      "No mathematical bound on segmentation accuracy \u2014 heuristic agent loop"
     ],
     "matched_concept_ids": [
       "pixel-level-segmentation",
       "mpmri-brain-tumor-reconstruction",
       "histopathology-wsi"
     ],
-    "notes": "Full JSON at /extractions/medsam-agent-2026.json. Companion to the existing medsam-linkedin-infographic extraction — adds the agentic LLM loop on top of MedSAM."
+    "notes": "Full JSON at /extractions/medsam-agent-2026.json. Companion to the existing medsam-linkedin-infographic extraction \u2014 adds the agentic LLM loop on top of MedSAM."
   },
   {
     "slug": "rpca-psf-reconstruction-2026",
@@ -87,14 +87,14 @@
       "Recovers sub-pixel PSF structure even when the data is undersampled",
       "Pixel-integrated forward model removes bias from pixel-sample approximations",
       "Low-rank spatial decomposition captures field-dependent PSF variation compactly",
-      "Sub-pixel structure is statistically inferred — confidence intervals matter"
+      "Sub-pixel structure is statistically inferred \u2014 confidence intervals matter"
     ],
     "matched_concept_ids": [
       "jwst-galaxy-morphology",
       "camera-agnostic-ray-fields",
       "black-hole-imaging-eht"
     ],
-    "notes": "Full JSON at /extractions/rpca-psf-reconstruction-2026.json. Directly relevant to space-domain cards — PSF uncertainty is a key ingredient OSIRIS's Theorem 7 bound would propagate."
+    "notes": "Full JSON at /extractions/rpca-psf-reconstruction-2026.json. Directly relevant to space-domain cards \u2014 PSF uncertainty is a key ingredient OSIRIS's Theorem 7 bound would propagate."
   },
   {
     "slug": "coded-aperture-aiml-2026",
@@ -106,7 +106,7 @@
     "key_claims": [
       "Enables real-time reconstruction on embedded hardware (not just offline post-processing)",
       "Pathway for deployment in resource-constrained instruments (small satellites, fielded detectors)",
-      "Learned reconstructors can hallucinate sources not present in the data — uncertainty quantification is critical",
+      "Learned reconstructors can hallucinate sources not present in the data \u2014 uncertainty quantification is critical",
       "Generalization across mask patterns, detector responses, source distributions requires careful training"
     ],
     "matched_concept_ids": [
@@ -114,6 +114,30 @@
       "camera-agnostic-ray-fields",
       "black-hole-imaging-eht"
     ],
-    "notes": "Full JSON at /extractions/coded-aperture-aiml-2026.json. Real-time deployment is the key OSIRIS-relevant angle — a Theorem 7 bound would make real-time output auditable."
+    "notes": "Full JSON at /extractions/coded-aperture-aiml-2026.json. Real-time deployment is the key OSIRIS-relevant angle \u2014 a Theorem 7 bound would make real-time output auditable."
+  },
+  {
+    "slug": "chest-xray-report-generation-2026",
+    "title": "Can a 6 GB laptop GPU power an AI system that generates radiology reports from chest X-rays?",
+    "source_type": "LinkedIn post",
+    "extracted_at": "2026-10-27T22:00:00.000Z",
+    "author": "LinkedIn post (DenseNet-121 + BioGPT + LoRA on 6GB GPU)",
+    "topic": "Multimodal chest X-ray report generation: DenseNet-121 (7x7 grid) + BioGPT (347M) + LoRA + CheXpert (14 pathologies) + Grad-CAM. 13.4% lower loss than GPT-2. Key insight: heatmaps alone dont establish clinical correctness.",
+    "key_claims": [
+      "13.4% lower validation loss than GPT-2 baseline (1.77 vs 2.05)",
+      "Generates reports in 2-5 seconds per X-ray on a 6GB RTX 3050",
+      "14 CheXpert pathology classifications with confidence visualizations",
+      "LoRA fine-tuning: only 0.45% of model parameters trained",
+      "Heatmaps alone dont establish clinical correctness (the gap OSIRIS fills)"
+    ],
+    "matched_concept_ids": [
+      "chest-xray-report-generation",
+      "radiology-report-bridge",
+      "interpretability-vs-certification",
+      "ct-lung-nodule-detection",
+      "pixel-level-segmentation",
+      "mpmri-brain-tumor-reconstruction"
+    ],
+    "notes": "Full JSON at /extractions/chest-xray-report-generation-2026.json. This extraction motivated 3 new cards: chest-xray-report-generation (single-domain), radiology-report-bridge (7th cross-domain bridge, first for generative medical AI), and interpretability-vs-certification (2nd theorem card)."
   }
 ]
