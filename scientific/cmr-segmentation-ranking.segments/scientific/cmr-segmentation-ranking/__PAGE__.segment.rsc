@@ -1,9 +1,9 @@
 1:"$Sreact.fragment"
 2:I[47257,["/DemoAISciMShub/_next/static/chunks/ff1a16fafef87110.js","/DemoAISciMShub/_next/static/chunks/d2be314c3ece3fbe.js"],"ClientPageRoot"]
-3:I[67185,["/DemoAISciMShub/_next/static/chunks/e35b8598edabacb1.js","/DemoAISciMShub/_next/static/chunks/13f365fb89e52f2e.js","/DemoAISciMShub/_next/static/chunks/8fb3652db1c8aa9b.js","/DemoAISciMShub/_next/static/chunks/02b2617b38e11c9a.js","/DemoAISciMShub/_next/static/chunks/a94db5a2f1bf8452.js","/DemoAISciMShub/_next/static/chunks/227cb298a4f44adf.js","/DemoAISciMShub/_next/static/chunks/cbdf158a79490c20.js"],"default"]
+3:I[67185,["/DemoAISciMShub/_next/static/chunks/983c33b96805b508.js","/DemoAISciMShub/_next/static/chunks/13f365fb89e52f2e.js","/DemoAISciMShub/_next/static/chunks/46a70d6fbc2737c2.js","/DemoAISciMShub/_next/static/chunks/02b2617b38e11c9a.js","/DemoAISciMShub/_next/static/chunks/a94db5a2f1bf8452.js","/DemoAISciMShub/_next/static/chunks/227cb298a4f44adf.js","/DemoAISciMShub/_next/static/chunks/2aeaacd010f3395e.js"],"default"]
 6:I[97367,["/DemoAISciMShub/_next/static/chunks/ff1a16fafef87110.js","/DemoAISciMShub/_next/static/chunks/d2be314c3ece3fbe.js"],"OutletBoundary"]
 7:"$Sreact.suspense"
-0:{"buildId":"4AG6jTv5yycQF5A4kfHQ3","rsc":["$","$1","c",{"children":[["$","$L2",null,{"Component":"$3","serverProvidedParams":{"searchParams":{},"params":{},"promises":["$@4","$@5"]}}],[["$","script","script-0",{"src":"/DemoAISciMShub/_next/static/chunks/227cb298a4f44adf.js","async":true}],["$","script","script-1",{"src":"/DemoAISciMShub/_next/static/chunks/cbdf158a79490c20.js","async":true}]],["$","$L6",null,{"children":["$","$7",null,{"name":"Next.MetadataOutlet","children":"$@8"}]}]]}],"loading":null,"isPartial":false}
+0:{"buildId":"25sIJr76ltEI91NNkrOHG","rsc":["$","$1","c",{"children":[["$","$L2",null,{"Component":"$3","serverProvidedParams":{"searchParams":{},"params":{},"promises":["$@4","$@5"]}}],[["$","script","script-0",{"src":"/DemoAISciMShub/_next/static/chunks/227cb298a4f44adf.js","async":true}],["$","script","script-1",{"src":"/DemoAISciMShub/_next/static/chunks/2aeaacd010f3395e.js","async":true}]],["$","$L6",null,{"children":["$","$7",null,{"name":"Next.MetadataOutlet","children":"$@8"}]}]]}],"loading":null,"isPartial":false}
 4:{}
 5:"$0:rsc:props:children:0:props:serverProvidedParams:params"
 8:null
