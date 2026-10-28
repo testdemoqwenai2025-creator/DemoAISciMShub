@@ -139,5 +139,29 @@
       "mpmri-brain-tumor-reconstruction"
     ],
     "notes": "Full JSON at /extractions/chest-xray-report-generation-2026.json. This extraction motivated 3 new cards: chest-xray-report-generation (single-domain), radiology-report-bridge (7th cross-domain bridge, first for generative medical AI), and interpretability-vs-certification (2nd theorem card)."
+  },
+  {
+    "slug": "gpcr-fiducial-markers-2026",
+    "title": "Designing rigid protein fiducials to visualize GPCR conformational states",
+    "source_type": "Nature paper",
+    "extracted_at": "2026-10-28T08:30:00.000Z",
+    "author": "Nature (2026)",
+    "topic": "Generative protein design + cryoEM fiducial markers for GPCR conformational states. Fiducial marker IS the norm-clamp. Major gaps in co-folding models = lack of Theorem 7 certification.",
+    "key_claims": [
+      "Fiducial markers enable cryoEM of GPCRs at arbitrary fusion points",
+      "Major gaps in co-folding models for predicting ligand-induced GPCR conformations",
+      "Fiducial marker IS the norm-clamp (bounds conformational displacement)",
+      "Generalizable framework for accessing inaccessible structural states"
+    ],
+    "matched_concept_ids": [
+      "gpcr-conformational-landscape",
+      "gpcr-signaling-bridge",
+      "signaling-cascade-lc-bound",
+      "cryo-em-density",
+      "drug-target-binding-affinity",
+      "natural-language-protein-design",
+      "interpretability-vs-certification"
+    ],
+    "notes": "Full JSON at /extractions/gpcr-fiducial-markers-2026.json. This extraction motivated 3 new cards: gpcr-conformational-landscape (#52), gpcr-signaling-bridge (#53, 9th bridge), signaling-cascade-lc-bound (#54, 4th theorem card)."
   }
 ]

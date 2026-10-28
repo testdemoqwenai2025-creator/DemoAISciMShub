@@ -1,0 +1,16 @@
+{
+  "headers": {
+    "x-nextjs-stale-time": "300",
+    "x-nextjs-prerender": "1",
+    "x-next-cache-tags": "_N_T_/layout,_N_T_/scientific/layout,_N_T_/scientific/cellular-signaling/layout,_N_T_/scientific/cellular-signaling/page,_N_T_/scientific/cellular-signaling"
+  },
+  "segmentPaths": [
+    "/_tree",
+    "/_full",
+    "/scientific/cellular-signaling/__PAGE__",
+    "/scientific/cellular-signaling",
+    "/scientific",
+    "/_index",
+    "/_head"
+  ]
+}
