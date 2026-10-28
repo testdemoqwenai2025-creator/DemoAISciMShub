@@ -1,0 +1,54 @@
+{
+  "extraction_metadata": {
+    "source_type": "LinkedIn post",
+    "extraction_confidence": "high",
+    "primary_language": "en",
+    "notes": "On September 16, 2026 the FDA awarded Cognita Imaging a $1.29M research contract to build an 'LLMs-as-a-jury' system for evaluating radiology reports — multiple LLM agents cross-examining AI-generated reports. Directly relevant to the interpretability-vs-certification theorem card and to multi-agent verification architectures."
+  },
+  "title": "FDA funds an 'LLMs-as-a-jury' system for evaluating radiology reports",
+  "subtitle_or_tagline": "Cognita Imaging wins $1.29M contract — multiple LLM agents cross-examine AI-generated radiology reports",
+  "topic": "The FDA awarded Cognita Imaging a $1.29 million research contract (September 2026) to build what the company calls an 'LLMs-as-a-jury' evaluation system: multiple large language model agents independently assess AI-generated radiology reports, then their verdicts are aggregated like jury votes. This is regulatory-grade multi-agent verification — the insight being that a single model's self-assessment is unreliable, but a diverse ensemble of independent evaluators cross-examining the same artifact converges toward trustworthy judgment.",
+  "architecture": {
+    "components": [
+      { "name": "Report Under Review", "role": "AI-generated radiology report being evaluated" },
+      { "name": "LLM Jurors (ensemble)", "role": "Multiple independent LLM agents, each assessing the report" },
+      { "name": "Jury Aggregation", "role": "Combines individual verdicts into a calibrated final assessment" },
+      { "name": "Human Oversight", "role": "Regulatory reviewers receive aggregated evidence, not raw output" }
+    ],
+    "data_flow": "AI-generated report -> N independent LLM jurors -> verdict aggregation -> regulatory-grade assessment",
+    "input_types": ["radiology report text", "reference clinical data"],
+    "output_types": ["aggregated verdict", "confidence assessment", "identified inconsistencies"]
+  },
+  "workflow_steps": [
+    "Step 1 - An AI system generates a draft radiology report",
+    "Step 2 - Multiple independent LLM agents each review the report against clinical criteria",
+    "Step 3 - Each juror produces an independent verdict (like jury deliberation)",
+    "Step 4 - Verdicts are aggregated; disagreement is surfaced as a signal",
+    "Step 5 - Aggregated assessment feeds regulatory review workflow"
+  ],
+  "modalities_covered": ["radiology report text", "regulatory evaluation"],
+  "key_claims": [
+    "FDA awarded Cognita Imaging $1.29M (September 16, 2026)",
+    "Multi-agent jury architecture replaces single-model self-evaluation",
+    "Designed for regulatory-grade assessment of AI-generated reports",
+    "Independent cross-examination surfaces hallucinations single reviewers miss",
+    "Signals FDA's interest in ensemble-verification patterns for AI oversight"
+  ],
+  "caveats_or_warnings": [
+    "LLM jurors are themselves language models — correlated failure modes are possible",
+    "A research contract is not a regulatory mandate yet",
+    "Jury aggregation requires careful design to avoid bias amplification"
+  ],
+  "citations": [
+    { "type": "url", "value": "https://www.linkedin.com/pulse/fda-funds-ai-jury-radiology-reports-jonathan-govette-mazdc" },
+    { "type": "author", "value": "Jonathan Govette, LinkedIn Pulse" },
+    { "type": "author", "value": "Cognita Imaging / FDA contract, September 2026" }
+  ],
+  "visual_elements": ["contract announcement", "multi-agent verification concept"],
+  "keywords_for_concept_matching": ["LLM", "jury", "multi-agent", "verification", "FDA", "radiology report", "hallucination", "ensemble", "cross-examination", "regulatory"],
+  "potential_concept_card_links": ["interpretability-vs-certification", "chest-xray-report-generation", "osiris-system-architecture"],
+  "matched_concept_ids": ["interpretability-vs-certification", "chest-xray-report-generation"],
+  "osiris_connection": "LLMs-as-a-jury is statistical certification: N independent evaluators bound the error rate of the whole ensemble. OSIRIS's Theorem 7 is mathematical certification: the norm-clamp bounds the displacement of every update, so total drift is bounded by L*c. The jury answers 'is this report likely wrong?' with a probability; the norm-clamp answers 'can this update ever produce an unbounded artifact?' with a proof. The FDA funding both kinds of verification in the same month (DeepHealth's foundation-model clearance, Cognita's LLM jury) shows the regulatory world converging on what OSIRIS formalizes: no single evaluation is sufficient — you need bounded updates AND independent verification.",
+  "extraction_timestamp": "2026-10-28T18:06:00.000Z",
+  "extraction_source": "https://www.linkedin.com/pulse/fda-funds-ai-jury-radiology-reports-jonathan-govette-mazdc"
+}

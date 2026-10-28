@@ -1,0 +1,355 @@
+[
+  {
+    "slug": "medsam-linkedin-infographic",
+    "title": "How does MedSAM segment any medical image with one box?",
+    "source_type": "LinkedIn infographic",
+    "extracted_at": "2026-10-26T20:45:00.000Z",
+    "author": "Navansh (AI/ML Engineer)",
+    "topic": "MedSAM adapts SAM (Segment Anything Model) for medical images via 2D box prompts: image encoder + prompt encoder + mask decoder → 2D segmentation mask.",
+    "key_claims": [
+      "One box can segment any medical image",
+      "A single model works across diverse medical-image tasks",
+      "Based on SAM (adapted for medical images)"
+    ],
+    "matched_concept_ids": [
+      "pixel-level-segmentation",
+      "mpmri-brain-tumor-reconstruction"
+    ],
+    "notes": "Full JSON at /extractions/medsam-linkedin-infographic.json"
+  },
+  {
+    "slug": "autobinder-agent-2026",
+    "title": "AutoBinder Agent: An MCP-Based Agent for End-to-End Protein Binder Design",
+    "source_type": "arXiv preprint",
+    "extracted_at": "2026-10-27T17:30:00.000Z",
+    "author": "Ge et al. (arXiv:2602.00019, Feb 2026)",
+    "topic": "LLM + Model Context Protocol coordinates MaSIF + Rosetta + ProteinMPNN + AlphaFold3 for end-to-end protein binder design from target structure.",
+    "key_claims": [
+      "Protocol-driven LLM coordination replaces rigid script-based workflows for drug design",
+      "Integrates four SOTA components (MaSIF, Rosetta, ProteinMPNN, AlphaFold3) under one MCP-based agent",
+      "Improves reproducibility, extensibility, portability, and auditability",
+      "Auditability is protocol-level (which tool ran when), not mathematical (no per-step displacement bound)"
+    ],
+    "matched_concept_ids": [
+      "agentic-protein-discovery",
+      "protein-pipeline-orchestration",
+      "drug-target-binding-affinity"
+    ],
+    "notes": "Full JSON at /extractions/autobinder-agent-2026.json. Strong parallel to OSIRIS agentic-protein-discovery card — both use agent layers above tools, but AutoBinder has no Theorem 7-style certification."
+  },
+  {
+    "slug": "mdrna-cat-2026",
+    "title": "mdRNAcat: A Molecular Dynamics RNA Catalog of REST2 Conformational Ensembles",
+    "source_type": "arXiv preprint",
+    "extracted_at": "2026-10-27T17:30:00.000Z",
+    "author": "Dorn et al. (arXiv:2610.35204, Oct 2026)",
+    "topic": "48-RNA all-atom MD catalog with REST2 replica-exchange (32 Hamiltonian states, 200-300 ns each) and reference-Hamiltonian force reevaluation. Released on HuggingFace (HelmholtzAI-FZJ).",
+    "key_claims": [
+      "First broad-purpose RNA MD catalog with consistent reference-Hamiltonian force reevaluation",
+      "48 RNA systems selected for sequence diversity (not just functional class)",
+      "REST2 captures conformational variability that single-trajectory MD misses",
+      "Reusable resource for data-driven RNA models including coarse-grained force fields"
+    ],
+    "matched_concept_ids": [
+      "natural-language-protein-design",
+      "cryo-em-density"
+    ],
+    "notes": "Full JSON at /extractions/mdrna-cat-2026.json. Extends the protein-design dataset thesis to RNA — a candidate for OSIRIS to certify RNA design workflows in future."
+  },
+  {
+    "slug": "medsam-agent-2026",
+    "title": "MedSAM-Agent: Empowering Interactive Medical Image Segmentation with Multi-modal Large Language Models",
+    "source_type": "arXiv preprint",
+    "extracted_at": "2026-10-27T17:30:00.000Z",
+    "author": "arXiv:2602.03320 (Feb 2026)",
+    "topic": "MedSAM augmented with a multi-modal LLM agent loop for natural-language-driven, generalizable medical image segmentation across CT/MRI/X-ray/Ultrasound/Endoscopy/Pathology.",
+    "key_claims": [
+      "Generalizable framework: single system handles diverse medical segmentation tasks",
+      "Multi-modal LLM enables natural-language interaction with non-expert users",
+      "Agent loop improves accuracy through iterative refinement",
+      "No mathematical bound on segmentation accuracy — heuristic agent loop"
+    ],
+    "matched_concept_ids": [
+      "pixel-level-segmentation",
+      "mpmri-brain-tumor-reconstruction",
+      "histopathology-wsi"
+    ],
+    "notes": "Full JSON at /extractions/medsam-agent-2026.json. Companion to the existing medsam-linkedin-infographic extraction — adds the agentic LLM loop on top of MedSAM."
+  },
+  {
+    "slug": "rpca-psf-reconstruction-2026",
+    "title": "RPCA: a Resolved PSF reconstruction method for undersampled images",
+    "source_type": "arXiv preprint",
+    "extracted_at": "2026-10-27T17:30:00.000Z",
+    "author": "arXiv:2610.19909 (Oct 2026)",
+    "topic": "Resolved Point-Spread Function reconstruction for undersampled astronomical images, using pixel-integrated forward modeling + PCA-style spatial decomposition. Recovers sub-pixel PSF structure for deconvolution, photometry, and weak-lensing shape measurement.",
+    "key_claims": [
+      "Recovers sub-pixel PSF structure even when the data is undersampled",
+      "Pixel-integrated forward model removes bias from pixel-sample approximations",
+      "Low-rank spatial decomposition captures field-dependent PSF variation compactly",
+      "Sub-pixel structure is statistically inferred — confidence intervals matter"
+    ],
+    "matched_concept_ids": [
+      "jwst-galaxy-morphology",
+      "camera-agnostic-ray-fields",
+      "black-hole-imaging-eht"
+    ],
+    "notes": "Full JSON at /extractions/rpca-psf-reconstruction-2026.json. Directly relevant to space-domain cards — PSF uncertainty is a key ingredient OSIRIS's Theorem 7 bound would propagate."
+  },
+  {
+    "slug": "coded-aperture-aiml-2026",
+    "title": "A New AI/ML Based Image Reconstruction Technique for Coded-Aperture Instruments",
+    "source_type": "arXiv preprint",
+    "extracted_at": "2026-10-27T17:30:00.000Z",
+    "author": "arXiv:2610.22709 (Oct 2026)",
+    "topic": "AI/ML-based image reconstruction for coded-aperture instruments with embedded real-time path. Replaces/augments iterative decoders with a learned neural-network reconstructor that runs on embedded hardware at acquisition rate.",
+    "key_claims": [
+      "Enables real-time reconstruction on embedded hardware (not just offline post-processing)",
+      "Pathway for deployment in resource-constrained instruments (small satellites, fielded detectors)",
+      "Learned reconstructors can hallucinate sources not present in the data — uncertainty quantification is critical",
+      "Generalization across mask patterns, detector responses, source distributions requires careful training"
+    ],
+    "matched_concept_ids": [
+      "jwst-galaxy-morphology",
+      "camera-agnostic-ray-fields",
+      "black-hole-imaging-eht"
+    ],
+    "notes": "Full JSON at /extractions/coded-aperture-aiml-2026.json. Real-time deployment is the key OSIRIS-relevant angle — a Theorem 7 bound would make real-time output auditable."
+  },
+  {
+    "slug": "chest-xray-report-generation-2026",
+    "title": "Can a 6 GB laptop GPU power an AI system that generates radiology reports from chest X-rays?",
+    "source_type": "LinkedIn post",
+    "extracted_at": "2026-10-27T22:00:00.000Z",
+    "author": "LinkedIn post (DenseNet-121 + BioGPT + LoRA on 6GB GPU)",
+    "topic": "Multimodal chest X-ray report generation: DenseNet-121 (7x7 grid) + BioGPT (347M) + LoRA + CheXpert (14 pathologies) + Grad-CAM. 13.4% lower loss than GPT-2. Key insight: heatmaps alone dont establish clinical correctness.",
+    "key_claims": [
+      "13.4% lower validation loss than GPT-2 baseline (1.77 vs 2.05)",
+      "Generates reports in 2-5 seconds per X-ray on a 6GB RTX 3050",
+      "14 CheXpert pathology classifications with confidence visualizations",
+      "LoRA fine-tuning: only 0.45% of model parameters trained",
+      "Heatmaps alone dont establish clinical correctness (the gap OSIRIS fills)"
+    ],
+    "matched_concept_ids": [
+      "chest-xray-report-generation",
+      "radiology-report-bridge",
+      "interpretability-vs-certification",
+      "ct-lung-nodule-detection",
+      "pixel-level-segmentation",
+      "mpmri-brain-tumor-reconstruction"
+    ],
+    "notes": "Full JSON at /extractions/chest-xray-report-generation-2026.json. This extraction motivated 3 new cards: chest-xray-report-generation (single-domain), radiology-report-bridge (7th cross-domain bridge, first for generative medical AI), and interpretability-vs-certification (2nd theorem card)."
+  },
+  {
+    "slug": "gpcr-fiducial-markers-2026",
+    "title": "Designing rigid protein fiducials to visualize GPCR conformational states",
+    "source_type": "Nature paper",
+    "extracted_at": "2026-10-28T08:30:00.000Z",
+    "author": "Nature (2026)",
+    "topic": "Generative protein design + cryoEM fiducial markers for GPCR conformational states. Fiducial marker IS the norm-clamp. Major gaps in co-folding models = lack of Theorem 7 certification.",
+    "key_claims": [
+      "Fiducial markers enable cryoEM of GPCRs at arbitrary fusion points",
+      "Major gaps in co-folding models for predicting ligand-induced GPCR conformations",
+      "Fiducial marker IS the norm-clamp (bounds conformational displacement)",
+      "Generalizable framework for accessing inaccessible structural states"
+    ],
+    "matched_concept_ids": [
+      "gpcr-conformational-landscape",
+      "gpcr-signaling-bridge",
+      "signaling-cascade-lc-bound",
+      "cryo-em-density",
+      "drug-target-binding-affinity",
+      "natural-language-protein-design",
+      "interpretability-vs-certification"
+    ],
+    "notes": "Full JSON at /extractions/gpcr-fiducial-markers-2026.json. This extraction motivated 3 new cards: gpcr-conformational-landscape (#52), gpcr-signaling-bridge (#53, 9th bridge), signaling-cascade-lc-bound (#54, 4th theorem card)."
+  },
+  {
+    "slug": "deephealth-fda-clearance-2026",
+    "title": "DeepHealth Chest XRay receives FDA 510(k) clearance",
+    "source_type": "LinkedIn post",
+    "extracted_at": "2026-10-28T18:05:00.000Z",
+    "author": "DeepHealth / RadNet (Sept 2026 announcement)",
+    "topic": "FDA 510(k) clearance for a chest X-ray CADe built on a proprietary foundation model — foundation models cross the regulatory threshold. Clearance is procedural certification; OSIRIS's Theorem 7 is its mathematical analog.",
+    "key_claims": [
+      "FDA 510(k) clearance granted September 16, 2026",
+      "Built on a proprietary chest X-ray foundation model",
+      "Covers nodules, consolidation, and additional findings",
+      "Signals regulators will accept foundation-model architectures with sufficient evidence"
+    ],
+    "matched_concept_ids": [
+      "chest-xray-report-generation",
+      "ct-lung-nodule-detection"
+    ],
+    "notes": "Full JSON at /extractions/deephealth-fda-clearance-2026.json"
+  },
+  {
+    "slug": "fda-llm-jury-2026",
+    "title": "FDA funds an 'LLMs-as-a-jury' system for evaluating radiology reports",
+    "source_type": "LinkedIn post",
+    "extracted_at": "2026-10-28T18:06:00.000Z",
+    "author": "Cognita Imaging / FDA contract (Jonathan Govette)",
+    "topic": "FDA awarded Cognita Imaging $1.29M (Sept 2026) for multi-LLM jury evaluation of AI-generated radiology reports. Statistical certification via ensemble verification — the procedural complement to OSIRIS's mathematical Theorem 7 bound.",
+    "key_claims": [
+      "FDA awarded Cognita Imaging $1.29M research contract",
+      "Multi-agent jury replaces single-model self-evaluation",
+      "Independent cross-examination surfaces hallucinations single reviewers miss",
+      "Signals FDA interest in ensemble-verification patterns"
+    ],
+    "matched_concept_ids": [
+      "interpretability-vs-certification",
+      "chest-xray-report-generation"
+    ],
+    "notes": "Full JSON at /extractions/fda-llm-jury-2026.json"
+  },
+  {
+    "slug": "claude-protein-design-2026",
+    "title": "Claude achieves 28.2% hit rate in protein design",
+    "source_type": "LinkedIn post",
+    "extracted_at": "2026-10-28T18:07:00.000Z",
+    "author": "Anthropic (shared by NC Frey)",
+    "topic": "Frontier LLM achieves 28.2% experimental hit rate in de novo protein design (~1 in 4 designed proteins express and fold). Biological reasoning emerging as a frontier-LLM capability; OSIRIS adds the mathematical bound on design drift.",
+    "key_claims": [
+      "28.2% experimental hit rate for Claude-designed proteins",
+      "General-purpose LLM, not a specialized architecture",
+      "Historical de novo hit rates were low single digits",
+      "Wet-lab validation, not just computational scoring"
+    ],
+    "matched_concept_ids": [
+      "agentic-protein-discovery",
+      "natural-language-protein-design"
+    ],
+    "notes": "Full JSON at /extractions/claude-protein-design-2026.json"
+  },
+  {
+    "slug": "gpcr-fluorescent-sensors-2026",
+    "title": "GPCR-based fluorescent sensors light up when neuromodulators bind",
+    "source_type": "LinkedIn post",
+    "extracted_at": "2026-10-28T18:08:00.000Z",
+    "author": "Harvard Medical School",
+    "topic": "Engineered GPCR sensors couple the receptor's own conformational change to a fluorophore — a direct optical readout of conformational state. Experimental instrument for the exact quantity the GPCR conformational landscape card models.",
+    "key_claims": [
+      "Sensors fluoresce when specific neuromodulators bind",
+      "Readout is the receptor's conformational change, not a downstream proxy",
+      "Real-time imaging of neuromodulator signaling in living systems",
+      "GPCR family provides modular scaffold for multiple targets"
+    ],
+    "matched_concept_ids": [
+      "gpcr-conformational-landscape",
+      "signaling-cascade-lc-bound"
+    ],
+    "notes": "Full JSON at /extractions/gpcr-fluorescent-sensors-2026.json"
+  },
+  {
+    "slug": "dl-downscaling-india-2026",
+    "title": "Why precipitation downscaling is one of the hardest deep-learning problems in climate",
+    "source_type": "LinkedIn post",
+    "extracted_at": "2026-10-28T18:09:00.000Z",
+    "author": "M. Midhun",
+    "topic": "Practitioner post: precipitation downscaling breaks standard regression assumptions — skewed distributions, spatial intermittency, stochastic variability. Indian monsoon as natural stress test. OSIRIS: norm-clamped downscaler treats extremes as controlled bound usage.",
+    "key_claims": [
+      "Precipitation downscaling is among the hardest climate ML problems",
+      "Skewed distributions break standard regression losses",
+      "Spatial intermittency defeats smoothness-inducing architectures",
+      "Stochastic variability makes the mapping inherently one-to-many"
+    ],
+    "matched_concept_ids": [
+      "sst-enso-detection"
+    ],
+    "notes": "Full JSON at /extractions/dl-downscaling-india-2026.json"
+  },
+  {
+    "slug": "fm-post-deployment-monitoring-2026",
+    "title": "Post-deployment monitoring of foundation models in radiology: outputs aren't enough",
+    "source_type": "LinkedIn post (European Radiology opinion paper)",
+    "extracted_at": "2026-10-28T23:12:00.000Z",
+    "author": "ESR Journals (Sorin, Wald, Klang, Korfiatis, Collins)",
+    "topic": "Behavioural drift in deployed radiology FMs must be monitored at the system-pathway level (prompts, retrieval contexts, deployment settings), not just outputs. Institutional observability as a prerequisite for safe clinical AI.",
+    "key_claims": [
+      "Output-only monitoring is insufficient for foundation models",
+      "Invisible deployment settings shape model behaviour",
+      "Health systems need true observability to detect drift before patient impact"
+    ],
+    "matched_concept_ids": [
+      "interpretability-vs-certification",
+      "chest-xray-report-generation"
+    ],
+    "notes": "Full JSON at /extractions/fm-post-deployment-monitoring-2026.json"
+  },
+  {
+    "slug": "gpcr-alignment-fiducial-2026",
+    "title": "The G protein was doing the alignment — why the cryo-EM GPCR corpus is 91% active-state",
+    "source_type": "LinkedIn article (Data-Rich, Insight-Poor XXXVII)",
+    "extracted_at": "2026-10-28T23:15:00.000Z",
+    "author": "Ermelinda Damko",
+    "topic": "Recomputed GPCRdb statistics show cryo-EM corpus is 91% active-state because single-particle alignment requires mass+asymmetry — the G protein IS the de facto fiducial marker. 218 of 287 class A receptors never seen inactive; surrogate fiducials (BRIL, nanobodies) are the field's hand-engineered bounded references.",
+    "key_claims": [
+      "Cryo-EM GPCR structures are ~91% active-state vs ~29% for X-ray",
+      "Alignment needs mass + asymmetry: agonist+G protein provides both, antagonist alone provides neither",
+      "218/287 non-olfactory class A GPCRs lack any inactive-state structure",
+      "Surrogate fiducial strategies add multi-protein burden and unbounded linker screening"
+    ],
+    "matched_concept_ids": [
+      "gpcr-conformational-landscape",
+      "gpcr-fiducial-markers",
+      "cryo-em-density"
+    ],
+    "notes": "Full JSON at /extractions/gpcr-alignment-fiducial-2026.json"
+  },
+  {
+    "slug": "nicheformer-nature-methods-2026",
+    "title": "Nicheformer published in Nature Methods — foundation model for single-cell and spatial omics",
+    "source_type": "LinkedIn post (publication announcement)",
+    "extracted_at": "2026-10-28T23:18:00.000Z",
+    "author": "Fabian Theis (Helmholtz Munich)",
+    "topic": "Nicheformer, a transformer foundation model bridging single-cell and spatial transcriptomics, published in Nature Methods. Watch item from the 18:00 round has matured: preprint → peer review.",
+    "key_claims": [
+      "Foundation model spanning scRNA-seq and spatial transcriptomics",
+      "Published in Nature Methods (peer-review milestone)",
+      "Pretraining substrate for downstream spatial-omics models"
+    ],
+    "matched_concept_ids": [
+      "single-cell-rnaseq",
+      "scrna-seq",
+      "crop-disease-spatial-tracking"
+    ],
+    "notes": "Full JSON at /extractions/nicheformer-nature-methods-2026.json"
+  },
+  {
+    "slug": "hiro-acev2-extreme-weather-2026",
+    "title": "HiRO-ACEv2 simulates global extreme weather at 3 km resolution for ~1/300th the cost",
+    "source_type": "LinkedIn post (AI lab announcement)",
+    "extracted_at": "2026-10-28T23:21:00.000Z",
+    "author": "Allen Institute for AI",
+    "topic": "Learned emulator achieving kilometer-scale global extreme-weather simulation at ~1/300th the cost of NWP. Autoregressive roll-out drift is the known failure mode — exactly the compounding-displacement pathology Theorem 7 bounds.",
+    "key_claims": [
+      "3 km global resolution extreme-weather simulation",
+      "~1/300th computational cost vs conventional kilometer-scale NWP",
+      "Targets the extreme tail where coarse emulators wash out"
+    ],
+    "matched_concept_ids": [
+      "sst-enso-detection",
+      "solar-flare-forecasting"
+    ],
+    "notes": "Full JSON at /extractions/hiro-acev2-extreme-weather-2026.json"
+  },
+  {
+    "slug": "prostate-screening-distribution-shift-2026",
+    "title": "Deep learning's false-positive burden threatens the MRI harm-reduction mandate in screening",
+    "source_type": "LinkedIn post (European Radiology commentary)",
+    "extracted_at": "2026-10-28T23:24:00.000Z",
+    "author": "ESR Journals (Padhani & Papanikolaou)",
+    "topic": "Göteborg Prostate Screening 2: hospital-trained DL model loses up to 0.37 specificity in low-prevalence screening cohort — prior shift without clamp recalibration converts permissive operating points into population-scale biopsy harm.",
+    "key_claims": [
+      "Specificity drop up to 0.37 vs radiologists under population shift",
+      "False positives drive unnecessary biopsies at scale",
+      "Hospital-trained models require validation + recalibration before screening deployment"
+    ],
+    "matched_concept_ids": [
+      "mpmri-brain-tumor-reconstruction",
+      "ct-lung-nodule-detection",
+      "lung-rads"
+    ],
+    "notes": "Full JSON at /extractions/prostate-screening-distribution-shift-2026.json"
+  }
+]

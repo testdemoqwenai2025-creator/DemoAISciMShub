@@ -1,0 +1,51 @@
+{
+  "extraction_metadata": {
+    "source_type": "LinkedIn post (journal commentary share by radiologists)",
+    "extraction_confidence": "high",
+    "primary_language": "en",
+    "notes": "European Radiology commentary (Padhani & Papanikolaou) on the Göteborg Prostate Cancer Screening 2 Trial, shared by ESR Journals with substantial radiologist commentary (Amit Gupta MD). Distinct failure mode from the post-deployment-monitoring paper in the same feed: this is a population-level distribution shift (symptomatic hospital cohort -> low-prevalence screening cohort), not a pathway-drift problem."
+  },
+  "title": "Deep learning's false-positive burden threatens the MRI harm-reduction mandate in screening",
+  "subtitle_or_tagline": "Göteborg Prostate Screening 2 — specificity drops up to 0.37 below radiologists in low-prevalence cohorts",
+  "topic": "A European Radiology commentary analyzing findings from the Göteborg Prostate Cancer Screening 2 Trial, where a deep-learning model exhibited a specificity drop of up to 0.37 versus radiologists when applied to a low-prevalence screening cohort after development on symptomatic hospital populations. The resulting false-positive burden drives unnecessary biopsies, directly threatening the harm-reduction mandate that justifies MRI-based screening. The authors warn that models trained on symptomatic hospital populations cannot be dropped into healthy screening populations without rigorous validation and recalibration.",
+  "architecture": {
+    "components": [
+      { "name": "DL prostate MRI model", "role": "Trained on symptomatic hospital populations (higher prevalence, referral-biased)" },
+      { "name": "Screening deployment cohort", "role": "Low-prevalence healthy population (Göteborg trial)" },
+      { "name": "Specificity failure", "role": "Up to 0.37 specificity drop vs radiologists under prior shift" },
+      { "name": "Biopsy cascade", "role": "False positives convert directly into invasive procedures at population scale" }
+    ],
+    "data_flow": "hospital-trained model -> screening population deployment -> prior-shifted operating point -> specificity collapse -> unnecessary biopsy burden",
+    "input_types": ["prostate MRI", "population screening cohorts"],
+    "output_types": ["screening decisions", "false-positive burden statistics"]
+  },
+  "workflow_steps": [
+    "Step 1 - Train DL model on symptomatic hospital MRI cohorts",
+    "Step 2 - Deploy to low-prevalence screening population without recalibration",
+    "Step 3 - Measure specificity against radiologist readers in the trial",
+    "Step 4 - Observe up to 0.37 specificity drop -> false-positive biopsy burden",
+    "Step 5 - Recognize the generalization gap: validation and recalibration are mandatory before population deployment"
+  ],
+  "modalities_covered": ["prostate MRI", "population screening"],
+  "key_claims": [
+    "DL model specificity dropped up to 0.37 below radiologists in the low-prevalence screening cohort",
+    "False-positive burden leads to unnecessary biopsies at population scale",
+    "The harm-reduction mandate that justifies MRI screening is directly threatened",
+    "Models trained on symptomatic populations cannot be dropped into healthy screening populations without recalibration"
+  ],
+  "caveats_or_warnings": [
+    "Commentary on a single trial (Göteborg 2) — prostate MRI specific",
+    "The generalization-gap lesson generalizes, but the magnitude (0.37) is domain-specific"
+  ],
+  "citations": [
+    "Padhani AR, Papanikolaou N. Deep learning's false positive burden may threaten the MRI harm reduction mandate in screening. European Radiology (2026)",
+    "Göteborg Prostate Cancer Screening 2 Trial"
+  ],
+  "visual_elements": ["LinkedIn post with paper link and radiologist commentary"],
+  "keywords_for_concept_matching": ["screening", "specificity", "distribution shift", "false positive", "prostate MRI", "generalization gap", "prevalence"],
+  "potential_concept_card_links": ["mpmri-brain-tumor-reconstruction", "ct-lung-nodule-detection", "lung-rads"],
+  "matched_concept_ids": ["mpmri-brain-tumor-reconstruction", "ct-lung-nodule-detection", "lung-rads"],
+  "osiris_connection": "This is a population-scale demonstration of why c must be recalibrated per deployment regime. The model's operating point — implicitly its (L, c) pair — was calibrated on a hospital distribution where prevalence justified a permissive displacement budget; the screening population shifts the prior, and the same budget that was 'permissive' in clinic becomes 'harmful' in screening: every unit of displacement budget the model spends now converts into biopsies at population scale. OSIRIS's disease presets embody the correct pattern — cancer c=2.5σ for heterogeneous clinical tissue, Alzheimer c=1.8σ for pre-clinical sensitivity — the clamp radius is a deployment-regime parameter, not a model constant. The Göteborg result is the cost of treating it as a constant: a 0.37 specificity collapse is what an unrecalibrated bound looks like in the wild.",
+  "extraction_timestamp": "2026-10-28T23:24:00.000Z",
+  "extraction_source": "https://www.linkedin.com/posts/esr-journals_post-deployment-monitoring-of-foundation-activity-7460962486683332608-CwTF"
+}

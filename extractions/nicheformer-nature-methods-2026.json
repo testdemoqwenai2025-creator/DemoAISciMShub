@@ -1,0 +1,49 @@
+{
+  "extraction_metadata": {
+    "source_type": "LinkedIn post (publication announcement by lab lead)",
+    "extraction_confidence": "high",
+    "primary_language": "en",
+    "notes": "Fabian Theis (Helmholtz Munich) announcing Nicheformer's publication in Nature Methods. This is the watch item explicitly flagged in the 2026-10-28 18:00 monitoring round: 'Fabian Theis's Nicheformer ... is gaining traction as the pretraining substrate for spatial models. Worth monitoring for a future extraction if a benchmark-vs-CONCERT post appears.' The watch item has now matured into a peer-reviewed publication."
+  },
+  "title": "Nicheformer published in Nature Methods — a foundation model for single-cell and spatial omics",
+  "subtitle_or_tagline": "The spatial-transcriptomics pretraining substrate matures from preprint to peer review",
+  "topic": "Fabian Theis announces the Nature Methods publication of Nicheformer, a transformer foundation model pretrained across single-cell and spatial transcriptomics data. Nicheformer bridges the two modalities by learning a shared representation space, allowing existing single-cell atlases to be projected into spatially-aware contexts and providing a pretrained substrate that downstream spatial models (including niche/microenvironment predictors) can fine-tune from. It consolidates the lab's earlier line of work on reference-mapping and niche prediction, and positions itself as infrastructure for the spatial-omics model ecosystem alongside tools like CONCERT.",
+  "architecture": {
+    "components": [
+      { "name": "Transformer backbone", "role": "Self-supervised pretraining over single-cell and spatial expression token sequences" },
+      { "name": "Modality bridging", "role": "Shared embedding space spanning scRNA-seq and spatial transcriptomics profiles" },
+      { "name": "Fine-tuning heads", "role": "Downstream adaptation for niche prediction, cell-type annotation, spatial context tasks" }
+    ],
+    "data_flow": "single-cell + spatial corpora -> transformer pretraining -> shared latent space -> fine-tuned spatial-omics tasks",
+    "input_types": ["scRNA-seq", "spatial transcriptomics (e.g., Visium, MERFISH-style)"],
+    "output_types": ["contextualized cell embeddings", "spatial niche representations"]
+  },
+  "workflow_steps": [
+    "Step 1 - Curate large single-cell and spatial transcriptomics pretraining corpora",
+    "Step 2 - Pretrain transformer with modality-aware objectives",
+    "Step 3 - Fine-tune on spatial niche and microenvironment tasks",
+    "Step 4 - Validate transfer from single-cell-only to spatial contexts",
+    "Step 5 - Release as community infrastructure for spatial-omics pipelines"
+  ],
+  "modalities_covered": ["single-cell RNA-seq", "spatial transcriptomics"],
+  "key_claims": [
+    "Nicheformer is a foundation model for both single-cell and spatial omics",
+    "Published in Nature Methods (peer-reviewed milestone)",
+    "Provides a pretraining substrate that downstream spatial models can build on",
+    "Bridges single-cell atlases into spatially-aware representations"
+  ],
+  "caveats_or_warnings": [
+    "Announcement post — full benchmark details live in the Nature Methods paper",
+    "Direct head-to-head vs CONCERT benchmarks not yet circulating in this round's posts"
+  ],
+  "citations": [
+    "Theis F et al. Nicheformer: a foundation model for single-cell and spatial omics. Nature Methods (2026)"
+  ],
+  "visual_elements": ["LinkedIn announcement post by lab lead"],
+  "keywords_for_concept_matching": ["Nicheformer", "spatial transcriptomics", "foundation model", "single-cell", "niche", "microenvironment", "transformer"],
+  "potential_concept_card_links": ["scrna-seq", "single-cell-rnaseq", "crop-disease-spatial-tracking"],
+  "matched_concept_ids": ["single-cell-rnaseq", "scrna-seq", "crop-disease-spatial-tracking"],
+  "osiris_connection": "Nicheformer is the substrate layer of the spatial-omics stack that OSIRIS's spatial cards model. The OSIRIS connection is about transfer under a bound: a foundation model pretrained on dissociated single-cell data is being displaced (fine-tuned) into the spatial regime, and the representation drift between modalities is exactly the Δx that Theorem 7 bounds. A norm-clamped fine-tuning regime (L*c on embedding updates, per the OSIRIS lens) would make the single-cell→spatial transfer certifiable: the model may use its full displacement budget where the spatial context genuinely demands it, but cannot drift arbitrarily far from its pretraining distribution. This is also the monitoring round's planned maturation: the 18:00 round flagged Nicheformer as a watch item; peer-reviewed publication is the promotion criterion met.",
+  "extraction_timestamp": "2026-10-28T23:18:00.000Z",
+  "extraction_source": "https://www.linkedin.com/posts/fabian-theis-4b4b10173_our-new-paper-nicheformer-a-foundation-activity-7389742284113772544-7SAt"
+}

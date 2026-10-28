@@ -1,0 +1,64 @@
+{
+  "extraction_metadata": {
+    "source_type": "LinkedIn post",
+    "extraction_confidence": "high",
+    "primary_language": "en",
+    "notes": "Extracted from a LinkedIn post about a multimodal chest X-ray report generation system using DenseNet-121 + BioGPT + LoRA on a 6GB GPU. The post's key insight — 'heatmaps alone don't establish clinical correctness' — directly motivates the interpretability-vs-certification theorem card."
+  },
+  "title": "Can a 6 GB laptop GPU power an AI system that generates radiology reports from chest X-rays?",
+  "subtitle_or_tagline": "DenseNet-121 + BioGPT + LoRA on a 6GB RTX 3050 — multimodal deep learning for chest X-ray report generation",
+  "topic": "A multimodal deep learning system combining DenseNet-121 (computer vision, 7×7 grid) and Microsoft BioGPT (347M parameters, pretrained on biomedical literature) to generate chest X-ray reports. Fine-tuned via LoRA (r=16, alpha=32, 0.45% of parameters) on a 6GB RTX 3050 GPU. Achieves 13.4% lower validation loss than GPT-2 baseline (1.77 vs 2.05). Generates reports in 2-5 seconds with Grad-CAM heatmaps and 14 CheXpert pathology classifications.",
+  "architecture": {
+    "components": [
+      { "name": "DenseNet-121", "role": "Vision encoder: extracts spatial features from X-rays using a 7×7 grid" },
+      { "name": "BioGPT (347M)", "role": "Language model: pretrained on biomedical literature, generates report text" },
+      { "name": "Linear Projection", "role": "Maps 768-dim visual features into BioGPT's 1024-dim embedding space" },
+      { "name": "CheXpert Classifier", "role": "Auxiliary classifier for 14 pathology categories" },
+      { "name": "LoRA (r=16, alpha=32)", "role": "Parameter-efficient fine-tuning: 0.45% of model parameters" },
+      { "name": "Grad-CAM", "role": "Post-hoc interpretability: heatmaps for visual interpretation" }
+    ],
+    "data_flow": "X-ray → DenseNet-121 (7×7 grid) → Linear Projection → BioGPT (347M) → Report + CheXpert (14 pathologies) + Grad-CAM heatmaps",
+    "input_types": ["chest X-ray image"],
+    "output_types": ["radiology report text", "14 pathology classifications", "Grad-CAM heatmaps"]
+  },
+  "workflow_steps": [
+    "Step 1 - Input: chest X-ray image (1024×1024 pixels)",
+    "Step 2 - Vision: DenseNet-121 extracts spatial features as 7×7 grid of 1024-dim vectors",
+    "Step 3 - Projection: linear projection maps 768-dim visual features to BioGPT's 1024-dim space",
+    "Step 4 - Language: BioGPT autoregressively generates report text",
+    "Step 5 - Classification: CheXpert classifier predicts 14 pathology categories",
+    "Step 6 - Interpretability: Grad-CAM produces heatmaps for visual interpretation"
+  ],
+  "modalities_covered": ["chest X-ray", "radiology report text", "pathology classification"],
+  "key_claims": [
+    "13.4% lower validation loss than GPT-2 baseline (1.77 vs 2.05)",
+    "Generates reports in 2-5 seconds per X-ray",
+    "14 pathology classifications with confidence visualizations",
+    "Grad-CAM heatmaps for visual interpretation",
+    "LoRA fine-tuning: only 0.45% of model parameters trained",
+    "Runs on a 6GB RTX 3050 GPU (consumer hardware)",
+    "Data quality matters as much as model architecture",
+    "Interpretability matters, but heatmaps alone don't establish clinical correctness",
+    "A working end-to-end pipeline teaches far more than training a model in isolation"
+  ],
+  "caveats_or_warnings": [
+    "This is a research prototype, not a clinically validated medical device or a substitute for a radiologist",
+    "Mode collapse was a challenge — improved through dataset rebalancing and vision learning-rate adjustments",
+    "Empty generations were a challenge — fixed prompt anchoring and EOS token handling",
+    "Anonymization leakage was a challenge — added regex-based output cleanup",
+    "GPU memory constraints required LoRA for parameter-efficient fine-tuning",
+    "Heatmaps alone don't establish clinical correctness (author's own insight — this is the gap OSIRIS fills)"
+  ],
+  "citations": [
+    { "type": "github", "value": "https://lnkd.in/gJFGr_VW" },
+    { "type": "tech_stack", "value": "PyTorch • DenseNet-121 • BioGPT • Hugging Face PEFT • LoRA • FastAPI • React 18 • Tailwind CSS • SSE • Grad-CAM" },
+    { "type": "hardware", "value": "NVIDIA RTX 3050 with 6 GB VRAM" },
+    { "type": "model_params", "value": "BioGPT 347M parameters, LoRA r=16 alpha=32, 0.45% trained" },
+    { "type": "results", "value": "Validation loss: 1.77 vs 2.05 for GPT-2 baseline (13.4% lower)" }
+  ],
+  "visual_elements": ["X-ray upload interface", "generated report text", "Grad-CAM heatmaps", "pathology classification visualization"],
+  "keywords_for_concept_matching": ["chest X-ray", "radiology report", "DenseNet-121", "BioGPT", "LoRA", "Grad-CAM", "CheXpert", "medical imaging", "generative AI", "multimodal", "vision-language", "interpretability", "certification", "Theorem 7", "chest xray", "report generation", "pathology classification", "fine-tuning", "parameter-efficient", "6GB GPU"],
+  "potential_concept_card_links": ["chest-xray-report-generation", "radiology-report-bridge", "interpretability-vs-certification", "ct-lung-nodule-detection", "pixel-level-segmentation", "mpmri-brain-tumor-reconstruction"],
+  "extraction_timestamp": "2026-10-27T22:00:00.000Z",
+  "extraction_source": "osiris-reverse-engineer-v1"
+}

@@ -1,0 +1,50 @@
+{
+  "extraction_metadata": {
+    "source_type": "LinkedIn post (European Radiology opinion paper share)",
+    "extraction_confidence": "high",
+    "primary_language": "en",
+    "notes": "ESR Journals (European Society of Radiology) sharing an opinion paper from European Radiology on post-deployment monitoring of foundation models in radiology. Comment thread includes practising radiologists (Amit Gupta MD, Vera Sorin) converging on institutional observability. This is the strongest OSIRIS-aligned signal this round: the paper argues monitoring final outputs is insufficient — you must monitor the entire system pathway."
+  },
+  "title": "Post-deployment monitoring of foundation models in radiology: outputs aren't enough",
+  "subtitle_or_tagline": "European Radiology opinion paper — behavioural drift must be detected at the system-pathway level, not the output level",
+  "topic": "An opinion paper in European Radiology (Sorin, Wald, Klang, Korfiatis, Collins; ACR-affiliated) arguing that post-deployment monitoring of foundation models in radiology must go far beyond checking final outputs, because model behaviour is shaped by invisible deployment settings, user prompts, and dynamic retrieval contexts. The authors call for institutional deployment with true observability so health systems can detect behavioural drift before it affects patient care. The opening anecdote — a resident relying on an unmonitored personal chatbot at 4 a.m. — frames the governance stakes.",
+  "architecture": {
+    "components": [
+      { "name": "Foundation Model (FM)", "role": "Multimodal radiology model under continuous deployment" },
+      { "name": "Deployment Context Layer", "role": "User prompts, retrieval settings, institutional configurations — invisible inputs that shift behaviour" },
+      { "name": "Pathway Observability", "role": "Instrumentation of the full inference pathway, not just outputs" },
+      { "name": "Drift Detection", "role": "Health-system-level detection of behavioural change before patient impact" }
+    ],
+    "data_flow": "FM + deployment context -> full-pathway instrumentation -> drift detection -> governance feedback",
+    "input_types": ["radiology workflows", "FM inference traces", "deployment configurations"],
+    "output_types": ["behavioural drift alerts", "institutional audit trails"]
+  },
+  "workflow_steps": [
+    "Step 1 - Deploy foundation model under institutional (not personal) management",
+    "Step 2 - Instrument the full inference pathway: prompts, retrieval contexts, model versions",
+    "Step 3 - Monitor for behavioural drift across settings, not just output accuracy",
+    "Step 4 - Alert before drift affects patient care",
+    "Step 5 - Feed governance learnings back into deployment policy"
+  ],
+  "modalities_covered": ["radiology reporting", "multimodal foundation models", "LLM clinical infrastructure"],
+  "key_claims": [
+    "Post-deployment monitoring must go beyond checking final outputs",
+    "Model behaviour is shaped by invisible deployment settings, user prompts, and dynamic retrieval contexts",
+    "Institutional deployment with true observability is a prerequisite for safe clinical infrastructure",
+    "Health systems must detect behavioural drift before it affects patient care"
+  ],
+  "caveats_or_warnings": [
+    "Opinion paper — proposes a governance framework rather than reporting a validated monitoring system",
+    "Implementation cost of full-pathway observability at health-system scale is not quantified"
+  ],
+  "citations": [
+    "Sorin V, Wald C, Klang E, Korfiatis P, Collins J. Post-deployment monitoring of foundation models in radiology: Why outputs aren't enough. European Radiology (2026)"
+  ],
+  "visual_elements": ["LinkedIn post with paper link and radiologist commentary thread"],
+  "keywords_for_concept_matching": ["post-deployment monitoring", "foundation model", "behavioural drift", "observability", "radiology governance", "clinical AI safety"],
+  "potential_concept_card_links": ["interpretability-vs-certification", "chest-xray-report-generation"],
+  "matched_concept_ids": ["interpretability-vs-certification", "chest-xray-report-generation"],
+  "osiris_connection": "This paper is the clinical-governance version of the OSIRIS thesis. 'Behavioural drift' is precisely what Theorem 7 bounds: every model update, prompt shift, or retrieval-context change is a displacement, and cumulative displacement needs a bound (sum of L*c across the update path). The paper's demand for 'true observability' of the full pathway is operationally equivalent to OSIRIS's per-update (L, c) audit trail — the platform's extraction graph is exactly the artifact such an observability regime would produce. Where the paper says 'monitor the pathway, not the outputs', OSIRIS says 'certify each displacement, so the pathway's total drift is bounded by construction'.",
+  "extraction_timestamp": "2026-10-28T23:12:00.000Z",
+  "extraction_source": "https://www.linkedin.com/posts/esr-journals_post-deployment-monitoring-of-foundation-activity-7460962486683332608-CwTF"
+}

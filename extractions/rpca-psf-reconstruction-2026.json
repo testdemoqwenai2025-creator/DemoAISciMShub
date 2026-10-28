@@ -1,0 +1,51 @@
+{
+  "extraction_metadata": {
+    "source_type": "arXiv preprint",
+    "extraction_confidence": "high",
+    "primary_language": "en",
+    "notes": "Reverse-engineered from arXiv:2610.19909 (Oct 2026). PSF reconstruction for undersampled astronomical images."
+  },
+  "title": "RPCA: a Resolved PSF reconstruction method for undersampled images",
+  "subtitle_or_tagline": "Point-spread function reconstruction when the data is undersampled",
+  "topic": "A method for reconstructing the resolved Point-Spread Function (PSF) of astronomical instruments from undersampled imaging data. Undersampling occurs when the pixel scale is coarser than the diffraction limit, causing aliasing and making the PSF shape difficult to recover. RPCA addresses this by combining principal-component-style analysis with resolved forward-modeling, producing a PSF model that can be used for deconvolution, photometry, and weak-lensing shape measurement.",
+  "architecture": {
+    "components": [
+      { "name": "Star catalog selector", "role": "Picks suitable bright stars from the field for PSF estimation" },
+      { "name": "Undersampling-aware forward model", "role": "Models the pixel-integrated PSF rather than a pixel-sample PSF" },
+      { "name": "PCA-style decomposition", "role": "Represents PSF variation across the field as a low-rank basis" },
+      { "name": "Resolved reconstruction", "role": "Recovers the sub-pixel PSF structure from undersampled data" }
+    ],
+    "data_flow": "Undersampled image + star catalog -> select PSF stars -> pixel-integrated forward model -> PCA basis -> resolved sub-pixel PSF model -> deconvolution / photometry / shape measurement",
+    "input_types": ["undersampled astronomical image", "star catalog"],
+    "output_types": ["resolved PSF model (sub-pixel)", "PSF spatial variation field"]
+  },
+  "workflow_steps": [
+    "Step 1 - Identify bright unsaturated stars across the field of view.",
+    "Step 2 - Build pixel-integrated forward model (no pixel-sample approximation).",
+    "Step 3 - Decompose PSF variation into low-rank PCA-style basis.",
+    "Step 4 - Reconstruct resolved sub-pixel PSF at every field position.",
+    "Step 5 - Use reconstructed PSF for deconvolution or shape measurement."
+  ],
+  "modalities_covered": ["optical imaging", "near-IR imaging", "space telescope data"],
+  "key_claims": [
+    "Recovers sub-pixel PSF structure even when the data is undersampled.",
+    "Pixel-integrated forward model removes the bias introduced by pixel-sample approximations.",
+    "Low-rank spatial decomposition captures field-dependent PSF variation compactly.",
+    "Applicable to deconvolution, photometry, and weak-lensing shape measurement."
+  ],
+  "caveats_or_warnings": [
+    "Performance depends on having enough suitable PSF stars in the field.",
+    "Sub-pixel structure is statistically inferred, not directly observed; confidence intervals matter.",
+    "Assumes the PSF varies smoothly across the field — crowded fields or strong optical distortions may challenge this."
+  ],
+  "citations": [
+    { "type": "arxiv", "value": "arXiv:2610.19909" },
+    { "type": "url", "value": "https://arxiv.org/abs/2610.19909" },
+    { "type": "submission_date", "value": "2026-10 (Oct 2026)" }
+  ],
+  "visual_elements": ["PSF heat-map", "spatial variation field", "before/after deconvolution"],
+  "keywords_for_concept_matching": ["PSF", "point spread function", "RPCA", "undersampled", "astronomical imaging", "deconvolution", "weak lensing", "JWST", "Hubble", "diffraction limit"],
+  "potential_concept_card_links": ["jwst-galaxy-morphology", "camera-agnostic-ray-fields", "black-hole-imaging-eht"],
+  "extraction_timestamp": "2026-10-27T17:30:00.000Z",
+  "extraction_source": "osiris-weekly-ingestion-cron-476749"
+}

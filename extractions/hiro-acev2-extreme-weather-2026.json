@@ -1,0 +1,49 @@
+{
+  "extraction_metadata": {
+    "source_type": "LinkedIn post (AI research lab announcement)",
+    "extraction_confidence": "high",
+    "primary_language": "en",
+    "notes": "Allen Institute for AI (ai2) announcing HiRO-ACEv2, a system for simulating global extreme weather at 3 km resolution at ~1/300th the computational cost of conventional numerical weather prediction. This is the highest-signal climate post of the round — a concrete system with a quantified cost-resolution trade-off, directly relevant to the OSIRIS climate domain (c=0.25 K) and the downscaling discussion."
+  },
+  "title": "HiRO-ACEv2 simulates global extreme weather at 3 km resolution for ~1/300th the cost",
+  "subtitle_or_tagline": "AI2's kilometer-scale global weather simulation — extreme events without the supercomputer budget",
+  "topic": "The Allen Institute for AI announces HiRO-ACEv2, extending their ACE (AI for climate and earth system emulation) line: a learned emulator that simulates global extreme weather at 3 km effective resolution at approximately 1/300th the computational cost of conventional kilometer-scale numerical weather prediction. The system targets extreme events (the tail of the weather distribution — storms, extremes of precipitation and wind) where coarse emulators historically wash out detail, and claims the cost reduction makes kilometer-scale ensemble simulation accessible to research groups and agencies that cannot operate frontier NWP systems.",
+  "architecture": {
+    "components": [
+      { "name": "Learned weather emulator", "role": "Neural surrogate of atmospheric dynamics at kilometer scale" },
+      { "name": "Extreme-event focus", "role": "Specialized handling of the tail of the weather distribution (storms, precipitation extremes)" },
+      { "name": "Cost-efficient ensemble engine", "role": "1/300th-cost simulation enabling ensemble runs for uncertainty quantification" }
+    ],
+    "data_flow": "coarse atmospheric state -> learned emulator -> 3 km global fields with resolved extremes -> ensemble statistics",
+    "input_types": ["global atmospheric state", "reanalysis / NWP initial conditions"],
+    "output_types": ["3 km-resolution global weather fields", "extreme-event statistics", "ensemble forecasts"]
+  },
+  "workflow_steps": [
+    "Step 1 - Pretrain emulator on historical reanalysis + kilometer-scale NWP archives",
+    "Step 2 - Roll out autoregressive global simulation",
+    "Step 3 - Resolve extremes at 3 km without explicit convection-parameterization handoff",
+    "Step 4 - Run ensembles at 1/300th cost for uncertainty quantification",
+    "Step 5 - Distribute to agencies/researchers for extreme-weather decision support"
+  ],
+  "modalities_covered": ["global weather simulation", "extreme-event climatology"],
+  "key_claims": [
+    "Global extreme-weather simulation at 3 km resolution",
+    "~1/300th the computational cost of conventional kilometer-scale NWP",
+    "Makes kilometer-scale ensemble simulation accessible beyond frontier NWP centers",
+    "Targets the extreme-event tail where coarse emulators wash out detail"
+  ],
+  "caveats_or_warnings": [
+    "Lab announcement — full evaluation (extreme-event fidelity vs NWP ground truth) lives in the technical report",
+    "Learned emulators risk accumulating roll-out drift over long horizons — the known autoregressive failure mode"
+  ],
+  "citations": [
+    "Allen Institute for AI. HiRO-ACEv2: global extreme weather simulation at 3 km resolution (2026)"
+  ],
+  "visual_elements": ["LinkedIn announcement post from Allen AI"],
+  "keywords_for_concept_matching": ["extreme weather", "kilometer-scale", "AI emulator", "weather simulation", "downscaling", "ensemble", "ACE"],
+  "potential_concept_card_links": ["sst-enso-detection", "solar-flare-forecasting"],
+  "matched_concept_ids": ["sst-enso-detection", "solar-flare-forecasting"],
+  "osiris_connection": "HiRO-ACEv2 sharpens the OSIRIS climate question from last round: when a learned emulator resolves extremes at 3 km, what bounds its output displacement from the physical truth? The known failure mode of autoregressive weather emulators is roll-out drift — small displacements compounding over horizons until the simulation decorrelates. That compounding is exactly the sum-of-L*c pathology Theorem 7 governs: each emulator step is a Lipschitz operator, and unbounded total drift is the signature of an unclamped rollout. A norm-clamped ACE variant would make the 1/300th-cost claim certifiable — per-step displacement budget c chosen so the ensemble spread remains physically calibrated (the climate domain's c=0.25 K), turning 'cheap kilometer-scale simulation' from an empirical claim into a bounded one.",
+  "extraction_timestamp": "2026-10-28T23:21:00.000Z",
+  "extraction_source": "https://www.linkedin.com/posts/allen-ai_what-if-you-could-simulate-global-extreme-activity-7516176846074576896-dDlK"
+}

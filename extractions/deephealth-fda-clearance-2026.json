@@ -1,0 +1,54 @@
+{
+  "extraction_metadata": {
+    "source_type": "LinkedIn post",
+    "extraction_confidence": "high",
+    "primary_language": "en",
+    "notes": "DeepHealth (a RadNet company) received FDA 510(k) clearance on September 16, 2026 for DeepHealth Chest XRay, a CADe solution built on a proprietary chest X-ray foundation model. This is the first wave of foundation-model-based regulatory clearances — exactly the certification regime OSIRIS's Theorem 7 formalizes."
+  },
+  "title": "DeepHealth Chest XRay receives FDA 510(k) clearance — a foundation model crosses the regulatory threshold",
+  "subtitle_or_tagline": "CADe built on a chest X-ray foundation model covers nodules, consolidation and more",
+  "topic": "On September 16, 2026 DeepHealth announced FDA 510(k) clearance for its chest X-ray CADe solution built on a proprietary foundation model, covering detection of nodules, consolidation, and additional findings. This marks the transition of foundation-model architectures from research demos to regulated medical devices. The clearance answers the question the whole field has been asking: can a large pretrained model, rather than a narrow task-specific network, meet the FDA's safety and effectiveness bar?",
+  "architecture": {
+    "components": [
+      { "name": "Chest X-ray Foundation Model", "role": "Proprietary pretrained backbone for general chest X-ray understanding" },
+      { "name": "CADe Head", "role": "Computer-Assisted Detection layer producing localized findings" },
+      { "name": "Findings Taxonomy", "role": "Nodules, consolidation, and additional chest findings" },
+      { "name": "510(k) Evidence Package", "role": "Predicate-based regulatory submission demonstrating substantial equivalence" }
+    ],
+    "data_flow": "chest X-ray -> foundation model encoder -> CADe head -> localized findings -> radiologist review",
+    "input_types": ["chest X-ray image"],
+    "output_types": ["localized detections", "CADe findings list"]
+  },
+  "workflow_steps": [
+    "Step 1 - Pretrain foundation model on large chest X-ray corpus",
+    "Step 2 - Adapt CADe head for localized finding detection",
+    "Step 3 - Validate performance against regulatory benchmarks",
+    "Step 4 - File 510(k) with substantial-equivalence evidence",
+    "Step 5 - FDA clearance (September 16, 2026) and clinical deployment"
+  ],
+  "modalities_covered": ["chest X-ray"],
+  "key_claims": [
+    "FDA 510(k) clearance granted September 16, 2026",
+    "Built on a proprietary chest X-ray foundation model (not a narrow task-specific network)",
+    "Covers nodules, consolidation, and additional findings",
+    "CADe classification: detection is intended to flag findings for radiologist review",
+    "Signals that regulators will accept foundation-model architectures when evidence is sufficient"
+  ],
+  "caveats_or_warnings": [
+    "510(k) clearance is substantial equivalence, not a proof of generalization beyond the predicate domain",
+    "CADe output requires radiologist confirmation — the device assists, it does not replace",
+    "Foundation-model drift under distribution shift remains an open regulatory question"
+  ],
+  "citations": [
+    { "type": "url", "value": "https://www.linkedin.com/posts/ahmed-elsherbiney-444509323_radiology-artificialintelligence-medicalimaging-activity-7507629027210416129-j7aB" },
+    { "type": "url", "value": "https://www.linkedin.com/pulse/ai-medical-imaging-september-round-up-amy-thompson-gr8oc" },
+    { "type": "author", "value": "DeepHealth / RadNet announcement, September 16, 2026" }
+  ],
+  "visual_elements": ["product announcement", "regulatory milestone"],
+  "keywords_for_concept_matching": ["chest x-ray", "FDA", "510(k)", "foundation model", "CADe", "regulatory clearance", "medical imaging AI", "radiology", "certification"],
+  "potential_concept_card_links": ["chest-xray-report-generation", "ct-lung-nodule-detection", "interpretability-vs-certification"],
+  "matched_concept_ids": ["chest-xray-report-generation", "ct-lung-nodule-detection"],
+  "osiris_connection": "The FDA 510(k) is a procedural certificate: it bounds behavior by evidence of substantial equivalence, not by mathematics. OSIRIS's interpretability-vs-certification theorem card argues the complement — a mathematical bound (Theorem 7: displacement <= L*c) is the formal analog of what the FDA approximates procedurally. DeepHealth's clearance shows the regulatory pathway works for foundation models; OSIRIS shows what the mathematical version of that certificate should look like. The gap between 'cleared' and 'certified' is exactly the platform's reason to exist.",
+  "extraction_timestamp": "2026-10-28T18:05:00.000Z",
+  "extraction_source": "https://www.linkedin.com/posts/ahmed-elsherbiney-444509323_radiology-artificialintelligence-medicalimaging-activity-7507629027210416129-j7aB"
+}
