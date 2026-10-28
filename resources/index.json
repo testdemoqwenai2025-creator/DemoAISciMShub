@@ -1,0 +1,10 @@
+{
+  "_meta": {
+    "schema_version": 1,
+    "last_updated": "2026-10-28T17:30:00.000Z",
+    "description": "OSIRIS external resources index. The hardcoded CURATED_BASELINE array in resources-content.tsx is the always-present seed. Entries in this file's 'discovered' array are appended by the weekly ingestion cron (job 480174) and merged with the baseline at page-load time. Deduplication is by URL.",
+    "cron_job_id": 480174,
+    "auto_discovery_enabled": true
+  },
+  "discovered": []
+}
