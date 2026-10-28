@@ -163,5 +163,99 @@
       "interpretability-vs-certification"
     ],
     "notes": "Full JSON at /extractions/gpcr-fiducial-markers-2026.json. This extraction motivated 3 new cards: gpcr-conformational-landscape (#52), gpcr-signaling-bridge (#53, 9th bridge), signaling-cascade-lc-bound (#54, 4th theorem card)."
+  },
+  {
+    "slug": "deephealth-fda-clearance-2026",
+    "title": "DeepHealth Chest XRay receives FDA 510(k) clearance",
+    "source_type": "LinkedIn post",
+    "extracted_at": "2026-10-28T18:05:00.000Z",
+    "author": "DeepHealth / RadNet (Sept 2026 announcement)",
+    "topic": "FDA 510(k) clearance for a chest X-ray CADe built on a proprietary foundation model \u2014 foundation models cross the regulatory threshold. Clearance is procedural certification; OSIRIS's Theorem 7 is its mathematical analog.",
+    "key_claims": [
+      "FDA 510(k) clearance granted September 16, 2026",
+      "Built on a proprietary chest X-ray foundation model",
+      "Covers nodules, consolidation, and additional findings",
+      "Signals regulators will accept foundation-model architectures with sufficient evidence"
+    ],
+    "matched_concept_ids": [
+      "chest-xray-report-generation",
+      "ct-lung-nodule-detection"
+    ],
+    "notes": "Full JSON at /extractions/deephealth-fda-clearance-2026.json"
+  },
+  {
+    "slug": "fda-llm-jury-2026",
+    "title": "FDA funds an 'LLMs-as-a-jury' system for evaluating radiology reports",
+    "source_type": "LinkedIn post",
+    "extracted_at": "2026-10-28T18:06:00.000Z",
+    "author": "Cognita Imaging / FDA contract (Jonathan Govette)",
+    "topic": "FDA awarded Cognita Imaging $1.29M (Sept 2026) for multi-LLM jury evaluation of AI-generated radiology reports. Statistical certification via ensemble verification \u2014 the procedural complement to OSIRIS's mathematical Theorem 7 bound.",
+    "key_claims": [
+      "FDA awarded Cognita Imaging $1.29M research contract",
+      "Multi-agent jury replaces single-model self-evaluation",
+      "Independent cross-examination surfaces hallucinations single reviewers miss",
+      "Signals FDA interest in ensemble-verification patterns"
+    ],
+    "matched_concept_ids": [
+      "interpretability-vs-certification",
+      "chest-xray-report-generation"
+    ],
+    "notes": "Full JSON at /extractions/fda-llm-jury-2026.json"
+  },
+  {
+    "slug": "claude-protein-design-2026",
+    "title": "Claude achieves 28.2% hit rate in protein design",
+    "source_type": "LinkedIn post",
+    "extracted_at": "2026-10-28T18:07:00.000Z",
+    "author": "Anthropic (shared by NC Frey)",
+    "topic": "Frontier LLM achieves 28.2% experimental hit rate in de novo protein design (~1 in 4 designed proteins express and fold). Biological reasoning emerging as a frontier-LLM capability; OSIRIS adds the mathematical bound on design drift.",
+    "key_claims": [
+      "28.2% experimental hit rate for Claude-designed proteins",
+      "General-purpose LLM, not a specialized architecture",
+      "Historical de novo hit rates were low single digits",
+      "Wet-lab validation, not just computational scoring"
+    ],
+    "matched_concept_ids": [
+      "agentic-protein-discovery",
+      "natural-language-protein-design"
+    ],
+    "notes": "Full JSON at /extractions/claude-protein-design-2026.json"
+  },
+  {
+    "slug": "gpcr-fluorescent-sensors-2026",
+    "title": "GPCR-based fluorescent sensors light up when neuromodulators bind",
+    "source_type": "LinkedIn post",
+    "extracted_at": "2026-10-28T18:08:00.000Z",
+    "author": "Harvard Medical School",
+    "topic": "Engineered GPCR sensors couple the receptor's own conformational change to a fluorophore \u2014 a direct optical readout of conformational state. Experimental instrument for the exact quantity the GPCR conformational landscape card models.",
+    "key_claims": [
+      "Sensors fluoresce when specific neuromodulators bind",
+      "Readout is the receptor's conformational change, not a downstream proxy",
+      "Real-time imaging of neuromodulator signaling in living systems",
+      "GPCR family provides modular scaffold for multiple targets"
+    ],
+    "matched_concept_ids": [
+      "gpcr-conformational-landscape",
+      "signaling-cascade-lc-bound"
+    ],
+    "notes": "Full JSON at /extractions/gpcr-fluorescent-sensors-2026.json"
+  },
+  {
+    "slug": "dl-downscaling-india-2026",
+    "title": "Why precipitation downscaling is one of the hardest deep-learning problems in climate",
+    "source_type": "LinkedIn post",
+    "extracted_at": "2026-10-28T18:09:00.000Z",
+    "author": "M. Midhun",
+    "topic": "Practitioner post: precipitation downscaling breaks standard regression assumptions \u2014 skewed distributions, spatial intermittency, stochastic variability. Indian monsoon as natural stress test. OSIRIS: norm-clamped downscaler treats extremes as controlled bound usage.",
+    "key_claims": [
+      "Precipitation downscaling is among the hardest climate ML problems",
+      "Skewed distributions break standard regression losses",
+      "Spatial intermittency defeats smoothness-inducing architectures",
+      "Stochastic variability makes the mapping inherently one-to-many"
+    ],
+    "matched_concept_ids": [
+      "sst-enso-detection"
+    ],
+    "notes": "Full JSON at /extractions/dl-downscaling-india-2026.json"
   }
 ]

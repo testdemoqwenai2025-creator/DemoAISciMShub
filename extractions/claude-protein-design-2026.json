@@ -1,0 +1,52 @@
+{
+  "extraction_metadata": {
+    "source_type": "LinkedIn post",
+    "extraction_confidence": "high",
+    "primary_language": "en",
+    "notes": "Anthropic reported that Claude achieves a 28.2% hit rate in protein design — a frontier LLM successfully proposing proteins that experimentally validate. Directly relevant to the agentic-protein-discovery and natural-language-protein-design concept cards."
+  },
+  "title": "Claude achieves 28.2% hit rate in protein design",
+  "subtitle_or_tagline": "A frontier language model crosses the experimental-validation threshold for de novo proteins",
+  "topic": "Anthropic shared an update on Claude's protein design capabilities: the model achieves a 28.2% hit rate — meaning roughly 1 in 4 of its computationally designed proteins successfully express and fold as intended when tested experimentally. For context, historical de novo design hit rates were in the low single digits. A general-purpose language model (not a specialized structure-prediction pipeline) achieving this rate signals that biological reasoning is emerging as a capability of frontier LLMs rather than requiring bespoke architectures.",
+  "architecture": {
+    "components": [
+      { "name": "Claude (frontier LLM)", "role": "Reasons about sequence-structure-function relationships in natural language" },
+      { "name": "Candidate Proposer", "role": "Generates protein sequences with intended structures" },
+      { "name": "Experimental Validation", "role": "Wet-lab expression and folding assays confirm hit rate" }
+    ],
+    "data_flow": "design brief -> LLM reasoning -> candidate sequence -> experimental validation -> hit/miss feedback",
+    "input_types": ["protein design brief", "target structure/functional description"],
+    "output_types": ["protein sequences", "design rationale"]
+  },
+  "workflow_steps": [
+    "Step 1 - Specify target structure or function in natural language",
+    "Step 2 - Claude reasons about sequence constraints and proposes candidates",
+    "Step 3 - Candidates undergo experimental expression and folding tests",
+    "Step 4 - Hits validate at 28.2% rate (roughly 1 in 4 designs succeed)",
+    "Step 5 - Feedback loop improves future design rounds"
+  ],
+  "modalities_covered": ["protein sequence", "natural language design brief"],
+  "key_claims": [
+    "28.2% experimental hit rate for Claude-designed proteins",
+    "General-purpose LLM, not a specialized protein-design architecture",
+    "Historical de novo design hit rates were in the low single digits",
+    "Biological reasoning is emerging as a frontier-LLM capability",
+    "Wet-lab validation, not just computational scoring"
+  ],
+  "caveats_or_warnings": [
+    "Hit rate does not specify binding affinity or functional potency of hits",
+    "Cost per candidate remains far higher than computational-only pipelines",
+    "28.2% is a headline number — per-family breakdown not yet public"
+  ],
+  "citations": [
+    { "type": "url", "value": "https://www.linkedin.com/posts/ncfrey_today-were-sharing-an-update-on-claudes-activity-7495617555282423808-gcvT" },
+    { "type": "author", value: "Anthropic update, shared by NC Frey" }
+  ],
+  "visual_elements": ["benchmark update", "hit-rate statistic"],
+  "keywords_for_concept_matching": ["protein design", "Claude", "Anthropic", "hit rate", "de novo", "LLM", "language model", "experimental validation", "sequence design"],
+  "potential_concept_card_links": ["agentic-protein-discovery", "natural-language-protein-design", "drug-target-binding-affinity"],
+  "matched_concept_ids": ["agentic-protein-discovery", "natural-language-protein-design"],
+  "osiris_connection": "A 28.2% hit rate is an empirical bound on design reliability — but nothing in the pipeline bounds the displacement between the designed sequence and its realized structure. OSIRIS's agentic-protein-discovery card argues that agent-designed proteins need Theorem 7 certificates: if each design iteration is a bounded update (norm-clamp on the embedding), the cumulative design drift is bounded by L*c, making 'the model proposes X, the lab confirms X' a certified rather than statistical claim. Claude's result shows the empirical loop works; OSIRIS's contribution is the mathematical version of the same guarantee.",
+  "extraction_timestamp": "2026-10-28T18:07:00.000Z",
+  "extraction_source": "https://www.linkedin.com/posts/ncfrey_today-were-sharing-an-update-on-claudes-activity-7495617555282423808-gcvT"
+}
