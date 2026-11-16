@@ -1,0 +1,125 @@
+{
+  "extraction_metadata": {
+    "source_type": "PubMed-indexed journal article",
+    "extraction_confidence": "medium",
+    "primary_language": "en",
+    "notes": "Extraction from PMC article. Pimecrolimus is an FDA-approved calcineurin inhibitor (topical dermatology) repurposed here for neuronal apoptosis modulation. Docking against apoptotic proteins is the in-silico component."
+  },
+  "title": "Effect of Pimecrolimus on apoptotic pathways in H2O2-treated SH-SY5Y cells: molecular docking + in vitro validation",
+  "subtitle_or_tagline": "An FDA-approved calcineurin inhibitor repurposed against the apoptotic cascade — docking-guided hypothesis confirmed in neuronal culture.",
+  "topic": "Pimecrolimus (an FDA-approved calcineurin inhibitor used in dermatology) is docked against apoptotic-pathway proteins and then validated in vitro on differentiated SH-SY5Y neurons under H2O2 insult, showing reduced apoptosis and modulated Caspase-3 / calcineurin signaling.",
+  "architecture": {
+    "components": [
+      {
+        "name": "Molecular docking",
+        "role": "Pimecrolimus docked against apoptotic-pathway proteins (calcineurin, Caspase-3, related effectors) to predict binding pose."
+      },
+      {
+        "name": "SH-SY5Y cellular model",
+        "role": "Differentiated dopaminergic-like neurons under H2O2 oxidative insult ± Pimecrolimus."
+      },
+      {
+        "name": "Apoptosis panel",
+        "role": "MTT, Annexin-V/PI flow cytometry, Caspase-3 activity assay, calcineurin activity assay."
+      }
+    ],
+    "data_flow": "Pimecrolimus structure → Docking vs apoptotic targets → predicted mechanism → SH-SY5Y + H2O2 ± Pimecrolimus → viability / apoptosis / Caspase-3 / calcineurin readouts.",
+    "input_types": [
+      "Pimecrolimus structure",
+      "apoptotic-pathway protein structures",
+      "differentiated SH-SY5Y cells",
+      "H2O2"
+    ],
+    "output_types": [
+      "docking pose + affinity",
+      "MTT viability %",
+      "Annexin-V apoptosis %",
+      "Caspase-3 activity",
+      "calcineurin activity"
+    ]
+  },
+  "workflow_steps": [
+    "Step 1 - Dock Pimecrolimus against apoptotic-pathway proteins.",
+    "Step 2 - Differentiate SH-SY5Y cells.",
+    "Step 3 - Apply H2O2 insult ± Pimecrolimus.",
+    "Step 4 - Read out viability (MTT), apoptosis (Annexin-V/PI), Caspase-3 activity.",
+    "Step 5 - Quantify calcineurin activity to confirm on-target mechanism.",
+    "Step 6 - Connect docking pose → cellular effect → mechanistic pathway."
+  ],
+  "modalities_covered": [
+    "molecular docking",
+    "cell viability assay (MTT)",
+    "flow cytometry (Annexin-V/PI)",
+    "Caspase-3 activity assay",
+    "calcineurin activity assay"
+  ],
+  "key_claims": [
+    "Pimecrolimus docks favorably into apoptotic-pathway protein active sites.",
+    "Pre-treatment rescued SH-SY5Y viability under H2O2 insult.",
+    "Annexin-V positive population was reduced by Pimecrolimus treatment.",
+    "Caspase-3 activity was attenuated — consistent with downstream apoptosis suppression.",
+    "Calcineurin activity modulation confirms the on-target repurposing hypothesis.",
+    "Repurposing an FDA-approved drug de-risks the translational path relative to novel scaffolds."
+  ],
+  "effect_sizes": [
+    {
+      "assay": "MTT cell viability (rescue)",
+      "baseline_percent": 48.0,
+      "treated_percent": 72.0,
+      "direction": "rescue",
+      "delta_percent": 24.0,
+      "unit": "% viability vs control",
+      "model": "differentiated SH-SY5Y + H2O2",
+      "note": "Approximate; full-text verification required."
+    }
+  ],
+  "caveats_or_warnings": [
+    "Pimecrolimus is a topical dermatology drug — systemic exposure is currently limited; CNS repurposing requires BBB formulation work.",
+    "Calcineurin inhibitors carry immunosuppressive risk; chronic CNS use requires careful safety profiling.",
+    "Effect sizes are approximate; full-text verification required.",
+    "Docking against apoptotic-pathway proteins does not establish direct Caspase-3 active-site binding — mechanism may be upstream."
+  ],
+  "citations": [
+    {
+      "type": "author",
+      "value": "Kocanci FG. et al. (2025)"
+    },
+    {
+      "type": "url",
+      "value": "https://pmc.ncbi.nlm.nih.gov/articles/PMC11831029"
+    }
+  ],
+  "visual_elements": [
+    "docking pose render",
+    "MTT bars",
+    "Annexin-V/PI dot plots",
+    "Caspase-3 activity bars",
+    "calcineurin activity bars"
+  ],
+  "keywords_for_concept_matching": [
+    "Pimecrolimus",
+    "calcineurin inhibitor",
+    "Caspase-3",
+    "apoptosis",
+    "SH-SY5Y",
+    "H2O2",
+    "drug repurposing",
+    "FDA-approved",
+    "docking"
+  ],
+  "potential_concept_card_links": [
+    "drug-target-binding-affinity",
+    "enzyme-kinetics-haldane",
+    "interpretability-vs-certification"
+  ],
+  "molecule_metadata": {
+    "name": "Pimecrolimus",
+    "class": "Macrolactam (calcineurin inhibitor; FK506 analog)",
+    "molecular_weight_da": 810.47,
+    "source": "Semi-synthetic derivative of ascomycin (Streptomyces hygroscopicus).",
+    "notable": "Large macrolactam (MW 810) — will be flagged as BBB-impermeable by rule-based predictors. Formulation (e.g., nanoparticle, intranasal) required for CNS use.",
+    "tradition": "FDA-approved for atopic dermatitis since 2001; well-characterized safety profile."
+  },
+  "extraction_timestamp": "2026-11-16T15:35:00.000Z",
+  "extraction_source": "osiris-reverse-engineer-v1"
+}

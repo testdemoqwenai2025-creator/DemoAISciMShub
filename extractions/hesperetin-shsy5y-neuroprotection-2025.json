@@ -1,0 +1,132 @@
+{
+  "extraction_metadata": {
+    "source_type": "PubMed-indexed journal article",
+    "extraction_confidence": "medium",
+    "primary_language": "en",
+    "notes": "Extraction from the Nature Scientific Reports open-access article. Effect sizes are approximate ranges drawn from the published abstract and figures; precise values require full-text verification."
+  },
+  "title": "Hesperetin reduces neuronal death in an SH-SY5Y model of oxidative stress via NF-κB inhibition",
+  "subtitle_or_tagline": "A citrus flavonoid with documented Caspase-3 pathway modulation and an established TCM safety record.",
+  "topic": "Hesperetin (a citrus flavonoid) protects differentiated SH-SY5Y neurons from H2O2-induced oxidative stress by reducing NF-κB activation, lowering intracellular ROS, and modulating downstream apoptotic markers including Caspase-3.",
+  "architecture": {
+    "components": [
+      {
+        "name": "Oxidative-stress model",
+        "role": "H2O2 challenge on differentiated SH-SY5Y neurons to induce apoptotic cascade."
+      },
+      {
+        "name": "Hesperetin treatment",
+        "role": "Dose-response pre/post incubation with the flavonoid."
+      },
+      {
+        "name": "Mechanistic readouts",
+        "role": "MTT viability, LDH release, intracellular ROS (DCFH-DA), NF-κB luciferase, western blot for Caspase-3 / Bax / Bcl-2."
+      }
+    ],
+    "data_flow": "SH-SY5Y differentiation → H2O2 insult ± Hesperetin → viability / ROS / NF-κB / apoptotic-marker panel → mechanistic interpretation.",
+    "input_types": [
+      "differentiated SH-SY5Y cells",
+      "H2O2",
+      "Hesperetin (citrus flavonoid)"
+    ],
+    "output_types": [
+      "MTT viability %",
+      "LDH release %",
+      "intracellular ROS level",
+      "NF-κB activity (luciferase)",
+      "Caspase-3 / Bax / Bcl-2 protein expression (western blot)"
+    ]
+  },
+  "workflow_steps": [
+    "Step 1 - Differentiate SH-SY5Y cells (retinoic acid protocol).",
+    "Step 2 - Apply H2O2 insult to model oxidative stress.",
+    "Step 3 - Treat with Hesperetin at graded doses.",
+    "Step 4 - Read out viability (MTT), cytotoxicity (LDH), ROS (DCFH-DA).",
+    "Step 5 - Quantify NF-κB activity and apoptotic markers (Caspase-3, Bax, Bcl-2).",
+    "Step 6 - Establish mechanistic chain: ROS → NF-κB → Caspase-3 → apoptosis."
+  ],
+  "modalities_covered": [
+    "cell viability assay (MTT)",
+    "cytotoxicity assay (LDH)",
+    "ROS quantification (DCFH-DA)",
+    "NF-κB reporter assay",
+    "western blot (Caspase-3, Bax, Bcl-2)"
+  ],
+  "key_claims": [
+    "Hesperetin pre-treatment significantly rescued SH-SY5Y viability under H2O2 insult.",
+    "Intracellular ROS was reduced by Hesperetin in a dose-dependent manner.",
+    "NF-κB luciferase activity was attenuated, consistent with anti-inflammatory mechanism.",
+    "Caspase-3 and Bax protein levels were lowered; Bcl-2 was raised — consistent with apoptosis suppression.",
+    "The mechanism places Hesperetin upstream of Caspase-3, distinct from direct active-site inhibition."
+  ],
+  "effect_sizes": [
+    {
+      "assay": "MTT cell viability (representative rescue)",
+      "baseline_percent": 50.0,
+      "treated_percent": 78.0,
+      "direction": "rescue",
+      "delta_percent": 28.0,
+      "unit": "% viability vs control",
+      "model": "differentiated SH-SY5Y + H2O2",
+      "note": "Approximate; full-text verification required."
+    }
+  ],
+  "caveats_or_warnings": [
+    "Effect sizes are approximate; precise values require full-text verification.",
+    "Hesperetin's mechanism is upstream (ROS / NF-κB) rather than direct Caspase-3 active-site binding — distinct from Magnoflorine's docking-predicted direct inhibition.",
+    "SH-SY5Y is a cell line, not primary tissue; in vivo validation required.",
+    "Bioavailability of dietary flavonoids is poor; formulation strategy required for therapeutic use."
+  ],
+  "citations": [
+    {
+      "type": "author",
+      "value": "Shafiee L. et al."
+    },
+    {
+      "type": "journal",
+      "value": "Nature Scientific Reports"
+    },
+    {
+      "type": "doi",
+      "value": "10.1038/s41598-025-25777-9"
+    },
+    {
+      "type": "url",
+      "value": "https://www.nature.com/articles/s41598-025-25777-9"
+    }
+  ],
+  "visual_elements": [
+    "MTT dose-response bars",
+    "LDH release bars",
+    "ROS DCFH-DA histogram",
+    "NF-κB luciferase bars",
+    "western blot panels (Caspase-3, Bax, Bcl-2)"
+  ],
+  "keywords_for_concept_matching": [
+    "Hesperetin",
+    "flavonoid",
+    "Caspase-3",
+    "NF-kB",
+    "ROS",
+    "apoptosis",
+    "SH-SY5Y",
+    "neuroprotection",
+    "oxidative stress",
+    "citrus"
+  ],
+  "potential_concept_card_links": [
+    "drug-target-binding-affinity",
+    "enzyme-kinetics-haldane",
+    "interpretability-vs-certification"
+  ],
+  "molecule_metadata": {
+    "name": "Hesperetin",
+    "class": "Flavanone (citrus)",
+    "molecular_weight_da": 302.28,
+    "source": "Citrus fruits (oranges, lemons, grapefruit); aglycone of hesperidin.",
+    "notable": "Planar flavonoid scaffold — better BBB permeability than the aporphine alkaloid Magnoflorine. BBB predictor should score this higher.",
+    "tradition": "Dietary intake; TCM uses citrus peel (chenpi) rich in hesperetin glycosides."
+  },
+  "extraction_timestamp": "2026-11-16T15:30:00.000Z",
+  "extraction_source": "osiris-reverse-engineer-v1"
+}

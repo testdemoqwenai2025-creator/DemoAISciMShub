@@ -1,0 +1,90 @@
+{
+  "generated_at": "2026-11-16T07:20:45.106258+00:00",
+  "predictor_version": "rule-based-v1",
+  "predictor_notes": "Heuristic BBB permeability scorer using MW, logP, HBD, TPSA, charge. Class-based property estimates are used when SMILES is unavailable. Replace with an ML model (BBB Martel 2013 dataset or newer GNN-based BBB permeability predictors) for production drug-discovery use.",
+  "scoring_rules": {
+    "mw_ideal": "<= 450 Da",
+    "logp_ideal": "1.0 - 4.0",
+    "hbd_ideal": "<= 3",
+    "tpsa_ideal": "<= 70 Ų",
+    "charge_rule": "permanent cations penalized (0.3x multiplier)",
+    "class_labels": {
+      "high": ">= 0.7",
+      "medium": "0.4 - 0.7",
+      "low": "< 0.4"
+    }
+  },
+  "predictions": [
+    {
+      "extraction_slug": "flavonoids-mitochondrial-cascade-2024",
+      "molecule_name": "Flavonoid library (multiple structures)",
+      "molecule_class": "Polyphenolic natural products (flavones, flavanones, flavonols, isoflavones)",
+      "mw_da": 270.24,
+      "logp_estimate": 2.5,
+      "hbd_estimate": 3,
+      "tpsa_estimate": 90,
+      "charge": "neutral",
+      "bbb_score": 0.9,
+      "bbb_class": "high",
+      "confidence": "high",
+      "flags": [
+        "tpsa_borderline"
+      ],
+      "rationale": "MW=270 Da (OK); logP≈2.5 (OK); HBD≈3 (OK); TPSA≈90 (high); charge=neutral"
+    },
+    {
+      "extraction_slug": "hesperetin-shsy5y-neuroprotection-2025",
+      "molecule_name": "Hesperetin",
+      "molecule_class": "Flavanone (citrus)",
+      "mw_da": 302.28,
+      "logp_estimate": 2.5,
+      "hbd_estimate": 3,
+      "tpsa_estimate": 90,
+      "charge": "neutral",
+      "bbb_score": 0.9,
+      "bbb_class": "high",
+      "confidence": "high",
+      "flags": [
+        "tpsa_borderline"
+      ],
+      "rationale": "MW=302 Da (OK); logP≈2.5 (OK); HBD≈3 (OK); TPSA≈90 (high); charge=neutral"
+    },
+    {
+      "extraction_slug": "magnoflorine-caspase3-neuroprotection-2026",
+      "molecule_name": "Magnoflorine",
+      "molecule_class": "Aporphine alkaloid (quaternary ammonium)",
+      "mw_da": 342.41,
+      "logp_estimate": 1.5,
+      "hbd_estimate": 2,
+      "tpsa_estimate": 60,
+      "charge": "cation",
+      "bbb_score": 0.24,
+      "bbb_class": "low",
+      "confidence": "high",
+      "flags": [
+        "permanent_cation",
+        "cation_penalty_applied"
+      ],
+      "rationale": "MW=342 Da (OK); logP≈1.5 (OK); HBD≈2 (OK); TPSA≈60 (OK); charge=cation"
+    },
+    {
+      "extraction_slug": "pimecrolimus-shsy5y-apoptosis-2025",
+      "molecule_name": "Pimecrolimus",
+      "molecule_class": "Macrolactam (calcineurin inhibitor; FK506 analog)",
+      "mw_da": 810.47,
+      "logp_estimate": 3.5,
+      "hbd_estimate": 4,
+      "tpsa_estimate": 130,
+      "charge": "neutral",
+      "bbb_score": 0.5,
+      "bbb_class": "medium",
+      "confidence": "high",
+      "flags": [
+        "mw_very_high",
+        "hbd_borderline",
+        "tpsa_high"
+      ],
+      "rationale": "MW=810 Da (high); logP≈3.5 (OK); HBD≈4 (high); TPSA≈130 (high); charge=neutral"
+    }
+  ]
+}

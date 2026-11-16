@@ -36,6 +36,61 @@
     "Kainic acid raised Caspase-3 expression; Magnoflorine reduced that elevation.",
     "Computational prediction → biological hypothesis → experimental validation is the demonstrated pipeline."
   ],
+  "effect_sizes": [
+    { "assay": "MTT cell viability", "baseline_percent": 46.9, "treated_percent": 85.2, "direction": "rescue", "delta_percent": 38.3, "unit": "% viability relative to control", "model": "differentiated SH-SY5Y + kainic acid" },
+    { "assay": "LDH release (cytotoxicity)", "baseline_percent": 286.2, "treated_percent": 132.9, "direction": "reduction", "delta_percent": -153.3, "unit": "% LDH release relative to control", "model": "differentiated SH-SY5Y + kainic acid" },
+    { "assay": "Annexin-V early apoptosis", "baseline_percent": 29.8, "treated_percent": 13.4, "direction": "reduction", "delta_percent": -16.4, "unit": "% early-apoptotic cells", "model": "differentiated SH-SY5Y + kainic acid" },
+    { "assay": "Annexin-V late apoptosis", "baseline_percent": 34.9, "treated_percent": 3.1, "direction": "reduction", "delta_percent": -31.8, "unit": "% late-apoptotic cells", "model": "differentiated SH-SY5Y + kainic acid" }
+  ],
+  "deep_insights": {
+    "summary": "This paper is one data point on a much larger curve — the curve of computational neuroprotection finding its downstream value. The molecule is less interesting than the structural pattern it reveals.",
+    "what_this_paper_signals": [
+      {
+        "insight": "The computational-to-experimental gap has compressed from years to months.",
+        "detail": "Docking → 200 ns MD → cell panel was once a 5–10 year drug-discovery arc. This paper did it end-to-end. The bottleneck has moved downstream — into BBB penetration, in-vivo PK/PD, and human translation. Anyone building tooling should stop optimizing the upstream (docking, MD) and start optimizing the downstream (BBB prediction, translational biomarkers)."
+      },
+      {
+        "insight": "Caspase-3 is a hub target, not a single-disease target.",
+        "detail": "It sits downstream of Aβ, MPTP, rotenone, oxygen-glucose deprivation, tau oligomers, α-synuclein, and stroke ischemia. Inhibit the hub and you get leverage across Alzheimer's, Parkinson's, ALS, TBI, stroke, and HIE. One molecule can show effects in seemingly disparate models not because it is magic but because the target is a funnel. This changes the commercial logic: a platform asset with multiple shots on goal, not a single-indication drug."
+      },
+      {
+        "insight": "Natural products are systematically undervalued by drug-likeness filters.",
+        "detail": "Magnoflorine (aporphine alkaloid, 4 fused rings, stereocenter, ~342 Da) violates Lipinski-ish heuristics calibrated on flat synthetic libraries. Yet it docks, it is stable in MD, and it works in cells. Lipinski was built on oral small-molecule assumptions; CNS natural products live in a different region of chemical space. A quiet revaluation is underway."
+      }
+    ],
+    "futuristic_deployment_scenarios": [
+      {
+        "tier": "Tier 1 — high probability, high value (3–7 year horizon)",
+        "scenarios": [
+          { "name": "Acute stroke / TBI neuroprotectant", "rationale": "Caspase-3 activation peaks 6–24 h post-ischemia. We have zero FDA-approved neuroprotectants — only tPA for clot lysis with a 4.5 h window. A prehospital-administrable (intranasal/sublingual) Caspase-3 inhibitor extending the window to 24 h is a $5–10B opportunity. The decisive variable is BBB penetration half-life ≤ ~10 min." },
+          { "name": "Newborn hypoxic-ischemic encephalopathy (HIE)", "rationale": "Current standard is therapeutic hypothermia, which only modestly reduces disability. HIE affects ~1–6/1000 live births globally. Caspase-3 mediated apoptosis is the central death pathway. Orphan designation, premium pricing, shorter trial pathway, ethical urgency that accelerates regulatory review. The single most underpriced indication for Caspase-3 inhibition." },
+          { "name": "Companion diagnostics for neuroprotective drug response", "rationale": "CASP3, APAF1, BAX, BCL2 polymorphisms affect drug response. A pharmacogenomic panel that stratifies who will benefit from a given neuroprotectant is a parallel diagnostic business — higher margins, shorter time-to-revenue, and it de-risks the therapeutic. The data layer is the moat." }
+        ]
+      },
+      {
+        "tier": "Tier 2 — medium probability, transformative value (5–12 year horizon)",
+        "scenarios": [
+          { "name": "AI-driven natural-product repurposing at scale", "rationale": "~300,000 known natural products across TCM, Ayurveda, ethnobotany, marine chemistry. Maybe 5% have been screened against modern targets. A platform that pre-computes (dock + 200 ns MD + ML scoring) against 500 disease-relevant targets produces ~150M pairs, of which maybe 50,000 are true validated leads. License predictions back to pharma at $1–10M per program. The predictions compound with every validated hit." },
+          { "name": "Calibrated senolytic-neuroprotective combinations", "rationale": "Senescent neurons accumulate with age and are cleared by apoptosis including Caspase-3. A *partial* Caspase-3 inhibitor (not full suppression) could allow senescent cell clearance while protecting healthy neurons — a precision medicine problem requiring ML dose-response modeling. Companion biomarkers (serum NfL, GFAP) close the loop. This is the longevity-market play with a real mechanism." },
+          { "name": "Multimodal combination therapy design", "rationale": "Caspase-3 inhibition + autophagy enhancement (mTOR) + neurotrophic support (BDNF/TrkB) + mitochondrial stabilization (SS-31 analogs). The combinatorial space is enormous. AI that models disease trajectories and recommends staged combinations is genuinely unsolved. The extraction's `potential_concept_card_links` structure is essentially the seed of this graph." }
+        ]
+      },
+      {
+        "tier": "Tier 3 — lower probability, moonshot value (10–20 year horizon)",
+        "scenarios": [
+          { "name": "Precision psychiatry via apoptotic modulation", "rationale": "Chronic stress induces hippocampal apoptosis; Caspase-3 activation correlates with depression and PTSD severity. Adjunct Caspase-3 inhibition alongside SSRIs in treatment-resistant depression is plausible. Magnoflorine's centuries of TCM safety use de-risks the regulatory path. Lower probability because psychiatric drug development is brutal, but the patient populations are vast." },
+          { "name": "Pre-symptomatic neurodegenerative prevention", "rationale": "If Caspase-3 activation is an early event (it is, in many models), low-dose prophylactic inhibition in genetically high-risk populations (APOE4 homozygotes, LRRK2 carriers) could delay onset by years. Most speculative — requires decades-long trials — but prevention is worth 10–100x treatment." }
+        ]
+      }
+    ],
+    "strategic_implication_for_platform": "The Magnoflorine paper is not the product. It is the proof that the extraction workflow works. Turn the extraction workflow into a structured knowledge graph: every paper contributes a tuple (molecule, target, cell line, effect size, mechanism, evidence strength). After ~1,000 such extractions across neuroprotection, oncology, immunology, you have a queryable graph that answers 'what are the underexplored Caspase-3 inhibitors with BBB-penetrant scaffolds?' — a drug-discovery query, not a content query. Pharma pays $1–10M for those. The graph compounds. Within 12–18 months you have something no one else has: a living, curated map of natural product → mechanism → effect space.",
+    "next_actions_if_proceeding": [
+      "Build the extraction schema to capture (molecule, target, cell line, effect_size) as explicit structured fields — not narrative. The effect_sizes field on this extraction is the seed.",
+      "Backfill ~50 more neuroprotection papers using the same workflow. The graph needs density before it is useful.",
+      "Add a BBB-penetration predictor (open ML models exist). Tag every extracted molecule with predicted BBB class.",
+      "Generate a 'neuroprotection landscape' analytical view from the aggregated graph — the marketing asset that positions the platform as a discovery tool, not a content site."
+    ]
+  },
   "caveats_or_warnings": [
     "Docking + 200 ns MD is a hypothesis generator, not proof of binding or mechanism.",
     "SH-SY5Y is a cell line, not primary tissue — in vivo validation is still required.",
@@ -55,6 +110,15 @@
     "enzyme-kinetics-haldane",
     "interpretability-vs-certification"
   ],
+  "molecule_metadata": {
+    "name": "Magnoflorine",
+    "class": "Aporphine alkaloid (quaternary ammonium)",
+    "molecular_weight_da": 342.41,
+    "source": "Plant natural product (Magnolia, Coptis, Tinospora, Aristolochia species)",
+    "smiles_placeholder": "C[N+]1=CCc2cc(O)c3OCOc3c2C1Cc1c(cc(O)c2c1OCO2)CC1(C)CCc2cc(O)c3OCOc3c2C1[N+](C)(=O)[Note:示意SMILES, not canonical]",
+    "notable": "Quaternary ammonium cation — affects BBB permeability. BBB predictor should flag this.",
+    "tradition": "Centuries of TCM use (safety record), modern pharmacology from ~1990s."
+  },
   "extraction_timestamp": "2026-11-16T14:45:00.000Z",
   "extraction_source": "osiris-reverse-engineer-v1"
 }

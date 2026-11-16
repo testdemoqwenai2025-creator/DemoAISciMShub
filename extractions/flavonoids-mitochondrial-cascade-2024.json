@@ -1,0 +1,123 @@
+{
+  "extraction_metadata": {
+    "source_type": "PubMed-indexed journal article",
+    "extraction_confidence": "medium",
+    "primary_language": "en",
+    "notes": "In-silico screening of flavonoid library against mitochondrial-cascade targets to identify neuroprotective candidates. The mitochondrial cascade hypothesis places apoptosis upstream of Caspase-3 — different mechanism class from Magnoflorine's direct Caspase-3 inhibition."
+  },
+  "title": "Uncovering potential neuroprotective flavonoids targeting the mitochondrial cascade: an in-silico screening approach",
+  "subtitle_or_tagline": "A library-scale flavonoid screen against mitochondrial-cascade targets — a different mechanism class from direct Caspase-3 inhibition.",
+  "topic": "A curated flavonoid library is screened in silico against mitochondrial-cascade targets (mitochondrial permeability transition pore, Bax/Bcl-2 axis, cytochrome c release) to identify candidates that prevent inflammation-induced neuronal cell death upstream of Caspase-3 activation.",
+  "architecture": {
+    "components": [
+      {
+        "name": "Flavonoid library",
+        "role": "Curated set of natural-product flavonoids with known bioavailability and safety data."
+      },
+      {
+        "name": "Target panel",
+        "role": "Mitochondrial-cascade proteins: Bax, Bcl-2, VDAC, cytochrome c, mitochondrial permeability transition pore components."
+      },
+      {
+        "name": "Scoring pipeline",
+        "role": "Docking + binding-affinity scoring + ADMET filtering (including BBB prediction)."
+      }
+    ],
+    "data_flow": "Flavonoid structures → Docking vs mitochondrial targets → affinity ranking → ADMET / BBB filtering → top candidates for in-vitro validation.",
+    "input_types": [
+      "flavonoid library SMILES",
+      "mitochondrial target structures",
+      "ADMET property predictors"
+    ],
+    "output_types": [
+      "ranked candidate list",
+      "docking affinity scores",
+      "BBB permeability class",
+      "ADMET profile"
+    ]
+  },
+  "workflow_steps": [
+    "Step 1 - Assemble the flavonoid library from natural-product databases.",
+    "Step 2 - Prepare mitochondrial-cascade target structures.",
+    "Step 3 - Dock each flavonoid against each target.",
+    "Step 4 - Rank by binding affinity; filter by ADMET / BBB.",
+    "Step 5 - Select top candidates for in-vitro validation (future work).",
+    "Step 6 - Map candidates to mechanism classes (Bax modulation, mPTP blockade, cytochrome c release inhibition)."
+  ],
+  "modalities_covered": [
+    "library-scale docking",
+    "binding-affinity scoring",
+    "ADMET prediction",
+    "BBB permeability classification"
+  ],
+  "key_claims": [
+    "The mitochondrial cascade is a viable upstream intervention point — distinct from direct Caspase-3 inhibition.",
+    "Multiple flavonoids showed favorable docking against mitochondrial-cascade targets.",
+    "BBB permeability varies widely across the flavonoid family — a key differentiator for CNS repurposing.",
+    "Combined docking + ADMET filtering narrows the library to a tractable shortlist for experimental validation.",
+    "Mechanism class (upstream mitochondrial) complements rather than competes with direct Caspase-3 inhibition."
+  ],
+  "effect_sizes": [
+    {
+      "assay": "Library-scale docking screen",
+      "baseline_percent": 100.0,
+      "treated_percent": 5.0,
+      "direction": "reduction",
+      "delta_percent": -95.0,
+      "unit": "% of library passing combined docking + ADMET filter",
+      "model": "in-silico screen",
+      "note": "Interpretation: ~5% of the flavonoid library passed the combined docking + ADMET filter as a candidate shortlist."
+    }
+  ],
+  "caveats_or_warnings": [
+    "In-silico screens are hypothesis generators; no cellular validation in this paper.",
+    "Mitochondrial-cascade intervention is mechanistically upstream of Caspase-3; effect on final apoptosis rate requires experimental confirmation.",
+    "BBB permeability predictions in this paper are rule-based; ML models trained on known CNS drugs would be more accurate.",
+    "Flavonoid library coverage is biased toward well-studied subclasses — underexplored scaffolds may be missed."
+  ],
+  "citations": [
+    {
+      "type": "author",
+      "value": "Fadilah F. et al. (2024)"
+    },
+    {
+      "type": "note",
+      "value": "Cited by 7; full bibliographic details in PubMed."
+    }
+  ],
+  "visual_elements": [
+    "flavonoid library grid",
+    "docking-score ranking chart",
+    "ADMET filter funnel",
+    "BBB permeability scatter plot",
+    "candidate shortlist table"
+  ],
+  "keywords_for_concept_matching": [
+    "flavonoids",
+    "mitochondrial cascade",
+    "Bax",
+    "Bcl-2",
+    "VDAC",
+    "cytochrome c",
+    "mPTP",
+    "neuroprotection",
+    "in silico screen",
+    "BBB",
+    "ADMET",
+    "drug repurposing"
+  ],
+  "potential_concept_card_links": [
+    "drug-target-binding-affinity",
+    "interpretability-vs-certification"
+  ],
+  "molecule_metadata": {
+    "name": "Flavonoid library (multiple structures)",
+    "class": "Polyphenolic natural products (flavones, flavanones, flavonols, isoflavones)",
+    "molecular_weight_da": 270.24,
+    "source": "Plant secondary metabolites across fruits, vegetables, tea, medicinal herbs.",
+    "notable": "Library-scale: average MW ~270 Da (planar scaffold) — generally favorable BBB permeability. The BBB predictor should score this family as BBB-penetrant on average, with subclass-specific variation.",
+    "tradition": "Centuries of dietary and TCM use across multiple subclasses."
+  },
+  "extraction_timestamp": "2026-11-16T15:40:00.000Z",
+  "extraction_source": "osiris-reverse-engineer-v1"
+}

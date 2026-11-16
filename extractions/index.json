@@ -374,5 +374,68 @@
       "interpretability-vs-certification"
     ],
     "notes": "Full JSON at /extractions/magnoflorine-caspase3-neuroprotection-2026.json. Author explicitly notes in vivo validation is the required next step before any translational claim. The docking -> MD -> cell-assay chain is a textbook in-silico-to-in-vitro pipeline and pairs naturally with OSIRIS's interpretability-vs-certification thesis (computational predictions need experimental certification)."
+  },
+  {
+    "slug": "hesperetin-shsy5y-neuroprotection-2025",
+    "title": "Hesperetin reduces neuronal death in an SH-SY5Y model of oxidative stress via NF-κB inhibition",
+    "source_type": "PubMed-indexed journal article (Nature Sci Rep, open access)",
+    "extracted_at": "2026-11-16T15:30:00.000Z",
+    "author": "Shafiee L. et al. (2025)",
+    "topic": "Citrus flavonoid Hesperetin protects differentiated SH-SY5Y neurons from H2O2-induced oxidative stress by reducing intracellular ROS, attenuating NF-κB activity, and lowering Caspase-3 / Bax while raising Bcl-2. Mechanism is upstream of Caspase-3, distinct from direct active-site inhibition.",
+    "key_claims": [
+      "Hesperetin rescued SH-SY5Y viability under H2O2 insult",
+      "Intracellular ROS reduced dose-dependently",
+      "NF-κB activity attenuated",
+      "Caspase-3 / Bax lowered, Bcl-2 raised",
+      "Mechanism is upstream of Caspase-3 (ROS → NF-κB → Caspase-3)"
+    ],
+    "matched_concept_ids": [
+      "drug-target-binding-affinity",
+      "enzyme-kinetics-haldane",
+      "interpretability-vs-certification"
+    ],
+    "notes": "Full JSON at /extractions/hesperetin-shsy5y-neuroprotection-2025.json. Distinct from Magnoflorine: upstream mechanism vs direct Caspase-3 inhibition. Planar flavonoid scaffold predicts better BBB permeability than Magnoflorine (aporphine alkaloid)."
+  },
+  {
+    "slug": "pimecrolimus-shsy5y-apoptosis-2025",
+    "title": "Effect of Pimecrolimus on apoptotic pathways in H2O2-treated SH-SY5Y cells: molecular docking + in vitro validation",
+    "source_type": "PubMed-indexed journal article (PMC11831029, open access)",
+    "extracted_at": "2026-11-16T15:35:00.000Z",
+    "author": "Kocanci FG. et al. (2025)",
+    "topic": "FDA-approved calcineurin inhibitor Pimecrolimus is docked against apoptotic-pathway proteins and validated in vitro on differentiated SH-SY5Y neurons under H2O2 insult. Docking-guided repurposing hypothesis confirmed: reduced apoptosis and Caspase-3 activity, with calcineurin activity modulation confirming the on-target mechanism.",
+    "key_claims": [
+      "Pimecrolimus docks favorably into apoptotic-pathway proteins",
+      "Pre-treatment rescued SH-SY5Y viability under H2O2",
+      "Annexin-V positive population reduced",
+      "Caspase-3 activity attenuated",
+      "Calcineurin activity modulation confirms on-target mechanism",
+      "FDA-approved drug de-risks translational path"
+    ],
+    "matched_concept_ids": [
+      "drug-target-binding-affinity",
+      "enzyme-kinetics-haldane",
+      "interpretability-vs-certification"
+    ],
+    "notes": "Full JSON at /extractions/pimecrolimus-shsy5y-apoptosis-2025.json. Repurposing case study: an FDA-approved dermatology drug moved into neuroprotection. MW 810 Da macrolactam — BBB predictor should flag as impermeable; formulation strategy (intranasal, nanoparticle) required."
+  },
+  {
+    "slug": "flavonoids-mitochondrial-cascade-2024",
+    "title": "Uncovering potential neuroprotective flavonoids targeting the mitochondrial cascade: an in-silico screening approach",
+    "source_type": "PubMed-indexed journal article (cited by 7)",
+    "extracted_at": "2026-11-16T15:40:00.000Z",
+    "author": "Fadilah F. et al. (2024)",
+    "topic": "Library-scale in-silico screen of flavonoids against mitochondrial-cascade targets (Bax, Bcl-2, VDAC, cytochrome c, mPTP) to identify neuroprotective candidates upstream of Caspase-3. Different mechanism class from Magnoflorine's direct Caspase-3 inhibition — complementary rather than competing.",
+    "key_claims": [
+      "Mitochondrial cascade is a viable upstream intervention point",
+      "Multiple flavonoids showed favorable docking against mitochondrial targets",
+      "BBB permeability varies widely across the flavonoid family",
+      "Combined docking + ADMET filtering narrows library to ~5% shortlist",
+      "Upstream mechanism complements direct Caspase-3 inhibition"
+    ],
+    "matched_concept_ids": [
+      "drug-target-binding-affinity",
+      "interpretability-vs-certification"
+    ],
+    "notes": "Full JSON at /extractions/flavonoids-mitochondrial-cascade-2024.json. The third mechanism class in the neuroprotection graph: upstream mitochondrial modulation. Combined with Magnoflorine (direct Caspase-3) and Hesperetin (ROS/NF-κB), the graph now spans three distinct intervention points in the apoptosis cascade."
   }
 ]
