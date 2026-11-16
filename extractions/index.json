@@ -351,5 +351,28 @@
       "lung-rads"
     ],
     "notes": "Full JSON at /extractions/prostate-screening-distribution-shift-2026.json"
+  },
+  {
+    "slug": "magnoflorine-caspase3-neuroprotection-2026",
+    "title": "Neuroprotective Effect of Magnoflorine Through Inhibition of Caspase-3-Mediated Neuronal Apoptosis: In Silico to In Vitro Validation",
+    "source_type": "LinkedIn infographic / graphical abstract (Wiley Open Access)",
+    "extracted_at": "2026-11-16T14:45:00.000Z",
+    "author": "Aloush Ali Gharib (Bioinformatics Research Scholar; computational contributor)",
+    "topic": "Magnoflorine is computationally predicted by molecular docking + 200 ns MD to bind Caspase-3, then validated in vitro on differentiated SH-SY5Y cells where it rescues viability (46.9%->85.2%), lowers LDH (286.2%->132.9%), suppresses early/late apoptosis (29.8%->13.4%, 34.9%->3.1%), and reduces kainic-acid-elevated Caspase-3 expression.",
+    "key_claims": [
+      "Magnoflorine docked into Caspase-3 and formed a stable complex across 200 ns of MD",
+      "Trajectory stability is non-stationary: kainic-acid complex more stable early, Magnoflorine complex more stable late",
+      "Viability rescued 46.9% -> 85.2%; LDH 286.2% -> 132.9%",
+      "Early apoptosis 29.8% -> 13.4%; late apoptosis 34.9% -> 3.1%",
+      "Kainic acid raised Caspase-3 expression; Magnoflorine reduced that elevation",
+      "Computational prediction -> biological hypothesis -> experimental validation pipeline demonstrated"
+    ],
+    "matched_concept_ids": [
+      "drug-target-binding-affinity",
+      "gpcr-conformational-landscape",
+      "enzyme-kinetics-haldane",
+      "interpretability-vs-certification"
+    ],
+    "notes": "Full JSON at /extractions/magnoflorine-caspase3-neuroprotection-2026.json. Author explicitly notes in vivo validation is the required next step before any translational claim. The docking -> MD -> cell-assay chain is a textbook in-silico-to-in-vitro pipeline and pairs naturally with OSIRIS's interpretability-vs-certification thesis (computational predictions need experimental certification)."
   }
 ]

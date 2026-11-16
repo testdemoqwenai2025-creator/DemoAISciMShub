@@ -1,0 +1,60 @@
+{
+  "extraction_metadata": {
+    "source_type": "LinkedIn infographic / graphical abstract",
+    "extraction_confidence": "high",
+    "primary_language": "en",
+    "notes": "Extracted from a LinkedIn post by Aloush Ali Gharib (Bioinformatics Research Scholar) sharing the published Wiley open-access article. The post embeds a custom graphical abstract spanning computational (molecular docking + 200 ns MD) and in vitro (SH-SY5Y cellular) findings."
+  },
+  "title": "Neuroprotective Effect of Magnoflorine Through Inhibition of Caspase-3-Mediated Neuronal Apoptosis: In Silico to In Vitro Validation",
+  "subtitle_or_tagline": "From computer → molecules → proteins → cells: a docking-prediction validated in neuronal culture.",
+  "topic": "Magnoflorine (a plant alkaloid) is computationally predicted by molecular docking + 200 ns molecular dynamics to bind Caspase-3, then validated in vitro on differentiated SH-SY5Y cells where it rescues viability, lowers LDH release, suppresses apoptosis, and reduces Caspase-3 expression elevated by kainic acid.",
+  "architecture": {
+    "components": [
+      { "name": "Molecular Docking", "role": "Snap-shot prediction of Magnoflorine ↔ Caspase-3 binding pose and affinity." },
+      { "name": "200 ns Molecular Dynamics", "role": "Temporal refinement of the docking pose — converts the static snapshot into a stability trajectory (RMSD / fluctuation over time)." },
+      { "name": "SH-SY5Y Cellular Assay Panel", "role": "In vitro validation on differentiated dopaminergic-like neurons: MTT viability, LDH damage, Annexin-V apoptosis flow cytometry, Caspase-3 immunofluorescence." }
+    ],
+    "data_flow": "In silico: Magnoflorine structure → Docking vs Caspase-3 → 200 ns MD trajectory → predicted neuroprotective hypothesis. In vitro: SH-SY5Y + Kainic acid ± Magnoflorine → MTT/LDH/Annexin-V/Caspase-3 panels → cellular confirmation.",
+    "input_types": ["Magnoflorine SMILES / 3D structure", "Caspase-3 crystal structure", "differentiated SH-SY5Y cells", "kainic acid neurotoxin"],
+    "output_types": ["docking pose + binding affinity", "200 ns MD RMSD trajectory", "MTT viability %", "LDH release %", "Annexin-V apoptosis %", "Caspase-3 expression (fluorescence)"]
+  },
+  "workflow_steps": [
+    "Step 1 - Pose the question: does Magnoflorine protect neurons, and is Caspase-3 the mechanism?",
+    "Step 2 - In silico: molecular docking of Magnoflorine into the Caspase-3 active site.",
+    "Step 3 - In silico: 200 ns MD simulation to track complex stability over time (RMSD, fluctuation).",
+    "Step 4 - In vitro: differentiate SH-SY5Y cells, induce damage with kainic acid, treat with Magnoflorine.",
+    "Step 5 - In vitro: read out MTT viability, LDH release, Annexin-V apoptosis, Caspase-3 expression.",
+    "Step 6 - Connect the chain: molecular interaction → MD stability → viability → apoptosis → Caspase-3."
+  ],
+  "modalities_covered": ["molecular docking", "molecular dynamics (200 ns)", "cell viability assay (MTT)", "cytotoxicity assay (LDH)", "flow cytometry (Annexin-V)", "immunofluorescence (Caspase-3)"],
+  "key_claims": [
+    "Magnoflorine docked into Caspase-3 and formed a stable complex across 200 ns of MD.",
+    "Trajectory stability is non-stationary: kainic-acid complex was more stable early, Magnoflorine complex more stable late.",
+    "Magnoflorine rescued SH-SY5Y viability from 46.9% (KA) to 85.2% (KA + Magnoflorine).",
+    "LDH release fell from 286.2% (KA) to 132.9% (KA + Magnoflorine).",
+    "Early apoptosis fell from 29.8% to 13.4%; late apoptosis from 34.9% to 3.1%.",
+    "Kainic acid raised Caspase-3 expression; Magnoflorine reduced that elevation.",
+    "Computational prediction → biological hypothesis → experimental validation is the demonstrated pipeline."
+  ],
+  "caveats_or_warnings": [
+    "Docking + 200 ns MD is a hypothesis generator, not proof of binding or mechanism.",
+    "SH-SY5Y is a cell line, not primary tissue — in vivo validation is still required.",
+    "Findings support a potential neuroprotective role and Caspase-3 pathway involvement; they do NOT establish Magnoflorine as a treatment.",
+    "Author explicitly notes in vivo work is the next required step before any translational claim."
+  ],
+  "citations": [
+    { "type": "author", "value": "Aloush Ali Gharib (Bioinformatics Research Scholar, contributor to computational side)" },
+    { "type": "journal", "value": "Journal of Biochemical and Molecular Toxicology (Wiley, Open Access)" },
+    { "type": "doi", "value": "10.1002/jbt.71171" }
+  ],
+  "visual_elements": ["title banner with brain imagery + journal branding", "4 introductory panels (clinical problem, apoptosis, caspase-3, magnoflorine)", "research-goal banner", "study-workflow infographic with From-Computer-to-Cell icons", "RMSD line chart with two colored phases", "4 in-vitro bar charts (viability, LDH, apoptosis, Caspase-3)", "fluorescence-microscopy panels (Control, KA, KA+Mag)", "conclusion / why-it-matters / next-steps footer"],
+  "keywords_for_concept_matching": ["molecular docking", "molecular dynamics", "200 ns MD", "Caspase-3", "Magnoflorine", "apoptosis", "neuroprotection", "SH-SY5Y", "kainic acid", "in silico", "in vitro", "binding affinity", "enzyme inhibition", "caspase", "computational biology"],
+  "potential_concept_card_links": [
+    "drug-target-binding-affinity",
+    "gpcr-conformational-landscape",
+    "enzyme-kinetics-haldane",
+    "interpretability-vs-certification"
+  ],
+  "extraction_timestamp": "2026-11-16T14:45:00.000Z",
+  "extraction_source": "osiris-reverse-engineer-v1"
+}
