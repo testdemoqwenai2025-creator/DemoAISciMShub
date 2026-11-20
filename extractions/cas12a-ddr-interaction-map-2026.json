@@ -1,0 +1,154 @@
+{
+  "extraction_metadata": {
+    "source_type": "peer-reviewed journal article + open companion database",
+    "extraction_confidence": "high",
+    "primary_language": "en",
+    "notes": "Extracted from the Nature Biotechnology article and the companion CicciaLab DDR Genetic Interactions Database. This extraction is the keystone reference for the AISciMShub Phase 1 DDR-Neuro bridge — the article's architectural pattern (combinatorial perturbation of a coherent gene set, published as an open queryable map) is what the platform is porting to neuroprotection."
+  },
+
+  "title": "Cas12a-Based Combinatorial Knockout Screens Define the Genetic Architecture of the DNA Damage Response",
+
+  "subtitle_or_tagline": "From single-gene stories to network stories: a 233-gene pairwise knockout map with >750 high-confidence genetic interactions and 2,029 AlphaFold-multimer physical rationalizations.",
+
+  "topic": "The authors used a Cas12a-based CRISPR knockout system to combinatorially perturb 233 DNA damage response (DDR) genes — both individually and in 27,028 pairwise combinations — across MCF10A and TP53-deleted RPE-1 cell lines. The GRAPE pipeline quantified pairwise fitness effects, yielding >750 high-confidence genetic interactions (FDR < 0.1) spanning synthetic lethal (negative) and buffering (positive) relationships. AlphaFold-Multimer predictions for 2,029 gene pairs physically rationalize the genetic interactions. The full interaction map was released as an open queryable database, establishing the canonical reference for DDR network biology.",
+
+  "architecture": {
+    "components": [
+      "Cas12a CRISPR knockout library targeting 233 DDR genes (699 single-gene constructs, 27,028 pairwise constructs, 81,084 total constructs)",
+      "Two cell-line contexts: MCF10A (non-tumorigenic breast epithelial) and RPE-1 (retinal pigment epithelial, TP53-deleted)",
+      "GRAPE pipeline (Traver Hart Lab) for pairwise fitness scoring with local variance normalization",
+      "AlphaFold-Multimer physical interaction prediction for top-scoring gene pairs",
+      "Open companion database (ddr-genetic-interactions.ciccialab-database.com) with heatmap visualization and CSV export"
+    ],
+    "data_flow": "Cas12a library design → lentiviral transduction → pooled growth under unperturbed conditions → early (T9) + final (T17/T18) sequencing time points → GRAPE fitness estimation → pairwise genetic interaction z-scores → FDR thresholding → module clustering → AlphaFold-Multimer structural prediction → public database release",
+    "input_types": [
+      "curated 233-gene DDR gene set (Fanconi anemia, HR, NER, NHEJ, MMR, TLS, replication fork, checkpoint)",
+      "Cas12a guide RNA library (single + pairwise constructs)",
+      "MCF10A + TP53-deleted RPE-1 cell lines",
+      " Illumina sequencing reads at T0, T9, T17/T18"
+    ],
+    "output_types": [
+      "single-mutant fitness scores per gene",
+      "pairwise genetic interaction z-scores (negative = synthetic lethal, positive = buffering)",
+      "high-confidence interaction list (>750 pairs, FDR < 0.1)",
+      "functional module assignments (46-69 modules per dataset)",
+      "AlphaFold-Multimer physical interaction predictions for 2,029 pairs",
+      "open queryable web database with heatmap + CSV export"
+    ]
+  },
+
+  "workflow_steps": [
+    "Step 1 - Curate the 233-gene DDR set spanning Fanconi anemia, homologous recombination, NER, NHEJ, mismatch repair, translesion synthesis, replication fork protection, and checkpoint pathways.",
+    "Step 2 - Design a Cas12a combinatorial knockout library: 699 single-gene constructs + 27,028 pairwise constructs (81,084 total guide RNAs).",
+    "Step 3 - Transduce MCF10A and TP53-deleted RPE-1 cells, grow under unperturbed conditions, and sequence at early (T9) and final (T17/T18) time points.",
+    "Step 4 - Apply the GRAPE pipeline: estimate single-mutant fitness, expected double-knockout fitness under additivity, and apply local variance normalization to produce genetic interaction z-scores.",
+    "Step 5 - Threshold at FDR < 0.1 to define >750 high-confidence interactions; cluster into 46-69 functional modules per dataset.",
+    "Step 6 - Run AlphaFold-Multimer on top-scoring pairs to physically rationalize the genetic interactions (2,029 modeled pairs).",
+    "Step 7 - Release the full interaction map as an open queryable database with heatmap visualization, CSV export, and AlphaFold confidence annotations."
+  ],
+
+  "modalities_covered": [
+    "CRISPR combinatorial knockout screening",
+    "pooled fitness sequencing",
+    "genetic interaction scoring (GRAPE pipeline)",
+    "FDR-controlled statistical interaction calling",
+    "AlphaFold-Multimer structural prediction",
+    "open database publishing"
+  ],
+
+  "key_claims": [
+    "The 233 DDR genes were screened in 27,028 pairwise combinations, yielding >750 high-confidence genetic interactions at FDR < 0.1 — the first genome-scale open interaction map for the DDR.",
+    "Synthetic lethal interactions were identified between the REV1-Pol ζ translesion polymerase complex and the MCM8-MCM9-HROB helicase complex, linking translesion synthesis to mitotic DNA repair.",
+    "Buffering (positive) interactions between Fanconi anemia genes and mitotic DNA repair genes reveal functional redundancy that explains resistance to single-pathway therapeutic targeting.",
+    "Synthetic lethal interactions between SMARCAL1 (replication fork remodeler) and FANCM complex components connect replication stress response to Fanconi anemia.",
+    "AlphaFold-Multimer predictions for 2,029 gene pairs provide physical rationalization: many synthetic lethal pairs do NOT physically interact, indicating parallel-pathway rather than direct-complex compensation.",
+    "Functional module clustering (46-69 modules per dataset) redefines DDR pathway boundaries beyond the textbook HR/NER/NHEJ/NHEJ/TLS division.",
+    "The open companion database establishes a canonical reference: any subsequent DDR paper will cite it, and any DDR drug discovery program will query it."
+  ],
+
+  "caveats_or_warnings": [
+    "The screen was run in MCF10A and TP53-deleted RPE-1 cell lines — both dividing, non-neuronal contexts. The genetic interaction architecture may differ in post-mitotic neurons.",
+    "Cas12a knockout efficiency varies across genomic contexts; low-efficiency perturbations can produce false negatives.",
+    "Genetic interactions are context-dependent: a synthetic lethal pair in MCF10A may be buffered in RPE-1, and vice versa. The map is a starting point, not a universal truth.",
+    "AlphaFold-Multimer predictions are structural hypotheses, not experimental validations of physical interaction.",
+    "The companion database does not state an explicit open-data license (copyright Ciccia Lab, Columbia University). Reuse beyond querying the web interface requires contacting the lab."
+  ],
+
+  "citations": [
+    {
+      "type": "article",
+      "value": "Hayward et al., Cas12a-based combinatorial knockout screens define the genetic architecture of the DNA damage response, Nature Biotechnology 2026."
+    },
+    {
+      "type": "doi",
+      "value": "10.1038/s41587-026-03339-2"
+    },
+    {
+      "type": "database",
+      "value": "CicciaLab DDR Genetic Interactions Database — https://ddr-genetic-interactions.ciccialab-database.com"
+    },
+    {
+      "type": "pipeline",
+      "value": "GRAPE genetic interaction pipeline (Traver Hart Lab)"
+    },
+    {
+      "type": "structural",
+      "value": "AlphaFold-Multimer (DeepMind) for physical interaction prediction"
+    }
+  ],
+
+  "visual_elements": [
+    "heatmap of pairwise genetic interaction z-scores (233 × 233 matrix, blue-red diverging color scale)",
+    "functional module network graph (46-69 modules, node-edge layout)",
+    "AlphaFold-Multimer predicted structure ribbon diagrams for top-scoring pairs",
+    "bar chart of interaction score distribution per pathway",
+    "volcano plot of genetic interaction z-score vs. statistical significance",
+    "database screenshot with gene search + pair browser UI",
+    "schematic of Cas12a combinatorial library design (single vs. pairwise constructs)",
+    "module-cluster dendrogram showing DDR pathway redefinition"
+  ],
+
+  "keywords_for_concept_matching": [
+    "Cas12a",
+    "CRISPR knockout screen",
+    "combinatorial perturbation",
+    "genetic interaction map",
+    "synthetic lethality",
+    "buffering interaction",
+    "DNA damage response",
+    "DDR",
+    "Fanconi anemia",
+    "homologous recombination",
+    "nucleotide excision repair",
+    "translesion synthesis",
+    "replication fork",
+    "GRAPE pipeline",
+    "AlphaFold-Multimer",
+    "open database",
+    "network biology",
+    "CicciaLab",
+    "MCM8-MCM9-HROB",
+    "REV1-Pol ζ",
+    "SMARCAL1",
+    "FANCM",
+    "genetic architecture"
+  ],
+
+  "potential_concept_card_links": [
+    "genetic-interaction-map",
+    "combinatorial-knockout-screening",
+    "synthetic-lethality",
+    "conditional-neuroprotection"
+  ],
+
+  "extraction_timestamp": "2026-11-20T12:00:00.000Z",
+
+  "extraction_source": "osiris-reverse-engineer-v1",
+
+  "bridge_relevance": {
+    "role": "keystone source article for AISciMShub Phase 1 (DDR-Neuro bridge) and Phase 3 (Neuroprotection Genetic Interaction Map)",
+    "methodology_port": "The Cas12a combinatorial knockout + GRAPE scoring + open database pattern is directly portable to a 200-250 gene neuroprotection-relevant set (see build plan Chapter 3).",
+    "database_template": "The CicciaLab database architecture (gene A × gene B → interaction score, effect size, AlphaFold confidence) is the template for the planned Neuro-SLI matrix and the Compound × Pathway × Vulnerability triangle database.",
+    "asymmetric_opportunity": "The DDR field discovered synthetic lethal interactions among human genes but did not connect them to the chemical space of compounds that could exploit them. AISciMShub holds the compound side; adding the genetic interaction side completes a triangle no one else has."
+  }
+}
