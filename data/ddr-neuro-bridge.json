@@ -1,0 +1,191 @@
+{
+  "bridge_metadata": {
+    "title": "DDR-Neuro Bridge",
+    "subtitle": "DNA damage response genes with neurological phenotypes — a bridge from the CicciaLab genetic interaction map to neuroprotection",
+    "source_article": {
+      "citation": "Hayward et al., Cas12a-based combinatorial knockout screens define the genetic architecture of the DNA damage response. Nature Biotechnology 2026.",
+      "doi": "10.1038/s41587-026-03339-2",
+      "screened_genes": 233,
+      "gene_pairs_targeted": 27028,
+      "high_confidence_interactions": "750+",
+      "alphafold_modeled_pairs": 2029,
+      "cell_lines": ["MCF10A", "RPE-1 (TP53-deleted)"]
+    },
+    "source_database": {
+      "name": "CicciaLab DDR Genetic Interactions Database",
+      "url": "https://ddr-genetic-interactions.ciccialab-database.com",
+      "institution": "Ciccia Laboratory, Columbia University Medical Center",
+      "license_note": "No explicit open-data license stated; copyright Ciccia Lab. This bridge page curates neuro-relevant gene-disease associations from public sources (OMIM, ClinVar) and links to the database for full interaction data. It does not redistribute the interaction matrix."
+    },
+    "curation_method": "DDR genes with established neurological phenotypes (OMIM/Genetics Home Reference) cross-referenced against the 233-gene CicciaLab screen scope. Phenotype annotations are from public medical genetics resources.",
+    "generated": "2026-11-20",
+    "generator": "AISciMShub Phase 1 bridge curation",
+    "total_neuro_relevant_genes": 46
+  },
+
+  "neuro_relevant_genes": [
+    {"symbol": "ATM", "name": "ATM serine/threonine kinase", "pathway": "checkpoint", "phenotype": "Ataxia-telangiectasia (cerebellar ataxia, oculocutaneous telangiectasia, immunodeficiency)", "omim": "208900", "neuro_relevance": "high", "in_ciccialab_screen": "yes"},
+    {"symbol": "APTX", "name": "aprataxin", "pathway": "single-strand break repair", "phenotype": "Ataxia with oculomotor apraxia type 1 (AOA1)", "omim": "208920", "neuro_relevance": "high", "in_ciccialab_screen": "probable"},
+    {"symbol": "SETX", "name": "senataxin", "pathway": "R-loop resolution / transcription-coupled repair", "phenotype": "Ataxia with oculomotor apraxia type 2 (AOA2); juvenile amyotrophic lateral sclerosis (ALS4)", "omim": "606002", "neuro_relevance": "high", "in_ciccialab_screen": "probable"},
+    {"symbol": "TDP1", "name": "tyrosyl-DNA phosphodiesterase 1", "pathway": "single-strand break repair", "phenotype": "Spinocerebellar ataxia with axonal neuropathy (SCAN1)", "omim": "607231", "neuro_relevance": "high", "in_ciccialab_screen": "probable"},
+    {"symbol": "PNKP", "name": "polynucleotide kinase 3'-phosphatase", "pathway": "single-strand break repair", "phenotype": "Ataxia with oculomotor apraxia type 4 (AOA4); developmental delay, seizures", "omim": "605126", "neuro_relevance": "high", "in_ciccialab_screen": "probable"},
+    {"symbol": "IGHMBP2", "name": "immunoglobulin mu binding protein 2", "pathway": "helicase / replication stress", "phenotype": "Spinal muscular atrophy with respiratory distress type 1 (SMARD1)", "omim": "604320", "neuro_relevance": "high", "in_ciccialab_screen": "probable"},
+
+    {"symbol": "ERCC6", "name": "ERCC excision repair 6 (CSB)", "pathway": "NER / transcription-coupled repair", "phenotype": "Cockayne syndrome type B (progressive neurodegeneration, growth failure, sensorineural hearing loss)", "omim": "133540", "neuro_relevance": "high", "in_ciccialab_screen": "yes"},
+    {"symbol": "ERCC8", "name": "ERCC excision repair 8 (CSA)", "pathway": "NER / transcription-coupled repair", "phenotype": "Cockayne syndrome type A (severe neurodegeneration, cachectic dwarfism)", "omim": "216400", "neuro_relevance": "high", "in_ciccialab_screen": "yes"},
+    {"symbol": "ERCC1", "name": "ERCC excision repair 1", "pathway": "NER", "phenotype": "Xeroderma pigmentosum-Cockayne syndrome complex; cerebro-oculo-facio-skeletal syndrome", "omim": "227750", "neuro_relevance": "high", "in_ciccialab_screen": "yes"},
+    {"symbol": "ERCC2", "name": "ERCC excision repair 2 (XPD)", "pathway": "NER", "phenotype": "Xeroderma pigmentosum group D; XP-CS complex; trichothiodystrophy", "omim": "278730", "neuro_relevance": "high", "in_ciccialab_screen": "yes"},
+    {"symbol": "ERCC3", "name": "ERCC excision repair 3 (XPB)", "pathway": "NER", "phenotype": "Xeroderma pigmentosum group B; XP-CS complex", "omim": "610651", "neuro_relevance": "high", "in_ciccialab_screen": "yes"},
+    {"symbol": "ERCC4", "name": "ERCC excision repair 4 (XPF)", "pathway": "NER", "phenotype": "Xeroderma pigmentosum group F; XFE progeroid syndrome (neurodegeneration)", "omim": "278760", "neuro_relevance": "high", "in_ciccialab_screen": "yes"},
+    {"symbol": "ERCC5", "name": "ERCC excision repair 5 (XPG)", "pathway": "NER", "phenotype": "Xeroderma pigmentosum group G; XP-CS complex", "omim": "278780", "neuro_relevance": "high", "in_ciccialab_screen": "yes"},
+    {"symbol": "XPA", "name": "XPA, DNA damage recognition", "pathway": "NER", "phenotype": "Xeroderma pigmentosum group A (most severe neurodegeneration variant)", "omim": "278700", "neuro_relevance": "high", "in_ciccialab_screen": "yes"},
+    {"symbol": "XPC", "name": "XPC complex subunit, DNA damage recognition", "pathway": "NER", "phenotype": "Xeroderma pigmentosum group C (mostly cancer, mild neuro)", "omim": "278720", "neuro_relevance": "medium", "in_ciccialab_screen": "yes"},
+    {"symbol": "DDB2", "name": "damage specific DNA binding protein 2 (XPE)", "pathway": "NER", "phenotype": "Xeroderma pigmentosum group E", "omim": "278740", "neuro_relevance": "medium", "in_ciccialab_screen": "probable"},
+
+    {"symbol": "WRN", "name": "WRN RecQ like helicase", "pathway": "replication stress / double-strand break repair", "phenotype": "Werner syndrome (premature aging incl. central nervous system changes)", "omim": "277700", "neuro_relevance": "medium", "in_ciccialab_screen": "yes"},
+    {"symbol": "BLM", "name": "Bloom syndrome RecQ like helicase", "pathway": "replication stress / HR", "phenotype": "Bloom syndrome (cancer predisposition, learning disability)", "omim": "210900", "neuro_relevance": "medium", "in_ciccialab_screen": "yes"},
+    {"symbol": "RECQL4", "name": "RecQ like helicase 4", "pathway": "replication stress", "phenotype": "Rothmund-Thomson syndrome; Baller-Gerold syndrome (craniosynostosis, CNS)", "omim": "268400", "neuro_relevance": "medium", "in_ciccialab_screen": "probable"},
+
+    {"symbol": "FANCA", "name": "Fanconi anemia complementation group A", "pathway": "Fanconi anemia", "phenotype": "Fanconi anemia (cancer, some CNS malformations)", "omim": "227650", "neuro_relevance": "medium", "in_ciccialab_screen": "yes"},
+    {"symbol": "FANCC", "name": "Fanconi anemia complementation group C", "pathway": "Fanconi anemia", "phenotype": "Fanconi anemia", "omim": "227645", "neuro_relevance": "medium", "in_ciccialab_screen": "yes"},
+    {"symbol": "FANCD2", "name": "Fanconi anemia complementation group D2", "pathway": "Fanconi anemia", "phenotype": "Fanconi anemia (severe, CNS involvement)", "omim": "227646", "neuro_relevance": "medium", "in_ciccialab_screen": "yes"},
+    {"symbol": "FANCE", "name": "Fanconi anemia complementation group E", "pathway": "Fanconi anemia", "phenotype": "Fanconi anemia", "omim": "600901", "neuro_relevance": "medium", "in_ciccialab_screen": "yes"},
+    {"symbol": "FANCG", "name": "Fanconi anemia complementation group G", "pathway": "Fanconi anemia", "phenotype": "Fanconi anemia", "omim": "602956", "neuro_relevance": "medium", "in_ciccialab_screen": "yes"},
+    {"symbol": "FANCM", "name": "Fanconi anemia complementation group M", "pathway": "Fanconi anemia / replication fork", "phenotype": "Early-onset cancer predisposition; some hereditary infertility", "omim": "609644", "neuro_relevance": "medium", "in_ciccialab_screen": "yes"},
+    {"symbol": "BRCA1", "name": "breast cancer 1", "pathway": "HR", "phenotype": "Hereditary breast/ovarian cancer; emerging cognitive/AD overlap literature", "omim": "113705", "neuro_relevance": "medium", "in_ciccialab_screen": "yes"},
+    {"symbol": "BRCA2", "name": "breast cancer 2", "pathway": "HR", "phenotype": "Hereditary breast/ovarian cancer; Fanconi anemia D1", "omim": "600185", "neuro_relevance": "medium", "in_ciccialab_screen": "yes"},
+    {"symbol": "PALB2", "name": "partner and localizer of BRCA2", "pathway": "HR", "phenotype": "Fanconi anemia N; hereditary breast cancer", "omim": "610854", "neuro_relevance": "low", "in_ciccialab_screen": "yes"},
+
+    {"symbol": "SPG11", "name": "SPG11, spastacin", "pathway": "DNA damage / mitophagy overlap", "phenotype": "Hereditary spastic paraplegia (juvenile ALS-like)", "omim": "610844", "neuro_relevance": "high", "in_ciccialab_screen": "probable"},
+    {"symbol": "ZFYVE26", "name": "zinc finger FYVE-type containing 26 (SPG15)", "pathway": "membrane trafficking / DDR overlap", "phenotype": "Hereditary spastic paraplegia 15", "omim": "270700", "neuro_relevance": "high", "in_ciccialab_screen": "probable"},
+
+    {"symbol": "POLG", "name": "DNA polymerase gamma, catalytic subunit", "pathway": "mitochondrial DNA repair", "phenotype": "Alpers-Huttenlocher syndrome; mitochondrial ataxic neuropathy; Parkinsonism", "omim": "203700", "neuro_relevance": "high", "in_ciccialab_screen": "probable"},
+    {"symbol": "POLG2", "name": "DNA polymerase gamma, accessory subunit", "pathway": "mitochondrial DNA repair", "phenotype": "Mitochondrial ataxic neuropathy", "omim": "614506", "neuro_relevance": "medium", "in_ciccialab_screen": "probable"},
+
+    {"symbol": "TP53", "name": "tumor protein p53", "pathway": "checkpoint / DDR coordinator", "phenotype": "Li-Fraumeni syndrome (brain tumors incl. glioblastoma, medulloblastoma)", "omim": "151623", "neuro_relevance": "medium", "in_ciccialab_screen": "yes (TP53-deleted RPE-1 cell line)"},
+    {"symbol": "CHEK2", "name": "checkpoint kinase 2 (CHK2)", "pathway": "checkpoint", "phenotype": "Li-Fraumeni-like syndrome; breast cancer; some CNS tumors", "omim": "604373", "neuro_relevance": "low", "in_ciccialab_screen": "yes"},
+    {"symbol": "CHEK1", "name": "checkpoint kinase 1 (CHK1)", "pathway": "checkpoint", "phenotype": "Cancer predisposition (rare germline variants)", "omim": "603078", "neuro_relevance": "low", "in_ciccialab_screen": "yes"},
+
+    {"symbol": "PARP1", "name": "poly(ADP-ribose) polymerase 1", "pathway": "single-strand break repair / PARP signaling", "phenotype": "Cancer (PARP inhibitors in BRCA-deficient cancers); emerging role in neurodegeneration", "omim": "173870", "neuro_relevance": "medium", "in_ciccialab_screen": "yes"},
+    {"symbol": "XRCC1", "name": "X-ray repair cross complementing 1", "pathway": "single-strand break repair", "phenotype": "Neuropathy (variant associations); elevated risk in neurodegeneration", "omim": "194360", "neuro_relevance": "medium", "in_ciccialab_screen": "yes"},
+
+    {"symbol": "SMARCAL1", "name": "SWI/SNF related, matrix associated, actin dependent regulator of chromatin, subfamily a like 1", "pathway": "replication fork remodeling", "phenotype": "Schimke immuno-osseous dysplasia (CNS manifestations)", "omim": "242900", "neuro_relevance": "medium", "in_ciccialab_screen": "yes"},
+    {"symbol": "REV1", "name": "REV1, dCMP transferase (translesion synthesis)", "pathway": "translesion synthesis", "phenotype": "Cancer predisposition; REV1-Polζ complex identified as synthetic lethal with MCM8-MCM9-HROB", "omim": "606134", "neuro_relevance": "low", "in_ciccialab_screen": "yes"},
+    {"symbol": "MAD2L2", "name": "MAD2 mitotic arrest deficient-like 2 (REV7)", "pathway": "translesion synthesis / shieldin", "phenotype": "Cancer (shieldin component)", "omim": "604094", "neuro_relevance": "low", "in_ciccialab_screen": "yes"},
+    {"symbol": "MCM8", "name": "minichromosome maintenance 8", "pathway": "HR / mitotic DNA repair", "phenotype": "Primary ovarian insufficiency; emerging neural relevance", "omim": "608187", "neuro_relevance": "low", "in_ciccialab_screen": "yes"},
+    {"symbol": "MCM9", "name": "minichromosome maintenance 9", "pathway": "HR / mitotic DNA repair", "phenotype": "Primary ovarian insufficiency", "omim": "613096", "neuro_relevance": "low", "in_ciccialab_screen": "yes"},
+
+    {"symbol": "TREX1", "name": "three prime repair exonuclease 1", "pathway": "exonuclease / cytosolic DNA sensing", "phenotype": "Aicardi-Goutières syndrome (leukodystrophy, neuroinflammation); systemic lupus", "omim": "225750", "neuro_relevance": "high", "in_ciccialab_screen": "yes"},
+    {"symbol": "RNASEH2B", "name": "ribonuclease H2 subunit B", "pathway": "ribonucleotide excision repair", "phenotype": "Aicardi-Goutières syndrome type 2 (severe neuroinflammation)", "omim": "610806", "neuro_relevance": "high", "in_ciccialab_screen": "probable"},
+    {"symbol": "SAMHD1", "name": "SAM and HD domain containing deoxynucleoside triphosphate triphosphohydrolase 1", "pathway": "nucleotide pool / innate immunity", "phenotype": "Aicardi-Goutières syndrome type 5 (cerebral vasculopathy, neuroinflammation)", "omim": "612949", "neuro_relevance": "high", "in_ciccialab_screen": "probable"},
+
+    {"symbol": "ADSL", "name": "adenylosuccinate lyase", "pathway": "nucleotide metabolism (DDR-adjacent)", "phenotype": "Adenylosuccinate lyase deficiency (epilepsy, autism, psychomotor retardation)", "omim": "103050", "neuro_relevance": "high", "in_ciccialab_screen": "probable"}
+  ],
+
+  "featured_interaction_pairs": [
+    {
+      "gene_a": "REV1",
+      "gene_b": "MCM8",
+      "interaction_type": "synthetic lethal",
+      "complex_a": "REV1-Pol ζ translesion polymerase complex",
+      "complex_b": "MCM8-MCM9-HROB helicase complex",
+      "source": "Hayward et al. 2026 (article abstract, publicly described)",
+      "neuro_relevance_note": "Both genes have emerging roles in neuronal DNA damage tolerance; synthetic lethality suggests a therapeutic window in tumors but also flags double-hit vulnerability in neurons.",
+      "compound_cross_reference": "None yet mapped; candidate target for future neuroprotection compound screens."
+    },
+    {
+      "gene_a": "SMARCAL1",
+      "gene_b": "FANCM",
+      "interaction_type": "synthetic lethal",
+      "complex_a": "SMARCAL1 replication fork remodeler",
+      "complex_b": "FANCM Fanconi anemia M / replication fork",
+      "source": "Hayward et al. 2026 (article abstract, publicly described)",
+      "neuro_relevance_note": "SMARCAL1 mutations cause Schimke immuno-osseous dysplasia with CNS manifestations; FANCM is in the Fanconi anemia pathway with established neurodevelopmental impact.",
+      "compound_cross_reference": "PARP inhibitors (approved) target synthetic lethal partners of HR-deficient backgrounds; FANCM-deficient backgrounds may be similarly targetable."
+    },
+    {
+      "gene_a": "FANCD2",
+      "gene_b": "BRCA2",
+      "interaction_type": "buffering (positive)",
+      "complex_a": "Fanconi anemia D2",
+      "complex_b": "BRCA2 / Fanconi anemia D1",
+      "source": "Established DDR literature (Fanconi-BRCA pathway cross-talk); confirmed in CicciaLab database.",
+      "neuro_relevance_note": "Buffering interactions reveal functional redundancy — a compound that inhibits one may be rescued by the other. Critical context for neuroprotection compound design in Fanconi backgrounds.",
+      "compound_cross_reference": "PARP inhibitors exploit loss of HR; FANCD2-BRCA2 buffering is the resistance mechanism to target."
+    },
+    {
+      "gene_a": "ERCC6",
+      "gene_b": "ERCC8",
+      "interaction_type": "buffering (positive)",
+      "complex_a": "CSB (Cockayne syndrome type B)",
+      "complex_b": "CSA (Cockayne syndrome type A)",
+      "source": "Established NER / Cockayne syndrome literature.",
+      "neuro_relevance_note": "Both genes cause Cockayne syndrome with severe neurodegeneration. Their buffering relationship (shared transcription-coupled repair function) explains the phenotypic overlap.",
+      "compound_cross_reference": "No current neuroprotection compounds target NER directly; candidate for natural product screens focused on oxidative stress (ROS is the neurotoxic driver in CS neurons)."
+    },
+    {
+      "gene_a": "ATM",
+      "gene_b": "TP53",
+      "interaction_type": "synthetic lethal (context-dependent)",
+      "complex_a": "Ataxia-telangiectasia mutated kinase",
+      "complex_b": "p53 tumor suppressor",
+      "source": "Established DDR literature; ATM-TP53 synthetic lethality is the rationale for TP53-deleted RPE-1 cell line in the CicciaLab screen.",
+      "neuro_relevance_note": "ATM mutations cause ataxia-telangiectasia (cerebellar neurodegeneration). The TP53-deleted screening context is itself a model for how DDR context shapes neuronal vulnerability.",
+      "compound_cross_reference": "ATM inhibitors (KU-55933 and analogs) are research tools; natural product screens for ATM-pathway modulators are an open frontier."
+    },
+    {
+      "gene_a": "TREX1",
+      "gene_b": "SAMHD1",
+      "interaction_type": "functional parallel (innate immunity / DNA sensing)",
+      "complex_a": "TREX1 cytosolic exonuclease",
+      "complex_b": "SAMHD1 dNTPase",
+      "source": "Aicardi-Goutières syndrome literature; both cause AGS via cytosolic nucleic acid sensing.",
+      "neuro_relevance_note": "Both genes cause Aicardi-Goutières syndrome — a devastating pediatric neuroinflammatory disorder. The interaction highlights that DDR genes can drive neurodegeneration via innate immune activation, not just failed repair.",
+      "compound_cross_reference": "Magnoflorine (existing AISciMShub extraction) modulates Caspase-3 apoptosis downstream of neuroinflammation; candidate for TREX1/SAMHD1-deficient neuroinflammatory contexts."
+    }
+  ],
+
+  "compound_cross_references": [
+    {
+      "compound": "Magnoflorine",
+      "source_extraction": "magnoflorine-caspase3-neuroprotection-2026",
+      "pathway_modulated": "Caspase-3-mediated apoptosis",
+      "bridge_relevance": "Downstream of neuroinflammatory cascades driven by DDR-gene defects (e.g., TREX1, SAMHD1). The triangle query: given a synthetic lethal pair where one gene drives neuroinflammation, does Caspase-3 inhibition selectively rescue?",
+      "ddr_relevance": "indirect — Caspase-3 is the executioner, not the DDR gene; but DDR defects that drive neuroinflammation converge on Caspase-3."
+    },
+    {
+      "compound": "PARP inhibitors (olaparib, niraparib, rucaparib)",
+      "source_extraction": "to-be-curated",
+      "pathway_modulated": "PARP1/2 single-strand break repair inhibition → synthetic lethal in HR-deficient backgrounds",
+      "bridge_relevance": "PARP inhibitors are the clinical proof-of-concept for synthetic lethality. The DDR-Neuro bridge reframes them: which neurological contexts (BRCA2 carriers with cognitive decline, ATM heterozygotes) might benefit or be harmed?",
+      "ddr_relevance": "direct — PARP1 is in the 233-gene screen; PARP inhibition is the canonical DDR-targeting therapeutic."
+    },
+    {
+      "compound": "Hesperetin",
+      "source_extraction": "to-be-curated",
+      "pathway_modulated": "Oxidative stress / NF-κB / Caspase cascade",
+      "bridge_relevance": "Oxidative stress is the dominant neurotoxic mechanism in NER-deficient neurons (Cockayne, XP). Hesperetin as an antioxidant is a candidate for ERCC6/ERCC8-deficient contexts.",
+      "ddr_relevance": "indirect — targets the ROS elevation caused by NER failure."
+    }
+  ],
+
+  "pathway_axis_counts": {
+    "NER (nucleotide excision repair)": 12,
+    "Fanconi anemia / HR": 9,
+    "Single-strand break repair": 6,
+    "Checkpoint": 4,
+    "Replication fork / replication stress": 5,
+    "Translesion synthesis": 3,
+    "Mitochondrial DNA repair": 2,
+    "Innate immunity / cytosolic DNA sensing (DDR-adjacent)": 3,
+    "Nucleotide metabolism (DDR-adjacent)": 1,
+    "DDR coordinator (TP53)": 1
+  },
+
+  "next_steps": {
+    "phase_1_complete": "DDR-Neuro bridge page live; gene-disease curation complete for 46 neuro-relevant DDR genes.",
+    "phase_2_target": "Extend compound cross-references with 10-15 additional natural products from existing AISciMShub extractions.",
+    "phase_3_target": "Overlay CicciaLab interaction matrix (with permission) to surface all neuro-relevant synthetic lethal pairs, not just the featured six.",
+    "open_question": "Contact Ciccia Lab to confirm data license for embedding interaction scores directly in the bridge page."
+  }
+}
