@@ -1,0 +1,86 @@
+{
+  "compounds": [
+    {
+      "id": "magnoflorine",
+      "name": "Magnoflorine",
+      "source_extraction": "magnoflorine-caspase3-neuroprotection-2026",
+      "pathway_modulated": "Caspase-3-mediated apoptosis",
+      "bridge_relevance": "Downstream of neuroinflammatory cascades driven by DDR-gene defects (e.g. TREX1, SAMHD1). The triangle query: given a synthetic lethal pair where one gene drives neuroinflammation, does Caspase-3 inhibition selectively rescue?",
+      "ddr_relevance": "indirect - Caspase-3 is the executioner, not the DDR gene; but DDR defects that drive neuroinflammation converge on Caspase-3.",
+      "supporting_extractions": [
+        "magnoflorine-caspase3-neuroprotection-2026",
+        "hesperetin-shsy5y-neuroprotection-2025",
+        "flavonoids-mitochondrial-cascade-2024"
+      ],
+      "molecule": {
+        "class": "Aporphine alkaloid (quaternary ammonium)",
+        "molecular_weight_da": 342.41,
+        "source": "Plant natural product (Magnolia, Coptis, Tinospora, Aristolochia species)",
+        "notable": "Quaternary ammonium cation — affects BBB permeability. BBB predictor should flag this."
+      }
+    },
+    {
+      "id": "parp-inhibitors",
+      "name": "PARP inhibitors (olaparib, niraparib, rucaparib)",
+      "source_extraction": null,
+      "pathway_modulated": "PARP1/2 single-strand break repair inhibition -> synthetic lethal in HR-deficient backgrounds",
+      "bridge_relevance": "PARP inhibitors are the clinical proof-of-concept for synthetic lethality. The DDR-Neuro bridge reframes them: which neurological contexts (BRCA2 carriers with cognitive decline, ATM heterozygotes) might benefit or be harmed?",
+      "ddr_relevance": "direct - PARP1 is in the 233-gene CicciaLab screen; PARP inhibition is the canonical DDR-targeting therapeutic.",
+      "supporting_extractions": [],
+      "molecule": null
+    },
+    {
+      "id": "hesperetin",
+      "name": "Hesperetin",
+      "source_extraction": "hesperetin-shsy5y-neuroprotection-2025",
+      "pathway_modulated": "Oxidative stress / NF-kB / Caspase cascade",
+      "bridge_relevance": "Oxidative stress is the dominant neurotoxic mechanism in NER-deficient neurons (Cockayne, XP). Hesperetin as an antioxidant is a candidate for ERCC6/ERCC8-deficient contexts.",
+      "ddr_relevance": "indirect - targets the ROS elevation caused by NER failure.",
+      "supporting_extractions": [
+        "hesperetin-shsy5y-neuroprotection-2025",
+        "flavonoids-mitochondrial-cascade-2024"
+      ],
+      "molecule": {
+        "class": "Flavanone (citrus)",
+        "molecular_weight_da": 302.28,
+        "source": "Citrus fruits (oranges, lemons, grapefruit); aglycone of hesperidin.",
+        "notable": "Planar flavonoid scaffold — better BBB permeability than the aporphine alkaloid Magnoflorine. BBB predictor should score this higher."
+      }
+    },
+    {
+      "id": "pimecrolimus",
+      "name": "Pimecrolimus",
+      "source_extraction": "pimecrolimus-shsy5y-apoptosis-2025",
+      "pathway_modulated": "Calcineurin / apoptotic pathway (FK506 analog)",
+      "bridge_relevance": "Discovered from the pimecrolimus SH-SY5Y extraction (molecule_metadata present). A macrolactam calcineurin inhibitor; docks into apoptotic-pathway protein active sites. Candidate for neuroinflammatory contexts downstream of DDR defects.",
+      "ddr_relevance": "indirect - calcineurin / apoptosis modulation, not a direct DDR target. Large MW (810 Da) flagged as BBB-impermeable by rule-based prediction.",
+      "supporting_extractions": [
+        "pimecrolimus-shsy5y-apoptosis-2025"
+      ],
+      "molecule": {
+        "class": "Macrolactam (calcineurin inhibitor; FK506 analog)",
+        "molecular_weight_da": 810.47,
+        "source": "Semi-synthetic derivative of ascomycin (Streptomyces hygroscopicus).",
+        "notable": "Large macrolactam (MW 810) — will be flagged as BBB-impermeable by rule-based predictors. Formulation (e.g., nanoparticle, intranasal) required for CNS use."
+      }
+    },
+    {
+      "id": "flavonoid-library",
+      "name": "Flavonoid library (polyphenolic natural products)",
+      "source_extraction": "flavonoids-mitochondrial-cascade-2024",
+      "pathway_modulated": "Mitochondrial cascade (upstream intervention point)",
+      "bridge_relevance": "Discovered from the flavonoids mitochondrial-cascade extraction. Library-scale in-silico screen of flavones/flavanones/flavonols/isoflavones targeting the mitochondrial cascade - a distinct upstream intervention point from direct Caspase-3 inhibition.",
+      "ddr_relevance": "indirect - mitochondrial cascade is downstream of DDR-driven neurodegeneration (POLG/POLG2 mitochondrial DNA repair defects).",
+      "supporting_extractions": [
+        "flavonoids-mitochondrial-cascade-2024",
+        "hesperetin-shsy5y-neuroprotection-2025"
+      ],
+      "molecule": {
+        "class": "Polyphenolic natural products (flavones, flavanones, flavonols, isoflavones)",
+        "molecular_weight_da": 270.24,
+        "source": "Plant secondary metabolites across fruits, vegetables, tea, medicinal herbs.",
+        "notable": "Library-scale: average MW ~270 Da (planar scaffold) — generally favorable BBB permeability. The BBB predictor should score this family as BBB-penetrant on average, with subclass-specific variation."
+      }
+    }
+  ]
+}

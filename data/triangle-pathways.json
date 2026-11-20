@@ -1,0 +1,149 @@
+{
+  "pathways": [
+    {
+      "id": "fanconi-hr",
+      "name": "Fanconi Anemia / Homologous Recombination",
+      "gene_count": 11,
+      "genes": [
+        "BRCA1",
+        "BRCA2",
+        "FANCA",
+        "FANCC",
+        "FANCD2",
+        "FANCE",
+        "FANCG",
+        "FANCM",
+        "MCM8",
+        "MCM9",
+        "PALB2"
+      ],
+      "is_core_repair": true,
+      "description": "Fanconi anemia and homologous recombination repair DNA interstrand crosslinks and double-strand breaks. BRCA1/2 and PALB2 sit here. PARP inhibitors exploit HR loss."
+    },
+    {
+      "id": "ner",
+      "name": "Nucleotide Excision Repair (NER)",
+      "gene_count": 11,
+      "genes": [
+        "DDB2",
+        "ERCC1",
+        "ERCC2",
+        "ERCC3",
+        "ERCC4",
+        "ERCC5",
+        "ERCC6",
+        "ERCC8",
+        "SETX",
+        "XPA",
+        "XPC"
+      ],
+      "is_core_repair": true,
+      "description": "Nucleotide excision repair removes helix-distorting bulky DNA lesions and underlies transcription-coupled repair. Defects cause xeroderma pigmentosum and Cockayne syndrome with severe neurodegeneration."
+    },
+    {
+      "id": "replication-fork",
+      "name": "Replication Fork / Replication Stress",
+      "gene_count": 5,
+      "genes": [
+        "BLM",
+        "IGHMBP2",
+        "RECQL4",
+        "SMARCAL1",
+        "WRN"
+      ],
+      "is_core_repair": true,
+      "description": "Replication fork protection and stress response: RecQ helicases (WRN, BLM, RECQL4), IGHMBP2, SMARCAL1. Defects cause progeroid and motor-neuron syndromes."
+    },
+    {
+      "id": "ssbr",
+      "name": "Single-Strand Break Repair",
+      "gene_count": 5,
+      "genes": [
+        "APTX",
+        "PARP1",
+        "PNKP",
+        "TDP1",
+        "XRCC1"
+      ],
+      "is_core_repair": true,
+      "description": "Single-strand break repair mends the most frequent DNA lesions. PARP1, XRCC1, APTX, TDP1, PNKP act here. Defects cause ataxias with oculomotor apraxia."
+    },
+    {
+      "id": "checkpoint",
+      "name": "DNA Damage Checkpoint",
+      "gene_count": 3,
+      "genes": [
+        "ATM",
+        "CHEK1",
+        "CHEK2"
+      ],
+      "is_core_repair": false,
+      "description": "DNA damage checkpoint kinases ATM, CHEK1, CHEK2 coordinate the DDR response. ATM mutations cause ataxia-telangiectasia."
+    },
+    {
+      "id": "innate-immunity",
+      "name": "Innate Immunity / Cytosolic DNA Sensing",
+      "gene_count": 3,
+      "genes": [
+        "RNASEH2B",
+        "SAMHD1",
+        "TREX1"
+      ],
+      "is_core_repair": false,
+      "description": "Cytosolic DNA sensing / innate immunity (TREX1, RNASEH2B, SAMHD1). DDR genes that drive neurodegeneration via neuroinflammation, not failed repair. Defects cause Aicardi-Goutieres syndrome."
+    },
+    {
+      "id": "ddr-adjacent",
+      "name": "DDR-adjacent / Membrane & Mitophagy",
+      "gene_count": 2,
+      "genes": [
+        "SPG11",
+        "ZFYVE26"
+      ],
+      "is_core_repair": false,
+      "description": "DDR-adjacent genes with membrane-trafficking / mitophagy overlap (SPG11, ZFYVE26). Defects cause hereditary spastic paraplegia with juvenile ALS-like presentation."
+    },
+    {
+      "id": "mito-dna-repair",
+      "name": "Mitochondrial DNA Repair",
+      "gene_count": 2,
+      "genes": [
+        "POLG",
+        "POLG2"
+      ],
+      "is_core_repair": true,
+      "description": "Mitochondrial DNA repair by POLG/POLG2. Defects cause Alpers-Huttenlocher syndrome, mitochondrial ataxia, parkinsonism."
+    },
+    {
+      "id": "tls",
+      "name": "Translesion Synthesis",
+      "gene_count": 2,
+      "genes": [
+        "MAD2L2",
+        "REV1"
+      ],
+      "is_core_repair": true,
+      "description": "Translesion synthesis polymerases (REV1-Pol zeta, REV7/MAD2L2) bypass lesions. REV1-MCM8 synthetic lethality is a CicciaLab flagship finding."
+    },
+    {
+      "id": "ddr-coordinator",
+      "name": "DDR Coordinator (TP53)",
+      "gene_count": 1,
+      "genes": [
+        "TP53"
+      ],
+      "is_core_repair": false,
+      "description": "TP53 - the master DDR coordinator. Li-Fraumeni syndrome; brain tumors. The TP53-deleted RPE-1 line is the CicciaLab screening context."
+    },
+    {
+      "id": "nucleotide-metabolism",
+      "name": "Nucleotide Metabolism (DDR-adjacent)",
+      "gene_count": 1,
+      "genes": [
+        "ADSL"
+      ],
+      "is_core_repair": false,
+      "description": "DDR-adjacent nucleotide metabolism (ADSL). Defects cause epilepsy, autism, psychomotor retardation."
+    }
+  ]
+}
