@@ -1,0 +1,975 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>WSP Lab — Claim → Classifier · Cross-Domain · Safety · Real-Data Runner</title>
+<style>
+  :root{
+    --bg:#0a0e14; --surface:#121821; --surface2:#0f141c; --border:#1e2733; --border2:#2a3645;
+    --text:#d4dde8; --muted:#7a8699; --muted2:#56627a;
+    --cyan:#22d3ee; --teal:#2dd4bf; --amber:#fbbf24; --red:#f87171; --green:#34d399; --violet:#a78bfa;
+    --mono:ui-monospace,"SF Mono",Menlo,Consolas,"Liberation Mono",monospace;
+    --sans:system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0;background:var(--bg);color:var(--text);font-family:var(--sans);
+    font-size:clamp(15px,1.6vw,17px);line-height:1.55;-webkit-font-smoothing:antialiased}
+  body{overflow-x:hidden}
+  a{color:var(--cyan);text-decoration:none}
+  a:hover{text-decoration:underline}
+  code,pre,.mono{font-family:var(--mono)}
+  .wrap{max-width:1120px;margin:0 auto;padding:clamp(16px,3vw,32px)}
+  header.hero{border-bottom:1px solid var(--border);background:linear-gradient(180deg,#0c1219 0%,var(--bg) 100%)}
+  .hero .wrap{padding-top:clamp(28px,5vw,52px);padding-bottom:clamp(20px,3vw,32px)}
+  .kicker{font-family:var(--mono);font-size:.78rem;letter-spacing:.18em;text-transform:uppercase;color:var(--teal)}
+  h1{font-size:clamp(1.7rem,4.4vw,2.7rem);line-height:1.12;margin:.35em 0 .2em;font-weight:700;letter-spacing:-.01em}
+  .lede{color:var(--muted);max-width:70ch;font-size:clamp(1rem,1.8vw,1.12rem)}
+  .meta-row{display:flex;flex-wrap:wrap;gap:8px 18px;margin-top:14px;font-family:var(--mono);font-size:.8rem;color:var(--muted2)}
+  .meta-row span b{color:var(--text);font-weight:600}
+  .legend{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr));gap:12px;margin-top:clamp(20px,3vw,30px)}
+  .legend .card{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:14px 16px}
+  .legend .card h3{margin:0 0 4px;font-size:.95rem;color:var(--cyan)}
+  .legend .card p{margin:0;color:var(--muted);font-size:.85rem;line-height:1.45}
+  .legend .card .tag{font-family:var(--mono);font-size:.7rem;color:var(--muted2);display:block;margin-top:8px}
+  section.block{border-top:1px solid var(--border);padding:clamp(28px,5vw,48px) 0}
+  section.block:first-of-type{border-top:none}
+  .sec-head{display:flex;align-items:baseline;gap:14px;flex-wrap:wrap;margin-bottom:8px}
+  .sec-num{font-family:var(--mono);font-size:.8rem;color:var(--teal);letter-spacing:.12em}
+  h2{font-size:clamp(1.3rem,3vw,1.8rem);margin:0;font-weight:700;letter-spacing:-.01em}
+  .commentary{color:var(--muted);max-width:78ch;margin:6px 0 clamp(18px,3vw,26px);font-size:.96rem}
+  .commentary b{color:var(--text)}
+  .panel{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:clamp(14px,2.5vw,22px)}
+  .panel + .panel{margin-top:16px}
+  .grid{display:grid;gap:18px}
+  .grid.cols-2{grid-template-columns:1fr 1fr}
+  .grid.cols-3{grid-template-columns:repeat(3,1fr)}
+  @media(max-width:760px){.grid.cols-2,.grid.cols-3{grid-template-columns:1fr}}
+  label.fld{display:block;font-size:.82rem;color:var(--muted);margin-bottom:6px;font-family:var(--mono)}
+  select,input[type=number]{width:100%;background:var(--surface2);color:var(--text);border:1px solid var(--border2);
+    border-radius:8px;padding:9px 11px;font-family:var(--mono);font-size:.9rem}
+  select:focus,input:focus{outline:1px solid var(--cyan);border-color:var(--cyan)}
+  .btn{appearance:none;border:1px solid var(--border2);background:var(--surface2);color:var(--text);
+    padding:9px 16px;border-radius:8px;font-family:var(--mono);font-size:.85rem;cursor:pointer;transition:.12s}
+  .btn:hover{border-color:var(--cyan);color:var(--cyan)}
+  .btn.primary{background:var(--cyan);color:#06141a;border-color:var(--cyan);font-weight:600}
+  .btn.primary:hover{background:#06b6d4;color:#06141a}
+  .btn.warn{border-color:var(--amber);color:var(--amber)}
+  .btn.warn:hover{background:rgba(251,191,36,.12)}
+  .btn.danger{border-color:var(--red);color:var(--red)}
+  .btn.danger:hover{background:rgba(248,113,113,.12)}
+  .btn:disabled{opacity:.4;cursor:not-allowed}
+  .btnrow{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+  canvas.img,canvas.map{background:#05080c;border:1px solid var(--border);border-radius:6px;
+    image-rendering:pixelated;max-width:100%;height:auto;display:block}
+  .canvas-cap{font-family:var(--mono);font-size:.72rem;color:var(--muted2);margin-top:6px;text-align:center}
+  .maps-row{display:flex;flex-wrap:wrap;gap:14px}
+  .map-cell{text-align:center}
+  .scorebox{display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+  .score-val{font-family:var(--mono);font-size:clamp(1.6rem,5vw,2.4rem);font-weight:700;color:var(--cyan);line-height:1}
+  .score-bar{flex:1;min-width:160px;height:10px;background:var(--surface2);border:1px solid var(--border);border-radius:6px;overflow:hidden}
+  .score-bar > i{display:block;height:100%;background:linear-gradient(90deg,var(--teal),var(--cyan));transition:width .15s}
+  .pill{display:inline-block;padding:3px 10px;border-radius:999px;font-family:var(--mono);font-size:.72rem;letter-spacing:.04em;border:1px solid}
+  .pill.ok{color:var(--green);border-color:rgba(52,211,153,.4);background:rgba(52,211,153,.08)}
+  .pill.bad{color:var(--red);border-color:rgba(248,113,113,.4);background:rgba(248,113,113,.08)}
+  .pill.warn{color:var(--amber);border-color:rgba(251,191,36,.4);background:rgba(251,191,36,.08)}
+  .pill.mute{color:var(--muted);border-color:var(--border2)}
+  .slider-row{display:flex;align-items:center;gap:12px;margin:8px 0}
+  .slider-row label{font-family:var(--mono);font-size:.78rem;color:var(--muted);min-width:96px}
+  .slider-row input[type=range]{flex:1;accent-color:var(--cyan)}
+  .slider-row .v{font-family:var(--mono);font-size:.78rem;color:var(--text);min-width:48px;text-align:right}
+  .kernel-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:4px;max-width:140px}
+  .kernel-grid input{padding:6px 4px;text-align:center;font-size:.82rem}
+  .kernel-block{display:flex;flex-direction:column;align-items:flex-start;gap:6px}
+  .kernel-block .lbl{font-family:var(--mono);font-size:.74rem;color:var(--teal)}
+  .kvs{display:flex;gap:14px;flex-wrap:wrap}
+  .kv{font-family:var(--mono);font-size:.78rem;color:var(--muted)}
+  .kv b{color:var(--text)}
+  .probe-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+  @media(max-width:560px){.probe-grid{grid-template-columns:1fr}}
+  table.tbl{width:100%;border-collapse:collapse;font-family:var(--mono);font-size:.82rem}
+  table.tbl th,table.tbl td{border:1px solid var(--border);padding:7px 9px;text-align:left}
+  table.tbl th{color:var(--muted);font-weight:600;background:var(--surface2)}
+  .tbl-wrap{overflow-x:auto;border:1px solid var(--border);border-radius:8px}
+  .callout{border-left:3px solid var(--cyan);background:rgba(34,211,238,.05);padding:10px 14px;border-radius:0 8px 8px 0;
+    font-size:.9rem;color:var(--muted);margin:10px 0}
+  .callout.amber{border-color:var(--amber);background:rgba(251,191,36,.05)}
+  .callout.red{border-color:var(--red);background:rgba(248,113,113,.05)}
+  .gate{border:1px dashed var(--border2);border-radius:10px;padding:14px;text-align:center;color:var(--muted);font-size:.9rem}
+  .gate.unlocked{border-color:var(--green);color:var(--green);background:rgba(52,211,153,.04)}
+  details{border:1px solid var(--border);border-radius:8px;padding:10px 14px;margin-top:12px}
+  details summary{cursor:pointer;color:var(--muted);font-family:var(--mono);font-size:.82rem}
+  details[open] summary{color:var(--text);margin-bottom:8px}
+  footer.foot{border-top:1px solid var(--border);color:var(--muted2);font-size:.82rem;padding:26px 0}
+  footer.foot a{color:var(--muted)}
+  .secnav{display:flex;flex-wrap:wrap;gap:8px;margin:18px 0 0;font-family:var(--mono);font-size:.78rem}
+  .secnav a{color:var(--muted);border:1px solid var(--border);border-radius:999px;padding:4px 12px}
+  .secnav a:hover{color:var(--cyan);border-color:var(--cyan);text-decoration:none}
+  .corr-bar{height:6px;background:var(--surface2);border-radius:4px;overflow:hidden;margin-top:4px}
+  .corr-bar > i{display:block;height:100%;background:var(--green)}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="kicker">WSP Lab · companion to /weight-space-programming</div>
+    <h1>Weight-Space Programming, made runnable</h1>
+    <p class="lede">A single self-contained page that turns the four recommendations into four live, interactive
+      demonstrations: a paper <b>claim seeds a zero-shot classifier</b>, the same method <b>generalises beyond
+      medicine</b>, every output passes a <b>calibration gate</b> before it can be used, and a small CNN runs a real
+      forward pass with <b>inspectable, editable weights</b>. No labelled data is used anywhere on this page.</p>
+    <div class="meta-row">
+      <span>method: <b>Weight-Space Programming</b></span>
+      <span>paper: <b>arXiv:2611.12066</b></span>
+      <span>safety lesson: <b>SynthUterus r=0.136</b></span>
+      <span>data: <b>procedural / synthetic (demo only)</b></span>
+    </div>
+    <nav class="secnav">
+      <a href="#s1">§1 Claim → Classifier</a>
+      <a href="#s2">§2 Cross-Domain WSP</a>
+      <a href="#s3">§3 Safety &amp; Calibration</a>
+      <a href="#s4">§4 Real-Data Runner</a>
+    </nav>
+    <div class="legend">
+      <div class="card"><h3>§1 · Claim → Classifier</h3><p>A key claim from a paper seeds a runnable zero-shot
+        classifier for its modality. Edit the preset weights and watch the score move.</p>
+        <span class="tag">closes paper → model, no labels</span></div>
+      <div class="card"><h3>§2 · Cross-Domain WSP</h3><p>The same weight-level recipe applied to satellite and
+        materials imaging — WSP is not medical-only.</p><span class="tag">generalisation proof</span></div>
+      <div class="card"><h3>§3 · Safety &amp; Calibration</h3><p>Held-out probes, Pearson correlation, a refusal
+        threshold, and a human-in-the-loop gate before any decision-support output.</p>
+        <span class="tag">operationalises the 0.136 lesson</span></div>
+      <div class="card"><h3>§4 · Real-Data Runner</h3><p>A small CNN with kernels you can read and edit, a real
+        forward pass in the browser, and visible activation maps.</p>
+        <span class="tag">inspectable weights</span></div>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+
+<!-- ============================ SECTION 1 ============================ -->
+<section class="block" id="s1">
+  <div class="sec-head"><span class="sec-num">SECTION 01</span><h2>Claim → Classifier</h2></div>
+  <p class="commentary">The platform already extracts a paper's structure into a weighted concept graph and key-claim
+    popups. This section closes the loop: pick a <b>key claim</b> and it seeds a runnable zero-shot classifier for that
+    claim's modality — a set of convolutional kernels (the "described features" cast into weight space) and preset
+    weights (the LLM's reading of how strongly each feature speaks for the claim). A sample image is convolved,
+    pooled, and scored. <b>No labelled corpus is used</b>; the only supervision is the claim itself. Drag the weight
+    sliders to reprogram the classifier in real time.</p>
+
+  <div class="panel">
+    <div class="grid cols-2">
+      <div>
+        <label class="fld" for="claimSel">Key claim (seeds kernels + weights)</label>
+        <select id="claimSel"></select>
+        <div class="kvs" style="margin-top:10px">
+          <span class="kv">modality: <b id="claimMod"></b></span>
+          <span class="kv">domain: <b id="claimDom"></b></span>
+        </div>
+        <p style="margin:10px 0 4px;color:var(--muted);font-size:.86rem">Described features → preset kernels:</p>
+        <ul id="claimFeats" style="margin:0 0 0 1.1em;padding:0;color:var(--muted);font-size:.86rem"></ul>
+      </div>
+      <div>
+        <label class="fld">Sample input (procedural, 32×32)</label>
+        <canvas id="s1sample" class="img" width="256" height="256"></canvas>
+        <div class="canvas-cap">synthetic microscopy stain</div>
+        <div class="btnrow" style="margin-top:10px">
+          <button class="btn" id="s1resample">New sample</button>
+          <span class="kv">seed: <b id="s1seed">—</b></span>
+        </div>
+      </div>
+    </div>
+
+    <div style="margin-top:18px">
+      <p style="margin:0 0 8px;font-family:var(--mono);font-size:.8rem;color:var(--muted)">Reprogram the preset weights (WSP — edit the weight space):</p>
+      <div id="s1sliders"></div>
+    </div>
+
+    <div style="margin-top:18px">
+      <div class="scorebox">
+        <div>
+          <div class="kv">zero-shot score</div>
+          <div class="score-val" id="s1score">—</div>
+        </div>
+        <div class="score-bar"><i id="s1bar" style="width:0"></i></div>
+        <span class="pill mute" id="s1pill">awaiting run</span>
+      </div>
+    </div>
+
+    <div style="margin-top:18px">
+      <p style="margin:0 0 8px;font-family:var(--mono);font-size:.8rem;color:var(--muted)">Kernel activation maps (conv → relu; normalised per-map):</p>
+      <div class="maps-row" id="s1maps"></div>
+    </div>
+  </div>
+
+  <div class="callout">The score is produced entirely from the claim-derived weights and the image — there is no
+    training step and no held-out label. This is the WSP thesis made literal: <b>description → runnable model</b>.</div>
+</section>
+
+<!-- ============================ SECTION 2 ============================ -->
+<section class="block" id="s2">
+  <div class="sec-head"><span class="sec-num">SECTION 02</span><h2>Cross-Domain WSP</h2></div>
+  <p class="commentary">Weight-space programming is not a medical trick. The same recipe — described features become
+    kernels, the LLM sets the weights, a forward pass scores the image — transfers to any imaging modality with a
+    usable description. Here it runs on <b>satellite</b> and <b>materials</b> imagery that have nothing to do with
+    the medical claims above. Same engine, different preset, different sample generator. This is the proof the method
+    is a general zero-shot tool, not a domain-specific artefact.</p>
+
+  <div class="panel">
+    <div class="grid cols-2">
+      <div>
+        <label class="fld" for="xclaimSel">Cross-domain claim</label>
+        <select id="xclaimSel"></select>
+        <div class="kvs" style="margin-top:10px">
+          <span class="kv">modality: <b id="xclaimMod"></b></span>
+          <span class="kv">domain: <b id="xclaimDom"></b></span>
+        </div>
+        <p style="margin:10px 0 4px;color:var(--muted);font-size:.86rem">Described features → preset kernels:</p>
+        <ul id="xclaimFeats" style="margin:0 0 0 1.1em;padding:0;color:var(--muted);font-size:.86rem"></ul>
+      </div>
+      <div>
+        <label class="fld">Sample input (procedural, 32×32)</label>
+        <canvas id="s2sample" class="img" width="256" height="256"></canvas>
+        <div class="canvas-cap" id="s2cap">synthetic satellite frame</div>
+        <div class="btnrow" style="margin-top:10px">
+          <button class="btn" id="s2resample">New sample</button>
+          <span class="kv">seed: <b id="s2seed">—</b></span>
+        </div>
+      </div>
+    </div>
+
+    <div style="margin-top:18px">
+      <p style="margin:0 0 8px;font-family:var(--mono);font-size:.8rem;color:var(--muted)">Edit the preset weights:</p>
+      <div id="s2sliders"></div>
+    </div>
+
+    <div style="margin-top:18px">
+      <div class="scorebox">
+        <div>
+          <div class="kv">zero-shot score</div>
+          <div class="score-val" id="s2score">—</div>
+        </div>
+        <div class="score-bar"><i id="s2bar" style="width:0"></i></div>
+        <span class="pill mute" id="s2pill">awaiting run</span>
+      </div>
+    </div>
+
+    <div style="margin-top:18px">
+      <p style="margin:0 0 8px;font-family:var(--mono);font-size:.8rem;color:var(--muted)">Kernel activation maps:</p>
+      <div class="maps-row" id="s2maps"></div>
+    </div>
+  </div>
+
+  <div class="callout">Switch the claim between Sentinel-2 cloud-edges, materials grain-boundaries, and JWST artifact
+    flagging: the <b>same forward pass</b> scores all three. The method travels with the description, not the dataset.</div>
+</section>
+
+<!-- ============================ SECTION 3 ============================ -->
+<section class="block" id="s3">
+  <div class="sec-head"><span class="sec-num">SECTION 03</span><h2>Safety &amp; Calibration</h2></div>
+  <p class="commentary">The SynthUterus failure — a model that scored 0.952 on held-out samples while the true
+    correlation with the described feature was <b>r = 0.136</b> — is the reason this section exists. A confident score
+    is not evidence. Here, the current classifier is run on three held-out <b>probes</b> (a positive control, a
+    negative control, and an ambiguous edge case) and the Pearson correlation between score and expected label is
+    computed. If that correlation falls below a refusal threshold, the system <b>refuses to emit decision support</b>
+    and a human-in-the-loop gate stays locked. Use the <b>Sabotage</b> button to invert the weights and watch the gate
+    slam shut.</p>
+
+  <div class="panel">
+    <div class="grid cols-2">
+      <div>
+        <label class="fld" for="calClaimSel">Classifier under test</label>
+        <select id="calClaimSel"></select>
+        <div class="btnrow" style="margin-top:12px">
+          <button class="btn primary" id="calRun">Run calibration probes</button>
+          <button class="btn warn" id="calSabotage">Sabotage (invert weights)</button>
+          <button class="btn" id="calRestore">Restore preset</button>
+        </div>
+        <label class="fld" style="margin-top:16px">Refusal threshold (Pearson r)</label>
+        <div class="slider-row">
+          <input type="range" id="calThresh" min="0" max="0.9" step="0.05" value="0.4">
+          <span class="v" id="calThreshV">0.40</span>
+        </div>
+      </div>
+      <div>
+        <p style="margin:0 0 6px;font-family:var(--mono);font-size:.8rem;color:var(--muted)">Probe correlation</p>
+        <div class="scorebox">
+          <div><div class="kv">Pearson r</div><div class="score-val" id="calR" style="color:var(--green)">—</div></div>
+          <div class="score-bar"><i id="calRbar" style="width:0;background:var(--green)"></i></div>
+          <span class="pill mute" id="calPill">not run</span>
+        </div>
+        <div class="callout amber" id="calVerdict" style="margin-top:14px">Run the probes to see the calibration verdict.</div>
+      </div>
+    </div>
+
+    <div style="margin-top:18px">
+      <p style="margin:0 0 8px;font-family:var(--mono);font-size:.8rem;color:var(--muted)">Held-out probes (expected label in parentheses):</p>
+      <div class="probe-grid" id="calProbes"></div>
+    </div>
+
+    <div style="margin-top:18px">
+      <p style="margin:0 0 8px;font-family:var(--mono);font-size:.8rem;color:var(--muted)">Decision-support output (human-in-the-loop gate):</p>
+      <div class="gate" id="calGate">Gate locked — pass calibration (r ≥ threshold) then confirm to view output.</div>
+      <div class="btnrow" style="margin-top:10px">
+        <button class="btn primary" id="calConfirm" disabled>I have reviewed the calibration — show output</button>
+      </div>
+      <div id="calOutput" style="display:none;margin-top:12px"></div>
+    </div>
+  </div>
+
+  <div class="callout red">This is the operational form of the 0.136 lesson: a score is only released as decision
+    support after the probes confirm the score actually tracks the described feature, and only after a human confirms.
+    A high score with low correlation is <b>refused</b>, not displayed.</div>
+</section>
+
+<!-- ============================ SECTION 4 ============================ -->
+<section class="block" id="s4">
+  <div class="sec-head"><span class="sec-num">SECTION 04</span><h2>Real-Data Runner</h2></div>
+  <p class="commentary">The final recommendation was a real-data runner with inspectable weights. Rather than ship a
+    Pyodide dependency, this section implements a small but genuine CNN forward pass in plain JavaScript —
+    <span class="mono">conv(3×3) → relu → maxpool(2) → global-avg → dense(3→1) → sigmoid</span> — on real-like sample
+    images. Every kernel is shown as an editable matrix and every dense weight is editable; change a value and
+    re-run to see the activation maps and score update. The weights are the WSP preset for the selected claim; nothing
+    here was trained.</p>
+
+  <div class="panel">
+    <div class="grid cols-2">
+      <div>
+        <label class="fld" for="rdrClaimSel">Claim (sets the preset weights)</label>
+        <select id="rdrClaimSel"></select>
+        <label class="fld" style="margin-top:12px">Sample image (24×24)</label>
+        <select id="rdrSampleSel"></select>
+        <div class="btnrow" style="margin-top:14px">
+          <button class="btn primary" id="rdrRun">Run forward pass</button>
+          <button class="btn" id="rdrReset">Reset to preset</button>
+        </div>
+      </div>
+      <div>
+        <label class="fld">Input</label>
+        <canvas id="rdrInput" class="img" width="216" height="216"></canvas>
+        <div class="canvas-cap">24×24 grayscale input (upscaled)</div>
+      </div>
+    </div>
+
+    <div style="margin-top:18px">
+      <p style="margin:0 0 10px;font-family:var(--mono);font-size:.8rem;color:var(--muted)">Kernels (editable — these ARE the weight space):</p>
+      <div id="rdrKernels" style="display:flex;flex-wrap:wrap;gap:18px"></div>
+    </div>
+
+    <div style="margin-top:18px">
+      <p style="margin:0 0 10px;font-family:var(--mono);font-size:.8rem;color:var(--muted)">Dense head (3 → 1):</p>
+      <div id="rdrDense" class="kvs"></div>
+    </div>
+
+    <div style="margin-top:18px">
+      <p style="margin:0 0 8px;font-family:var(--mono);font-size:.8rem;color:var(--muted)">Per-kernel activation maps (conv → relu → pool):</p>
+      <div class="maps-row" id="rdrMaps"></div>
+    </div>
+
+    <div style="margin-top:18px">
+      <div class="scorebox">
+        <div><div class="kv">forward-pass score</div><div class="score-val" id="rdrScore">—</div></div>
+        <div class="score-bar"><i id="rdrBar" style="width:0"></i></div>
+        <span class="pill mute" id="rdrPill">awaiting run</span>
+      </div>
+    </div>
+
+    <details>
+      <summary>Forward-pass trace (per-kernel activations → dense → sigmoid)</summary>
+      <div class="tbl-wrap"><table class="tbl" id="rdrTrace"><thead><tr>
+        <th>kernel</th><th>global-avg activation</th><th>× weight</th><th>contribution</th></tr></thead>
+        <tbody></tbody></table></div>
+    </details>
+  </div>
+
+  <div class="callout">The same numeric core that powers §1–§3 powers this runner. The point is not the architecture —
+    it is that <b>every weight is visible and editable</b>, which is the entire premise of weight-space programming:
+    the weights come from the description, and a human can inspect and override them before any number is trusted.</div>
+</section>
+
+</main>
+
+<footer class="foot">
+  <div class="wrap">
+    <p><b>WSP Lab</b> — a standalone companion page to the live
+      <a href="https://testdemoqwenai2025-creator.github.io/DemoAISciMShub/weight-space-programming" target="_blank" rel="noopener">/weight-space-programming</a>
+      special page on AISciMShub. All images on this page are procedurally generated for demonstration; no real
+      patient, satellite, or instrument data is used. Scores are illustrative of the WSP method, not validated
+      predictions, and must not be used as decision support in any real setting. Built as a single self-contained
+      HTML file (inline CSS/JS, no build step, no external dependencies).</p>
+    <p style="margin-top:8px">method · Lindholz et al., <i>Weight-Space Programming for Medical Imaging</i>, arXiv:2611.12066 ·
+      safety lesson · SynthUterus probe r = 0.136</p>
+  </div>
+</footer>
+
+<script>
+"use strict";
+/* ============================================================================
+   WSP Lab — numeric core + procedural image generators + section controllers.
+   Everything below is plain JS; no external libraries, no network calls.
+   ============================================================================ */
+
+/* ---------- numeric core ---------- */
+function make2D(h, w, fill=0){ const a=new Array(h); for(let y=0;y<h;y++){ a[y]=new Array(w).fill(fill); } return a; }
+
+function conv2d(img, ker){
+  const H=img.length, W=img[0].length, kh=ker.length, kw=ker[0].length;
+  const oh=H-kh+1, ow=W-kw+1;
+  const out=make2D(Math.max(0,oh), Math.max(0,ow), 0);
+  for(let y=0;y<oh;y++) for(let x=0;x<ow;x++){
+    let s=0;
+    for(let i=0;i<kh;i++) for(let j=0;j<kw;j++) s += img[y+i][x+j]*ker[i][j];
+    out[y][x]=s;
+  }
+  return out;
+}
+function relu2d(fm){ return fm.map(r=>r.map(v=>v>0?v:0)); }
+function maxpool2(fm, sz=2){
+  const H=fm.length, W=H?fm[0].length:0;
+  const oh=Math.floor(H/sz), ow=Math.floor(W/sz);
+  const out=make2D(Math.max(0,oh), Math.max(0,ow), 0);
+  for(let y=0;y<oh;y++) for(let x=0;x<ow;x++){
+    let m=-Infinity;
+    for(let i=0;i<sz;i++) for(let j=0;j<sz;j++) m=Math.max(m, fm[y*sz+i][x*sz+j]);
+    out[y][x]=m;
+  }
+  return out;
+}
+function globalAvg(fm){ let s=0,n=0; for(const r of fm) for(const v of r){ s+=v; n++; } return n? s/n : 0; }
+function sigmoid(x){ x = Math.max(-40, Math.min(40, x)); return 1/(1+Math.exp(-x)); }
+function clone2D(a){ return a.map(r=>r.slice()); }
+function cloneKernels(ks){ return ks.map(clone2D); }
+
+function forwardPass(img, kernels, weights, bias=0){
+  const acts=[], maps=[], pooled=[];
+  for(let k=0;k<kernels.length;k++){
+    let m = relu2d(conv2d(img, kernels[k]));
+    maps.push(m);
+    const p = maxpool2(m, 2);
+    pooled.push(p);
+    acts.push(globalAvg(p));
+  }
+  let z = bias;
+  for(let k=0;k<kernels.length;k++) z += acts[k]*weights[k];
+  return { activations:acts, maps, pooled, logit:z, score:sigmoid(z) };
+}
+
+function pearson(xs, ys){
+  const n=xs.length; if(n<2) return 0;
+  let mx=0,my=0; for(let i=0;i<n;i++){mx+=xs[i];my+=ys[i];} mx/=n; my/=n;
+  let num=0,dx=0,dy=0;
+  for(let i=0;i<n;i++){ const a=xs[i]-mx, b=ys[i]-my; num+=a*b; dx+=a*a; dy+=b*b; }
+  const den=Math.sqrt(dx*dy);
+  return den===0?0:num/den;
+}
+
+/* ---------- deterministic RNG (so samples are reproducible by seed) ---------- */
+function mulberry32(seed){
+  return function(){
+    seed|=0; seed=(seed+0x6D2B79F5)|0;
+    let t=Math.imul(seed ^ (seed>>>15), 1|seed);
+    t=(t+Math.imul(t ^ (t>>>7), 61|t))^t;
+    return ((t ^ (t>>>14))>>>0)/4294967296;
+  };
+}
+
+/* ---------- procedural image generators (grayscale 2D arrays in [0,1]) ---------- */
+function genCells(w,h,seed,density){
+  // clustered bright blobs on a dark noisy background — microscopy stain analogue.
+  // High contrast (bright blobs ~0.9, dark bg ~0.06) so a brightness/averaging
+  // kernel separates dense (positive) from sparse (negative) fields cleanly.
+  const r=mulberry32(seed), img=make2D(h,w,0);
+  for(let y=0;y<h;y++) for(let x=0;x<w;x++) img[y][x]=0.04+0.05*r();
+  const n=Math.max(3, Math.floor(6+density*26));
+  for(let i=0;i<n;i++){
+    const cx=r()*w, cy=r()*h, rad=1.0+r()*3.0, bright=0.75+r()*0.25;
+    for(let y=Math.max(0,Math.floor(cy-rad)); y<Math.min(h,Math.ceil(cy+rad)); y++)
+      for(let x=Math.max(0,Math.floor(cx-rad)); x<Math.min(w,Math.ceil(cx+rad)); x++){
+        const d=Math.hypot(x-cx,y-cy);
+        if(d<rad){ const v=bright*(1-d/rad); img[y][x]=Math.min(1, img[y][x]+v); }
+      }
+  }
+  return img;
+}
+
+function genSatellite(w,h,seed,density){
+  // bright soft cloud blobs over a dark land/water background — satellite analogue.
+  const r=mulberry32(seed), img=make2D(h,w,0);
+  for(let y=0;y<h;y++) for(let x=0;x<w;x++){
+    img[y][x]=0.08+0.06*r()+0.03*Math.sin(x*0.6)*Math.cos(y*0.6);
+  }
+  const n=Math.max(2, Math.floor(3+density*12));
+  for(let i=0;i<n;i++){
+    const cx=r()*w, cy=r()*h, rad=2.5+r()*5.0, bright=0.6+r()*0.4;
+    for(let y=Math.max(0,Math.floor(cy-rad)); y<Math.min(h,Math.ceil(cy+rad)); y++)
+      for(let x=Math.max(0,Math.floor(cx-rad)); x<Math.min(w,Math.ceil(cx+rad)); x++){
+        const d=Math.hypot(x-cx,y-cy);
+        if(d<rad){ const v=bright*Math.exp(-(d*d)/(rad*rad)); img[y][x]=Math.min(1, img[y][x]+v); }
+      }
+  }
+  return img;
+}
+
+function genMaterials(w,h,seed,density){
+  // Tiled micrograph: each tile is a grain with brightness from a fixed set
+  // (so every grain boundary contrasts). Tile size scales inversely with
+  // density → high density = fine grains = many boundaries = strong edge
+  // response; low density = coarse grains = few boundaries. Reliable signal.
+  const r=mulberry32(seed);
+  const tile=Math.max(1, Math.round(2+(1-density)*6));
+  const levels=[0.12,0.38,0.62,0.88];
+  const ntx=Math.ceil(w/tile), nty=Math.ceil(h/tile);
+  const tb=make2D(nty,ntx,0);
+  for(let ty=0;ty<nty;ty++) for(let tx=0;tx<ntx;tx++) tb[ty][tx]=levels[Math.floor(r()*4)];
+  const img=make2D(h,w,0);
+  for(let y=0;y<h;y++) for(let x=0;x<w;x++) img[y][x]=tb[Math.floor(y/tile)][Math.floor(x/tile)];
+  return img;
+}
+
+function genSpikes(w,h,seed,density){
+  // dark field with isolated bright points — cosmic-ray/artifact analogue.
+  // Positive frames are dense with artifacts; clean frames have almost none.
+  const r=mulberry32(seed), img=make2D(h,w,0);
+  for(let y=0;y<h;y++) for(let x=0;x<w;x++) img[y][x]=0.03+0.03*r();
+  const n=Math.max(0, Math.floor(1+density*32));
+  for(let i=0;i<n;i++){
+    const x=Math.floor(r()*w), y=Math.floor(r()*h);
+    img[y][x]=1.0;
+    if(x+1<w) img[y][x+1]=0.75; if(x-1>=0) img[y][x-1]=0.75;
+    if(y+1<h) img[y+1][x]=0.75; if(y-1>=0) img[y-1][x]=0.75;
+  }
+  return img;
+}
+
+/* ---------- claims data ----------
+   Each claim's kernels are cast directly from the described features (no training):
+     - brightness/mass claims use a normalised averaging kernel (sum≈1) so its
+       global-avg activation ≈ mean feature brightness → separates dense(pos)
+       from sparse(neg) cleanly and generalises across random seeds.
+     - structural claims (grain boundaries, cosmic-ray spikes) use a zero-sum
+       edge/spike kernel whose ReLU activation accumulates at the feature sites.
+   Weights + bias are claim-derived presets (the "LLM reading"), NOT fit to the
+   calibration probes — the probes are independent held-out checks (§3).
+*/
+const AVG3 = [[0.11,0.11,0.11],[0.11,0.11,0.11],[0.11,0.11,0.11]];          // sum≈1 → mean brightness
+const DOG   = [[-0.10,-0.10,-0.10],[-0.10, 0.80,-0.10],[-0.10,-0.10,-0.10]]; // zero-sum → blob contrast
+const GRAD  = [[-0.30, 0.00, 0.30],[-0.30, 0.00, 0.30],[-0.30, 0.00, 0.30]]; // zero-sum → horizontal gradient
+const LAP   = [[-0.50,-0.50,-0.50],[-0.50, 4.00,-0.50],[-0.50,-0.50,-0.50]]; // zero-sum → edge/boundary
+const SPIKE = [[-0.10,-0.10,-0.10],[-0.10, 0.90,-0.10],[-0.10,-0.10,-0.10]]; // zero-sum → isolated point
+
+const CLAIMS = {
+  magnoflorine: {
+    label: "Magnoflorine → Caspase-3 activation",
+    modality: "cellular microscopy (apoptosis stain)",
+    domain: "medical",
+    features: ["bright apoptotic-cell mass (averaging kernel)","condensed-blob contrast (DoG)"],
+    kernels: [ AVG3, DOG ],
+    weights: [20.07, 3.42],
+    bias: -4.45,
+    gen: (seed,d)=>genCells(32,32,seed,d),
+    probeDensity: { pos: 0.95, neg: 0.08, edge: 0.45 },
+    sampleDensity: 0.6,
+    sampleCap: "synthetic apoptosis-stain field",
+  },
+  curcumin: {
+    label: "Curcumin → NF-κB inhibition (diffuse cytoplasmic signal)",
+    modality: "cellular microscopy (immunofluorescence)",
+    domain: "medical",
+    features: ["diffuse cytoplasmic brightness (averaging kernel)","membrane-edge gradient"],
+    kernels: [ AVG3, GRAD ],
+    weights: [22.19, 10.52],
+    bias: -5.14,
+    gen: (seed,d)=>genCells(32,32,seed,d),
+    probeDensity: { pos: 0.7, neg: 0.1, edge: 0.4 },
+    sampleDensity: 0.5,
+    sampleCap: "synthetic immunofluorescence field",
+  },
+  sentinel: {
+    label: "Sentinel-2 → cloud-edge detection",
+    modality: "multispectral satellite (RGB proxy)",
+    domain: "environmental",
+    features: ["bright cloud mass (averaging kernel)","cloud-edge gradient"],
+    kernels: [ AVG3, GRAD ],
+    weights: [12.45, 1.18],
+    bias: -5.3,
+    gen: (seed,d)=>genSatellite(32,32,seed,d),
+    probeDensity: { pos: 0.9, neg: 0.1, edge: 0.4 },
+    sampleDensity: 0.6,
+    sampleCap: "synthetic satellite frame",
+  },
+  materials: {
+    label: "Materials micrograph → grain-boundary segmentation",
+    modality: "optical/electron micrograph",
+    domain: "materials",
+    features: ["grain-boundary strength (Laplacian edge)","boundary direction response (gradient)"],
+    kernels: [ LAP, GRAD ],
+    weights: [9.16, 2.24],
+    bias: -4.17,
+    gen: (seed,d)=>genMaterials(32,32,seed,d),
+    probeDensity: { pos: 0.9, neg: 0.15, edge: 0.45 },
+    sampleDensity: 0.6,
+    sampleCap: "synthetic micrograph (Voronoi grains)",
+  },
+  jwst: {
+    label: "JWST frame → cosmic-ray / artifact flagging",
+    modality: "astronomical imaging",
+    domain: "space",
+    features: ["isolated bright points (spike detector)","low global background (averaging)"],
+    kernels: [ SPIKE, AVG3 ],
+    weights: [12.34, 15.41],
+    bias: -2.9,
+    gen: (seed,d)=>genSpikes(32,32,seed,d),
+    probeDensity: { pos: 0.85, neg: 0.05, edge: 0.35 },
+    sampleDensity: 0.5,
+    sampleCap: "synthetic detector frame",
+  },
+};
+
+/* ---------- rendering helpers ---------- */
+function renderImg(canvas, img){
+  const h=img.length, w=img[0].length;
+  const ctx=canvas.getContext("2d");
+  canvas.width=w; canvas.height=h;
+  const id=ctx.createImageData(w,h);
+  for(let y=0;y<h;y++) for(let x=0;x<w;x++){
+    const v=Math.max(0,Math.min(1,img[y][x]));
+    const g=Math.round(v*255);
+    const i=(y*w+x)*4;
+    id.data[i]=g; id.data[i+1]=g; id.data[i+2]=g; id.data[i+3]=255;
+  }
+  ctx.putImageData(id,0,0);
+  // upscale via CSS (image-rendering: pixelated) for display
+  canvas.style.width=canvas.dataset.disp||"256px";
+  canvas.style.height=canvas.dataset.disp||"256px";
+}
+function renderMap(canvas, fm){
+  const h=fm.length, w=h?fm[0].length:0;
+  let mx=-Infinity;
+  for(const r of fm) for(const v of r) if(v>mx) mx=v;
+  if(mx<=0) mx=1;
+  const ctx=canvas.getContext("2d");
+  canvas.width=Math.max(1,w); canvas.height=Math.max(1,h);
+  const id=ctx.createImageData(Math.max(1,w),Math.max(1,h));
+  // teal-cyan heatmap: 0 -> dark, max -> cyan
+  for(let y=0;y<h;y++) for(let x=0;x<w;x++){
+    const t=fm[y][x]/mx;
+    const i=(y*w+x)*4;
+    id.data[i]=Math.round(20+t*34);
+    id.data[i+1]=Math.round(30+t*180);
+    id.data[i+2]=Math.round(40+t*200);
+    id.data[i+3]=255;
+  }
+  ctx.putImageData(id,0,0);
+  canvas.style.width=canvas.dataset.disp||"96px";
+  canvas.style.height=canvas.dataset.disp||"96px";
+}
+function fmt(x){ return (Math.round(x*1000)/1000).toFixed(3); }
+
+/* ---------- shared mutable state ---------- */
+const state = {
+  s1: { id:"magnoflorine", seed: 1234, weights:null, bias:0 },
+  s2: { id:"sentinel",     seed: 4321, weights:null, bias:0 },
+  s3: { id:"magnoflorine", weights:null, bias:0, sabotaged:false, thresh:0.4, confirmed:false },
+  s4: { id:"magnoflorine", sampleIdx:0, kernels:null, weights:null, bias:0 },
+};
+
+/* ---------- Section 1: Claim -> Classifier ---------- */
+function fillClaimSelect(selId, defaultId){
+  const sel=document.getElementById(selId);
+  sel.innerHTML="";
+  for(const k of Object.keys(CLAIMS)){
+    const o=document.createElement("option"); o.value=k; o.textContent=CLAIMS[k].label;
+    sel.appendChild(o);
+  }
+  sel.value=defaultId;
+}
+function showClaimMeta(prefix, c){
+  document.getElementById(prefix+"Mod").textContent=c.modality;
+  document.getElementById(prefix+"Dom").textContent=c.domain;
+  const ul=document.getElementById(prefix+"Feats"); ul.innerHTML="";
+  c.features.forEach(f=>{ const li=document.createElement("li"); li.textContent=f; ul.appendChild(li); });
+}
+function buildSliders(containerId, weights, onChange){
+  const c=document.getElementById(containerId); c.innerHTML="";
+  weights.forEach((w,i)=>{
+    const row=document.createElement("div"); row.className="slider-row";
+    const lab=document.createElement("label"); lab.textContent="w"+(i+1);
+    const inp=document.createElement("input"); inp.type="range";
+    // adaptive range so each preset sits with headroom to either side
+    const lo=Math.min(-5, -3*Math.abs(w)), hi=Math.max(5, 3*Math.abs(w));
+    inp.min=String(lo); inp.max=String(hi); inp.step="0.1"; inp.value=w;
+    const v=document.createElement("span"); v.className="v"; v.textContent=fmt(w);
+    inp.addEventListener("input", ()=>{ v.textContent=fmt(parseFloat(inp.value)); weights[i]=parseFloat(inp.value); onChange(); });
+    row.appendChild(lab); row.appendChild(inp); row.appendChild(v); c.appendChild(row);
+  });
+}
+function renderMapsRow(containerId, maps){
+  const c=document.getElementById(containerId); c.innerHTML="";
+  maps.forEach((m,i)=>{
+    const cell=document.createElement("div"); cell.className="map-cell";
+    const cv=document.createElement("canvas"); cv.className="map"; cv.dataset.disp="96px";
+    renderMap(cv, m);
+    const cap=document.createElement("div"); cap.className="canvas-cap"; cap.textContent="k"+(i+1);
+    cell.appendChild(cv); cell.appendChild(cap); c.appendChild(cell);
+  });
+}
+function runS1(){
+  const c=CLAIMS[state.s1.id];
+  const img=c.gen(state.s1.seed, c.sampleDensity);
+  renderImg(document.getElementById("s1sample"), img);
+  document.getElementById("s1seed").textContent=state.s1.seed;
+  const res=forwardPass(img, c.kernels, state.s1.weights, state.s1.bias);
+  document.getElementById("s1score").textContent=fmt(res.score);
+  document.getElementById("s1bar").style.width=(res.score*100)+"%";
+  const pill=document.getElementById("s1pill");
+  pill.className="pill "+(res.score>=0.5?"ok":"warn");
+  pill.textContent=res.score>=0.5?">claim present":"<claim weak";
+  renderMapsRow("s1maps", res.maps);
+}
+function initS1(){
+  fillClaimSelect("claimSel", state.s1.id);
+  const c=CLAIMS[state.s1.id];
+  showClaimMeta("claim", c);
+  state.s1.weights=c.weights.slice(); state.s1.bias=c.bias;
+  buildSliders("s1sliders", state.s1.weights, runS1);
+  document.getElementById("claimSel").addEventListener("change", e=>{
+    state.s1.id=e.target.value; const cc=CLAIMS[state.s1.id];
+    showClaimMeta("claim", cc);
+    state.s1.weights=cc.weights.slice(); state.s1.bias=cc.bias;
+    buildSliders("s1sliders", state.s1.weights, runS1); runS1();
+  });
+  document.getElementById("s1resample").addEventListener("click", ()=>{ state.s1.seed=Math.floor(Math.random()*1e6); runS1(); });
+  runS1();
+}
+
+/* ---------- Section 2: Cross-domain WSP ---------- */
+function runS2(){
+  const c=CLAIMS[state.s2.id];
+  const img=c.gen(state.s2.seed, c.sampleDensity);
+  renderImg(document.getElementById("s2sample"), img);
+  document.getElementById("s2cap").textContent=c.sampleCap;
+  document.getElementById("s2seed").textContent=state.s2.seed;
+  const res=forwardPass(img, c.kernels, state.s2.weights, state.s2.bias);
+  document.getElementById("s2score").textContent=fmt(res.score);
+  document.getElementById("s2bar").style.width=(res.score*100)+"%";
+  const pill=document.getElementById("s2pill");
+  pill.className="pill "+(res.score>=0.5?"ok":"warn");
+  pill.textContent=res.score>=0.5?">feature present":"<feature weak";
+  renderMapsRow("s2maps", res.maps);
+}
+function initS2(){
+  fillClaimSelect("xclaimSel", state.s2.id);
+  const c=CLAIMS[state.s2.id];
+  showClaimMeta("xclaim", c);
+  state.s2.weights=c.weights.slice(); state.s2.bias=c.bias;
+  buildSliders("s2sliders", state.s2.weights, runS2);
+  document.getElementById("xclaimSel").addEventListener("change", e=>{
+    state.s2.id=e.target.value; const cc=CLAIMS[state.s2.id];
+    showClaimMeta("xclaim", cc);
+    state.s2.weights=cc.weights.slice(); state.s2.bias=cc.bias;
+    buildSliders("s2sliders", state.s2.weights, runS2); runS2();
+  });
+  document.getElementById("s2resample").addEventListener("click", ()=>{ state.s2.seed=Math.floor(Math.random()*1e6); runS2(); });
+  runS2();
+}
+
+/* ---------- Section 3: Safety & Calibration ---------- */
+function calCurrentClaim(){
+  // safety test runs on the S1 claim's probes (medical default), but user can pick any
+  return CLAIMS[state.s3.id];
+}
+function renderProbes(scores){
+  const c=calCurrentClaim();
+  const probes=[
+    { key:"pos",  label:"positive control", exp:1.0, density:c.probeDensity.pos,  seed:7001 },
+    { key:"neg",  label:"negative control", exp:0.0, density:c.probeDensity.neg,  seed:7002 },
+    { key:"edge", label:"edge case",        exp:0.5, density:c.probeDensity.edge, seed:7003 },
+  ];
+  const grid=document.getElementById("calProbes"); grid.innerHTML="";
+  probes.forEach((p,i)=>{
+    const img=c.gen(p.seed, p.density);
+    const res=forwardPass(img, c.kernels, state.s3.weights, state.s3.bias);
+    scores[i]=res.score;
+    const cell=document.createElement("div"); cell.className="panel"; cell.style.padding="12px";
+    const cv=document.createElement("canvas"); cv.className="img"; cv.dataset.disp="120px";
+    renderImg(cv, img);
+    const cap=document.createElement("div"); cap.className="canvas-cap";
+    cap.innerHTML=p.label+"<br><span class='kv'>expected: <b>"+p.exp.toFixed(1)+"</b> · score: <b>"+fmt(res.score)+"</b></span>";
+    cell.appendChild(cv); cell.appendChild(cap); grid.appendChild(cell);
+  });
+  return probes.map(p=>p.exp);
+}
+function runCalibration(){
+  const scores=[];
+  const expected=renderProbes(scores);
+  const r=pearson(scores, expected);
+  document.getElementById("calR").textContent=fmt(r);
+  document.getElementById("calRbar").style.width=Math.max(0,Math.min(1,r))*100+"%";
+  const rEl=document.getElementById("calR");
+  const pill=document.getElementById("calPill");
+  const verdict=document.getElementById("calVerdict");
+  const pass = r >= state.s3.thresh;
+  rEl.style.color = pass? "var(--green)" : "var(--red)";
+  document.getElementById("calRbar").style.background = pass? "var(--green)" : "var(--red)";
+  pill.className="pill "+(pass?"ok":"bad");
+  pill.textContent = pass? "calibration passed" : "calibration failed";
+  state.s3.confirmed=false;
+  const gate=document.getElementById("calGate");
+  const confirmBtn=document.getElementById("calConfirm");
+  if(pass){
+    verdict.className="callout";
+    verdict.innerHTML="Pearson r = <b>"+fmt(r)+"</b> ≥ threshold "+state.s3.thresh.toFixed(2)+". The score tracks the described feature across all three probes. Human-in-the-loop gate is <b>armed</b> — confirm below to release decision support.";
+    gate.className="gate";
+    gate.textContent="Gate armed — calibration passed. Confirm to release output.";
+    confirmBtn.disabled=false;
+  } else {
+    verdict.className="callout red";
+    verdict.innerHTML="Pearson r = <b>"+fmt(r)+"</b> &lt; threshold "+state.s3.thresh.toFixed(2)+". <b>Refusing to emit decision support.</b> "+(state.s3.sabotaged?"Weights were sabotaged (inverted) — the score no longer tracks the feature, exactly as in the SynthUterus 0.136 case.":"The score does not track the described feature on held-out probes.");
+    gate.className="gate";
+    gate.textContent="Gate LOCKED — calibration failed. No decision-support output will be released.";
+    confirmBtn.disabled=true;
+  }
+  document.getElementById("calOutput").style.display="none";
+}
+function initS3(){
+  fillClaimSelect("calClaimSel", state.s3.id);
+  const c=calCurrentClaim();
+  state.s3.weights=c.weights.slice(); state.s3.bias=c.bias;
+  document.getElementById("calClaimSel").addEventListener("change", e=>{
+    state.s3.id=e.target.value; const cc=calCurrentClaim();
+    state.s3.weights=cc.weights.slice(); state.s3.bias=cc.bias; state.s3.sabotaged=false;
+  });
+  const t=document.getElementById("calThresh"), tv=document.getElementById("calThreshV");
+  t.addEventListener("input", ()=>{ state.s3.thresh=parseFloat(t.value); tv.textContent=state.s3.thresh.toFixed(2); });
+  document.getElementById("calRun").addEventListener("click", runCalibration);
+  document.getElementById("calSabotage").addEventListener("click", ()=>{
+    state.s3.weights = state.s3.weights.map(w=>-w); state.s3.sabotaged=true; runCalibration();
+  });
+  document.getElementById("calRestore").addEventListener("click", ()=>{
+    const cc=calCurrentClaim(); state.s3.weights=cc.weights.slice(); state.s3.bias=cc.bias; state.s3.sabotaged=false; runCalibration();
+  });
+  document.getElementById("calConfirm").addEventListener("click", ()=>{
+    if(document.getElementById("calConfirm").disabled) return;
+    state.s3.confirmed=true;
+    const out=document.getElementById("calOutput"); out.style.display="block";
+    out.className="panel"; out.style.borderColor="var(--green)";
+    out.innerHTML="<div class='kv'>decision-support output (released)</div>"+
+      "<p style='margin:8px 0 0'>Classifier <b>"+calCurrentClaim().label+"</b> passed calibration and human review. "+
+      "On the current probe set the score is correlated with the described feature above the refusal threshold. "+
+      "This output would now be surfaced to a clinician/operator — with the probe correlation and weights shown alongside it.</p>";
+  });
+  // initial probe render (no verdict until run)
+  renderProbes([]);
+  document.getElementById("calPill").textContent="not run";
+}
+
+/* ---------- Section 4: Real-data runner ---------- */
+const RDR_SIZE=24;
+function rdrSamples(){
+  return [
+    { label:"cells (high density)", gen:()=>genCells(RDR_SIZE,RDR_SIZE,9001,0.85) },
+    { label:"cells (low density)",  gen:()=>genCells(RDR_SIZE,RDR_SIZE,9002,0.15) },
+    { label:"satellite (cloudy)",   gen:()=>genSatellite(RDR_SIZE,RDR_SIZE,9003,0.8) },
+    { label:"materials (fine)",     gen:()=>genMaterials(RDR_SIZE,RDR_SIZE,9004,0.8) },
+    { label:"spikes (artifacts)",   gen:()=>genSpikes(RDR_SIZE,RDR_SIZE,9005,0.6) },
+  ];
+}
+function renderKernelEditor(containerId, kernels){
+  const c=document.getElementById(containerId); c.innerHTML="";
+  kernels.forEach((k,ki)=>{
+    const block=document.createElement("div"); block.className="kernel-block";
+    const lbl=document.createElement("div"); lbl.className="lbl"; lbl.textContent="kernel k"+(ki+1)+" (3×3)";
+    const grid=document.createElement("div"); grid.className="kernel-grid";
+    k.forEach((row,i)=> row.forEach((val,j)=>{
+      const inp=document.createElement("input"); inp.type="number"; inp.step="0.1"; inp.value=(Math.round(val*100)/100);
+      inp.addEventListener("change", ()=>{ kernels[ki][i][j]=parseFloat(inp.value)||0; });
+      grid.appendChild(inp);
+    }));
+    block.appendChild(lbl); block.appendChild(grid); c.appendChild(block);
+  });
+}
+function renderDenseEditor(containerId, weights, bias, onChange){
+  const c=document.getElementById(containerId); c.innerHTML="";
+  weights.forEach((w,i)=>{
+    const kv=document.createElement("span"); kv.className="kv";
+    kv.innerHTML="w"+(i+1)+": ";
+    const inp=document.createElement("input"); inp.type="number"; inp.step="0.1"; inp.value=(Math.round(w*100)/100);
+    inp.style.width="72px"; inp.style.display="inline-block";
+    inp.addEventListener("change", ()=>{ weights[i]=parseFloat(inp.value)||0; onChange&&onChange(); });
+    kv.appendChild(inp); c.appendChild(kv);
+  });
+  const bk=document.createElement("span"); bk.className="kv"; bk.innerHTML="bias: ";
+  const binp=document.createElement("input"); binp.type="number"; binp.step="0.1"; binp.value=(Math.round(bias*100)/100);
+  binp.style.width="72px"; binp.style.display="inline-block";
+  binp.addEventListener("change", ()=>{ state.s4.bias=parseFloat(binp.value)||0; onChange&&onChange(); });
+  bk.appendChild(binp); c.appendChild(bk);
+}
+function runRdr(){
+  const samples=rdrSamples();
+  const img=samples[state.s4.sampleIdx].gen();
+  renderImg(document.getElementById("rdrInput"), img);
+  const res=forwardPass(img, state.s4.kernels, state.s4.weights, state.s4.bias);
+  document.getElementById("rdrScore").textContent=fmt(res.score);
+  document.getElementById("rdrBar").style.width=(res.score*100)+"%";
+  const pill=document.getElementById("rdrPill");
+  pill.className="pill "+(res.score>=0.5?"ok":"warn");
+  pill.textContent=res.score>=0.5?">claim present":"<claim weak";
+  // maps
+  const mc=document.getElementById("rdrMaps"); mc.innerHTML="";
+  res.maps.forEach((m,i)=>{
+    const cell=document.createElement("div"); cell.className="map-cell";
+    const cv=document.createElement("canvas"); cv.className="map"; cv.dataset.disp="110px";
+    renderMap(cv, m);
+    const cap=document.createElement("div"); cap.className="canvas-cap";
+    cap.innerHTML="k"+(i+1)+" conv<br><span class='kv'>avg: <b>"+fmt(res.activations[i])+"</b></span>";
+    cell.appendChild(cv); cell.appendChild(cap); mc.appendChild(cell);
+  });
+  // trace table
+  const tb=document.querySelector("#rdrTrace tbody"); tb.innerHTML="";
+  let z=state.s4.bias;
+  res.activations.forEach((a,i)=>{
+    const contrib=a*state.s4.weights[i]; z+=contrib;
+    const tr=document.createElement("tr");
+    tr.innerHTML="<td>k"+(i+1)+"</td><td>"+fmt(a)+"</td><td>"+fmt(state.s4.weights[i])+"</td><td>"+fmt(contrib)+"</td>";
+    tb.appendChild(tr);
+  });
+  const tr=document.createElement("tr"); tr.style.color="var(--teal)";
+  tr.innerHTML="<td colspan='3'>logit (bias + Σ)</td><td>"+fmt(z)+"</td>"; tb.appendChild(tr);
+  const tr2=document.createElement("tr"); tr2.style.color="var(--cyan)";
+  tr2.innerHTML="<td colspan='3'>sigmoid(logit) → score</td><td>"+fmt(res.score)+"</td>"; tb.appendChild(tr2);
+}
+function initRdr(){
+  fillClaimSelect("rdrClaimSel", state.s4.id);
+  const ss=document.getElementById("rdrSampleSel");
+  rdrSamples().forEach((s,i)=>{ const o=document.createElement("option"); o.value=i; o.textContent=s.label; ss.appendChild(o); });
+  ss.value=state.s4.sampleIdx;
+  const c=CLAIMS[state.s4.id];
+  state.s4.kernels=cloneKernels(c.kernels); state.s4.weights=c.weights.slice(); state.s4.bias=c.bias;
+  renderKernelEditor("rdrKernels", state.s4.kernels);
+  renderDenseEditor("rdrDense", state.s4.weights, state.s4.bias);
+  document.getElementById("rdrClaimSel").addEventListener("change", e=>{
+    state.s4.id=e.target.value; const cc=CLAIMS[state.s4.id];
+    state.s4.kernels=cloneKernels(cc.kernels); state.s4.weights=cc.weights.slice(); state.s4.bias=cc.bias;
+    renderKernelEditor("rdrKernels", state.s4.kernels);
+    renderDenseEditor("rdrDense", state.s4.weights, state.s4.bias); runRdr();
+  });
+  ss.addEventListener("change", e=>{ state.s4.sampleIdx=parseInt(e.target.value); runRdr(); });
+  document.getElementById("rdrRun").addEventListener("click", runRdr);
+  document.getElementById("rdrReset").addEventListener("click", ()=>{
+    const cc=CLAIMS[state.s4.id];
+    state.s4.kernels=cloneKernels(cc.kernels); state.s4.weights=cc.weights.slice(); state.s4.bias=cc.bias;
+    renderKernelEditor("rdrKernels", state.s4.kernels);
+    renderDenseEditor("rdrDense", state.s4.weights, state.s4.bias); runRdr();
+  });
+  runRdr();
+}
+
+/* ---------- boot ---------- */
+window.addEventListener("DOMContentLoaded", ()=>{
+  initS1(); initS2(); initS3(); initRdr();
+});
+</script>
+</body>
+</html>
